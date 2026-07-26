@@ -101,6 +101,38 @@ const List<ShopItem> purchasableItems = [
     displayConfig: ShopItemDisplayConfig(scale: 2.0, alignmentY: -0.45),
   ),
   ShopItem(
+    id: 'accessory_sunglasses',
+    name: 'Sunglasses',
+    description: 'Classic dark shades.',
+    imageAssetPath: 'assets/shop/accessory_sunglasses.svg',
+    price: 120,
+    category: ShopItemCategory.item,
+    avatarSlot: AvatarSlot.accessory,
+    avatarTransforms: {
+      DefaultItemIds.avatarGirl: AvatarTransform(
+        offset: Offset(5, -45),
+        scale: 0.75,
+      ),
+    },
+    displayConfig: ShopItemDisplayConfig(scale: 2.0, alignmentY: -0.45),
+  ),
+  ShopItem(
+    id: 'accessory_sunglasses_rounded',
+    name: 'Rounded Sunglasses',
+    description: 'Modern circular dark shades.',
+    imageAssetPath: 'assets/shop/accessory_sunglasses_rounded.svg',
+    price: 130,
+    category: ShopItemCategory.item,
+    avatarSlot: AvatarSlot.accessory,
+    avatarTransforms: {
+      DefaultItemIds.avatarGirl: AvatarTransform(
+        offset: Offset(5, -45),
+        scale: 0.75,
+      ),
+    },
+    displayConfig: ShopItemDisplayConfig(scale: 2.0, alignmentY: -0.45),
+  ),
+  ShopItem(
     id: 'powerup_streak_freeze',
     name: 'Streak Freeze',
     description: 'Protects your streak if you miss a day.',

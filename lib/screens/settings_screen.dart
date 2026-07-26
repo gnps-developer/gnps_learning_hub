@@ -13,6 +13,7 @@ import '../providers/content_providers.dart';
 import '../providers/progress_providers.dart';
 import '../tools/content_debug_screen.dart';
 import '../tools/tracing_checkpoint_recorder_screen.dart';
+import 'attributions_screen.dart';
 import 'intro_screen.dart';
 
 const List<Color> _themeColorOptions = [
@@ -255,6 +256,19 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       leading: const Icon(Icons.videogame_asset_outlined),
                       title: const Text('Total games'),
                       trailing: Text(totalGames),
+                    ),
+                    ListTile(
+                      onTap: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => const AttributionsScreen(),
+                        ),
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                      ),
+                      leading: const Icon(Icons.palette_outlined),
+                      title: const Text('Artwork Attributions'),
+                      trailing: const Icon(Icons.chevron_right),
                     ),
                   ],
                 );
