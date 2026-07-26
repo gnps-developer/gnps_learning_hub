@@ -1,0 +1,61 @@
+workflows:
+  default-workflow:
+    name: Flutter Build
+    max_build_duration: 120
+    instance_type: mac_mini_m2
+
+    environment:
+      flutter: stable
+      xcode: latest
+
+    cache:
+      cache_paths:
+        - $HOME/.pub-cache
+        - $HOME/Library/Caches/CocoaPods
+        - ios/Pods
+
+    scripts:
+      - name: Flutter version
+        script: |
+          flutter --version
+
+      - name: Get Flutter packages
+        script: |
+          flutter pub get
+
+      - name: Run Flutter analyzer
+        script: |
+          flutter analyze
+
+      - name: Run tests
+        script: |
+          flutter test
+
+      - name: Build Android App Bundle
+        script: |
+          flutter build appbundle --release
+
+      - name: Build Android APK
+        script: |
+          flutter build apk --release
+
+      # Only works if iOS code signing has been configured
+      # - name: Build iOS IPA
+      #   script: |
+      #     flutter build ipa --release
+
+    artifacts:
+      - build/app/outputs/**/*.apk
+      - build/app/outputs/**/*.aab
+      - build/app/outputs/**/mapping.txt
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+      - flutter_drive.log
+
+    publishing:
+      email:
+        recipients:
+          - codemanxdev@gmail.com
+        notify:
+          success: true
+          failure: true
