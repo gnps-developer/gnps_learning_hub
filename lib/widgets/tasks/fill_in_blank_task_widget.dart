@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -29,6 +30,7 @@ class FillInBlankTaskWidget extends ConsumerStatefulWidget {
 
 class _FillInBlankTaskWidgetState extends ConsumerState<FillInBlankTaskWidget>
     with SingleTickerProviderStateMixin {
+  late final List<String> _shuffledOptions;
   String? _selected;
   bool? _isCorrect;
 
@@ -40,6 +42,10 @@ class _FillInBlankTaskWidgetState extends ConsumerState<FillInBlankTaskWidget>
   @override
   void initState() {
     super.initState();
+    _shuffledOptions =
+        List<String>.from(widget.task.content['options'] as List)
+          ..shuffle(Random());
+
     // Auto-play the sentence sound after a short delay
     final parts = List<String>.from(widget.task.content['sentenceParts'] as List);
     final correctWord = widget.task.content['correctWord'] as String;
@@ -79,7 +85,6 @@ class _FillInBlankTaskWidgetState extends ConsumerState<FillInBlankTaskWidget>
     final parts = List<String>.from(
       widget.task.content['sentenceParts'] as List,
     );
-    final options = List<String>.from(widget.task.content['options'] as List);
     final correctWord = widget.task.content['correctWord'] as String;
 
     return Padding(
@@ -129,7 +134,7 @@ class _FillInBlankTaskWidgetState extends ConsumerState<FillInBlankTaskWidget>
             spacing: 12,
             runSpacing: 12,
             alignment: WrapAlignment.center,
-            children: options.map((option) {
+            children: _shuffledOptions.map((option) {
               return TaskLetterBank(text: option, onTap: () => _select(option));
             }).toList(),
           ),
