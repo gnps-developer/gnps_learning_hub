@@ -1,37 +1,42 @@
 import 'package:flutter/material.dart';
-import '../../models/shop_item.dart';
+import '../../models/shop/shop_item.dart';
+import '../../models/shop/shop_item_category.dart';
+import '../../models/shop/shop_item_display_config.dart';
+import '../../models/shop/default_item_ids.dart';
+import '../../models/avatar/avatar_slot.dart';
+import '../../models/avatar/avatar_transform.dart';
 
 const List<ShopItem> purchasableItems = [
   ShopItem(
-    id: 'turban_orange',
+    id: 'headwear_orange',
     name: 'Orange Turban',
     description: 'A vibrant orange turban.',
     imageAssetPath: 'assets/shop/turban_orange.svg',
     price: 100,
     category: ShopItemCategory.item,
-    avatarSlot: AvatarSlot.turban,
+    avatarSlot: AvatarSlot.headwear,
     supportedAvatarIds: [DefaultItemIds.avatarBoy],
     displayConfig: ShopItemDisplayConfig(scale: 1.5, alignmentY: -1.45),
   ),
   ShopItem(
-    id: 'turban_blue',
+    id: 'headwear_blue',
     name: 'Blue Turban',
     description: 'A classic blue turban.',
     imageAssetPath: 'assets/shop/turban_blue.svg',
     price: 100,
     category: ShopItemCategory.item,
-    avatarSlot: AvatarSlot.turban,
+    avatarSlot: AvatarSlot.headwear,
     supportedAvatarIds: [DefaultItemIds.avatarBoy],
     displayConfig: ShopItemDisplayConfig(scale: 1.5, alignmentY: -1.45),
   ),
   ShopItem(
-    id: 'turban_red',
+    id: 'headwear_red',
     name: 'Red Turban',
     description: 'A bold red turban.',
     imageAssetPath: 'assets/shop/turban_red.svg',
     price: 100,
     category: ShopItemCategory.item,
-    avatarSlot: AvatarSlot.turban,
+    avatarSlot: AvatarSlot.headwear,
     supportedAvatarIds: [DefaultItemIds.avatarBoy],
     displayConfig: ShopItemDisplayConfig(scale: 1.5, alignmentY: -1.45),
   ),

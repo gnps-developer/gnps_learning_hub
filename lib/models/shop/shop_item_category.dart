@@ -1,0 +1,4 @@
+enum ShopItemCategory {
+  item,
+  powerUp,
+}

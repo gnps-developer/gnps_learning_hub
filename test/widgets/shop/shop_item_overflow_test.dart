@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gnps_learning_hub/models/shop_item.dart';
+import 'package:gnps_learning_hub/models/shop/shop_item.dart';
+import 'package:gnps_learning_hub/models/shop/shop_item_category.dart';
 import 'package:gnps_learning_hub/widgets/shop/shop_item_card.dart';
 
 void main() {

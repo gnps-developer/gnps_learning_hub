@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../models/shop_item.dart';
+import '../../models/avatar/avatar_slot.dart';
+import '../../models/shop/shop_item.dart';
+import '../../models/shop/default_item_ids.dart';
 
 class AvatarPreview extends StatelessWidget {
   final Map<String, String> equippedItemIds;
@@ -26,17 +28,23 @@ class AvatarPreview extends StatelessWidget {
   // valid default, but they shouldn't render a visible badge.
   bool _isVisible(ShopItem? item) {
     if (item == null) return false;
-    return item.id != DefaultItemIds.turbanNone &&
+    return item.id != DefaultItemIds.headwearNone &&
         item.id != DefaultItemIds.accessoryNone &&
         item.id != DefaultItemIds.clothesDefault;
   }
 
   @override
   Widget build(BuildContext context) {
-    final base = _resolve(AvatarSlot.base);
-    final turban = _resolve(AvatarSlot.turban);
-    final clothes = _resolve(AvatarSlot.clothes);
-    final accessory = _resolve(AvatarSlot.accessory);
+    final equippedItems = <AvatarSlot, ShopItem?>{
+      for (final slot in AvatarSlot.values) slot: _resolve(slot),
+    };
+
+    final base = equippedItems[AvatarSlot.base];
+    final skinTone = equippedItems[AvatarSlot.skinTone];
+
+    // Sort slots by layerOrder to ensure correct stacking
+    final sortedSlots = AvatarSlot.values.toList()
+      ..sort((a, b) => a.layerOrder.compareTo(b.layerOrder));
 
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -58,29 +66,9 @@ class AvatarPreview extends StatelessWidget {
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  // 1. Base Body
-                  if (base?.imageAssetPath != null)
-                    SvgPicture.asset(base!.imageAssetPath!, fit: BoxFit.contain)
-                  else
-                    Center(
-                      child: Icon(
-                        base?.icon ?? Icons.person,
-                        size: refWidth * 0.6,
-                        color: base?.color ?? Colors.grey.shade600,
-                      ),
-                    ),
-
-                  // 2. Clothes
-                  if (_isVisible(clothes))
-                    _Layer(item: clothes!, avatarId: base?.id),
-
-                  // 3. Accessory (Glasses, etc.)
-                  if (_isVisible(accessory))
-                    _Layer(item: accessory!, avatarId: base?.id),
-
-                  // 4. Turban (On top)
-                  if (_isVisible(turban))
-                    _Layer(item: turban!, avatarId: base?.id),
+                  for (final slot in sortedSlots)
+                    if (slot != AvatarSlot.skinTone) // skinTone is a property, not a layer
+                      _buildLayer(slot, equippedItems[slot], base?.id, skinTone),
                 ],
               ),
             ),
@@ -88,6 +76,38 @@ class AvatarPreview extends StatelessWidget {
         );
       },
     );
+  }
+
+  Widget _buildLayer(
+    AvatarSlot slot,
+    ShopItem? item,
+    String? baseId,
+    ShopItem? skinTone,
+  ) {
+    if (!_isVisible(item) && slot != AvatarSlot.base) {
+      return const SizedBox.shrink();
+    }
+
+    if (slot == AvatarSlot.base) {
+      if (item?.imageAssetPath != null) {
+        return SvgPicture.asset(
+          item!.imageAssetPath!,
+          fit: BoxFit.contain,
+          colorFilter: skinTone?.color != null
+              ? ColorFilter.mode(skinTone!.color!, BlendMode.modulate)
+              : null,
+        );
+      }
+      return Center(
+        child: Icon(
+          item?.icon ?? Icons.person,
+          size: 300 * 0.6,
+          color: skinTone?.color ?? item?.color ?? Colors.grey.shade600,
+        ),
+      );
+    }
+
+    return _Layer(item: item!, avatarId: baseId);
   }
 }
 

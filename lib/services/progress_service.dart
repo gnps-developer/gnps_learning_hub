@@ -1,6 +1,6 @@
 import '../models/journey.dart';
 import '../models/progress.dart';
-import '../models/shop_item.dart';
+import '../models/shop/shop_item.dart';
 import '../repositories/progress_repository.dart';
 import 'package:flutter/foundation.dart' show kDebugMode;
 

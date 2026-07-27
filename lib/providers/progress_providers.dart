@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/journey.dart';
 import '../models/progress.dart';
-import '../models/shop_item.dart';
+import '../models/shop/shop_item.dart';
 import '../repositories/progress_repository.dart';
 import '../services/audio_service.dart';
 import '../services/progress_service.dart';

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../models/shop_item.dart';
+import '../../models/shop/shop_item.dart';
+import '../../models/shop/shop_item_category.dart';
+import '../../models/shop/default_item_ids.dart';
+import '../../models/avatar/avatar_slot.dart';
 
 const List<ShopItem> defaultItems = [
   ShopItem(
@@ -21,15 +24,44 @@ const List<ShopItem> defaultItems = [
     avatarSlot: AvatarSlot.base,
   ),
   ShopItem(
-    id: DefaultItemIds.turbanNone,
-    name: 'No Turban',
+    id: DefaultItemIds.skinToneFair,
+    name: 'Fair',
+    description: 'Fair skin tone.',
+    icon: Icons.circle,
+    color: Color(0xFFFFDBAC),
+    price: 0,
+    category: ShopItemCategory.item,
+    avatarSlot: AvatarSlot.skinTone,
+  ),
+  ShopItem(
+    id: 'skin_tone_tan',
+    name: 'Tan',
+    description: 'Tan skin tone.',
+    icon: Icons.circle,
+    color: Color(0xFFE0AC69),
+    price: 0,
+    category: ShopItemCategory.item,
+    avatarSlot: AvatarSlot.skinTone,
+  ),
+  ShopItem(
+    id: 'skin_tone_deep',
+    name: 'Deep',
+    description: 'Deep skin tone.',
+    icon: Icons.circle,
+    color: Color(0xFF8D5524),
+    price: 0,
+    category: ShopItemCategory.item,
+    avatarSlot: AvatarSlot.skinTone,
+  ),
+  ShopItem(
+    id: DefaultItemIds.headwearNone,
+    name: 'No Headwear',
     description: 'Bare-headed.',
     icon: Icons.circle_outlined,
     color: Colors.grey,
     price: 0,
     category: ShopItemCategory.item,
-    avatarSlot: AvatarSlot.turban,
-    supportedAvatarIds: [DefaultItemIds.avatarBoy],
+    avatarSlot: AvatarSlot.headwear,
   ),
   ShopItem(
     id: DefaultItemIds.clothesDefault,

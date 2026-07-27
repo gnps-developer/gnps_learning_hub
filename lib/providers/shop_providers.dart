@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../models/shop_item.dart';
+import '../models/shop/shop_item.dart';
 import '../repositories/shop_repository.dart';
 
 final shopRepositoryProvider = Provider((ref) => ShopRepository());

@@ -1,7 +1,10 @@
 // ignore_for_file: avoid_print
 import 'dart:io';
 import 'package:gnps_learning_hub/data/shop/shop_items.dart';
-import 'package:gnps_learning_hub/models/shop_item.dart';
+import 'package:gnps_learning_hub/models/avatar/avatar_slot.dart';
+import 'package:gnps_learning_hub/models/shop/shop_item.dart';
+import 'package:gnps_learning_hub/models/shop/shop_item_category.dart';
+import 'package:gnps_learning_hub/models/shop/default_item_ids.dart';
 
 /// Automatically generates SHOP_ITEMS.md from the app's shop data.
 ///
@@ -18,12 +21,12 @@ void main() {
   );
   buffer.writeln();
 
-  // Turbans
+  // Headwear
   _writeSection(
     buffer,
-    '👳 Turbans',
+    '👳 Headwear',
     'Available for the Boy avatar.',
-    purchasableItems.where((i) => i.avatarSlot == AvatarSlot.turban).toList(),
+    purchasableItems.where((i) => i.avatarSlot == AvatarSlot.headwear).toList(),
   );
 
   // Clothes
@@ -32,7 +35,6 @@ void main() {
     '👕 Clothes',
     'Traditional and formal outfits for both avatars.',
     purchasableItems.where((i) => i.avatarSlot == AvatarSlot.clothes).toList(),
-    includeAvatarColumn: true,
   );
 
   // Accessories
@@ -78,7 +80,6 @@ void _writeSection(
   String title,
   String description,
   List<ShopItem> items, {
-  bool includeAvatarColumn = false,
   bool includeStackableColumn = false,
 }) {
   if (items.isEmpty) return;
@@ -87,34 +88,37 @@ void _writeSection(
   buffer.writeln(description);
   buffer.writeln();
 
-  if (includeAvatarColumn) {
+  if (includeStackableColumn) {
+    buffer.writeln('| Item Name | Description | Avatar | Stackable | Price |');
+    buffer.writeln('| :--- | :--- | :--- | :--- | :--- |');
+  } else {
     buffer.writeln('| Item Name | Description | Avatar | Price |');
     buffer.writeln('| :--- | :--- | :--- | :--- |');
-  } else if (includeStackableColumn) {
-    buffer.writeln('| Item Name | Description | Stackable | Price |');
-    buffer.writeln('| :--- | :--- | :--- | :--- |');
-  } else {
-    buffer.writeln('| Item Name | Description | Price |');
-    buffer.writeln('| :--- | :--- | :--- |');
   }
 
   for (final item in items) {
     final name = '**${item.name}**';
     final price = '${item.price} 💎';
-    
-    if (includeAvatarColumn) {
-      String avatar = 'Both';
-      if (item.supportedAvatarIds?.contains(DefaultItemIds.avatarBoy) ?? false) {
-        avatar = 'Boy';
-      } else if (item.supportedAvatarIds?.contains(DefaultItemIds.avatarGirl) ?? false) {
-        avatar = 'Girl';
-      }
-      buffer.writeln('| $name | ${item.description} | $avatar | $price |');
-    } else if (includeStackableColumn) {
+
+    final supportsBoy =
+        item.supportedAvatarIds?.contains(DefaultItemIds.avatarBoy) ?? true;
+    final supportsGirl =
+        item.supportedAvatarIds?.contains(DefaultItemIds.avatarGirl) ?? true;
+
+    String avatar = 'Both';
+    if (supportsBoy && !supportsGirl) {
+      avatar = 'Boy';
+    } else if (!supportsBoy && supportsGirl) {
+      avatar = 'Girl';
+    }
+
+    if (includeStackableColumn) {
       final stackable = item.stackable ? 'Yes' : 'No';
-      buffer.writeln('| $name | ${item.description} | $stackable | $price |');
+      buffer.writeln(
+        '| $name | ${item.description} | $avatar | $stackable | $price |',
+      );
     } else {
-      buffer.writeln('| $name | ${item.description} | $price |');
+      buffer.writeln('| $name | ${item.description} | $avatar | $price |');
     }
   }
   buffer.writeln();

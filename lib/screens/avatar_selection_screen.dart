@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../models/shop_item.dart';
+import '../models/avatar/avatar_slot.dart';
 import '../providers/progress_providers.dart';
 import '../providers/shop_providers.dart';
 import 'journey_screen.dart';

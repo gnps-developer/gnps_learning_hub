@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../config/reward_config.dart';
-import '../models/shop_item.dart';
+import '../models/shop/shop_item.dart';
 import '../providers/progress_providers.dart';
 import '../providers/shop_providers.dart';
 import 'avatar_customization_screen.dart';

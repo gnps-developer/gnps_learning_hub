@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../models/shop_item.dart';
+import '../../models/avatar/avatar_slot.dart';
+import '../../models/shop/shop_item.dart';
 
 class ShopItemDisplay extends StatelessWidget {
   final ShopItem item;
@@ -35,7 +36,7 @@ class ShopItemDisplay extends StatelessWidget {
           scale = item.displayConfig!.scale;
         } else {
           switch (item.avatarSlot) {
-            case AvatarSlot.turban:
+            case AvatarSlot.headwear:
               alignment = const Alignment(0, -0.95);
               scale = 1.4;
               break;

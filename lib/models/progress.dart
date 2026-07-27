@@ -1,4 +1,5 @@
-import 'shop_item.dart';
+import 'avatar/avatar_slot.dart';
+import 'shop/default_item_ids.dart';
 
 class LocalProgress {
   String? userName;
@@ -19,7 +20,8 @@ class LocalProgress {
 
   static const Map<AvatarSlot, String> defaultEquippedItemIds = {
     AvatarSlot.base: DefaultItemIds.avatarBoy,
-    AvatarSlot.turban: DefaultItemIds.turbanNone,
+    AvatarSlot.skinTone: DefaultItemIds.skinToneFair,
+    AvatarSlot.headwear: DefaultItemIds.headwearNone,
     AvatarSlot.clothes: DefaultItemIds.clothesDefault,
     AvatarSlot.accessory: DefaultItemIds.accessoryNone,
   };

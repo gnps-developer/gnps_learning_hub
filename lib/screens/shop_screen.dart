@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../config/reward_config.dart';
 import '../models/progress.dart';
-import '../models/shop_item.dart';
+import '../models/avatar/avatar_slot.dart';
+import '../models/shop/shop_item.dart';
+import '../models/shop/shop_item_category.dart';
 import '../providers/progress_providers.dart';
 import '../providers/shop_providers.dart';
 import '../services/progress_service.dart';
@@ -29,21 +31,19 @@ class ShopScreen extends ConsumerWidget {
   }
 }
 
-class _ShopContent extends ConsumerWidget {
+class _ShopContent extends ConsumerStatefulWidget {
   final LocalProgress progress;
 
   const _ShopContent({required this.progress});
 
-  String _categoryLabel(ShopItemCategory category) {
-    switch (category) {
-      case ShopItemCategory.item:
-        return 'Items';
-      case ShopItemCategory.powerUp:
-        return 'Power-ups';
-    }
-  }
+  @override
+  ConsumerState<_ShopContent> createState() => _ShopContentState();
+}
 
-  Future<void> _buy(BuildContext context, WidgetRef ref, ShopItem item) async {
+class _ShopContentState extends ConsumerState<_ShopContent> {
+  String _selectedFilter = 'All';
+
+  Future<void> _buy(BuildContext context, ShopItem item) async {
     final result = await ref.read(progressProvider.notifier).purchaseItem(item);
     if (!context.mounted) return;
 
@@ -60,16 +60,12 @@ class _ShopContent extends ConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final service = ref.read(progressServiceProvider);
     final catalog = ref.watch(shopCatalogProvider);
 
-    final currentBaseId = progress.equippedItemIds[AvatarSlot.base.name];
+    final currentBaseId = widget.progress.equippedItemIds[AvatarSlot.base.name];
 
-    // Free default items (price 0) exist so every avatar slot always has
-    // something equipped, but they're not meant to be "bought" — hide
-    // them from the shop grid so this screen only shows real purchases.
-    // Also filter by compatibility with the currently equipped base avatar.
     final purchasableCatalog = catalog.where((i) {
       final isPurchasable = i.price > 0;
       final isCompatible = i.supportedAvatarIds == null ||
@@ -78,42 +74,79 @@ class _ShopContent extends ConsumerWidget {
       return isPurchasable && isCompatible;
     }).toList();
 
-    return ListView(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 20),
+    // Determine available filters based on content
+    final List<String> filters = ['All'];
+    if (purchasableCatalog.any((i) => i.category == ShopItemCategory.powerUp)) {
+      filters.add('Power-ups');
+    }
+    for (final slot in AvatarSlot.values) {
+      if (slot == AvatarSlot.base || slot == AvatarSlot.skinTone) continue;
+      if (purchasableCatalog.any((i) => i.avatarSlot == slot)) {
+        filters.add(slot.displayName);
+      }
+    }
+
+    final filteredItems = purchasableCatalog.where((i) {
+      if (_selectedFilter == 'All') return true;
+      if (_selectedFilter == 'Power-ups') {
+        return i.category == ShopItemCategory.powerUp;
+      }
+      return i.avatarSlot?.displayName == _selectedFilter;
+    }).toList();
+
+    return Column(
       children: [
-        GemBalance(points: progress.totalPoints),
-        const SizedBox(height: 24),
-        for (final category in ShopItemCategory.values)
-          if (purchasableCatalog.any((i) => i.category == category)) ...[
-            Text(
-              _categoryLabel(category),
-              style: Theme.of(
-                context,
-              ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 12),
-            GridView.count(
-              crossAxisCount: 2,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              mainAxisSpacing: 8,
-              crossAxisSpacing: 8,
-              childAspectRatio: 0.64,
-              children: [
-                for (final item in purchasableCatalog.where(
-                  (i) => i.category == category,
-                ))
-                  ShopItemCard(
-                    item: item,
-                    owned: service.isItemOwned(progress, item.id),
-                    quantity: service.itemQuantity(progress, item.id),
-                    canAfford: progress.totalPoints >= item.price,
-                    onBuy: () => _buy(context, ref, item),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(12, 20, 12, 0),
+          child: GemBalance(points: widget.progress.totalPoints),
+        ),
+        const SizedBox(height: 16),
+        SizedBox(
+          height: 44,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            itemCount: filters.length,
+            itemBuilder: (context, index) {
+              final filter = filters[index];
+              return Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: ChoiceChip(
+                  label: Text(filter),
+                  selected: _selectedFilter == filter,
+                  onSelected: (selected) {
+                    if (selected) setState(() => _selectedFilter = filter);
+                  },
+                ),
+              );
+            },
+          ),
+        ),
+        const SizedBox(height: 8),
+        Expanded(
+          child: filteredItems.isEmpty
+              ? const Center(child: Text('No items found.'))
+              : GridView.builder(
+                  padding: const EdgeInsets.all(16),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 12,
+                    crossAxisSpacing: 12,
+                    childAspectRatio: 0.68,
                   ),
-              ],
-            ),
-            const SizedBox(height: 24),
-          ],
+                  itemCount: filteredItems.length,
+                  itemBuilder: (context, index) {
+                    final item = filteredItems[index];
+                    return ShopItemCard(
+                      item: item,
+                      owned: service.isItemOwned(widget.progress, item.id),
+                      quantity: service.itemQuantity(widget.progress, item.id),
+                      canAfford: widget.progress.totalPoints >= item.price,
+                      onBuy: () => _buy(context, item),
+                    );
+                  },
+                ),
+        ),
       ],
     );
   }

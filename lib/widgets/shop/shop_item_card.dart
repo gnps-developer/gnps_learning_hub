@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../config/reward_config.dart';
-import '../../models/shop_item.dart';
+import '../../models/shop/shop_item.dart';
 
 import 'shop_item_display.dart';
 

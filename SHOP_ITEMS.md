@@ -2,14 +2,14 @@
 
 This document is automatically generated from the app's shop data.
 
-## 👳 Turbans
+## 👳 Headwear
 Available for the Boy avatar.
 
-| Item Name | Description | Price |
-| :--- | :--- | :--- |
-| **Orange Turban** | A vibrant orange turban. | 100 💎 |
-| **Blue Turban** | A classic blue turban. | 100 💎 |
-| **Red Turban** | A bold red turban. | 100 💎 |
+| Item Name | Description | Avatar | Price |
+| :--- | :--- | :--- | :--- |
+| **Orange Turban** | A vibrant orange turban. | Boy | 100 💎 |
+| **Blue Turban** | A classic blue turban. | Boy | 100 💎 |
+| **Red Turban** | A bold red turban. | Boy | 100 💎 |
 
 ## 👕 Clothes
 Traditional and formal outfits for both avatars.
@@ -23,20 +23,20 @@ Traditional and formal outfits for both avatars.
 ## 🕶️ Accessories
 Eyewear to customize your character's look.
 
-| Item Name | Description | Price |
-| :--- | :--- | :--- |
-| **Glasses** | For a studious look. | 80 💎 |
-| **Rounded Glasses** | A modern, circular frame. | 90 💎 |
-| **Sunglasses** | Classic dark shades. | 120 💎 |
-| **Rounded Sunglasses** | Modern circular dark shades. | 130 💎 |
+| Item Name | Description | Avatar | Price |
+| :--- | :--- | :--- | :--- |
+| **Glasses** | For a studious look. | Both | 80 💎 |
+| **Rounded Glasses** | A modern, circular frame. | Both | 90 💎 |
+| **Sunglasses** | Classic dark shades. | Both | 120 💎 |
+| **Rounded Sunglasses** | Modern circular dark shades. | Both | 130 💎 |
 
 ## ⚡ Power-ups
 Consumable items to help you on your learning journey.
 
-| Item Name | Description | Stackable | Price |
-| :--- | :--- | :--- | :--- |
-| **Streak Freeze** | Protects your streak if you miss a day. | Yes | 50 💎 |
-| **Extra Heart** | Gives you an extra life in games. | Yes | 20 💎 |
+| Item Name | Description | Avatar | Stackable | Price |
+| :--- | :--- | :--- | :--- | :--- |
+| **Streak Freeze** | Protects your streak if you miss a day. | Both | Yes | 50 💎 |
+| **Extra Heart** | Gives you an extra life in games. | Both | Yes | 20 💎 |
 
 ---
 

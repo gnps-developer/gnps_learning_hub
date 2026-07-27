@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../models/progress.dart';
-import '../models/shop_item.dart';
+import '../models/avatar/avatar_slot.dart';
+import '../models/shop/shop_item.dart';
+import '../models/shop/shop_item_category.dart';
 import '../providers/progress_providers.dart';
 import '../providers/shop_providers.dart';
 import '../widgets/avatar/avatar_preview.dart';
@@ -103,7 +105,7 @@ class _AvatarCustomizationScreenState
               if (slot == AvatarSlot.base) return true;
               return avatarItems.any((i) =>
                   i.avatarSlot == slot &&
-                  _isOwned(progress, i) &&
+                  (i.price == 0 || _isOwned(progress, i)) &&
                   (i.supportedAvatarIds == null ||
                       (currentBaseId != null &&
                           i.supportedAvatarIds!.contains(currentBaseId))));
@@ -116,7 +118,7 @@ class _AvatarCustomizationScreenState
 
             final slotItems = avatarItems
                 .where((i) => i.avatarSlot == _selectedSlot)
-                .where((i) => _isOwned(progress, i))
+                .where((i) => i.price == 0 || _isOwned(progress, i))
                 .where((i) =>
                     i.supportedAvatarIds == null ||
                     (currentBaseId != null &&
@@ -145,7 +147,7 @@ class _AvatarCustomizationScreenState
                       return Padding(
                         padding: const EdgeInsets.only(right: 8),
                         child: ChoiceChip(
-                          label: Text(_slotLabel(slot)),
+                          label: Text(slot.displayName),
                           selected: selected,
                           onSelected: (_) =>
                               setState(() => _selectedSlot = slot),
@@ -238,19 +240,6 @@ class _AvatarCustomizationScreenState
         ),
       ),
     );
-  }
-
-  String _slotLabel(AvatarSlot slot) {
-    switch (slot) {
-      case AvatarSlot.base:
-        return 'Base';
-      case AvatarSlot.turban:
-        return 'Turban';
-      case AvatarSlot.clothes:
-        return 'Clothes';
-      case AvatarSlot.accessory:
-        return 'Accessory';
-    }
   }
 }
 

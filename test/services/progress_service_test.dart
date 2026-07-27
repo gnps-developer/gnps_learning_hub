@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gnps_learning_hub/models/progress.dart';
-import 'package:gnps_learning_hub/models/shop_item.dart';
+import 'package:gnps_learning_hub/models/shop/shop_item.dart';
+import 'package:gnps_learning_hub/models/shop/shop_item_category.dart';
 import 'package:gnps_learning_hub/repositories/progress_repository.dart';
 import 'package:gnps_learning_hub/services/progress_service.dart';
 import 'package:mocktail/mocktail.dart';
