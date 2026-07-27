@@ -1,5 +1,5 @@
 enum AvatarSlot {
-  base(0, 'Base'),
+  base(0, 'Base Avatar'),
   skinTone(1, 'Skin Tone'),
   hair(2, 'Hair'),
   clothes(3, 'Clothes'),

@@ -44,16 +44,6 @@ const List<ShopItem> defaultItems = [
     avatarSlot: AvatarSlot.skinTone,
   ),
   ShopItem(
-    id: 'skin_tone_deep',
-    name: 'Deep',
-    description: 'Deep skin tone.',
-    icon: Icons.circle,
-    color: Color(0xFF8D5524),
-    price: 0,
-    category: ShopItemCategory.item,
-    avatarSlot: AvatarSlot.skinTone,
-  ),
-  ShopItem(
     id: DefaultItemIds.headwearNone,
     name: 'No Headwear',
     description: 'Bare-headed.',
