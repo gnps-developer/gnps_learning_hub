@@ -17,7 +17,7 @@ class AttributionsScreen extends StatelessWidget {
             items: [
               _AttributionItem(
                 name: 'Boy and Girl Avatars',
-                attribution: 'Custom designed for GNPS Learning Hub.',
+                attribution: '<a href="https://www.vecteezy.com/free-vector/indian">Indian Vectors by Vecteezy</a>.',
               ),
             ],
           ),
@@ -27,10 +27,10 @@ class AttributionsScreen extends StatelessWidget {
             items: [
               _AttributionItem(
                 name: 'Turbans and Traditional Clothing',
-                attribution: 'Inspired by traditional Sikh attire, custom illustrated.',
+                attribution: '<a href="https://www.vecteezy.com/free-vector/indian">Indian Vectors by Vecteezy</a>',
               ),
               _AttributionItem(
-                name: 'Accessories & Power-ups',
+                name: 'Accessories',
                 attribution: 'Original artwork by GNPS Team.',
               ),
             ],
