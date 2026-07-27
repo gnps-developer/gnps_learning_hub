@@ -11,4 +11,5 @@ class DefaultItemIds {
   static const accessoryNone = 'accessory_none';
   static const skinToneFair = 'skin_tone_fair';
   static const extraLife = 'powerup_extra_life';
+  static const streakFreeze = 'powerup_streak_freeze';
 }

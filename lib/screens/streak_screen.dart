@@ -140,7 +140,11 @@ class _StreakContent extends StatelessWidget {
           const SizedBox(height: 12),
           _WeekdayHeaderRow(),
           const SizedBox(height: 4),
-          _CalendarGrid(displayedMonth: displayedMonth, streakDays: streakDays),
+          _CalendarGrid(
+            displayedMonth: displayedMonth,
+            streakDays: streakDays,
+            frozenDates: progress.frozenDates,
+          ),
         ],
       ),
     );
@@ -235,8 +239,13 @@ class _WeekdayHeaderRow extends StatelessWidget {
 class _CalendarGrid extends StatelessWidget {
   final DateTime displayedMonth;
   final Set<DateTime> streakDays;
+  final Set<String> frozenDates;
 
-  const _CalendarGrid({required this.displayedMonth, required this.streakDays});
+  const _CalendarGrid({
+    required this.displayedMonth,
+    required this.streakDays,
+    required this.frozenDates,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -257,6 +266,9 @@ class _CalendarGrid extends StatelessWidget {
           isStreakDay: streakDays.contains(
             DateTime(displayedMonth.year, displayedMonth.month, day),
           ),
+          isFrozen: frozenDates.contains(
+            "${displayedMonth.year}-${displayedMonth.month.toString().padLeft(2, '0')}-${day.toString().padLeft(2, '0')}",
+          ),
           isToday: DateUtils.isSameDay(
             DateTime(displayedMonth.year, displayedMonth.month, day),
             today,
@@ -276,16 +288,22 @@ class _CalendarGrid extends StatelessWidget {
 class _DayCell extends StatelessWidget {
   final DateTime date;
   final bool isStreakDay;
+  final bool isFrozen;
   final bool isToday;
 
   const _DayCell({
     required this.date,
     required this.isStreakDay,
+    required this.isFrozen,
     required this.isToday,
   });
 
   @override
   Widget build(BuildContext context) {
+    final showIcon = isStreakDay || isFrozen;
+    final icon = isFrozen ? Icons.ac_unit : Icons.local_fire_department;
+    final iconColor = isFrozen ? Colors.blue : Colors.orange;
+
     return Padding(
       padding: const EdgeInsets.all(3),
       child: AspectRatio(
@@ -293,7 +311,7 @@ class _DayCell extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: isStreakDay ? Colors.orange.withValues(alpha: 0.12) : null,
+            color: showIcon ? iconColor.withValues(alpha: 0.12) : null,
             border: isToday
                 ? Border.all(
                     color: Theme.of(context).colorScheme.primary,
@@ -302,12 +320,8 @@ class _DayCell extends StatelessWidget {
                 : null,
           ),
           child: Center(
-            child: isStreakDay
-                ? const Icon(
-                    Icons.local_fire_department,
-                    color: Colors.orange,
-                    size: 22,
-                  )
+            child: showIcon
+                ? Icon(icon, color: iconColor, size: 22)
                 : Text(
                     '${date.day}',
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(

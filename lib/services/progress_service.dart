@@ -1,7 +1,8 @@
-import '../models/journey.dart';
-import '../models/progress.dart';
-import '../models/shop/shop_item.dart';
-import '../repositories/progress_repository.dart';
+import 'package:gnps_learning_hub/models/shop/default_item_ids.dart';
+import 'package:gnps_learning_hub/models/journey.dart';
+import 'package:gnps_learning_hub/models/progress.dart';
+import 'package:gnps_learning_hub/models/shop/shop_item.dart';
+import 'package:gnps_learning_hub/repositories/progress_repository.dart';
 import 'package:flutter/foundation.dart' show kDebugMode;
 
 enum PurchaseResult { success, insufficientGems, alreadyOwned }
@@ -30,7 +31,26 @@ class ProgressService {
       } else if (dayDiff == 1) {
         updated.currentStreak += 1;
       } else {
-        updated.currentStreak = 1; // today counts as a fresh start
+        // Multi-day gap. Check for Streak Freezes.
+        final missedDays = dayDiff - 1;
+        final availableFreezes = itemQuantity(updated, DefaultItemIds.streakFreeze);
+
+        if (availableFreezes >= missedDays) {
+          // Consume freezes to cover the gap
+          updated.ownedItemQuantities[DefaultItemIds.streakFreeze] = availableFreezes - missedDays;
+          
+          // Record frozen dates for visualization
+          for (int i = 1; i <= missedDays; i++) {
+            final frozenDate = last.add(Duration(days: i));
+            final dateStr = "${frozenDate.year}-${frozenDate.month.toString().padLeft(2, '0')}-${frozenDate.day.toString().padLeft(2, '0')}";
+            updated.frozenDates.add(dateStr);
+          }
+          
+          // Streak continues: previous streak + missed days (frozen) + 1 (today)
+          updated.currentStreak += missedDays + 1;
+        } else {
+          updated.currentStreak = 1; // Not enough freezes, reset.
+        }
       }
     }
 

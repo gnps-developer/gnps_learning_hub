@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gnps_learning_hub/models/progress.dart';
+import 'package:gnps_learning_hub/models/shop/default_item_ids.dart';
 import 'package:gnps_learning_hub/models/shop/shop_item.dart';
 import 'package:gnps_learning_hub/models/shop/shop_item_category.dart';
 import 'package:gnps_learning_hub/repositories/progress_repository.dart';
@@ -45,6 +46,39 @@ void main() {
       final result = await service.registerAppOpen(progress);
       
       expect(result.currentStreak, 1);
+    });
+
+    test('registerAppOpen should use Streak Freezes for multi-day gaps', () async {
+      final threeDaysAgo = DateTime.now().subtract(const Duration(days: 3));
+      final progress = LocalProgress(
+        currentStreak: 10,
+        lastActiveDate: DateTime(threeDaysAgo.year, threeDaysAgo.month, threeDaysAgo.day),
+        ownedItemQuantities: {DefaultItemIds.streakFreeze: 5},
+      );
+
+      final result = await service.registerAppOpen(progress);
+
+      // 3 days ago -> gap of 2 days (Day 2, Day 1 missed).
+      // Today is Day 0.
+      // Gap = dayDiff - 1 = 3 - 1 = 2 days.
+      expect(result.currentStreak, 13); // 10 (orig) + 2 (frozen) + 1 (today)
+      expect(result.ownedItemQuantities[DefaultItemIds.streakFreeze], 3);
+      expect(result.frozenDates.length, 2);
+    });
+
+    test('registerAppOpen should reset if not enough Streak Freezes', () async {
+      final threeDaysAgo = DateTime.now().subtract(const Duration(days: 3));
+      final progress = LocalProgress(
+        currentStreak: 10,
+        lastActiveDate: DateTime(threeDaysAgo.year, threeDaysAgo.month, threeDaysAgo.day),
+        ownedItemQuantities: {DefaultItemIds.streakFreeze: 1},
+      );
+
+      final result = await service.registerAppOpen(progress);
+
+      expect(result.currentStreak, 1);
+      expect(result.ownedItemQuantities[DefaultItemIds.streakFreeze], 1); // Not consumed
+      expect(result.frozenDates.isEmpty, true);
     });
 
     test('purchaseItem should award item and deduct points on success', () async {

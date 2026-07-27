@@ -9,6 +9,7 @@ class LocalProgress {
   Set<String> completedLessonIds;
   Set<String> completedSectionIds;
   Set<String> unlockedLessonIds;
+  Set<String> frozenDates;
   Map<String, int> ownedItemQuantities;
   Map<String, String> equippedItemIds;
   bool soundEnabled;
@@ -38,6 +39,7 @@ class LocalProgress {
     Set<String>? completedLessonIds,
     Set<String>? completedSectionIds,
     Set<String>? unlockedLessonIds,
+    Set<String>? frozenDates,
     Map<String, int>? ownedItemQuantities,
     Map<String, String>? equippedItemIds,
     this.soundEnabled = true,
@@ -49,6 +51,7 @@ class LocalProgress {
   }) : completedLessonIds = completedLessonIds ?? {},
        completedSectionIds = completedSectionIds ?? {},
        unlockedLessonIds = unlockedLessonIds ?? {},
+       frozenDates = frozenDates ?? {},
        ownedItemQuantities = {
          ...defaultOwnedItemQuantities,
          ...(ownedItemQuantities ?? {}),
@@ -75,6 +78,9 @@ class LocalProgress {
       ),
       unlockedLessonIds: Set<String>.from(
         json['unlockedLessonIds'] as List? ?? [],
+      ),
+      frozenDates: Set<String>.from(
+        json['frozenDates'] as List? ?? [],
       ),
       ownedItemQuantities: {
         ...defaultOwnedItemQuantities,
@@ -113,6 +119,7 @@ class LocalProgress {
     'completedLessonIds': completedLessonIds.toList(),
     'completedSectionIds': completedSectionIds.toList(),
     'unlockedLessonIds': unlockedLessonIds.toList(),
+    'frozenDates': frozenDates.toList(),
     'ownedItemQuantities': ownedItemQuantities,
     'equippedItemIds': equippedItemIds,
     'soundEnabled': soundEnabled,
