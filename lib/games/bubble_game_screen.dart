@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/game_config.dart';
+import '../models/shop/default_item_ids.dart';
 import '../config/ui_strings.dart';
 import '../providers/progress_providers.dart';
 import '../providers/audio_providers.dart';
@@ -28,12 +29,13 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
   late Timer _gameLoop;
   final GlobalKey<ConfettiOverlayState> _confettiKey = GlobalKey();
 
-  int _lives = 3;
   int _score = 0;
   String _targetLetter = '';
   List<String> _letterPool = [];
   bool _gameOver = false;
   bool _gameWon = false;
+  bool _isConsumingHeart = false;
+  int _pendingLosses = 0;
 
   // Configurable parameters from game.content
   late int _spawnRateMs;
@@ -117,17 +119,22 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
   }
 
   void _updateBubbles() {
+    int lostCount = 0;
     setState(() {
       for (var i = _bubbles.length - 1; i >= 0; i--) {
         _bubbles[i].y -= _bubbles[i].speed;
         if (_bubbles[i].y < -100) {
           if (_bubbles[i].letter == _targetLetter && !_bubbles[i].popped) {
-            _loseLife();
+            lostCount++;
           }
           _bubbles.removeAt(i);
         }
       }
     });
+
+    for (int i = 0; i < lostCount; i++) {
+      _loseLife();
+    }
   }
 
   void _popBubble(_Bubble bubble) {
@@ -145,47 +152,52 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
         }
       } else {
         bubble.status = _BubbleStatus.wrong;
-        _loseLife();
       }
     });
+
+    if (bubble.letter != _targetLetter) {
+      _loseLife();
+    }
 
     Future.delayed(const Duration(milliseconds: 500), () {
-      setState(() {
-        _bubbles.removeWhere((b) => b.id == bubble.id);
-      });
-    });
-  }
-
-  void _loseLife() {
-    setState(() {
-      _lives--;
-      if (_lives <= 0) {
-        _handleOutOfLives();
-      }
-    });
-  }
-
-  void _handleOutOfLives() async {
-    final progress = ref.read(progressProvider).value;
-    final extraHearts =
-        progress?.ownedItemQuantities['powerup_extra_life'] ?? 0;
-
-    if (extraHearts > 0) {
-      // Automatically consume an extra heart and refill lives.
-      await ref
-          .read(progressProvider.notifier)
-          .consumeItem('powerup_extra_life');
-
       if (mounted) {
         setState(() {
-          _lives = 3;
+          _bubbles.removeWhere((b) => b.id == bubble.id);
         });
       }
-    } else {
-      // No extra hearts left, game over immediately.
-      setState(() => _gameOver = true);
-      ref.read(audioServiceProvider).playGameOver();
+    });
+  }
+
+  void _loseLife() async {
+    _pendingLosses++;
+    if (_gameOver || _isConsumingHeart) return;
+
+    _isConsumingHeart = true;
+    while (_pendingLosses > 0 && !_gameOver) {
+      _pendingLosses--;
+
+      final progress = ref.read(progressProvider).value;
+      final hearts =
+          progress?.ownedItemQuantities[DefaultItemIds.extraLife] ?? 0;
+
+      if (hearts > 0) {
+        ref.read(audioServiceProvider).playFailure();
+        await ref
+            .read(progressProvider.notifier)
+            .consumeItem(DefaultItemIds.extraLife);
+
+        if (hearts <= 1 && mounted) {
+          setState(() => _gameOver = true);
+          ref.read(audioServiceProvider).playGameOver();
+        }
+      } else {
+        if (mounted) {
+          setState(() => _gameOver = true);
+          ref.read(audioServiceProvider).playGameOver();
+        }
+      }
     }
+    _isConsumingHeart = false;
   }
 
   void _winGame() {
@@ -251,55 +263,34 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
                             ...List.generate(
                               3,
                               (index) => Icon(
-                                index < _lives
+                                index <
+                                        (ref
+                                                .watch(progressProvider)
+                                                .value
+                                                ?.ownedItemQuantities[DefaultItemIds.extraLife] ??
+                                            0)
                                     ? Icons.favorite
                                     : Icons.favorite_border,
                                 color: Colors.red,
                                 size: 32,
                               ),
                             ),
-                            const SizedBox(width: 8),
                             if ((ref
                                         .watch(progressProvider)
                                         .value
-                                        ?.ownedItemQuantities['powerup_extra_life'] ??
+                                        ?.ownedItemQuantities[DefaultItemIds.extraLife] ??
                                     0) >
-                                0)
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 8,
-                                  vertical: 4,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: Colors.red.withValues(alpha: 0.1),
-                                  borderRadius: BorderRadius.circular(12),
-                                  border: Border.all(
-                                    color: Colors.red.withValues(alpha: 0.3),
-                                  ),
-                                ),
-                                child: Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.add,
-                                      size: 16,
-                                      color: Colors.red,
-                                    ),
-                                    const Icon(
-                                      Icons.favorite,
-                                      size: 16,
-                                      color: Colors.red,
-                                    ),
-                                    const SizedBox(width: 4),
-                                    Text(
-                                      '${ref.watch(progressProvider).value?.ownedItemQuantities['powerup_extra_life']}',
-                                      style: const TextStyle(
-                                        color: Colors.red,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
+                                3) ...[
+                              const SizedBox(width: 4),
+                              Text(
+                                '+${(ref.watch(progressProvider).value?.ownedItemQuantities[DefaultItemIds.extraLife] ?? 0) - 3}',
+                                style: const TextStyle(
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
                                 ),
                               ),
+                            ],
                           ],
                         ),
                         Text(

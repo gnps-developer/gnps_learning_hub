@@ -13,6 +13,7 @@ import 'profile_screen.dart';
 import 'shop_screen.dart';
 
 import '../models/game_config.dart';
+import '../models/shop/default_item_ids.dart';
 import '../games/bubble_game_screen.dart';
 
 class JourneyScreen extends ConsumerStatefulWidget {
@@ -34,6 +35,36 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
   }
 
   void _openGame(GameConfig game, Journey journey) {
+    final hearts =
+        ref.read(progressProvider).value?.ownedItemQuantities[DefaultItemIds.extraLife] ?? 0;
+
+    if (hearts <= 0) {
+      showDialog(
+        context: context,
+        builder:
+            (context) => AlertDialog(
+              title: const Text('No Hearts! ❤️'),
+              content: const Text(
+                'You need at least one heart to play this game. Visit the shop to get more!',
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: const Text('Cancel'),
+                ),
+                FilledButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    setState(() => _tabIndex = 1); // Switch to Shop tab
+                  },
+                  child: const Text('Go to Shop'),
+                ),
+              ],
+            ),
+      );
+      return;
+    }
+
     Navigator.of(context).push(
       MaterialPageRoute(builder: (_) => BubbleGameScreen(game: game)),
     );
