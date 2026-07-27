@@ -274,7 +274,7 @@ class LessonPath extends StatelessWidget {
                       isLocked: !isUnlocked,
                       onTap: () => onTapGame?.call(game),
                       icon: game.icon ?? Icons.videogame_asset,
-                      color: game.color ?? Colors.amber,
+                      color: game.iconColor ?? Colors.amber,
                     ),
                   );
                 }),

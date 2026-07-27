@@ -9,7 +9,7 @@ class GameConfig {
   final double? mapXOffset; // Horizontal offset from the anchor lesson
   final double? mapYOffset; // Vertical offset from the anchor lesson
   final IconData? icon;
-  final Color? color;
+  final Color? iconColor;
 
   const GameConfig({
     required this.id,
@@ -20,7 +20,7 @@ class GameConfig {
     this.mapXOffset,
     this.mapYOffset,
     this.icon,
-    this.color,
+    this.iconColor,
   });
 
   factory GameConfig.fromJson(Map<String, dynamic> json) {
@@ -35,9 +35,9 @@ class GameConfig {
       icon: json['icon'] is String
           ? _iconMapping[json['icon'] as String]
           : json['icon'] as IconData?,
-      color: json['color'] is int
-          ? Color(json['color'] as int)
-          : json['color'] as Color?,
+      iconColor: json['iconColor'] is int
+          ? Color(json['iconColor'] as int)
+          : json['iconColor'] as Color?,
     );
   }
 
@@ -50,7 +50,7 @@ class GameConfig {
     'mapXOffset': mapXOffset,
     'mapYOffset': mapYOffset,
     'icon': _reverseIconMapping[icon],
-    'color': color?.toARGB32(),
+    'iconColor': iconColor?.toARGB32(),
   };
 
   /// Mapping of string keys to IconData constants to allow for icon

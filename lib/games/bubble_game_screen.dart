@@ -8,6 +8,7 @@ import '../config/ui_strings.dart';
 import '../providers/progress_providers.dart';
 import '../providers/audio_providers.dart';
 import '../widgets/common/task_speaker_button.dart';
+import '../widgets/common/task_header.dart';
 import '../widgets/confetti/confetti_overlay.dart';
 
 class BubbleGameScreen extends ConsumerStatefulWidget {
@@ -212,7 +213,10 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Colors.blue.shade200, Colors.blue.shade50],
+            colors: [
+              Theme.of(context).colorScheme.primaryContainer,
+              Theme.of(context).colorScheme.surface,
+            ],
           ),
         ),
         child: Stack(
@@ -319,11 +323,10 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
                       ),
                       child: Column(
                         children: [
-                          Text(
-                            widget.game.id.contains('word')
-                                ? 'Listen to the word:'
-                                : 'Listen to the letter:',
-                            style: const TextStyle(fontSize: 18),
+                          TaskHeader(
+                            title: widget.game.id.contains('word')
+                                ? 'Listen to the word'
+                                : 'Listen to the letter',
                           ),
                           const SizedBox(height: 8),
                           TaskSpeakerButton(

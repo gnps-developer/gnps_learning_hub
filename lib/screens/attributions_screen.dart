@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AttributionsScreen extends StatelessWidget {
   const AttributionsScreen({super.key});
@@ -17,7 +18,8 @@ class AttributionsScreen extends StatelessWidget {
             items: [
               _AttributionItem(
                 name: 'Boy and Girl Avatars',
-                attribution: '<a href="https://www.vecteezy.com/free-vector/indian">Indian Vectors by Vecteezy</a>.',
+                attribution: 'Indian Vectors by Vecteezy',
+                url: 'https://www.vecteezy.com/free-vector/indian',
               ),
             ],
           ),
@@ -27,7 +29,8 @@ class AttributionsScreen extends StatelessWidget {
             items: [
               _AttributionItem(
                 name: 'Turbans and Traditional Clothing',
-                attribution: '<a href="https://www.vecteezy.com/free-vector/indian">Indian Vectors by Vecteezy</a>',
+                attribution: 'Indian Vectors by Vecteezy',
+                url: 'https://www.vecteezy.com/free-vector/indian',
               ),
               _AttributionItem(
                 name: 'Accessories',
@@ -93,14 +96,25 @@ class _AttributionSection extends StatelessWidget {
 class _AttributionItem extends StatelessWidget {
   final String name;
   final String attribution;
+  final String? url;
 
   const _AttributionItem({
     required this.name,
     required this.attribution,
+    this.url,
   });
+
+  Future<void> _launchUrl() async {
+    if (url == null) return;
+    final uri = Uri.parse(url!);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    final isLink = url != null;
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
       child: Column(
@@ -110,9 +124,15 @@ class _AttributionItem extends StatelessWidget {
             name,
             style: const TextStyle(fontWeight: FontWeight.w600),
           ),
-          Text(
-            attribution,
-            style: Theme.of(context).textTheme.bodyMedium,
+          InkWell(
+            onTap: isLink ? _launchUrl : null,
+            child: Text(
+              attribution,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: isLink ? Colors.blue : null,
+                    decoration: isLink ? TextDecoration.underline : null,
+                  ),
+            ),
           ),
         ],
       ),

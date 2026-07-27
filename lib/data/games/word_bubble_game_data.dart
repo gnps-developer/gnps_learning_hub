@@ -10,7 +10,7 @@ final Map<String, dynamic> wordBubbleGameConfig = {
   'mapXOffset': -110.0, // Tucked into the left tree line
   'mapYOffset': -20.0, // Slightly above the lesson node to avoid bottom edge
   'icon': 'menu_book',
-  'color': const Color(0xFF9C27B0),
+  'iconColor': const Color(0xFF9C27B0),
   'content': {
     'spawnRateMs': 1200,
     'minSpeed': 0.0,
