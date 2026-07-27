@@ -61,44 +61,18 @@ class JourneySyncNotifier extends StateNotifier<JourneySyncState> {
         toVersion: journeyData.version,
       );
 
-      final bundledInstallDelay = Future.delayed(const Duration(milliseconds: 800));
+      final bundledInstallDelay = Future.delayed(
+        const Duration(milliseconds: 800),
+      );
       await _repository.cacheJourney(journeyData);
       await bundledInstallDelay;
 
       local = journeyData;
     }
 
-    final remoteVersion = await _repository.fetchRemoteVersion();
-
-    if (remoteVersion == null || remoteVersion <= local.version) {
-      await checkingDelay;
-      state = JourneyReady(journey: local, wasUpdated: false);
-      _readyCompleter.complete(local);
-      return;
-    }
-
     await checkingDelay;
-    state = JourneyInstallingUpdate(
-      fromVersion: local.version,
-      toVersion: remoteVersion,
-    );
-
-    final remoteInstallDelay = Future.delayed(
-      const Duration(milliseconds: 200),
-    );
-
-    try {
-      final installed = await _repository.fetchAndCacheRemoteJourney(
-        remoteVersion,
-      );
-      await remoteInstallDelay;
-      state = JourneyReady(journey: installed, wasUpdated: true);
-      _readyCompleter.complete(installed);
-    } catch (_) {
-      await remoteInstallDelay;
-      state = JourneyReady(journey: local, wasUpdated: false);
-      _readyCompleter.complete(local);
-    }
+    state = JourneyReady(journey: local, wasUpdated: false);
+    _readyCompleter.complete(local);
   }
 }
 

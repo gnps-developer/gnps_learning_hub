@@ -1,9 +1,8 @@
 # GNPS Learning Hub
 
-**GNPS Learning Hub** is a gamified Punjabi learning application designed specifically for kids. It combines a structured curriculum with engaging game mechanics like streaks, gems, and avatar customization to make language learning an adventure.
+Learn Punjabi through short lessons — earn gems, build streaks, unlock and play word games and customize your own avatar along the way.
 
 [![Flutter](https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev)
-[![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com/)
 
 ---
 
@@ -25,7 +24,6 @@
 
 - Flutter SDK (latest stable version)
 - Android Studio / VS Code
-- Firebase account (optional for local development)
 
 ### Installation
 
@@ -52,7 +50,6 @@
 - **Framework**: [Flutter](https://flutter.dev)
 - **State Management**: [Riverpod](https://riverpod.dev)
 - **Local Database**: [Hive](https://docs.hivedb.dev/)
-- **Backend**: [Firebase Firestore](https://firebase.google.com/docs/firestore) (Optional)
 - **Audio**: `audioplayers` & `flutter_tts`
 - **Graphics**: `flutter_svg`
 
@@ -66,7 +63,7 @@ lib/
 ├── data/         # Mock data and initial assets
 ├── models/       # Data models (Lesson, Task, Progress, etc.)
 ├── providers/    # Riverpod state providers
-├── repositories/ # Data access layer (Hive/Firestore)
+├── repositories/ # Data access layer (Local Hive Storage)
 ├── screens/      # UI Screens (Journey, Shop, Profile, etc.)
 ├── services/     # External services (Audio, TTS)
 └── widgets/      # Reusable UI components
@@ -75,11 +72,6 @@ lib/
 ---
 
 ## 🔧 Configuration
-
-### Firebase (Optional)
-The app is designed to work with mock data if Firebase is not configured. To enable Firebase:
-1.  Run `flutterfire configure`.
-2.  Uncomment the import and options in `lib/main.dart`.
 
 ### Local Storage
 User progress and shop items are stored locally using Hive for a seamless offline experience.

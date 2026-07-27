@@ -45,6 +45,6 @@ GNPS Learning Hub is designed to make learning Punjabi engaging and fun for chil
 ## 🛠 Technology & Architecture
 
 - **Offline First**: All progress is saved locally using Hive, ensuring the app works without an active connection.
-- **Firebase Sync**: Optional Firestore integration for content updates and cross-device synchronization.
+- **Bundled Updates**: Curriculum is managed via app updates, with automated cache migration on first launch of a new version.
 - **State Management**: Built with Flutter Riverpod for high performance and testability.
 - **Dynamic Theming**: The app UI adapts its primary color based on user preferences.
