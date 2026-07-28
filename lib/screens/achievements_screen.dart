@@ -115,6 +115,7 @@ class _GameAchievementCard extends StatelessWidget {
             const SizedBox(height: 24),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _TrophyItem(
                   level: GameDifficulty.easy,
@@ -186,14 +187,19 @@ class _TrophyItem extends StatelessWidget {
             color: isEarned ? null : Colors.grey,
           ),
         ),
-        if (showBestScore)
-          Text(
-            'Best: $score ⭐',
-            style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.orange.shade800,
-                ),
-          ),
+        const SizedBox(height: 4),
+        SizedBox(
+          height: 16,
+          child: showBestScore
+              ? Text(
+                  'Best: $score ⭐',
+                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.orange.shade800,
+                      ),
+                )
+              : null,
+        ),
       ],
     );
   }
