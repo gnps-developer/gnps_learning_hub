@@ -261,17 +261,23 @@ class _NameFieldState extends ConsumerState<_NameField> {
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
       children: [
+        // Invisible placeholder to balance the edit icon on the right
+        const Opacity(
+          opacity: 0,
+          child: Icon(Icons.edit, size: 18),
+        ),
+        const SizedBox(width: 6),
         Flexible(
           child: Text(
             hasName ? widget.currentName! : 'Add your name',
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
+            textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: hasName ? null : Theme.of(context).colorScheme.outline,
-            ),
+                  fontWeight: FontWeight.bold,
+                  color: hasName ? null : Theme.of(context).colorScheme.outline,
+                ),
           ),
         ),
         const SizedBox(width: 6),
