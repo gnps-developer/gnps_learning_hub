@@ -20,6 +20,18 @@ final Map<String, dynamic> bubbleGameConfig = {
     'pointsPerCorrect': 10,
     'initialDelayMs': 1200,
     'targetProbability': 0.5,
+    'difficulties': {
+      'medium': {
+        'spawnRateMultiplier': 0.75,
+        'speedMultiplier': 1.3,
+        'probabilityMultiplier': 0.8,
+      },
+      'hard': {
+        'spawnRateMultiplier': 0.5,
+        'speedMultiplier': 1.6,
+        'probabilityMultiplier': 0.6,
+      },
+    },
     'letters': [
       'ੳ',
       'ਅ',

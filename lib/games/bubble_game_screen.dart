@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/game_config.dart';
+import '../models/games/game_difficulty.dart';
 import '../models/shop/default_item_ids.dart';
 import '../config/ui_strings.dart';
 import '../providers/progress_providers.dart';
@@ -14,8 +15,9 @@ import '../widgets/confetti/confetti_overlay.dart';
 
 class BubbleGameScreen extends ConsumerStatefulWidget {
   final GameConfig game;
+  final GameDifficulty? difficulty;
 
-  const BubbleGameScreen({super.key, required this.game});
+  const BubbleGameScreen({super.key, required this.game, this.difficulty});
 
   @override
   ConsumerState<BubbleGameScreen> createState() => _BubbleGameScreenState();
@@ -36,6 +38,7 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
   bool _gameWon = false;
   bool _isConsumingHeart = false;
   int _pendingLosses = 0;
+  GameDifficulty? _selectedDifficulty;
 
   // Configurable parameters from game.content
   late int _spawnRateMs;
@@ -62,6 +65,31 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
     _initialDelayMs = (content['initialDelayMs'] as num? ?? 1200).toInt();
     _targetProbability =
         (content['targetProbability'] as num? ?? 0.3).toDouble();
+
+    if (widget.difficulty != null) {
+      _startGame(widget.difficulty!);
+    }
+  }
+
+  void _startGame(GameDifficulty diff) {
+    setState(() {
+      _selectedDifficulty = diff;
+    });
+
+    // Scale difficulty based on configuration
+    final content = widget.game.content;
+    final Map<String, dynamic>? difficulties = content['difficulties'];
+    if (difficulties != null && difficulties.containsKey(diff.name)) {
+      final Map<String, dynamic> config = difficulties[diff.name];
+      
+      final spawnRateMult = (config['spawnRateMultiplier'] as num? ?? 1.0).toDouble();
+      final speedMult = (config['speedMultiplier'] as num? ?? 1.0).toDouble();
+      final probMult = (config['probabilityMultiplier'] as num? ?? 1.0).toDouble();
+
+      _spawnRateMs = (_spawnRateMs * spawnRateMult).toInt();
+      _maxSpeed = _maxSpeed * speedMult;
+      _targetProbability = _targetProbability * probMult;
+    }
 
     _initGame();
   }
@@ -210,11 +238,13 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
         if (hearts <= 1 && mounted) {
           setState(() => _gameOver = true);
           ref.read(audioServiceProvider).playGameOver();
+          _recordFinalScore(won: false);
         }
       } else {
         if (mounted) {
           setState(() => _gameOver = true);
           ref.read(audioServiceProvider).playGameOver();
+          _recordFinalScore(won: false);
         }
       }
     }
@@ -229,6 +259,17 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
     _confettiKey.currentState?.play();
     ref.read(audioServiceProvider).playGameWon();
     ref.read(progressProvider.notifier).addPoints(50);
+    _recordFinalScore(won: true);
+  }
+
+  void _recordFinalScore({required bool won}) {
+    if (_selectedDifficulty == null) return;
+    ref.read(progressProvider.notifier).recordGameScore(
+      gameId: widget.game.id,
+      score: _score,
+      difficulty: _selectedDifficulty!,
+      won: won,
+    );
   }
 
   @override
@@ -326,6 +367,22 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
                         ),
                       ],
                     ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        if (_selectedDifficulty != null) ...[
+                          Text(
+                            'Difficulty: ${_selectedDifficulty!.displayName}',
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            'Best: ${ref.read(progressProvider).value?.gameHighScores[widget.game.id]?[_selectedDifficulty!.name] ?? 0} ⭐',
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
+                        ],
+                      ],
+                    ),
                     const SizedBox(height: 20),
                     Container(
                       padding: const EdgeInsets.symmetric(
@@ -396,7 +453,109 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
               ),
 
             Positioned.fill(child: ConfettiOverlay(key: _confettiKey)),
+
+            if (_selectedDifficulty == null)
+              _DifficultySelectionOverlay(
+                gameTitle: widget.game.title,
+                unlockedLevel: ref
+                        .watch(progressProvider)
+                        .value
+                        ?.unlockedGameDifficulties[widget.game.id] ??
+                    0,
+                onSelected: _startGame,
+              ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _DifficultySelectionOverlay extends StatelessWidget {
+  final String gameTitle;
+  final int unlockedLevel;
+  final ValueChanged<GameDifficulty> onSelected;
+
+  const _DifficultySelectionOverlay({
+    required this.gameTitle,
+    required this.unlockedLevel,
+    required this.onSelected,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.black.withValues(alpha: 0.5),
+      child: Center(
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 32),
+          padding: const EdgeInsets.all(24),
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.surface,
+            borderRadius: BorderRadius.circular(28),
+            boxShadow: const [BoxShadow(color: Colors.black26, blurRadius: 20)],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                gameTitle,
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 8),
+              const Text('Select difficulty:'),
+              const SizedBox(height: 24),
+              _DifficultyButton(
+                difficulty: GameDifficulty.easy,
+                isLocked: false,
+                onPressed: () => onSelected(GameDifficulty.easy),
+              ),
+              const SizedBox(height: 12),
+              _DifficultyButton(
+                difficulty: GameDifficulty.medium,
+                isLocked: unlockedLevel < 1,
+                onPressed: () => onSelected(GameDifficulty.medium),
+              ),
+              const SizedBox(height: 12),
+              _DifficultyButton(
+                difficulty: GameDifficulty.hard,
+                isLocked: unlockedLevel < 2,
+                onPressed: () => onSelected(GameDifficulty.hard),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _DifficultyButton extends StatelessWidget {
+  final GameDifficulty difficulty;
+  final bool isLocked;
+  final VoidCallback onPressed;
+
+  const _DifficultyButton({
+    required this.difficulty,
+    required this.isLocked,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: OutlinedButton.icon(
+        onPressed: isLocked ? null : onPressed,
+        icon: Icon(isLocked ? Icons.lock : difficulty.icon, size: 20),
+        label: Text(difficulty.displayName),
+        style: OutlinedButton.styleFrom(
+          padding: const EdgeInsets.symmetric(vertical: 14),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         ),
       ),
     );

@@ -6,6 +6,8 @@ import '../models/lesson.dart';
 import '../models/progress.dart';
 import '../providers/content_providers.dart';
 import '../providers/progress_providers.dart';
+import '../providers/shop_providers.dart';
+import '../models/shop/shop_item.dart';
 import '../widgets/journey/lesson_path.dart';
 import '../widgets/journey/journey_banner.dart';
 import 'lesson_screen.dart';
@@ -35,8 +37,8 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
   }
 
   void _openGame(GameConfig game, Journey journey) {
-    final hearts =
-        ref.read(progressProvider).value?.ownedItemQuantities[DefaultItemIds.extraLife] ?? 0;
+    final progress = ref.read(progressProvider).value;
+    final hearts = progress?.ownedItemQuantities[DefaultItemIds.extraLife] ?? 0;
 
     if (hearts <= 0) {
       showDialog(
@@ -74,6 +76,7 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
   Widget build(BuildContext context) {
     final journeyAsync = ref.watch(journeyProvider);
     final progressAsync = ref.watch(progressProvider);
+    final catalog = ref.watch(shopCatalogProvider);
 
     return Scaffold(
       body: SafeArea(
@@ -86,6 +89,7 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
                 data: (progress) => _JourneyContent(
                   journey: journey,
                   progress: progress,
+                  catalog: catalog,
                   onTapLesson: (lesson) => _openLesson(lesson, journey),
                   onTapGame: (game) => _openGame(game, journey),
                 ),
@@ -126,12 +130,14 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
 class _JourneyContent extends StatelessWidget {
   final Journey journey;
   final LocalProgress progress;
+  final List<ShopItem> catalog;
   final void Function(Lesson lesson) onTapLesson;
   final void Function(GameConfig game) onTapGame;
 
   const _JourneyContent({
     required this.journey,
     required this.progress,
+    required this.catalog,
     required this.onTapLesson,
     required this.onTapGame,
   });
@@ -141,9 +147,8 @@ class _JourneyContent extends StatelessWidget {
     return Column(
       children: [
         JourneyBanner(
-          streak: progress.currentStreak,
-          points: progress.totalPoints,
-          hearts: progress.ownedItemQuantities['powerup_extra_life'] ?? 0,
+          progress: progress,
+          catalog: catalog,
         ),
         Expanded(
           child: LessonPath(

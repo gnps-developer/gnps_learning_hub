@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/journey.dart';
 import '../models/progress.dart';
+import '../models/games/game_difficulty.dart';
 import '../models/shop/shop_item.dart';
 import '../repositories/progress_repository.dart';
 import '../services/audio_service.dart';
@@ -200,6 +201,25 @@ class ProgressNotifier extends StateNotifier<AsyncValue<LocalProgress>> {
     final current = state.value;
     if (current == null) return;
     final updated = await _service.updateDeveloperMode(current, enabled);
+    state = AsyncValue.data(updated);
+  }
+
+  Future<void> recordGameScore({
+    required String gameId,
+    required int score,
+    required GameDifficulty difficulty,
+    required bool won,
+  }) async {
+    await _initialLoad;
+    final current = state.value;
+    if (current == null) return;
+    final updated = await _service.recordGameScore(
+      progress: current,
+      gameId: gameId,
+      score: score,
+      difficulty: difficulty,
+      won: won,
+    );
     state = AsyncValue.data(updated);
   }
 }

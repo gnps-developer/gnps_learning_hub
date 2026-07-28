@@ -18,15 +18,10 @@ class ShopScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final progressAsync = ref.watch(progressProvider);
 
-    return Scaffold(
-      appBar: AppBar(title: const Text('Shop')),
-      body: SafeArea(
-        child: progressAsync.when(
-          data: (progress) => _ShopContent(progress: progress),
-          loading: () => const Center(child: CircularProgressIndicator()),
-          error: (_, _) => const Center(child: Text('Could not load shop.')),
-        ),
-      ),
+    return progressAsync.when(
+      data: (progress) => _ShopContent(progress: progress),
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (_, _) => const Center(child: Text('Could not load shop.')),
     );
   }
 }
@@ -97,15 +92,24 @@ class _ShopContentState extends ConsumerState<_ShopContent> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.fromLTRB(12, 20, 12, 0),
-          child: GemBalance(points: widget.progress.totalPoints),
+          padding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Shop',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+              GemBalance(points: widget.progress.totalPoints),
+            ],
+          ),
         ),
         const SizedBox(height: 16),
         SizedBox(
           height: 44,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 24),
             itemCount: filters.length,
             itemBuilder: (context, index) {
               final filter = filters[index];

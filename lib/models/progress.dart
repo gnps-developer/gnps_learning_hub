@@ -12,6 +12,8 @@ class LocalProgress {
   Set<String> frozenDates;
   Map<String, int> ownedItemQuantities;
   Map<String, String> equippedItemIds;
+  Map<String, Map<String, int>> gameHighScores;
+  Map<String, int> unlockedGameDifficulties;
   bool soundEnabled;
   bool hapticsEnabled;
   int themeSeedColor;
@@ -42,6 +44,8 @@ class LocalProgress {
     Set<String>? frozenDates,
     Map<String, int>? ownedItemQuantities,
     Map<String, String>? equippedItemIds,
+    Map<String, Map<String, int>>? gameHighScores,
+    Map<String, int>? unlockedGameDifficulties,
     this.soundEnabled = true,
     this.hapticsEnabled = true,
     this.themeSeedColor = 0xFF2196F3, // Colors.blue
@@ -60,7 +64,9 @@ class LocalProgress {
            equippedItemIds ??
            defaultEquippedItemIds.map(
              (slot, itemId) => MapEntry(slot.name, itemId),
-           );
+           ),
+       gameHighScores = gameHighScores ?? {},
+       unlockedGameDifficulties = unlockedGameDifficulties ?? {};
 
   factory LocalProgress.fromJson(Map<String, dynamic> json) {
     return LocalProgress(
@@ -91,6 +97,23 @@ class LocalProgress {
               {},
         ),
       },
+      gameHighScores: (json['gameHighScores'] as Map?)?.map(
+            (k, v) => MapEntry(
+              k as String,
+              Map<String, int>.from(
+                (v as Map).map(
+                  (kd, vd) => MapEntry(kd as String, (vd as num).toInt()),
+                ),
+              ),
+            ),
+          ) ??
+          {},
+      unlockedGameDifficulties: Map<String, int>.from(
+        (json['unlockedGameDifficulties'] as Map?)?.map(
+              (key, value) => MapEntry(key as String, (value as num).toInt()),
+            ) ??
+            {},
+      ),
       equippedItemIds: {
         ...defaultEquippedItemIds.map(
           (slot, itemId) => MapEntry(slot.name, itemId),
@@ -122,6 +145,8 @@ class LocalProgress {
     'frozenDates': frozenDates.toList(),
     'ownedItemQuantities': ownedItemQuantities,
     'equippedItemIds': equippedItemIds,
+    'gameHighScores': gameHighScores,
+    'unlockedGameDifficulties': unlockedGameDifficulties,
     'soundEnabled': soundEnabled,
     'hapticsEnabled': hapticsEnabled,
     'themeSeedColor': themeSeedColor,

@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../config/reward_config.dart';
 import '../models/shop/shop_item.dart';
+import '../models/games/game_difficulty.dart';
+import '../providers/content_providers.dart';
 import '../providers/progress_providers.dart';
 import '../providers/shop_providers.dart';
 import 'avatar_customization_screen.dart';
@@ -35,13 +37,13 @@ class ProfileScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final progressAsync = ref.watch(progressProvider);
+    final journeyAsync = ref.watch(journeyProvider);
     final catalog = ref.watch(shopCatalogProvider); // List<ShopItem>, sync
 
     return progressAsync.when(
-      data: (progress) => SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
+      data: (progress) => SingleChildScrollView(
+        padding: const EdgeInsets.all(24),
+        child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Row(
@@ -105,14 +107,64 @@ class ProfileScreen extends ConsumerWidget {
               ),
               const SizedBox(height: 24),
               Text(
+                'Game High Scores',
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+              const SizedBox(height: 12),
+              journeyAsync.maybeWhen(
+                data: (journey) {
+                  final unlockedGames = journey.games
+                      .where((g) => progress.unlockedLessonIds
+                          .contains(g.unlockAfterLessonId))
+                      .toList();
+
+                  final List<Widget> cards = [];
+                  for (final game in unlockedGames) {
+                    final scores = progress.gameHighScores[game.id] ?? {};
+                    for (final diff in GameDifficulty.values) {
+                      final score = scores[diff.name] ?? 0;
+                      if (score > 0) {
+                        cards.add(
+                          _StatCard(
+                            icon: Icons.star,
+                            color: Colors.amber,
+                            label: '${game.title}\n${diff.displayName}',
+                            value: '$score',
+                          ),
+                        );
+                      }
+                    }
+                  }
+
+                  if (cards.isEmpty) {
+                    return const Text(
+                      'No high scores yet! Play games on the map to earn stars.',
+                      style: TextStyle(fontStyle: FontStyle.italic),
+                    );
+                  }
+
+                  return GridView.count(
+                    crossAxisCount: 2,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    mainAxisSpacing: 16,
+                    crossAxisSpacing: 16,
+                    childAspectRatio: 1.1,
+                    children: cards,
+                  );
+                },
+                orElse: () => const SizedBox.shrink(),
+              ),
+              const SizedBox(height: 24),
+              Text(
                 'Lessons completed: ${progress.completedLessonIds.length}',
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
-              const Spacer(),
             ],
           ),
         ),
-      ),
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (e, _) => Center(child: Text('Error loading profile: $e')),
     );

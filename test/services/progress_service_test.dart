@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gnps_learning_hub/models/progress.dart';
+import 'package:gnps_learning_hub/models/games/game_difficulty.dart';
 import 'package:gnps_learning_hub/models/shop/default_item_ids.dart';
 import 'package:gnps_learning_hub/models/shop/shop_item.dart';
 import 'package:gnps_learning_hub/models/shop/shop_item_category.dart';
@@ -122,6 +123,27 @@ void main() {
       );
       
       expect(result, PurchaseResult.insufficientGems);
+    });
+
+    test('recordGameScore should update high score and unlock next level',
+        () async {
+      final progress = LocalProgress(
+        gameHighScores: {
+          'game1': {'easy': 100}
+        },
+        unlockedGameDifficulties: {'game1': 0},
+      );
+
+      final result = await service.recordGameScore(
+        progress: progress,
+        gameId: 'game1',
+        score: 150,
+        difficulty: GameDifficulty.easy,
+        won: true,
+      );
+
+      expect(result.gameHighScores['game1']!['easy'], 150);
+      expect(result.unlockedGameDifficulties['game1'], 1); // Unlocked Medium
     });
   });
 }

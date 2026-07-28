@@ -1,6 +1,7 @@
 import 'package:gnps_learning_hub/models/shop/default_item_ids.dart';
 import 'package:gnps_learning_hub/models/journey.dart';
 import 'package:gnps_learning_hub/models/progress.dart';
+import 'package:gnps_learning_hub/models/games/game_difficulty.dart';
 import 'package:gnps_learning_hub/models/shop/shop_item.dart';
 import 'package:gnps_learning_hub/repositories/progress_repository.dart';
 import 'package:flutter/foundation.dart' show kDebugMode;
@@ -251,6 +252,36 @@ class ProgressService {
     bool enabled,
   ) async {
     final updated = progress.clone()..isDeveloperModeEnabled = enabled;
+    await _repository.save(updated);
+    return updated;
+  }
+
+  /// Records the score for a game and unlocks the next difficulty if won.
+  Future<LocalProgress> recordGameScore({
+    required LocalProgress progress,
+    required String gameId,
+    required int score,
+    required GameDifficulty difficulty,
+    required bool won,
+  }) async {
+    final updated = progress.clone();
+
+    // 1. Update high score
+    final gameScores = updated.gameHighScores[gameId] ?? {};
+    final currentHigh = gameScores[difficulty.name] ?? 0;
+    if (score > currentHigh) {
+      gameScores[difficulty.name] = score;
+      updated.gameHighScores[gameId] = gameScores;
+    }
+
+    // 2. Unlock next difficulty if won
+    if (won) {
+      final currentMaxUnlocked = updated.unlockedGameDifficulties[gameId] ?? 0;
+      if (difficulty.index == currentMaxUnlocked && difficulty.index < 2) {
+        updated.unlockedGameDifficulties[gameId] = difficulty.index + 1;
+      }
+    }
+
     await _repository.save(updated);
     return updated;
   }
