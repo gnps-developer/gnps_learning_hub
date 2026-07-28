@@ -6,11 +6,11 @@ import '../models/shop/shop_item.dart';
 import '../providers/content_providers.dart';
 import '../providers/progress_providers.dart';
 import '../providers/shop_providers.dart';
+import '../providers/navigation_providers.dart';
 import 'avatar_customization_screen.dart';
 import 'achievements_screen.dart';
 import 'settings_screen.dart';
 import 'streak_screen.dart';
-import 'shop_screen.dart';
 import '../widgets/avatar/avatar_preview.dart';
 
 class ProfileScreen extends ConsumerWidget {
@@ -22,10 +22,8 @@ class ProfileScreen extends ConsumerWidget {
     ).push(MaterialPageRoute(builder: (_) => const StreakScreen()));
   }
 
-  void _openShopScreen(BuildContext context) {
-    Navigator.of(
-      context,
-    ).push(MaterialPageRoute(builder: (_) => const ShopScreen()));
+  void _openShopScreen(WidgetRef ref) {
+    ref.read(mainNavigationProvider.notifier).state = 1; // Switch to Shop tab
   }
 
   void _openSettingsScreen(BuildContext context) {
@@ -92,7 +90,7 @@ class ProfileScreen extends ConsumerWidget {
                   const SizedBox(width: 16),
                   Expanded(
                     child: GestureDetector(
-                      onTap: () => _openShopScreen(context),
+                      onTap: () => _openShopScreen(ref),
                       child: _StatCard(
                         icon: RewardConfig.icon,
                         color: RewardConfig.color,

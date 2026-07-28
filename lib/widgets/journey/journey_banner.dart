@@ -11,11 +11,13 @@ import '../../widgets/avatar/avatar_preview.dart';
 class JourneyBanner extends StatelessWidget {
   final LocalProgress progress;
   final List<ShopItem> catalog;
+  final VoidCallback? onTapGems;
 
   const JourneyBanner({
     super.key,
     required this.progress,
     required this.catalog,
+    this.onTapGems,
   });
 
   void _openStreakScreen(BuildContext context) {
@@ -81,10 +83,13 @@ class JourneyBanner extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 10),
-              _StatPill(
-                icon: RewardConfig.icon,
-                color: RewardConfig.color,
-                value: '${progress.totalPoints}',
+              GestureDetector(
+                onTap: onTapGems,
+                child: _StatPill(
+                  icon: RewardConfig.icon,
+                  color: RewardConfig.color,
+                  value: '${progress.totalPoints}',
+                ),
               ),
             ],
           ),

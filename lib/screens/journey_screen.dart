@@ -16,6 +16,7 @@ import 'shop_screen.dart';
 
 import '../models/game_config.dart';
 import '../models/shop/default_item_ids.dart';
+import '../providers/navigation_providers.dart';
 import '../games/bubble_game_screen.dart';
 import '../widgets/celebration/achievement_celebration_overlay.dart';
 
@@ -27,8 +28,6 @@ class JourneyScreen extends ConsumerStatefulWidget {
 }
 
 class _JourneyScreenState extends ConsumerState<JourneyScreen> {
-  int _tabIndex = 0;
-
   Future<void> _openLesson(Lesson lesson, Journey journey) async {
     await Navigator.of(context).push(
       MaterialPageRoute(
@@ -58,7 +57,8 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
                 FilledButton(
                   onPressed: () {
                     Navigator.of(context).pop();
-                    setState(() => _tabIndex = 1); // Switch to Shop tab
+                    ref.read(mainNavigationProvider.notifier).state =
+                        1; // Switch to Shop tab
                   },
                   child: const Text('Go to Shop'),
                 ),
@@ -100,12 +100,12 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
     final journeyAsync = ref.watch(journeyProvider);
     final progressAsync = ref.watch(progressProvider);
     final catalog = ref.watch(shopCatalogProvider);
+    final tabIndex = ref.watch(mainNavigationProvider);
 
     return Scaffold(
       body: SafeArea(
-        bottom: false, // NavigationBar handles the bottom inset itself
         child: IndexedStack(
-          index: _tabIndex,
+          index: tabIndex,
           children: [
             journeyAsync.when(
               data: (journey) => progressAsync.when(
@@ -129,8 +129,9 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
         ),
       ),
       bottomNavigationBar: NavigationBar(
-        selectedIndex: _tabIndex,
-        onDestinationSelected: (i) => setState(() => _tabIndex = i),
+        selectedIndex: tabIndex,
+        onDestinationSelected: (i) =>
+            ref.read(mainNavigationProvider.notifier).state = i,
         destinations: const [
           NavigationDestination(
             icon: Icon(Icons.map_outlined),
@@ -150,7 +151,7 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
   }
 }
 
-class _JourneyContent extends StatelessWidget {
+class _JourneyContent extends ConsumerWidget {
   final Journey journey;
   final LocalProgress progress;
   final List<ShopItem> catalog;
@@ -166,12 +167,14 @@ class _JourneyContent extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       children: [
         JourneyBanner(
           progress: progress,
           catalog: catalog,
+          onTapGems: () =>
+              ref.read(mainNavigationProvider.notifier).state = 1,
         ),
         Expanded(
           child: LessonPath(
