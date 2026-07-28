@@ -12,13 +12,14 @@ final Map<String, dynamic> wordBubbleGameConfig = {
   'icon': 'menu_book',
   'iconColor': const Color(0xFF9C27B0),
   'content': {
-    'spawnRateMs': 1200,
+    'spawnRateMs': 2000,
     'minSpeed': 0.0,
-    'maxSpeed': 2.0,
+    'maxSpeed': 1.5,
     'bubbleSize': 180.0, // Larger for words
     'targetScore': 350,
     'pointsPerCorrect': 10,
     'initialDelayMs': 1200,
+    'targetProbability': 0.5,
     'letters': [
       'ਸਕੂਲ',
       'ਕਿਤਾਬ',

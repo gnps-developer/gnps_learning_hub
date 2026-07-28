@@ -45,6 +45,7 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
   late int _targetScore;
   late int _pointsPerCorrect;
   late int _initialDelayMs;
+  late double _targetProbability;
 
   @override
   void initState() {
@@ -59,6 +60,8 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
     _targetScore = (content['targetScore'] as num? ?? 100).toInt();
     _pointsPerCorrect = (content['pointsPerCorrect'] as num? ?? 10).toInt();
     _initialDelayMs = (content['initialDelayMs'] as num? ?? 1200).toInt();
+    _targetProbability =
+        (content['targetProbability'] as num? ?? 0.3).toDouble();
 
     _initGame();
   }
@@ -104,7 +107,7 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
   void _spawnBubble() {
     final x =
         _random.nextDouble() * (MediaQuery.of(context).size.width - 80) + 40;
-    final letter = _random.nextDouble() > 0.7
+    final letter = _random.nextDouble() < _targetProbability
         ? _targetLetter
         : _letterPool[_random.nextInt(_letterPool.length)];
 

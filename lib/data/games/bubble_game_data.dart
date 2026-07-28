@@ -12,13 +12,14 @@ final Map<String, dynamic> bubbleGameConfig = {
   'icon': 'videogame_asset',
   'iconColor': const Color(0xFF00BCD4),
   'content': {
-    'spawnRateMs': 1200,
+    'spawnRateMs': 2000,
     'minSpeed': 0.8,
-    'maxSpeed': 2.0,
+    'maxSpeed': 1.5,
     'bubbleSize': 120.0,
     'targetScore': 350,
     'pointsPerCorrect': 10,
     'initialDelayMs': 1200,
+    'targetProbability': 0.5,
     'letters': [
       'ੳ',
       'ਅ',
