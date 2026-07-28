@@ -143,34 +143,45 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
     }
   }
 
-  void _popBubble(_Bubble bubble) {
-    if (bubble.popped || _gameOver) return;
+  void _popBubble(_Bubble bubble) async {
+    if (bubble.popped || _gameOver || bubble.status != _BubbleStatus.normal) {
+      return;
+    }
 
     setState(() {
-      bubble.popped = true;
       if (bubble.letter == _targetLetter) {
         _score += _pointsPerCorrect;
         bubble.status = _BubbleStatus.correct;
-        if (_score >= _targetScore) {
-          _winGame();
-        } else {
-          _nextRound();
-        }
       } else {
         bubble.status = _BubbleStatus.wrong;
       }
     });
 
-    if (bubble.letter != _targetLetter) {
+    if (bubble.letter == _targetLetter) {
+      if (_score >= _targetScore) {
+        _winGame();
+      } else {
+        _nextRound();
+      }
+    } else {
       _loseLife();
     }
 
-    Future.delayed(const Duration(milliseconds: 500), () {
-      if (mounted) {
-        setState(() {
-          _bubbles.removeWhere((b) => b.id == bubble.id);
-        });
-      }
+    // Stage 1: Show the result icon for a moment
+    await Future.delayed(const Duration(milliseconds: 600));
+    if (!mounted) return;
+
+    // Stage 2: Trigger the "burst" animation
+    setState(() {
+      bubble.popped = true;
+    });
+
+    // Stage 3: Wait for animation to finish before removing
+    await Future.delayed(const Duration(milliseconds: 400));
+    if (!mounted) return;
+
+    setState(() {
+      _bubbles.removeWhere((b) => b.id == bubble.id);
     });
   }
 
@@ -242,6 +253,7 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
             // Game Area
             ..._bubbles.map(
               (bubble) => Positioned(
+                key: ValueKey(bubble.id),
                 left: bubble.x - bubble.size / 2,
                 top: bubble.y - bubble.size / 2,
                 child: GestureDetector(
@@ -416,42 +428,119 @@ class _BubbleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (bubble.status == _BubbleStatus.correct) {
-      return Icon(Icons.check_circle, color: Colors.green, size: bubble.size);
-    }
-    if (bubble.status == _BubbleStatus.wrong) {
-      return Icon(Icons.cancel, color: Colors.red, size: bubble.size);
-    }
+    return TweenAnimationBuilder<double>(
+      tween: Tween<double>(end: bubble.popped ? 1.0 : 0.0),
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.easeOutCubic,
+      builder: (context, value, child) {
+        // When popped: scale from 1.0 to 1.5, fade from 1.0 to 0.0
+        final scale = 1.0 + (value * 0.5);
+        final opacity = (1.0 - value).clamp(0.0, 1.0);
 
-    return Container(
-      width: bubble.size,
-      height: bubble.size,
-      decoration: BoxDecoration(
-        color: bubble.color,
-        shape: BoxShape.circle,
-        border: Border.all(
-          color: Colors.white.withValues(alpha: 0.5),
-          width: 2,
-        ),
-      ),
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            bubble.letter,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: bubble.letter.length > 3
-                  ? bubble.size * 0.25
-                  : bubble.letter.length > 1
-                  ? bubble.size * 0.35
-                  : bubble.size * 0.5,
-              fontWeight: FontWeight.bold,
-              shadows: const [Shadow(color: Colors.black26, blurRadius: 4)],
+        return Opacity(
+          opacity: opacity,
+          child: Transform.scale(
+            scale: scale,
+            child: child,
+          ),
+        );
+      },
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          // Bubble Body with 3D look
+          Container(
+            width: bubble.size,
+            height: bubble.size,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: RadialGradient(
+                colors: [
+                  bubble.color.withValues(alpha: 0.85),
+                  bubble.color.withValues(alpha: 0.6),
+                  bubble.color.withValues(alpha: 0.3),
+                ],
+                stops: const [0.0, 0.7, 1.0],
+                center: const Alignment(-0.3, -0.3),
+                radius: 1.0,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.08),
+                  blurRadius: 6,
+                  offset: const Offset(1, 2),
+                  spreadRadius: 0.5,
+                ),
+              ],
+              border: Border.all(
+                color: Colors.white.withValues(alpha: 0.3),
+                width: 1.0,
+              ),
             ),
           ),
-        ),
+
+          // Shine Highlight (More subtle and smooth)
+          Positioned(
+            top: bubble.size * 0.08,
+            left: bubble.size * 0.18,
+            child: Container(
+              width: bubble.size * 0.4,
+              height: bubble.size * 0.3,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: RadialGradient(
+                  colors: [
+                    Colors.white.withValues(alpha: 0.35),
+                    Colors.white.withValues(alpha: 0.0),
+                  ],
+                  stops: const [0.2, 1.0],
+                ),
+              ),
+            ),
+          ),
+
+          // Content (Letter or Status Icon)
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: _buildContent(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildContent() {
+    if (bubble.status == _BubbleStatus.correct) {
+      return Icon(
+        Icons.check_circle,
+        color: Colors.green,
+        size: bubble.size * 0.7,
+        shadows: const [Shadow(color: Colors.black26, blurRadius: 8)],
+      );
+    }
+    if (bubble.status == _BubbleStatus.wrong) {
+      return Icon(
+        Icons.cancel,
+        color: Colors.red,
+        size: bubble.size * 0.7,
+        shadows: const [Shadow(color: Colors.black26, blurRadius: 8)],
+      );
+    }
+
+    return Text(
+      bubble.letter,
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        color: Colors.white,
+        fontSize: bubble.letter.length > 3
+            ? bubble.size * 0.25
+            : bubble.letter.length > 1
+                ? bubble.size * 0.35
+                : bubble.size * 0.5,
+        fontWeight: FontWeight.bold,
+        shadows: const [Shadow(color: Colors.black26, blurRadius: 4)],
       ),
     );
   }
