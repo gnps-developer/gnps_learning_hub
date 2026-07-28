@@ -257,7 +257,8 @@ class ProgressService {
   }
 
   /// Records the score for a game and unlocks the next difficulty if won.
-  Future<LocalProgress> recordGameScore({
+  /// Returns the newly unlocked difficulty index if a new achievement was earned, otherwise null.
+  Future<(LocalProgress, int?)> recordGameScore({
     required LocalProgress progress,
     required String gameId,
     required int score,
@@ -265,6 +266,7 @@ class ProgressService {
     required bool won,
   }) async {
     final updated = progress.clone();
+    int? newAchievementIndex;
 
     // 1. Update high score
     final gameScores = updated.gameHighScores[gameId] ?? {};
@@ -278,12 +280,14 @@ class ProgressService {
     if (won) {
       final currentMaxUnlocked = updated.unlockedGameDifficulties[gameId] ?? 0;
       if (difficulty.index == currentMaxUnlocked && difficulty.index <= 2) {
-        updated.unlockedGameDifficulties[gameId] = difficulty.index + 1;
+        final nextIndex = difficulty.index + 1;
+        updated.unlockedGameDifficulties[gameId] = nextIndex;
+        newAchievementIndex = nextIndex;
       }
     }
 
     await _repository.save(updated);
-    return updated;
+    return (updated, newAchievementIndex);
   }
 
   /// How many of [itemId] the user currently owns (0 if none).

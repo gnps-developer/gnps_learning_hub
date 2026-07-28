@@ -17,6 +17,7 @@ import 'shop_screen.dart';
 import '../models/game_config.dart';
 import '../models/shop/default_item_ids.dart';
 import '../games/bubble_game_screen.dart';
+import '../widgets/celebration/achievement_celebration_overlay.dart';
 
 class JourneyScreen extends ConsumerStatefulWidget {
   const JourneyScreen({super.key});
@@ -36,7 +37,7 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
     );
   }
 
-  void _openGame(GameConfig game, Journey journey) {
+  void _openGame(GameConfig game, Journey journey) async {
     final progress = ref.read(progressProvider).value;
     final hearts = progress?.ownedItemQuantities[DefaultItemIds.extraLife] ?? 0;
 
@@ -67,8 +68,30 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
       return;
     }
 
-    Navigator.of(context).push(
+    final result = await Navigator.of(context).push<Map<String, dynamic>>(
       MaterialPageRoute(builder: (_) => BubbleGameScreen(game: game)),
+    );
+
+    if (result != null && mounted) {
+      _showAchievementCelebration(
+        result['gameTitle'] as String,
+        result['difficultyIndex'] as int,
+      );
+    }
+  }
+
+  void _showAchievementCelebration(String title, int index) {
+    showGeneralDialog(
+      context: context,
+      barrierDismissible: false,
+      barrierLabel: 'Celebration',
+      barrierColor: Colors.black.withValues(alpha: 0.85),
+      transitionDuration: const Duration(milliseconds: 400),
+      pageBuilder: (context, __, ___) => AchievementCelebrationOverlay(
+        gameTitle: title,
+        difficultyIndex: index,
+        onDismiss: () => Navigator.of(context).pop(),
+      ),
     );
   }
 

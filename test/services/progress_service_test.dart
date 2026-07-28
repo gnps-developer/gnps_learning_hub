@@ -134,7 +134,7 @@ void main() {
         unlockedGameDifficulties: {'game1': 0},
       );
 
-      final result = await service.recordGameScore(
+      final (result, newIndex) = await service.recordGameScore(
         progress: progress,
         gameId: 'game1',
         score: 150,
@@ -144,6 +144,7 @@ void main() {
 
       expect(result.gameHighScores['game1']!['easy'], 150);
       expect(result.unlockedGameDifficulties['game1'], 1); // Unlocked Medium
+      expect(newIndex, 1);
     });
   });
 }

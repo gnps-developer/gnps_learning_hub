@@ -39,6 +39,7 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
   bool _isConsumingHeart = false;
   int _pendingLosses = 0;
   GameDifficulty? _selectedDifficulty;
+  Map<String, dynamic>? _newAchievement;
 
   // Configurable parameters from game.content
   late int _spawnRateMs;
@@ -262,14 +263,23 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
     _recordFinalScore(won: true);
   }
 
-  void _recordFinalScore({required bool won}) {
+  Future<void> _recordFinalScore({required bool won}) async {
     if (_selectedDifficulty == null) return;
-    ref.read(progressProvider.notifier).recordGameScore(
+    final newIndex = await ref.read(progressProvider.notifier).recordGameScore(
       gameId: widget.game.id,
       score: _score,
       difficulty: _selectedDifficulty!,
       won: won,
     );
+
+    if (newIndex != null && mounted) {
+      setState(() {
+        _newAchievement = {
+          'gameTitle': widget.game.title,
+          'difficultyIndex': newIndex,
+        };
+      });
+    }
   }
 
   @override
@@ -319,7 +329,8 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
                       children: [
                         IconButton(
                           icon: const Icon(Icons.close, size: 32),
-                          onPressed: () => Navigator.of(context).pop(),
+                          onPressed: () =>
+                              Navigator.of(context).pop(_newAchievement),
                         ),
                         Row(
                           children: [
@@ -438,7 +449,8 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
                       ),
                       const SizedBox(height: 32),
                       ElevatedButton(
-                        onPressed: () => Navigator.of(context).pop(),
+                        onPressed: () =>
+                            Navigator.of(context).pop(_newAchievement),
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 48,

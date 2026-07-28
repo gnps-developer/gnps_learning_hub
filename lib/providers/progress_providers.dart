@@ -204,7 +204,7 @@ class ProgressNotifier extends StateNotifier<AsyncValue<LocalProgress>> {
     state = AsyncValue.data(updated);
   }
 
-  Future<void> recordGameScore({
+  Future<int?> recordGameScore({
     required String gameId,
     required int score,
     required GameDifficulty difficulty,
@@ -212,8 +212,8 @@ class ProgressNotifier extends StateNotifier<AsyncValue<LocalProgress>> {
   }) async {
     await _initialLoad;
     final current = state.value;
-    if (current == null) return;
-    final updated = await _service.recordGameScore(
+    if (current == null) return null;
+    final (updated, newAchievementIndex) = await _service.recordGameScore(
       progress: current,
       gameId: gameId,
       score: score,
@@ -221,6 +221,7 @@ class ProgressNotifier extends StateNotifier<AsyncValue<LocalProgress>> {
       won: won,
     );
     state = AsyncValue.data(updated);
+    return newAchievementIndex;
   }
 }
 
