@@ -277,7 +277,7 @@ class ProgressService {
     // 2. Unlock next difficulty if won
     if (won) {
       final currentMaxUnlocked = updated.unlockedGameDifficulties[gameId] ?? 0;
-      if (difficulty.index == currentMaxUnlocked && difficulty.index < 2) {
+      if (difficulty.index == currentMaxUnlocked && difficulty.index <= 2) {
         updated.unlockedGameDifficulties[gameId] = difficulty.index + 1;
       }
     }

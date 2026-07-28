@@ -8,6 +8,7 @@ import '../providers/content_providers.dart';
 import '../providers/progress_providers.dart';
 import '../providers/shop_providers.dart';
 import 'avatar_customization_screen.dart';
+import 'achievements_screen.dart';
 import 'settings_screen.dart';
 import 'streak_screen.dart';
 import 'shop_screen.dart';
@@ -105,54 +106,32 @@ class ProfileScreen extends ConsumerWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 24),
-              Text(
-                'Game High Scores',
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-              ),
-              const SizedBox(height: 12),
               journeyAsync.maybeWhen(
                 data: (journey) {
-                  final unlockedGames = journey.games
-                      .where((g) => progress.unlockedLessonIds
-                          .contains(g.unlockAfterLessonId))
-                      .toList();
+                  final totalTrophies = progress.unlockedGameDifficulties.values
+                      .fold<int>(0, (sum, val) => sum + val);
 
-                  final List<Widget> cards = [];
-                  for (final game in unlockedGames) {
-                    final scores = progress.gameHighScores[game.id] ?? {};
-                    for (final diff in GameDifficulty.values) {
-                      final score = scores[diff.name] ?? 0;
-                      if (score > 0) {
-                        cards.add(
-                          _StatCard(
-                            icon: Icons.star,
-                            color: Colors.amber,
-                            label: '${game.title}\n${diff.displayName}',
-                            value: '$score',
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 24),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) => const AchievementsScreen(),
+                              ),
+                            ),
+                            child: _StatCard(
+                              icon: Icons.emoji_events,
+                              color: Colors.amber,
+                              label: 'Achievements',
+                              value: '$totalTrophies',
+                            ),
                           ),
-                        );
-                      }
-                    }
-                  }
-
-                  if (cards.isEmpty) {
-                    return const Text(
-                      'No high scores yet! Play games on the map to earn stars.',
-                      style: TextStyle(fontStyle: FontStyle.italic),
-                    );
-                  }
-
-                  return GridView.count(
-                    crossAxisCount: 2,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    mainAxisSpacing: 16,
-                    crossAxisSpacing: 16,
-                    childAspectRatio: 1.1,
-                    children: cards,
+                        ),
+                      ],
+                    ),
                   );
                 },
                 orElse: () => const SizedBox.shrink(),
