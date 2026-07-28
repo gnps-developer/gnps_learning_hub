@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../config/ui_config.dart';
+import '../config/ui_strings.dart';
 import '../models/games/game_difficulty.dart';
 import '../providers/content_providers.dart';
 import '../providers/progress_providers.dart';
@@ -13,7 +15,7 @@ class AchievementsScreen extends ConsumerWidget {
     final journeyAsync = ref.watch(journeyProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Achievements')),
+      appBar: AppBar(title: const Text(UIStrings.achievementsTitle)),
       body: progressAsync.when(
         data: (progress) => journeyAsync.when(
           data: (journey) {
@@ -41,9 +43,9 @@ class AchievementsScreen extends ConsumerWidget {
             if (unlockedGameCards.isEmpty) {
               return const Center(
                 child: Padding(
-                  padding: EdgeInsets.all(32.0),
+                  padding: EdgeInsets.all(AppSpacing.xl),
                   child: Text(
-                    'No games unlocked yet! Finish your first few lessons on the map to see your achievements here.',
+                    UIStrings.noTrophiesMessage,
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 18, color: Colors.grey),
                   ),
@@ -52,7 +54,7 @@ class AchievementsScreen extends ConsumerWidget {
             }
 
             return ListView(
-              padding: const EdgeInsets.all(24),
+              padding: const EdgeInsets.all(AppSpacing.lg),
               children: unlockedGameCards,
             );
           },
@@ -82,7 +84,7 @@ class _GameAchievementCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.only(bottom: 24),
+      margin: const EdgeInsets.only(bottom: AppSpacing.lg),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       elevation: 2,
       child: Padding(
@@ -93,7 +95,7 @@ class _GameAchievementCard extends StatelessWidget {
             Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(AppSpacing.sm),
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.primaryContainer,
                     borderRadius: BorderRadius.circular(12),
@@ -103,7 +105,7 @@ class _GameAchievementCard extends StatelessWidget {
                     color: Theme.of(context).colorScheme.onPrimaryContainer,
                   ),
                 ),
-                const SizedBox(width: 16),
+                const SizedBox(width: AppSpacing.md),
                 Text(
                   title,
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -112,7 +114,7 @@ class _GameAchievementCard extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: AppSpacing.lg),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -121,19 +123,19 @@ class _GameAchievementCard extends StatelessWidget {
                   level: GameDifficulty.easy,
                   isEarned: trophies >= 1,
                   score: scores[GameDifficulty.easy.name] ?? 0,
-                  color: const Color(0xFFCD7F32), // Bronze
+                  color: AppColors.bronze,
                 ),
                 _TrophyItem(
                   level: GameDifficulty.medium,
                   isEarned: trophies >= 2,
                   score: scores[GameDifficulty.medium.name] ?? 0,
-                  color: const Color(0xFFC0C0C0), // Silver
+                  color: AppColors.silver,
                 ),
                 _TrophyItem(
                   level: GameDifficulty.hard,
                   isEarned: trophies >= 3,
                   score: scores[GameDifficulty.hard.name] ?? 0,
-                  color: const Color(0xFFFFD700), // Gold
+                  color: AppColors.gold,
                 ),
               ],
             ),
@@ -179,7 +181,7 @@ class _TrophyItem extends StatelessWidget {
               ),
           ],
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: AppSpacing.sm),
         Text(
           level.displayName,
           style: TextStyle(
@@ -187,15 +189,15 @@ class _TrophyItem extends StatelessWidget {
             color: isEarned ? null : Colors.grey,
           ),
         ),
-        const SizedBox(height: 4),
+        const SizedBox(height: AppSpacing.xs),
         SizedBox(
           height: 16,
           child: showBestScore
               ? Text(
-                  'Best: $score ⭐',
+                  UIStrings.bestAttempt(score),
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: Colors.orange.shade800,
+                        color: AppColors.warning.shade800,
                       ),
                 )
               : null,

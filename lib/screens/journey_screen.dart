@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../config/ui_config.dart';
+import '../config/ui_strings.dart';
 import '../models/journey.dart';
 import '../models/lesson.dart';
 import '../models/progress.dart';
@@ -46,14 +48,12 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
         context: context,
         builder:
             (context) => AlertDialog(
-              title: const Text('No Hearts! ❤️'),
-              content: const Text(
-                'You need at least one heart to play this game. Visit the shop to get more!',
-              ),
+              title: const Text(UIStrings.noHeartsTitle),
+              content: const Text(UIStrings.noHeartsContent),
               actions: [
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(),
-                  child: const Text('Cancel'),
+                  child: const Text(UIStrings.cancel),
                 ),
                 FilledButton(
                   onPressed: () {
@@ -61,7 +61,7 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
                     ref.read(mainNavigationProvider.notifier).state =
                         1; // Switch to Shop tab
                   },
-                  child: const Text('Go to Shop'),
+                  child: const Text(UIStrings.goToShop),
                 ),
               ],
             ),
@@ -86,8 +86,8 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
       context: context,
       barrierDismissible: false,
       barrierLabel: 'Celebration',
-      barrierColor: Colors.black.withValues(alpha: 0.85),
-      transitionDuration: const Duration(milliseconds: 400),
+      barrierColor: AppColors.overlayDark,
+      transitionDuration: AppDurations.medium,
       pageBuilder: (context, _, _) => AchievementCelebrationOverlay(
         gameTitle: title,
         difficultyIndex: index,

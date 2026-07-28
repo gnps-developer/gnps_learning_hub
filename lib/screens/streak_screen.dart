@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import '../config/ui_strings.dart';
 import '../models/progress.dart';
 import '../providers/progress_providers.dart';
 
@@ -87,7 +87,7 @@ class _StreakScreenState extends ConsumerState<StreakScreen> {
     final progressAsync = ref.watch(progressProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Streak')),
+      appBar: AppBar(title: const Text(UIStrings.streakTitle)),
       body: SafeArea(
         child: progressAsync.when(
           data: (progress) => _StreakContent(

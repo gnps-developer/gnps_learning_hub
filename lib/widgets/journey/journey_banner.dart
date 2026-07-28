@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../config/reward_config.dart';
+import '../../config/ui_config.dart';
+import '../../config/ui_strings.dart';
 
 import '../../models/progress.dart';
 import '../../models/shop/shop_item.dart';
@@ -31,7 +33,12 @@ class JourneyBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(12, 12, 12, 4),
+      padding: const EdgeInsets.fromLTRB(
+        AppSpacing.ms,
+        AppSpacing.ms,
+        AppSpacing.ms,
+        AppSpacing.xs,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -55,7 +62,7 @@ class JourneyBanner extends StatelessWidget {
                 const SizedBox(width: 10),
                 Flexible(
                   child: Text(
-                    'Hi${progress.userName != null && progress.userName!.isNotEmpty ? ', ${progress.userName}' : ' there'}! 👋',
+                    UIStrings.greeting(progress.userName),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
@@ -66,35 +73,35 @@ class JourneyBanner extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(width: 8),
+          const SizedBox(width: AppSpacing.sm),
           Row(
             children: [
               _StatPill(
                 icon: Icons.favorite,
-                color: Colors.red,
+                color: AppColors.heart,
                 value:
                     '${progress.ownedItemQuantities['powerup_extra_life'] ?? 0}',
               ),
-              const SizedBox(width: 6),
+              const SizedBox(width: AppSpacing.xs),
               GestureDetector(
                 onTap: () => _openStreakScreen(context),
                 child: _StatPill(
                   icon: Icons.local_fire_department,
-                  color: Colors.orange,
+                  color: AppColors.streak,
                   value: '${progress.currentStreak}',
                 ),
               ),
-              const SizedBox(width: 6),
+              const SizedBox(width: AppSpacing.xs),
               GestureDetector(
                 onTap: onTapAchievements,
                 child: _StatPill(
                   icon: Icons.emoji_events,
-                  color: Colors.amber,
+                  color: AppColors.gold,
                   value:
                       '${progress.unlockedGameDifficulties.values.fold<int>(0, (sum, val) => sum + val)}',
                 ),
               ),
-              const SizedBox(width: 6),
+              const SizedBox(width: AppSpacing.xs),
               GestureDetector(
                 onTap: onTapGems,
                 child: _StatPill(

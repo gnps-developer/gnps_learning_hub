@@ -8,6 +8,7 @@ import 'package:crypto/crypto.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../config/debug_config.dart';
+import '../config/ui_config.dart';
 import '../config/ui_strings.dart';
 import '../providers/content_providers.dart';
 import '../providers/progress_providers.dart';
@@ -43,20 +44,17 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Factory Reset?'),
-        content: const Text(
-          'This clears all points, streaks, and lesson progress, and reloads '
-          'lesson content fresh. This can\'t be undone.',
-        ),
+        title: const Text(UIStrings.factoryResetTitle),
+        content: const Text(UIStrings.factoryResetWarning),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('Cancel'),
+            child: const Text(UIStrings.cancel),
           ),
           FilledButton(
             onPressed: () => Navigator.of(context).pop(true),
-            style: FilledButton.styleFrom(backgroundColor: Colors.red),
-            child: const Text('Reset Everything'),
+            style: FilledButton.styleFrom(backgroundColor: AppColors.error),
+            child: const Text(UIStrings.resetEverything),
           ),
         ],
       ),
@@ -97,7 +95,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       final messenger = ScaffoldMessenger.of(context);
       messenger.clearSnackBars();
       messenger.showSnackBar(
-        const SnackBar(content: Text('All lessons marked complete (debug).')),
+        const SnackBar(content: Text(UIStrings.markAllCompleteLabel)),
       );
     }
   }
@@ -114,7 +112,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     } else {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Could not open email app.')),
+          const SnackBar(content: Text(UIStrings.incorrectCode)),
         );
       }
     }
@@ -125,14 +123,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     final progressAsync = ref.watch(progressProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Settings')),
+      appBar: AppBar(title: const Text(UIStrings.settingsTitle)),
       body: progressAsync.when(
         data: (progress) => ListView(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(AppSpacing.md),
           children: [
             SwitchListTile(
               secondary: const Icon(Icons.volume_up_outlined),
-              title: const Text('Sound'),
+              title: const Text(UIStrings.soundLabel),
               value: progress.soundEnabled,
               onChanged: (value) {
                 ref.read(progressProvider.notifier).updateSoundEnabled(value);
@@ -141,17 +139,17 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
             SwitchListTile(
               secondary: const Icon(Icons.vibration),
-              title: const Text('Haptic feedback'),
+              title: const Text(UIStrings.hapticsLabel),
               value: progress.hapticsEnabled,
               onChanged: (value) {
                 ref.read(progressProvider.notifier).updateHapticsEnabled(value);
                 if (value) HapticFeedback.heavyImpact();
               },
             ),
-            const Divider(height: 32),
-            const _SectionHeader('Theme color'),
+            const Divider(height: AppSpacing.xl),
+            const _SectionHeader(UIStrings.themeColorLabel),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
               child: Wrap(
                 spacing: 12,
                 runSpacing: 12,
@@ -183,8 +181,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 }).toList(),
               ),
             ),
-            const Divider(height: 32),
-            const _SectionHeader('About'),
+            const Divider(height: AppSpacing.xl),
+            const _SectionHeader(UIStrings.aboutLabel),
             FutureBuilder<PackageInfo>(
               future: PackageInfo.fromPlatform(),
               builder: (context, snapshot) {
@@ -219,43 +217,43 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       behavior: HitTestBehavior.opaque,
                       child: ListTile(
                         contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 16,
+                          horizontal: AppSpacing.md,
                         ),
                         leading: const Icon(Icons.info_outline),
-                        title: const Text('App version'),
+                        title: const Text(UIStrings.appVersionLabel),
                         trailing: Text(appVersion),
                       ),
                     ),
                     ListTile(
                       contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 16,
+                        horizontal: AppSpacing.md,
                       ),
                       leading: const Icon(Icons.menu_book_outlined),
-                      title: const Text('Lesson content version'),
+                      title: const Text(UIStrings.contentVersionLabel),
                       trailing: Text(journeyVersion),
                     ),
                     ListTile(
                       contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 16,
+                        horizontal: AppSpacing.md,
                       ),
                       leading: const Icon(Icons.school_outlined),
-                      title: const Text('Total lessons'),
+                      title: const Text(UIStrings.totalLessonsLabel),
                       trailing: Text(totalLessons),
                     ),
                     ListTile(
                       contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 16,
+                        horizontal: AppSpacing.md,
                       ),
                       leading: const Icon(Icons.checklist_outlined),
-                      title: const Text('Total interactive tasks'),
+                      title: const Text(UIStrings.totalTasksLabel),
                       trailing: Text(totalTasks),
                     ),
                     ListTile(
                       contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 16,
+                        horizontal: AppSpacing.md,
                       ),
                       leading: const Icon(Icons.videogame_asset_outlined),
-                      title: const Text('Total games'),
+                      title: const Text(UIStrings.totalGamesLabel),
                       trailing: Text(totalGames),
                     ),
                     ListTile(
@@ -265,50 +263,50 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         ),
                       ),
                       contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 16,
+                        horizontal: AppSpacing.md,
                       ),
                       leading: const Icon(Icons.palette_outlined),
-                      title: const Text('Artwork Attributions'),
+                      title: const Text(UIStrings.artworkAttributionsLabel),
                       trailing: const Icon(Icons.chevron_right),
                     ),
                   ],
                 );
               },
             ),
-            const Divider(height: 32),
-            const _SectionHeader('Support'),
+            const Divider(height: AppSpacing.xl),
+            const _SectionHeader(UIStrings.contactSupport),
             ListTile(
               onTap: _contactSupport,
               leading: const Icon(Icons.email_outlined),
-              title: const Text('Contact Support'),
+              title: const Text(UIStrings.contactSupport),
               subtitle: const Text(UIStrings.supportEmail),
               trailing: const Icon(Icons.open_in_new, size: 16),
             ),
-            const Divider(height: 32),
-            const _SectionHeader('Account management'),
+            const Divider(height: AppSpacing.xl),
+            const _SectionHeader(UIStrings.accountManagementLabel),
             _SettingsActionButton(
               onPressed: () => _confirmAndReset(context),
               icon: Icons.restart_alt,
-              label: 'Factory Reset',
+              label: UIStrings.factoryResetLabel,
               isDestructive: true,
             ),
             if (kDebugMode || progress.isDeveloperModeEnabled) ...[
-              const Divider(height: 32),
-              const _SectionHeader('Debug Tools'),
+              const Divider(height: AppSpacing.xl),
+              const _SectionHeader(UIStrings.debugToolsLabel),
               _SettingsActionButton(
                 onPressed: () => _debugCompleteAllLessons(context),
                 icon: Icons.done_all,
-                label: 'Mark All Lessons Complete',
+                label: UIStrings.markAllCompleteLabel,
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: AppSpacing.ms),
               _SettingsActionButton(
                 onPressed: () => Navigator.of(context).push(
                   MaterialPageRoute(builder: (_) => const ContentDebugScreen()),
                 ),
                 icon: Icons.bug_report_outlined,
-                label: 'Content Progress Debug',
+                label: UIStrings.contentDebugLabel,
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: AppSpacing.ms),
               _SettingsActionButton(
                 onPressed: () => Navigator.of(context).push(
                   MaterialPageRoute(
@@ -316,22 +314,22 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   ),
                 ),
                 icon: Icons.edit_road,
-                label: 'Tracing Checkpoint Recorder',
+                label: UIStrings.tracingRecorderLabel,
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: AppSpacing.ms),
               _SettingsActionButton(
                 onPressed: () => _testAchievementCelebration(context),
                 icon: Icons.celebration_outlined,
-                label: 'Test Achievement Celebration',
+                label: UIStrings.testCelebrationLabel,
               ),
               if (progress.isDeveloperModeEnabled) ...[
-                const SizedBox(height: 12),
+                const SizedBox(height: AppSpacing.ms),
                 _SettingsActionButton(
                   onPressed: () => ref
                       .read(progressProvider.notifier)
                       .updateDeveloperMode(false),
                   icon: Icons.no_accounts,
-                  label: 'Disable Developer Mode',
+                  label: UIStrings.disableDevModeLabel,
                   isDestructive: true,
                 ),
               ],

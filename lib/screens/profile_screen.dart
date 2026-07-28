@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../config/reward_config.dart';
+import '../config/ui_config.dart';
+import '../config/ui_strings.dart';
 import '../models/shop/shop_item.dart';
 import '../providers/content_providers.dart';
 import '../providers/progress_providers.dart';
@@ -40,7 +42,7 @@ class ProfileScreen extends ConsumerWidget {
 
     return progressAsync.when(
       data: (progress) => SingleChildScrollView(
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.all(AppSpacing.lg),
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -48,17 +50,17 @@ class ProfileScreen extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Profile',
+                    UIStrings.profileTitle,
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
                   IconButton(
                     onPressed: () => _openSettingsScreen(context),
                     icon: const Icon(Icons.settings, size: 40),
-                    tooltip: 'Settings',
+                    tooltip: UIStrings.settingsTitle,
                   ),
                 ],
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: AppSpacing.md),
               Center(
                 child: _AvatarWithEditBadge(
                   equippedItemIds: progress.equippedItemIds,
@@ -70,9 +72,9 @@ class ProfileScreen extends ConsumerWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSpacing.md),
               _NameField(currentName: progress.userName),
-              const SizedBox(height: 24),
+              const SizedBox(height: AppSpacing.lg),
               Row(
                 children: [
                   Expanded(
@@ -80,14 +82,13 @@ class ProfileScreen extends ConsumerWidget {
                       onTap: () => _openStreakScreen(context),
                       child: _StatCard(
                         icon: Icons.local_fire_department,
-                        color: Colors.orange,
+                        color: AppColors.streak,
                         label: 'Streak',
-                        value:
-                            '${progress.currentStreak} day${progress.currentStreak == 1 ? '' : 's'}',
+                        value: UIStrings.streakDays(progress.currentStreak),
                       ),
                     ),
                   ),
-                  const SizedBox(width: 16),
+                  const SizedBox(width: AppSpacing.md),
                   Expanded(
                     child: GestureDetector(
                       onTap: () => _openShopScreen(ref),
@@ -109,7 +110,7 @@ class ProfileScreen extends ConsumerWidget {
                       .fold<int>(0, (sum, val) => sum + val);
 
                   return Padding(
-                    padding: const EdgeInsets.only(top: 24),
+                    padding: const EdgeInsets.only(top: AppSpacing.lg),
                     child: Row(
                       children: [
                         Expanded(
@@ -121,8 +122,8 @@ class ProfileScreen extends ConsumerWidget {
                             ),
                             child: _StatCard(
                               icon: Icons.emoji_events,
-                              color: Colors.amber,
-                              label: 'Achievements',
+                              color: AppColors.gold,
+                              label: UIStrings.achievementsTitle,
                               value: '$totalTrophies',
                             ),
                           ),
@@ -133,9 +134,9 @@ class ProfileScreen extends ConsumerWidget {
                 },
                 orElse: () => const SizedBox.shrink(),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: AppSpacing.lg),
               Text(
-                'Lessons completed: ${progress.completedLessonIds.length}',
+                UIStrings.lessonsCompleted(progress.completedLessonIds.length),
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
             ],
@@ -246,7 +247,7 @@ class _NameFieldState extends ConsumerState<_NameField> {
         textCapitalization: TextCapitalization.words,
         maxLength: 20,
         decoration: const InputDecoration(
-          labelText: 'Your name',
+          labelText: UIStrings.yourNameLabel,
           border: OutlineInputBorder(),
           isDense: true,
           counterText: "",
@@ -270,7 +271,7 @@ class _NameFieldState extends ConsumerState<_NameField> {
         const SizedBox(width: 6),
         Flexible(
           child: Text(
-            hasName ? widget.currentName! : 'Add your name',
+            hasName ? widget.currentName! : UIStrings.addNameHint,
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
             textAlign: TextAlign.center,
@@ -311,11 +312,11 @@ class _StatCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(AppSpacing.md),
         child: Column(
           children: [
             Icon(icon, color: color, size: 32),
-            const SizedBox(height: 8),
+            const SizedBox(height: AppSpacing.sm),
             Text(value, style: Theme.of(context).textTheme.headlineSmall),
             Text(label, style: Theme.of(context).textTheme.bodyMedium),
           ],

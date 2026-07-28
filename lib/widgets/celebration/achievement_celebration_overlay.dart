@@ -1,8 +1,8 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../models/progress.dart';
-import '../../models/shop/shop_item.dart';
+import '../../config/ui_config.dart';
+import '../../config/ui_strings.dart';
 import '../../providers/progress_providers.dart';
 import '../../providers/shop_providers.dart';
 import '../avatar/avatar_preview.dart';
@@ -38,7 +38,7 @@ class _AchievementCelebrationOverlayState
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1500),
+      duration: AppDurations.celebration,
     );
 
     _rotationController = AnimationController(
@@ -80,24 +80,24 @@ class _AchievementCelebrationOverlayState
   Color _getTrophyColor() {
     switch (widget.difficultyIndex) {
       case 1:
-        return const Color(0xFFCD7F32); // Bronze
+        return AppColors.bronze;
       case 2:
-        return const Color(0xFFC0C0C0); // Silver
+        return AppColors.silver;
       case 3:
-        return const Color(0xFFFFD700); // Gold
+        return AppColors.gold;
       default:
-        return Colors.amber;
+        return AppColors.gold;
     }
   }
 
   String _getTrophyName() {
     switch (widget.difficultyIndex) {
       case 1:
-        return 'Bronze';
+        return UIStrings.trophyBronze;
       case 2:
-        return 'Silver';
+        return UIStrings.trophySilver;
       case 3:
-        return 'Gold';
+        return UIStrings.trophyGold;
       default:
         return '';
     }
@@ -205,26 +205,26 @@ class _AchievementCelebrationOverlayState
                     ),
                   ],
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: AppSpacing.xxl),
                 // Text and Button
                 FadeTransition(
                   opacity: _opacity,
                   child: Column(
                     children: [
                       Text(
-                        '${_getTrophyName()} Trophy Unlocked!',
+                        UIStrings.trophyUnlocked(_getTrophyName()),
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: AppSpacing.sm),
                       Text(
-                        'for ${widget.gameTitle}',
+                        UIStrings.forGame(widget.gameTitle),
                         style: const TextStyle(color: Colors.white70, fontSize: 18),
                       ),
-                      const SizedBox(height: 48),
+                      const SizedBox(height: AppSpacing.xxl),
                       FilledButton(
                         onPressed: widget.onDismiss,
                         style: FilledButton.styleFrom(
@@ -235,11 +235,11 @@ class _AchievementCelebrationOverlayState
                           backgroundColor: _getTrophyColor(),
                           foregroundColor: Colors.black,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
+                            borderRadius: BorderRadius.circular(AppSpacing.md),
                           ),
                         ),
                         child: const Text(
-                          'CONTINUE',
+                          UIStrings.continueCapsLabel,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
@@ -255,7 +255,7 @@ class _AchievementCelebrationOverlayState
           ],
         ),
         loading: () => const SizedBox.shrink(),
-        error: (_, __) => const SizedBox.shrink(),
+        error: (_, _) => const SizedBox.shrink(),
       ),
     );
   }

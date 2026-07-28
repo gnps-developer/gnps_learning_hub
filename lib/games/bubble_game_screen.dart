@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/game_config.dart';
 import '../models/games/game_difficulty.dart';
 import '../models/shop/default_item_ids.dart';
+import '../config/ui_config.dart';
 import '../config/ui_strings.dart';
 import '../providers/progress_providers.dart';
 import '../providers/audio_providers.dart';
@@ -112,9 +113,12 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
       if (!_gameOver) _spawnBubble();
     });
 
-    _gameLoop = Timer.periodic(const Duration(milliseconds: 16), (timer) {
-      if (!_gameOver) _updateBubbles();
-    });
+    _gameLoop = Timer.periodic(
+      const Duration(milliseconds: 16),
+      (timer) {
+        if (!_gameOver) _updateBubbles();
+      },
+    );
 
     // Wait for the configured initial delay before speaking the first word.
     await Future.delayed(Duration(milliseconds: _initialDelayMs));
@@ -346,7 +350,7 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
                                             0)
                                     ? Icons.favorite
                                     : Icons.favorite_border,
-                                color: Colors.red,
+                                color: AppColors.heart,
                                 size: 32,
                               ),
                             ),
@@ -357,11 +361,11 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
                                         .extraLife] ??
                                     0) >
                                 3) ...[
-                              const SizedBox(width: 4),
+                              const SizedBox(width: AppSpacing.xs),
                               Text(
                                 '+${(ref.watch(progressProvider).value?.ownedItemQuantities[DefaultItemIds.extraLife] ?? 0) - 3}',
                                 style: const TextStyle(
-                                  color: Colors.red,
+                                  color: AppColors.heart,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20,
                                 ),
@@ -370,7 +374,7 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
                           ],
                         ),
                         Text(
-                          'Score: $_score',
+                          '${UIStrings.scoreLabel}: $_score',
                           style: const TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
@@ -386,7 +390,7 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
                             'Difficulty: ${_selectedDifficulty!.displayName}',
                             style: Theme.of(context).textTheme.bodySmall,
                           ),
-                          const SizedBox(width: 8),
+                          const SizedBox(width: AppSpacing.sm),
                           Text(
                             'Best: ${ref.read(progressProvider).value?.gameHighScores[widget.game.id]?[_selectedDifficulty!.name] ?? 0} ⭐',
                             style: Theme.of(context).textTheme.bodySmall,
@@ -394,10 +398,10 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
                         ],
                       ],
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: AppSpacing.ml),
                     Container(
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 24,
+                        horizontal: AppSpacing.lg,
                         vertical: 12,
                       ),
                       decoration: BoxDecoration(
@@ -411,7 +415,7 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
                                 ? 'Listen to the word'
                                 : 'Listen to the letter',
                           ),
-                          const SizedBox(height: 8),
+                          const SizedBox(height: AppSpacing.sm),
                           TaskSpeakerButton(
                             textToSpeak: _targetLetter,
                             iconSize: 40,
@@ -426,35 +430,35 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
 
             if (_gameOver)
               Container(
-                color: Colors.black.withValues(alpha: 0.7),
+                color: AppColors.barrierDark.withValues(alpha: 0.7),
                 child: Center(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        _gameWon ? 'VICTORY!' : 'GAME OVER',
+                        _gameWon ? UIStrings.victoryTitle : UIStrings.gameOverTitle,
                         style: TextStyle(
-                          color: _gameWon ? Colors.yellow : Colors.red,
+                          color: _gameWon ? Colors.yellow : AppColors.error,
                           fontSize: 48,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: AppSpacing.md),
                       Text(
-                        'Final Score: $_score',
+                        UIStrings.finalScore(_score),
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 24,
                         ),
                       ),
-                      const SizedBox(height: 32),
+                      const SizedBox(height: AppSpacing.xl),
                       ElevatedButton(
                         onPressed: () =>
                             Navigator.of(context).pop(_newAchievement),
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
-                            horizontal: 48,
-                            vertical: 16,
+                            horizontal: AppSpacing.xxl,
+                            vertical: AppSpacing.md,
                           ),
                         ),
                         child: const Text(UIStrings.backToJourney),
