@@ -15,6 +15,7 @@ class JourneyBanner extends StatelessWidget {
   final List<ShopItem> catalog;
   final VoidCallback? onTapGems;
   final VoidCallback? onTapAchievements;
+  final VoidCallback? onTapProfile;
 
   const JourneyBanner({
     super.key,
@@ -22,6 +23,7 @@ class JourneyBanner extends StatelessWidget {
     required this.catalog,
     this.onTapGems,
     this.onTapAchievements,
+    this.onTapProfile,
   });
 
   void _openStreakScreen(BuildContext context) {
@@ -45,16 +47,19 @@ class JourneyBanner extends StatelessWidget {
           Expanded(
             child: Row(
               children: [
-                CircleAvatar(
-                  radius: 18,
-                  backgroundColor: Colors.grey.shade200,
-                  child: ClipOval(
-                    child: SizedBox(
-                      width: 36,
-                      height: 36,
-                      child: AvatarPreview(
-                        equippedItemIds: progress.equippedItemIds,
-                        catalog: catalog,
+                GestureDetector(
+                  onTap: onTapProfile,
+                  child: CircleAvatar(
+                    radius: 18,
+                    backgroundColor: Colors.grey.shade200,
+                    child: ClipOval(
+                      child: SizedBox(
+                        width: 36,
+                        height: 36,
+                        child: AvatarPreview(
+                          equippedItemIds: progress.equippedItemIds,
+                          catalog: catalog,
+                        ),
                       ),
                     ),
                   ),

@@ -179,6 +179,8 @@ class _JourneyContent extends ConsumerWidget {
           onTapAchievements: () => Navigator.of(context).push(
             MaterialPageRoute(builder: (_) => const AchievementsScreen()),
           ),
+          onTapProfile: () =>
+              ref.read(mainNavigationProvider.notifier).state = 2,
         ),
         Expanded(
           child: LessonPath(
