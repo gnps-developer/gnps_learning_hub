@@ -16,6 +16,9 @@ final Map<String, dynamic> wordBubbleGameConfig = {
     'minSpeed': 0.0,
     'maxSpeed': 2.0,
     'bubbleSize': 180.0, // Larger for words
+    'targetScore': 350,
+    'pointsPerCorrect': 10,
+    'initialDelayMs': 1200,
     'letters': [
       'ਸਕੂਲ',
       'ਕਿਤਾਬ',

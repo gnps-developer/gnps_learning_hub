@@ -16,6 +16,9 @@ final Map<String, dynamic> bubbleGameConfig = {
     'minSpeed': 0.8,
     'maxSpeed': 2.0,
     'bubbleSize': 120.0,
+    'targetScore': 350,
+    'pointsPerCorrect': 10,
+    'initialDelayMs': 1200,
     'letters': [
       'ੳ',
       'ਅ',

@@ -42,6 +42,9 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
   late double _minSpeed;
   late double _maxSpeed;
   late double _baseBubbleSize;
+  late int _targetScore;
+  late int _pointsPerCorrect;
+  late int _initialDelayMs;
 
   @override
   void initState() {
@@ -53,6 +56,9 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
     _minSpeed = (content['minSpeed'] as num? ?? 2.0).toDouble();
     _maxSpeed = (content['maxSpeed'] as num? ?? 4.0).toDouble();
     _baseBubbleSize = (content['bubbleSize'] as num? ?? 70.0).toDouble();
+    _targetScore = (content['targetScore'] as num? ?? 100).toInt();
+    _pointsPerCorrect = (content['pointsPerCorrect'] as num? ?? 10).toInt();
+    _initialDelayMs = (content['initialDelayMs'] as num? ?? 1200).toInt();
 
     _initGame();
   }
@@ -78,8 +84,8 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
       if (!_gameOver) _updateBubbles();
     });
 
-    // Wait 2 seconds after bubbles start spawning before speaking the first word.
-    await Future.delayed(const Duration(milliseconds: 2000));
+    // Wait for the configured initial delay before speaking the first word.
+    await Future.delayed(Duration(milliseconds: _initialDelayMs));
     if (!mounted) return;
 
     _speakTarget();
@@ -143,9 +149,9 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
     setState(() {
       bubble.popped = true;
       if (bubble.letter == _targetLetter) {
-        _score += 10;
+        _score += _pointsPerCorrect;
         bubble.status = _BubbleStatus.correct;
-        if (_score >= 100) {
+        if (_score >= _targetScore) {
           _winGame();
         } else {
           _nextRound();
