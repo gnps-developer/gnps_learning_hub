@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/progress.dart';
@@ -25,8 +26,9 @@ class AchievementCelebrationOverlay extends ConsumerStatefulWidget {
 
 class _AchievementCelebrationOverlayState
     extends ConsumerState<AchievementCelebrationOverlay>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   late AnimationController _controller;
+  late AnimationController _rotationController;
   late Animation<double> _haloScale;
   late Animation<double> _trophyScale;
   late Animation<double> _opacity;
@@ -38,6 +40,11 @@ class _AchievementCelebrationOverlayState
       vsync: this,
       duration: const Duration(milliseconds: 1500),
     );
+
+    _rotationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 10),
+    )..repeat();
 
     _opacity = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
@@ -66,6 +73,7 @@ class _AchievementCelebrationOverlayState
   @override
   void dispose() {
     _controller.dispose();
+    _rotationController.dispose();
     super.dispose();
   }
 
@@ -106,6 +114,26 @@ class _AchievementCelebrationOverlayState
         data: (progress) => Stack(
           alignment: Alignment.center,
           children: [
+            // Light Rays (Rotating in the background)
+            FadeTransition(
+              opacity: _opacity,
+              child: AnimatedBuilder(
+                animation: _rotationController,
+                builder: (context, child) {
+                  return Transform.rotate(
+                    angle: _rotationController.value * 2 * pi,
+                    child: CustomPaint(
+                      painter: _LightRaysPainter(
+                        color: _getTrophyColor().withValues(alpha: 0.15),
+                        rayCount: 16,
+                      ),
+                      size: const Size(600, 600),
+                    ),
+                  );
+                },
+              ),
+            ),
+
             // Avatar and Trophy container
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -113,22 +141,24 @@ class _AchievementCelebrationOverlayState
                 Stack(
                   alignment: Alignment.center,
                   children: [
-                    // Background Halo
+                    // Background Halo (Enhanced)
                     AnimatedBuilder(
                       animation: _haloScale,
                       builder: (context, child) {
                         return Transform.scale(
                           scale: _haloScale.value,
                           child: Container(
-                            width: 280,
-                            height: 280,
+                            width: 320,
+                            height: 320,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               gradient: RadialGradient(
                                 colors: [
-                                  _getTrophyColor().withValues(alpha: 0.6),
+                                  _getTrophyColor().withValues(alpha: 0.7),
+                                  _getTrophyColor().withValues(alpha: 0.2),
                                   _getTrophyColor().withValues(alpha: 0.0),
                                 ],
+                                stops: const [0.0, 0.5, 1.0],
                               ),
                             ),
                           ),
@@ -229,4 +259,43 @@ class _AchievementCelebrationOverlayState
       ),
     );
   }
+}
+
+class _LightRaysPainter extends CustomPainter {
+  final Color color;
+  final int rayCount;
+
+  _LightRaysPainter({required this.color, required this.rayCount});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = color
+      ..style = PaintingStyle.fill;
+
+    final center = Offset(size.width / 2, size.height / 2);
+    final radius = max(size.width, size.height) * 1.5;
+    final angleStep = (2 * pi) / rayCount;
+
+    for (int i = 0; i < rayCount; i++) {
+      final startAngle = i * angleStep;
+      final path = Path();
+      path.moveTo(center.dx, center.dy);
+      
+      // Draw a thin triangle/ray
+      path.lineTo(
+        center.dx + radius * cos(startAngle - angleStep / 4),
+        center.dy + radius * sin(startAngle - angleStep / 4),
+      );
+      path.lineTo(
+        center.dx + radius * cos(startAngle + angleStep / 4),
+        center.dy + radius * sin(startAngle + angleStep / 4),
+      );
+      path.close();
+      canvas.drawPath(path, paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

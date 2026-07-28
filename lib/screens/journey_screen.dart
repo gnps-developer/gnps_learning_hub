@@ -87,7 +87,7 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
       barrierLabel: 'Celebration',
       barrierColor: Colors.black.withValues(alpha: 0.85),
       transitionDuration: const Duration(milliseconds: 400),
-      pageBuilder: (context, __, ___) => AchievementCelebrationOverlay(
+      pageBuilder: (context, _, _) => AchievementCelebrationOverlay(
         gameTitle: title,
         difficultyIndex: index,
         onDismiss: () => Navigator.of(context).pop(),

@@ -13,6 +13,7 @@ import '../providers/content_providers.dart';
 import '../providers/progress_providers.dart';
 import '../tools/content_debug_screen.dart';
 import '../tools/tracing_checkpoint_recorder_screen.dart';
+import '../widgets/celebration/achievement_celebration_overlay.dart';
 import 'attributions_screen.dart';
 import 'intro_screen.dart';
 
@@ -317,6 +318,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 icon: Icons.edit_road,
                 label: 'Tracing Checkpoint Recorder',
               ),
+              const SizedBox(height: 12),
+              _SettingsActionButton(
+                onPressed: () => _testAchievementCelebration(context),
+                icon: Icons.celebration_outlined,
+                label: 'Test Achievement Celebration',
+              ),
               if (progress.isDeveloperModeEnabled) ...[
                 const SizedBox(height: 12),
                 _SettingsActionButton(
@@ -402,6 +409,53 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         );
       }
     }
+  }
+
+  void _testAchievementCelebration(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => SimpleDialog(
+        title: const Text('Test Trophy Type'),
+        children: [
+          SimpleDialogOption(
+            onPressed: () {
+              Navigator.pop(context);
+              _showCelebration(1);
+            },
+            child: const Text('Bronze (Easy)'),
+          ),
+          SimpleDialogOption(
+            onPressed: () {
+              Navigator.pop(context);
+              _showCelebration(2);
+            },
+            child: const Text('Silver (Medium)'),
+          ),
+          SimpleDialogOption(
+            onPressed: () {
+              Navigator.pop(context);
+              _showCelebration(3);
+            },
+            child: const Text('Gold (Hard)'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showCelebration(int index) {
+    showGeneralDialog(
+      context: context,
+      barrierDismissible: false,
+      barrierLabel: 'Test Celebration',
+      barrierColor: Colors.black.withValues(alpha: 0.85),
+      transitionDuration: const Duration(milliseconds: 400),
+      pageBuilder: (context, _, _) => AchievementCelebrationOverlay(
+        gameTitle: 'Test Game',
+        difficultyIndex: index,
+        onDismiss: () => Navigator.of(context).pop(),
+      ),
+    );
   }
 }
 
