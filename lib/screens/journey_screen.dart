@@ -13,6 +13,7 @@ import '../widgets/journey/journey_banner.dart';
 import 'lesson_screen.dart';
 import 'profile_screen.dart';
 import 'shop_screen.dart';
+import 'achievements_screen.dart';
 
 import '../models/game_config.dart';
 import '../models/shop/default_item_ids.dart';
@@ -175,6 +176,9 @@ class _JourneyContent extends ConsumerWidget {
           catalog: catalog,
           onTapGems: () =>
               ref.read(mainNavigationProvider.notifier).state = 1,
+          onTapAchievements: () => Navigator.of(context).push(
+            MaterialPageRoute(builder: (_) => const AchievementsScreen()),
+          ),
         ),
         Expanded(
           child: LessonPath(

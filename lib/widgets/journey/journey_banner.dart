@@ -12,12 +12,14 @@ class JourneyBanner extends StatelessWidget {
   final LocalProgress progress;
   final List<ShopItem> catalog;
   final VoidCallback? onTapGems;
+  final VoidCallback? onTapAchievements;
 
   const JourneyBanner({
     super.key,
     required this.progress,
     required this.catalog,
     this.onTapGems,
+    this.onTapAchievements,
   });
 
   void _openStreakScreen(BuildContext context) {
@@ -29,7 +31,7 @@ class JourneyBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 12, 20, 4),
+      padding: const EdgeInsets.fromLTRB(12, 12, 12, 4),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -73,7 +75,7 @@ class JourneyBanner extends StatelessWidget {
                 value:
                     '${progress.ownedItemQuantities['powerup_extra_life'] ?? 0}',
               ),
-              const SizedBox(width: 10),
+              const SizedBox(width: 6),
               GestureDetector(
                 onTap: () => _openStreakScreen(context),
                 child: _StatPill(
@@ -82,7 +84,17 @@ class JourneyBanner extends StatelessWidget {
                   value: '${progress.currentStreak}',
                 ),
               ),
-              const SizedBox(width: 10),
+              const SizedBox(width: 6),
+              GestureDetector(
+                onTap: onTapAchievements,
+                child: _StatPill(
+                  icon: Icons.emoji_events,
+                  color: Colors.amber,
+                  value:
+                      '${progress.unlockedGameDifficulties.values.fold<int>(0, (sum, val) => sum + val)}',
+                ),
+              ),
+              const SizedBox(width: 6),
               GestureDetector(
                 onTap: onTapGems,
                 child: _StatPill(
@@ -113,16 +125,16 @@ class _StatPill extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surfaceContainerHighest,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(icon, color: color, size: 20),
-          const SizedBox(width: 6),
+          const SizedBox(width: 3),
           Text(
             value,
             style: Theme.of(
