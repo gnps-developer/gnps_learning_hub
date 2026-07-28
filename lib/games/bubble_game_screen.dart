@@ -475,6 +475,7 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
                         ?.unlockedGameDifficulties[widget.game.id] ??
                     0,
                 onSelected: _startGame,
+                onClose: () => Navigator.of(context).pop(),
               ),
           ],
         ),
@@ -487,11 +488,13 @@ class _DifficultySelectionOverlay extends StatelessWidget {
   final String gameTitle;
   final int unlockedLevel;
   final ValueChanged<GameDifficulty> onSelected;
+  final VoidCallback onClose;
 
   const _DifficultySelectionOverlay({
     required this.gameTitle,
     required this.unlockedLevel,
     required this.onSelected,
+    required this.onClose,
   });
 
   @override
@@ -501,41 +504,55 @@ class _DifficultySelectionOverlay extends StatelessWidget {
       child: Center(
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 32),
-          padding: const EdgeInsets.all(24),
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.surface,
             borderRadius: BorderRadius.circular(28),
             boxShadow: const [BoxShadow(color: Colors.black26, blurRadius: 20)],
           ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
+          child: Stack(
             children: [
-              Text(
-                gameTitle,
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.bold,
+              Padding(
+                padding: const EdgeInsets.all(24),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      gameTitle,
+                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                      textAlign: TextAlign.center,
                     ),
-                textAlign: TextAlign.center,
+                    const SizedBox(height: 8),
+                    const Text('Select difficulty:'),
+                    const SizedBox(height: 24),
+                    _DifficultyButton(
+                      difficulty: GameDifficulty.easy,
+                      isLocked: false,
+                      onPressed: () => onSelected(GameDifficulty.easy),
+                    ),
+                    const SizedBox(height: 12),
+                    _DifficultyButton(
+                      difficulty: GameDifficulty.medium,
+                      isLocked: unlockedLevel < 1,
+                      onPressed: () => onSelected(GameDifficulty.medium),
+                    ),
+                    const SizedBox(height: 12),
+                    _DifficultyButton(
+                      difficulty: GameDifficulty.hard,
+                      isLocked: unlockedLevel < 2,
+                      onPressed: () => onSelected(GameDifficulty.hard),
+                    ),
+                  ],
+                ),
               ),
-              const SizedBox(height: 8),
-              const Text('Select difficulty:'),
-              const SizedBox(height: 24),
-              _DifficultyButton(
-                difficulty: GameDifficulty.easy,
-                isLocked: false,
-                onPressed: () => onSelected(GameDifficulty.easy),
-              ),
-              const SizedBox(height: 12),
-              _DifficultyButton(
-                difficulty: GameDifficulty.medium,
-                isLocked: unlockedLevel < 1,
-                onPressed: () => onSelected(GameDifficulty.medium),
-              ),
-              const SizedBox(height: 12),
-              _DifficultyButton(
-                difficulty: GameDifficulty.hard,
-                isLocked: unlockedLevel < 2,
-                onPressed: () => onSelected(GameDifficulty.hard),
+              Positioned(
+                right: 8,
+                top: 8,
+                child: IconButton(
+                  icon: const Icon(Icons.close),
+                  onPressed: onClose,
+                ),
               ),
             ],
           ),
