@@ -16,25 +16,46 @@ class AchievementsScreen extends ConsumerWidget {
       appBar: AppBar(title: const Text('Achievements')),
       body: progressAsync.when(
         data: (progress) => journeyAsync.when(
-          data: (journey) => ListView(
-            padding: const EdgeInsets.all(24),
-            children: journey.games.map((game) {
-              // Only show achievements for games that are unlocked on the map
-              final isUnlocked = progress.unlockedLessonIds
-                  .contains(game.unlockAfterLessonId);
-              if (!isUnlocked) return const SizedBox.shrink();
+          data: (journey) {
+            final unlockedGameCards = journey.games
+                .map((game) {
+                  // Only show achievements for games that are unlocked (completed anchor lesson)
+                  final isUnlocked = progress.completedLessonIds
+                      .contains(game.unlockAfterLessonId);
+                  if (!isUnlocked) return const SizedBox.shrink();
 
-              final trophies = progress.unlockedGameDifficulties[game.id] ?? 0;
-              final scores = progress.gameHighScores[game.id] ?? {};
+                  final trophies =
+                      progress.unlockedGameDifficulties[game.id] ?? 0;
+                  final scores = progress.gameHighScores[game.id] ?? {};
 
-              return _GameAchievementCard(
-                title: game.title,
-                trophies: trophies,
-                scores: scores,
-                icon: game.icon ?? Icons.videogame_asset,
+                  return _GameAchievementCard(
+                    title: game.title,
+                    trophies: trophies,
+                    scores: scores,
+                    icon: game.icon ?? Icons.videogame_asset,
+                  );
+                })
+                .where((w) => w is! SizedBox)
+                .toList();
+
+            if (unlockedGameCards.isEmpty) {
+              return const Center(
+                child: Padding(
+                  padding: EdgeInsets.all(32.0),
+                  child: Text(
+                    'No games unlocked yet! Finish your first few lessons on the map to see your achievements here.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 18, color: Colors.grey),
+                  ),
+                ),
               );
-            }).toList(),
-          ),
+            }
+
+            return ListView(
+              padding: const EdgeInsets.all(24),
+              children: unlockedGameCards,
+            );
+          },
           loading: () => const Center(child: CircularProgressIndicator()),
           error: (e, _) => Center(child: Text('Error loading journey: $e')),
         ),
@@ -137,6 +158,8 @@ class _TrophyItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final showBestScore = !isEarned && score > 0;
+
     return Column(
       children: [
         Stack(
@@ -163,12 +186,12 @@ class _TrophyItem extends StatelessWidget {
             color: isEarned ? null : Colors.grey,
           ),
         ),
-        if (isEarned)
+        if (showBestScore)
           Text(
-            '$score ⭐',
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+            'Best: $score ⭐',
+            style: Theme.of(context).textTheme.labelSmall?.copyWith(
                   fontWeight: FontWeight.bold,
-                  color: Colors.blueGrey,
+                  color: Colors.orange.shade800,
                 ),
           ),
       ],

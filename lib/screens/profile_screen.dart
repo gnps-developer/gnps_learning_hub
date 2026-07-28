@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../config/reward_config.dart';
 import '../models/shop/shop_item.dart';
-import '../models/games/game_difficulty.dart';
 import '../providers/content_providers.dart';
 import '../providers/progress_providers.dart';
 import '../providers/shop_providers.dart';
