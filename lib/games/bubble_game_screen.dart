@@ -51,6 +51,8 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
   late int _pointsPerCorrect;
   late int _initialDelayMs;
   late double _targetProbability;
+  late int _winBonusPoints;
+  late bool _heartLossOnWrong;
 
   @override
   void initState() {
@@ -67,6 +69,8 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
     _initialDelayMs = (content['initialDelayMs'] as num? ?? 1200).toInt();
     _targetProbability =
         (content['targetProbability'] as num? ?? 0.3).toDouble();
+    _winBonusPoints = (content['winBonusPoints'] as num? ?? 50).toInt();
+    _heartLossOnWrong = content['heartLossOnWrong'] as bool? ?? true;
 
     if (widget.difficulty != null) {
       _startGame(widget.difficulty!);
@@ -83,14 +87,30 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
     final Map<String, dynamic>? difficulties = content['difficulties'];
     if (difficulties != null && difficulties.containsKey(diff.name)) {
       final Map<String, dynamic> config = difficulties[diff.name];
-      
-      final spawnRateMult = (config['spawnRateMultiplier'] as num? ?? 1.0).toDouble();
+
+      final spawnRateMult =
+          (config['spawnRateMultiplier'] as num? ?? 1.0).toDouble();
       final speedMult = (config['speedMultiplier'] as num? ?? 1.0).toDouble();
-      final probMult = (config['probabilityMultiplier'] as num? ?? 1.0).toDouble();
+      final probMult =
+          (config['probabilityMultiplier'] as num? ?? 1.0).toDouble();
 
       _spawnRateMs = (_spawnRateMs * spawnRateMult).toInt();
       _maxSpeed = _maxSpeed * speedMult;
       _targetProbability = _targetProbability * probMult;
+
+      // Scoring & logic overrides
+      if (config.containsKey('targetScore')) {
+        _targetScore = (config['targetScore'] as num).toInt();
+      }
+      if (config.containsKey('pointsPerCorrect')) {
+        _pointsPerCorrect = (config['pointsPerCorrect'] as num).toInt();
+      }
+      if (config.containsKey('winBonusPoints')) {
+        _winBonusPoints = (config['winBonusPoints'] as num).toInt();
+      }
+      if (config.containsKey('heartLossOnWrong')) {
+        _heartLossOnWrong = config['heartLossOnWrong'] as bool;
+      }
     }
 
     _initGame();
@@ -201,7 +221,9 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
         _nextRound();
       }
     } else {
-      _loseLife();
+      if (_heartLossOnWrong) {
+        _loseLife();
+      }
     }
 
     // Stage 1: Show the result icon for a moment
@@ -263,7 +285,7 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
     });
     _confettiKey.currentState?.play();
     ref.read(audioServiceProvider).playGameWon();
-    ref.read(progressProvider.notifier).addPoints(50);
+    ref.read(progressProvider.notifier).addPoints(_winBonusPoints);
     _recordFinalScore(won: true);
   }
 

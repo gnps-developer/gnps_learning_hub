@@ -18,6 +18,8 @@ final Map<String, dynamic> wordBubbleGameConfig = {
     'bubbleSize': 180.0, // Larger for words
     'targetScore': 350,
     'pointsPerCorrect': 10,
+    'winBonusPoints': 50,
+    'heartLossOnWrong': true,
     'initialDelayMs': 1200,
     'targetProbability': 0.5,
     'difficulties': {
@@ -25,11 +27,14 @@ final Map<String, dynamic> wordBubbleGameConfig = {
         'spawnRateMultiplier': 0.75,
         'speedMultiplier': 1.3,
         'probabilityMultiplier': 0.8,
+        'targetScore': 500,
       },
       'hard': {
         'spawnRateMultiplier': 0.5,
         'speedMultiplier': 1.6,
         'probabilityMultiplier': 0.6,
+        'targetScore': 750,
+        'pointsPerCorrect': 20,
       },
     },
     'letters': [
