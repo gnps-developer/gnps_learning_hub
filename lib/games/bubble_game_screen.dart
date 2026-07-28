@@ -152,6 +152,7 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
       if (bubble.letter == _targetLetter) {
         _score += _pointsPerCorrect;
         bubble.status = _BubbleStatus.correct;
+        ref.read(audioServiceProvider).playSuccess();
       } else {
         bubble.status = _BubbleStatus.wrong;
       }
@@ -285,7 +286,8 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
                                         (ref
                                                 .watch(progressProvider)
                                                 .value
-                                                ?.ownedItemQuantities[DefaultItemIds.extraLife] ??
+                                                ?.ownedItemQuantities[DefaultItemIds
+                                                .extraLife] ??
                                             0)
                                     ? Icons.favorite
                                     : Icons.favorite_border,
@@ -296,7 +298,8 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
                             if ((ref
                                         .watch(progressProvider)
                                         .value
-                                        ?.ownedItemQuantities[DefaultItemIds.extraLife] ??
+                                        ?.ownedItemQuantities[DefaultItemIds
+                                        .extraLife] ??
                                     0) >
                                 3) ...[
                               const SizedBox(width: 4),
@@ -439,10 +442,7 @@ class _BubbleWidget extends StatelessWidget {
 
         return Opacity(
           opacity: opacity,
-          child: Transform.scale(
-            scale: scale,
-            child: child,
-          ),
+          child: Transform.scale(scale: scale, child: child),
         );
       },
       child: Stack(
@@ -466,10 +466,14 @@ class _BubbleWidget extends StatelessWidget {
               ),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.08),
+                  color: Colors.black.withValues(alpha: 0.3),
+                  blurRadius: 12,
+                  offset: const Offset(5, 8),
+                ),
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.1),
                   blurRadius: 6,
-                  offset: const Offset(1, 2),
-                  spreadRadius: 0.5,
+                  offset: const Offset(2, 4),
                 ),
               ],
               border: Border.all(
@@ -537,8 +541,8 @@ class _BubbleWidget extends StatelessWidget {
         fontSize: bubble.letter.length > 3
             ? bubble.size * 0.25
             : bubble.letter.length > 1
-                ? bubble.size * 0.35
-                : bubble.size * 0.5,
+            ? bubble.size * 0.35
+            : bubble.size * 0.5,
         fontWeight: FontWeight.bold,
         shadows: const [Shadow(color: Colors.black26, blurRadius: 4)],
       ),
