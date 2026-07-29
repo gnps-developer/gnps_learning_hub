@@ -5,7 +5,7 @@ workflows:
       events:
         - push
       branch_patterns:
-        - pattern: 'main'
+        - pattern: "main"
           include: true
     max_build_duration: 120
     instance_type: mac_mini_m2
@@ -39,11 +39,15 @@ workflows:
 
       - name: Build Android App Bundle
         script: |
-          flutter build appbundle --release
+          flutter build appbundle --release \
+            --build-name=1.0.$PROJECT_BUILD_NUMBER \
+            --build-number=$PROJECT_BUILD_NUMBER
 
       - name: Build Android APK
         script: |
-          flutter build apk --release
+          flutter build apk --release \
+            --build-name=1.0.$PROJECT_BUILD_NUMBER \
+            --build-number=$PROJECT_BUILD_NUMBER
 
       # Only works if iOS code signing has been configured
       # - name: Build iOS IPA
