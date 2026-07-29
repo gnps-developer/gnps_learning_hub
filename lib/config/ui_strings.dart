@@ -91,6 +91,8 @@ class UIStrings {
 
   // Games
   static const selectDifficulty = 'Select difficulty:';
+  static const listenToLetter = 'Listen to the letter:';
+  static const listenToWord = 'Listen to the word:';
   static const victoryTitle = 'VICTORY!';
   static const gameOverTitle = 'GAME OVER';
   static String finalScore(int n) => 'Final Score: $n';

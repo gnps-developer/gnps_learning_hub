@@ -128,4 +128,4 @@ dart run tool/generate_curriculum.dart
 ```
 
 ---
-*Last Updated: 2026-07-20*
+*Last Updated: 2026-07-29*

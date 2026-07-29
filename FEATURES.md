@@ -2,49 +2,52 @@
 
 GNPS Learning Hub is designed to make learning Punjabi engaging and fun for children through gamification and interactive lessons.
 
-## 🎓 Learning Journey
+## 🗺️ Learning Journey
 
-- **Structured Path**: Progress through a curated journey of lessons, from basic alphabets to complex sentences.
-- **Interactive Lessons**: Each lesson consists of multiple tasks designed to reinforce learning through different modalities.
+- **Interactive Journey Map**: A visual roadmap through a lush, animated forest guiding students from basic letters to complex sentences.
+- **Structured Curriculum**: Pedagogy-driven lessons that unlock sequentially.
 - **Comprehensive Task Types**:
-  - **Tracing**: Practice writing Punjabi characters with real-time feedback.
-  - **Letter Selection**: Identify the correct letter from a grid.
-  - **Spelling**: Build words by selecting the correct letters from a bank.
-  - **Matching Pictures**: Match Punjabi words/letters with their corresponding images or emojis.
-  - **Matching Words**: Match pairs of related words or translations.
-  - **Sentence Building**: Arrange words in the correct order to form grammatically correct Punjabi sentences.
-  - **Fill in the Blanks**: Complete sentences with the appropriate vocabulary.
+  - **Tracing**: Interactive practice for Gurmukhi characters with checkpoint verification.
+  - **Letter Selection**: Audio-visual matching of Punjabi letters.
+  - **Spelling**: Word construction with drag-and-drop letter banks.
+  - **Matching Pictures**: Image-to-letter association.
+  - **Matching Words**: Punjabi-to-English vocabulary translation.
+  - **Sentence Building**: Logical word ordering and syntax practice.
+  - **Fill in the Blanks**: Contextual vocabulary usage.
 
-## 🎮 Gamification & Engagement
+## 🎮 High-Fidelity Games
 
-- **Points & Rewards**: Earn points for every task and lesson completed.
-- **Word Games**: Engage in puzzle-based games to test vocabulary.
-- **Daily Streaks**: Stay motivated by maintaining a daily learning habit.
-- **Power-ups**:
-  - **Streak Freeze**: Protect your streak even if you miss a day.
-  - **Extra Heart**: Gain extra lives to continue learning after mistakes.
-- **Milestones**: Track your progress as you unlock new sections of the curriculum.
+- **3D Bubble Pop Engine**: Immersive physics-based gameplay for reinforcing letter and word recognition.
+- **Tiered Difficulty**: Three distinct challenge levels (Easy, Medium, Hard) with data-driven scaling (speed, spawn rate, and probability).
+- **Heroic Visuals**: Spherical 3D bubbles with radial shines, smooth "burst" animations, and real-time performance feedback.
 
-## 👤 Personalization
+## 🏆 Achievement & Trophy System
 
-- **Avatar System**: Create your unique identity with a Boy or Girl avatar.
-- **Avatar Customization**: Equip different items across multiple slots:
-  - **Turban**: Various styles and colors (Orange, Blue, Red).
-  - **Clothes**: Traditional Kurta, Formal outfits, and suits.
-  - **Accessories**: Classic Glasses, Rounded Glasses, and dark Sunglasses.
-- **In-App Shop**: Use earned points to purchase new outfits and accessories.
-- **Goal Setting**: Choose a daily goal that fits your lifestyle (Casual, Regular, Serious, or Intense).
+- **Trophy Room**: Dedicated Achievements screen showcasing earned Bronze, Silver, and Gold trophies for each mastered challenge.
+- **Celebration Overlay**: Cinematic, full-screen celebrations for new achievements featuring a glowing halo, rotating light rays, and the student's personal avatar.
+- **High Score Tracking**: Persistent record-keeping per difficulty level to encourage mastery and replayability.
 
-## 🔊 Audio & UX
+## 👤 Personalization & Economy
 
-- **Text-to-Speech (TTS)**: Authentic pronunciation of Punjabi letters, words, and sentences.
-- **Haptic Feedback**: Tactile responses for successful actions and interactions.
-- **Immersive Sounds**: Feedback sounds for success and error states (can be toggled in settings).
-- **High-Quality Graphics**: Sharp, scalable SVG assets for characters, clothing, and shop items.
+- **Advanced Avatar System**: High-quality SVG-based character customizer.
+- **Multi-Slot Customization**: Personalize Base Avatar, Skin Tone, Headwear (Turbans/Pins), Clothes, and Accessories.
+- **In-App Shop**: Integrated economy using "Gems" earned through learning to unlock premium cosmetics and power-ups.
+- **Adaptive Goals**: Customizable daily learning targets (Casual to Intense).
 
-## 🛠 Technology & Architecture
+## 🔥 Persistence & Engagement
 
-- **Offline First**: All progress is saved locally using Hive, ensuring the app works without an active connection.
-- **Bundled Updates**: Curriculum is managed via app updates, with automated cache migration on first launch of a new version.
-- **State Management**: Built with Flutter Riverpod for high performance and testability.
-- **Dynamic Theming**: The app UI adapts its primary color based on user preferences.
+- **Daily Streaks**: Habit-forming engagement tracking.
+- **Streak Freeze (❄️)**: Strategic power-up that protects progress on missed days, visualized on a specialized streak calendar.
+- **Local Persistence**: Full progress and inventory saving using high-performance Hive database.
+
+## 🔊 Immersive UX
+
+- **Integrated Audio**: High-quality TTS for authentic Punjabi pronunciation and engaging feedback sounds.
+- **Haptic Feedback**: Tactile responses for a more tactile learning experience.
+- **Dynamic Theming**: Primary app colors adapt to the user's selected preference.
+
+## 🛠️ Developer & Admin Tools
+
+- **Developer Mode**: Secure, hidden tool suite for content verification and QA.
+- **Tracing Recorder**: Specialized utility for generating high-precision checkpoint data for the tracing engine.
+- **Universal Design System**: Centralized configuration for UI strings, colors, and layout spacing.

@@ -28,8 +28,8 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
     with TickerProviderStateMixin {
   final Random _random = Random();
   final List<_Bubble> _bubbles = [];
-  late Timer _spawnTimer;
-  late Timer _gameLoop;
+  Timer? _spawnTimer;
+  Timer? _gameLoop;
   final GlobalKey<ConfettiOverlayState> _confettiKey = GlobalKey();
 
   int _score = 0;
@@ -310,8 +310,8 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
 
   @override
   void dispose() {
-    _spawnTimer.cancel();
-    _gameLoop.cancel();
+    _spawnTimer?.cancel();
+    _gameLoop?.cancel();
     super.dispose();
   }
 
@@ -434,8 +434,8 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
                         children: [
                           TaskHeader(
                             title: widget.game.id.contains('word')
-                                ? 'Listen to the word'
-                                : 'Listen to the letter',
+                                ? UIStrings.listenToWord
+                                : UIStrings.listenToLetter,
                           ),
                           const SizedBox(height: AppSpacing.sm),
                           TaskSpeakerButton(
