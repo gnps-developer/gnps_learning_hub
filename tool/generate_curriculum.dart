@@ -3,6 +3,12 @@ import 'dart:io';
 import 'package:gnps_learning_hub/data/journey_data.dart';
 import 'package:gnps_learning_hub/config/content_ids.dart';
 
+/// Automatically generates CURRICULUM.md from the app's lesson data.
+///
+/// To run this tool, use:
+/// ```bash
+/// flutter test tool/generate_curriculum.dart
+/// ```
 const Map<String, String> lessonDescriptions = {
   ContentIds.tracing: '*Master the strokes of the Gurmukhi script.*',
   ContentIds.letterSelection:
@@ -61,15 +67,6 @@ void main() {
       '- **${game.title}**: ${game.type.replaceAll('_', ' ')} game unlocked after `${game.unlockAfterLessonId}`.',
     );
   }
-  buffer.writeln();
-
-  buffer.writeln('---');
-  buffer.writeln();
-  buffer.writeln('### 🛠️ Maintenance');
-  buffer.writeln('To refresh this document after modifying lesson data, run:');
-  buffer.writeln('```bash');
-  buffer.writeln('dart run tool/generate_curriculum.dart');
-  buffer.writeln('```');
   buffer.writeln();
   buffer.writeln('---');
   buffer.writeln('*Last Updated: ${DateTime.now().toString().split(' ')[0]}*');

@@ -120,12 +120,4 @@ This document is automatically generated from the app's lesson data.
 - **Word Bubbles**: bubble pop game unlocked after `lesson_matching_words`.
 
 ---
-
-### 🛠️ Maintenance
-To refresh this document after modifying lesson data, run:
-```bash
-dart run tool/generate_curriculum.dart
-```
-
----
 *Last Updated: 2026-07-29*

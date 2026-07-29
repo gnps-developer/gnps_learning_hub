@@ -58,13 +58,6 @@ void main() {
     includeStackableColumn: true,
   );
 
-  buffer.writeln('---');
-  buffer.writeln();
-  buffer.writeln('### 🛠️ Maintenance');
-  buffer.writeln('To refresh this document after modifying shop data, run:');
-  buffer.writeln('```bash');
-  buffer.writeln('flutter test tool/generate_shop_catalog.dart');
-  buffer.writeln('```');
   buffer.writeln();
   buffer.writeln('---');
   buffer.writeln('*Last Updated: ${DateTime.now().toString().split(' ')[0]}*');
