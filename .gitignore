@@ -172,3 +172,4 @@ app.*.symbols
 .agents/skills/personal-*
 /.agent-shell/
 .artifacts
+exports

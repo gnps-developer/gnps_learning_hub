@@ -766,7 +766,7 @@ Future<void> generateMarketingPdf() async {
     return;
   }
 
-  final outputPath = File('GNPS_Curriculum_Brochure_Premium.pdf').absolute.path;
+  final outputPath = File('exports/GNPS_Brochure.pdf').absolute.path;
 
   final result = await _printToPdf(chrome, outputPath, htmlFile.absolute.path);
 
