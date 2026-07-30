@@ -190,6 +190,20 @@ class ProgressService {
     return updated;
   }
 
+  /// DEBUG ONLY. Unlocks all game achievements (Gold status) for the bubble games.
+  Future<LocalProgress> debugCompleteAllAchievements(
+    LocalProgress progress,
+  ) async {
+    if (!kDebugMode) return progress;
+
+    final updated = progress.clone();
+    updated.unlockedGameDifficulties['bubble_pop_letters'] = 3;
+    updated.unlockedGameDifficulties['bubble_pop_words'] = 3;
+
+    await _repository.save(updated);
+    return updated;
+  }
+
   Future<LocalProgress> updateUserName(
     LocalProgress progress,
     String name,

@@ -190,25 +190,25 @@ Future<void> generateMarketingPdf() async {
 
   /* ---------- Page Layouts ---------- */
   .hero-page { background: linear-gradient(135deg, #1B2A4A 0%, #12203A 100%); color: #FBF7EF; justify-content: center; align-items: center; text-align: center; }
-  .feature-page { padding: 30px 60px; display: flex; flex-direction: row; align-items: center; gap: 60px; }
+  .feature-page { padding: 30px 50px; display: flex; flex-direction: row; align-items: center; gap: 36px; }
   .feature-page.alt { flex-direction: row-reverse; }
 
   /* ---------- Components ---------- */
   .text-side { flex: 1; min-width: 0; }
-  .image-side { flex: 0 0 450px; height: 100%; display: flex; align-items: center; justify-content: center; }
+  .image-side { flex: 0 0 260px; height: 100%; display: flex; align-items: center; justify-content: center; }
 
   .phone-mockup {
-    width: 400px;
-    height: 800px;
+    width: 230px;
+    height: 460px;
     background: #000;
-    border-radius: 60px;
-    padding: 12px;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.3);
-    border: 4px solid #333;
+    border-radius: 34px;
+    padding: 8px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    border: 3px solid #333;
     overflow: hidden;
     position: relative;
   }
-  .phone-screen { width: 100%; height: 100%; background: #fff; border-radius: 48px; overflow: hidden; }
+  .phone-screen { width: 100%; height: 100%; background: #fff; border-radius: 26px; overflow: hidden; }
   .phone-screen img { width: 100%; height: 100%; object-fit: cover; }
 
   .badge {

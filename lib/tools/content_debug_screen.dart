@@ -15,110 +15,144 @@ class ContentDebugScreen extends ConsumerWidget {
       appBar: AppBar(title: const Text('Content Debug Tool')),
       body: journeyAsync.when(
         data: (journey) => progressAsync.when(
-          data: (progress) => ListView.builder(
+          data: (progress) => ListView(
             padding: const EdgeInsets.all(16),
-            itemCount: journey.lessons.length,
-            itemBuilder: (context, index) {
-              final lesson = journey.lessons[index];
-              final isCompleted = progress.completedLessonIds.contains(lesson.id);
-              final isUnlocked = progress.unlockedLessonIds.contains(lesson.id);
-              final completedSections = lesson.sections
-                  .where((s) => progress.completedSectionIds.contains(s.id))
-                  .length;
+            children: [
+              ...journey.lessons.map((lesson) {
+                final isCompleted =
+                    progress.completedLessonIds.contains(lesson.id);
+                final isUnlocked =
+                    progress.unlockedLessonIds.contains(lesson.id);
+                final completedSections = lesson.sections
+                    .where((s) => progress.completedSectionIds.contains(s.id))
+                    .length;
 
-              return Card(
-                margin: const EdgeInsets.only(bottom: 16),
+                return Card(
+                  margin: const EdgeInsets.only(bottom: 16),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                lesson.title,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            _StatusBadge(
+                              isCompleted: isCompleted,
+                              isUnlocked: isUnlocked,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 4),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Sections: $completedSections / ${lesson.sections.length}',
+                              style: TextStyle(color: Colors.grey.shade600),
+                            ),
+                            Row(
+                              children: [
+                                _ShuffleIndicator(
+                                  icon: Icons.low_priority,
+                                  enabled: lesson.shuffleSections,
+                                  tooltip: 'Shuffles Chapters',
+                                ),
+                                const SizedBox(width: 8),
+                                _ShuffleIndicator(
+                                  icon: Icons.shuffle,
+                                  enabled: lesson.shuffleTasks,
+                                  tooltip: 'Shuffles Tasks',
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 16),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            _DebugButton(
+                              label: 'Reset',
+                              color: Colors.grey,
+                              onPressed: () => ref
+                                  .read(progressProvider.notifier)
+                                  .debugUpdateLessonProgress(
+                                    journey: journey,
+                                    lessonId: lesson.id,
+                                    percent: 0.0,
+                                  ),
+                            ),
+                            _DebugButton(
+                              label: '50%',
+                              color: Colors.blue,
+                              onPressed: () => ref
+                                  .read(progressProvider.notifier)
+                                  .debugUpdateLessonProgress(
+                                    journey: journey,
+                                    lessonId: lesson.id,
+                                    percent: 0.5,
+                                  ),
+                            ),
+                            _DebugButton(
+                              label: 'Complete',
+                              color: Colors.green,
+                              onPressed: () => ref
+                                  .read(progressProvider.notifier)
+                                  .debugUpdateLessonProgress(
+                                    journey: journey,
+                                    lessonId: lesson.id,
+                                    percent: 1.0,
+                                  ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }),
+              const SizedBox(height: 24),
+              const Text(
+                'Games & Achievements',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 16),
+              Card(
                 child: Padding(
                   padding: const EdgeInsets.all(16),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              lesson.title,
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          _StatusBadge(
-                            isCompleted: isCompleted,
-                            isUnlocked: isUnlocked,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 4),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Sections: $completedSections / ${lesson.sections.length}',
-                            style: TextStyle(color: Colors.grey.shade600),
-                          ),
-                          Row(
-                            children: [
-                              _ShuffleIndicator(
-                                icon: Icons.low_priority,
-                                enabled: lesson.shuffleSections,
-                                tooltip: 'Shuffles Chapters',
-                              ),
-                              const SizedBox(width: 8),
-                              _ShuffleIndicator(
-                                icon: Icons.shuffle,
-                                enabled: lesson.shuffleTasks,
-                                tooltip: 'Shuffles Tasks',
-                              ),
-                            ],
-                          ),
-                        ],
+                      const Text(
+                        'Unlock all trophies (Bronze, Silver, Gold) for Letter and Word Bubbles games.',
+                        style: TextStyle(color: Colors.grey),
                       ),
                       const SizedBox(height: 16),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          _DebugButton(
-                            label: 'Reset',
-                            color: Colors.grey,
-                            onPressed: () => ref
-                                .read(progressProvider.notifier)
-                                .debugUpdateLessonProgress(
-                                  journey: journey,
-                                  lessonId: lesson.id,
-                                  percent: 0.0,
-                                ),
-                          ),
-                          _DebugButton(
-                            label: '50%',
-                            color: Colors.blue,
-                            onPressed: () => ref
-                                .read(progressProvider.notifier)
-                                .debugUpdateLessonProgress(
-                                  journey: journey,
-                                  lessonId: lesson.id,
-                                  percent: 0.5,
-                                ),
-                          ),
-                          _DebugButton(
-                            label: 'Complete',
-                            color: Colors.green,
-                            onPressed: () => ref
-                                .read(progressProvider.notifier)
-                                .debugUpdateLessonProgress(
-                                  journey: journey,
-                                  lessonId: lesson.id,
-                                  percent: 1.0,
-                                ),
-                          ),
-                        ],
+                      SizedBox(
+                        width: double.infinity,
+                        child: _DebugButton(
+                          label: 'Unlock All Game Achievements',
+                          color: Colors.orange.shade800,
+                          onPressed: () => ref
+                              .read(progressProvider.notifier)
+                              .debugCompleteAllAchievements(),
+                        ),
                       ),
                     ],
                   ),
                 ),
-              );
-            },
+              ),
+              const SizedBox(height: 40),
+            ],
           ),
           loading: () => const Center(child: CircularProgressIndicator()),
           error: (e, _) => Center(child: Text('Error loading progress: $e')),
