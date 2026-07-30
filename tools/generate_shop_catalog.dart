@@ -1,10 +1,6 @@
 // ignore_for_file: avoid_print
+import 'dart:convert';
 import 'dart:io';
-import 'package:gnps_learning_hub/data/shop/shop_items.dart';
-import 'package:gnps_learning_hub/models/avatar/avatar_slot.dart';
-import 'package:gnps_learning_hub/models/shop/shop_item.dart';
-import 'package:gnps_learning_hub/models/shop/shop_item_category.dart';
-import 'package:gnps_learning_hub/models/shop/default_item_ids.dart';
 
 /// Automatically generates SHOP_ITEMS.md from the app's shop data.
 ///
@@ -13,6 +9,9 @@ import 'package:gnps_learning_hub/models/shop/default_item_ids.dart';
 /// flutter test tool/generate_shop_catalog.dart
 /// ```
 void main() {
+  final jsonStr = File('assets/data/shop_items.json').readAsStringSync();
+  final List purchasableItems = jsonDecode(jsonStr);
+
   final buffer = StringBuffer();
   buffer.writeln('# Shop Items Catalog - GNPS Learning Hub');
   buffer.writeln();
@@ -26,7 +25,7 @@ void main() {
     buffer,
     '👳 Headwear',
     'Available for the Boy avatar.',
-    purchasableItems.where((i) => i.avatarSlot == AvatarSlot.headwear).toList(),
+    purchasableItems.where((i) => i['avatarSlot'] == 'headwear').toList(),
   );
 
   // Clothes
@@ -34,7 +33,7 @@ void main() {
     buffer,
     '👕 Clothes',
     'Traditional and formal outfits for both avatars.',
-    purchasableItems.where((i) => i.avatarSlot == AvatarSlot.clothes).toList(),
+    purchasableItems.where((i) => i['avatarSlot'] == 'clothes').toList(),
   );
 
   // Accessories
@@ -43,7 +42,7 @@ void main() {
     '🕶️ Accessories',
     'Eyewear to customize your character\'s look.',
     purchasableItems
-        .where((i) => i.avatarSlot == AvatarSlot.accessory)
+        .where((i) => i['avatarSlot'] == 'accessory')
         .toList(),
   );
 
@@ -53,7 +52,7 @@ void main() {
     '⚡ Power-ups',
     'Consumable items to help you on your learning journey.',
     purchasableItems
-        .where((i) => i.category == ShopItemCategory.powerUp)
+        .where((i) => i['category'] == 'powerUp')
         .toList(),
     includeStackableColumn: true,
   );
@@ -72,7 +71,7 @@ void _writeSection(
   StringBuffer buffer,
   String title,
   String description,
-  List<ShopItem> items, {
+  List items, {
   bool includeStackableColumn = false,
 }) {
   if (items.isEmpty) return;
@@ -90,13 +89,14 @@ void _writeSection(
   }
 
   for (final item in items) {
-    final name = '**${item.name}**';
-    final price = '${item.price} 💎';
+    final name = '**${item['name']}**';
+    final price = '${item['price']} 💎';
 
+    final supportedAvatarIds = item['supportedAvatarIds'] as List?;
     final supportsBoy =
-        item.supportedAvatarIds?.contains(DefaultItemIds.avatarBoy) ?? true;
+        supportedAvatarIds?.contains('avatar_boy') ?? true;
     final supportsGirl =
-        item.supportedAvatarIds?.contains(DefaultItemIds.avatarGirl) ?? true;
+        supportedAvatarIds?.contains('avatar_girl') ?? true;
 
     String avatar = 'Both';
     if (supportsBoy && !supportsGirl) {
@@ -106,12 +106,12 @@ void _writeSection(
     }
 
     if (includeStackableColumn) {
-      final stackable = item.stackable ? 'Yes' : 'No';
+      final stackable = (item['stackable'] ?? false) ? 'Yes' : 'No';
       buffer.writeln(
-        '| $name | ${item.description} | $avatar | $stackable | $price |',
+        '| $name | ${item['description']} | $avatar | $stackable | $price |',
       );
     } else {
-      buffer.writeln('| $name | ${item.description} | $avatar | $price |');
+      buffer.writeln('| $name | ${item['description']} | $avatar | $price |');
     }
   }
   buffer.writeln();

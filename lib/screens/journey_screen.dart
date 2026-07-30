@@ -100,7 +100,7 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
   Widget build(BuildContext context) {
     final journeyAsync = ref.watch(journeyProvider);
     final progressAsync = ref.watch(progressProvider);
-    final catalog = ref.watch(shopCatalogProvider);
+    final catalogAsync = ref.watch(shopCatalogProvider);
     final tabIndex = ref.watch(mainNavigationProvider);
 
     return Scaffold(
@@ -110,12 +110,16 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
           children: [
             journeyAsync.when(
               data: (journey) => progressAsync.when(
-                data: (progress) => _JourneyContent(
-                  journey: journey,
-                  progress: progress,
-                  catalog: catalog,
-                  onTapLesson: (lesson) => _openLesson(lesson, journey),
-                  onTapGame: (game) => _openGame(game, journey),
+                data: (progress) => catalogAsync.when(
+                  data: (catalog) => _JourneyContent(
+                    journey: journey,
+                    progress: progress,
+                    catalog: catalog,
+                    onTapLesson: (lesson) => _openLesson(lesson, journey),
+                    onTapGame: (game) => _openGame(game, journey),
+                  ),
+                  loading: () => const Center(child: CircularProgressIndicator()),
+                  error: (e, _) => Center(child: Text('Error loading catalog: $e')),
                 ),
                 loading: () => const Center(child: CircularProgressIndicator()),
                 error: (e, _) =>

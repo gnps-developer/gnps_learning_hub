@@ -46,3 +46,6 @@ flutter:
     - assets/sounds/
     - assets/avatars/
     - assets/shop/
+    - assets/data/
+    - assets/data/lessons/
+    - assets/data/games/

@@ -106,153 +106,157 @@ class _AchievementCelebrationOverlayState
   @override
   Widget build(BuildContext context) {
     final progressAsync = ref.watch(progressProvider);
-    final catalog = ref.watch(shopCatalogProvider);
+    final catalogAsync = ref.watch(shopCatalogProvider);
 
     return Material(
       color: Colors.transparent,
       child: progressAsync.when(
-        data: (progress) => Stack(
-          alignment: Alignment.center,
-          children: [
-            // Light Rays (Rotating in the background)
-            FadeTransition(
-              opacity: _opacity,
-              child: AnimatedBuilder(
-                animation: _rotationController,
-                builder: (context, child) {
-                  return Transform.rotate(
-                    angle: _rotationController.value * 2 * pi,
-                    child: CustomPaint(
-                      painter: _LightRaysPainter(
-                        color: _getTrophyColor().withValues(alpha: 0.15),
-                        rayCount: 16,
+        data: (progress) => catalogAsync.when(
+          data: (catalogItems) => Stack(
+            alignment: Alignment.center,
+            children: [
+              // Light Rays (Rotating in the background)
+              FadeTransition(
+                opacity: _opacity,
+                child: AnimatedBuilder(
+                  animation: _rotationController,
+                  builder: (context, child) {
+                    return Transform.rotate(
+                      angle: _rotationController.value * 2 * pi,
+                      child: CustomPaint(
+                        painter: _LightRaysPainter(
+                          color: _getTrophyColor().withValues(alpha: 0.15),
+                          rayCount: 16,
+                        ),
+                        size: const Size(600, 600),
                       ),
-                      size: const Size(600, 600),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
-            ),
 
-            // Avatar and Trophy container
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    // Background Halo (Enhanced)
-                    AnimatedBuilder(
-                      animation: _haloScale,
-                      builder: (context, child) {
-                        return Transform.scale(
-                          scale: _haloScale.value,
-                          child: Container(
-                            width: 320,
-                            height: 320,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              gradient: RadialGradient(
-                                colors: [
-                                  _getTrophyColor().withValues(alpha: 0.7),
-                                  _getTrophyColor().withValues(alpha: 0.2),
-                                  _getTrophyColor().withValues(alpha: 0.0),
-                                ],
-                                stops: const [0.0, 0.5, 1.0],
+              // Avatar and Trophy container
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      // Background Halo (Enhanced)
+                      AnimatedBuilder(
+                        animation: _haloScale,
+                        builder: (context, child) {
+                          return Transform.scale(
+                            scale: _haloScale.value,
+                            child: Container(
+                              width: 320,
+                              height: 320,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                gradient: RadialGradient(
+                                  colors: [
+                                    _getTrophyColor().withValues(alpha: 0.7),
+                                    _getTrophyColor().withValues(alpha: 0.2),
+                                    _getTrophyColor().withValues(alpha: 0.0),
+                                  ],
+                                  stops: const [0.0, 0.5, 1.0],
+                                ),
                               ),
                             ),
-                          ),
-                        );
-                      },
-                    ),
+                          );
+                        },
+                      ),
 
-                    // Avatar
-                    FadeTransition(
-                      opacity: _opacity,
-                      child: SizedBox(
-                        width: 220,
-                        height: 350,
-                        child: AvatarPreview(
-                          equippedItemIds: progress.equippedItemIds,
-                          catalog: catalog,
+                      // Avatar
+                      FadeTransition(
+                        opacity: _opacity,
+                        child: SizedBox(
+                          width: 220,
+                          height: 350,
+                          child: AvatarPreview(
+                            equippedItemIds: progress.equippedItemIds,
+                            catalog: catalogItems,
+                          ),
                         ),
                       ),
-                    ),
 
-                    // Trophy (In front of avatar, beneath face)
-                    AnimatedBuilder(
-                      animation: _trophyScale,
-                      builder: (context, child) {
-                        return Positioned(
-                          bottom: 20, // Positioned near the bottom of the avatar container
-                          child: Transform.scale(
-                            scale: _trophyScale.value,
-                            child: Icon(
-                              Icons.emoji_events,
-                              color: _getTrophyColor(),
-                              size: 110,
-                              shadows: [
-                                Shadow(
-                                  color: Colors.black.withValues(alpha: 0.5),
-                                  blurRadius: 15,
-                                  offset: const Offset(0, 4),
-                                )
-                              ],
+                      // Trophy (In front of avatar, beneath face)
+                      AnimatedBuilder(
+                        animation: _trophyScale,
+                        builder: (context, child) {
+                          return Positioned(
+                            bottom: 20, // Positioned near the bottom of the avatar container
+                            child: Transform.scale(
+                              scale: _trophyScale.value,
+                              child: Icon(
+                                Icons.emoji_events,
+                                color: _getTrophyColor(),
+                                size: 110,
+                                shadows: [
+                                  Shadow(
+                                    color: Colors.black.withValues(alpha: 0.5),
+                                    blurRadius: 15,
+                                    offset: const Offset(0, 4),
+                                  )
+                                ],
+                              ),
                             ),
-                          ),
-                        );
-                      },
-                    ),
-                  ],
-                ),
-                const SizedBox(height: AppSpacing.xxl),
-                // Text and Button
-                FadeTransition(
-                  opacity: _opacity,
-                  child: Column(
-                    children: [
-                      Text(
-                        UIStrings.trophyUnlocked(_getTrophyName()),
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: AppSpacing.sm),
-                      Text(
-                        UIStrings.forGame(widget.gameTitle),
-                        style: const TextStyle(color: Colors.white70, fontSize: 18),
-                      ),
-                      const SizedBox(height: AppSpacing.xxl),
-                      FilledButton(
-                        onPressed: widget.onDismiss,
-                        style: FilledButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 56,
-                            vertical: 18,
-                          ),
-                          backgroundColor: _getTrophyColor(),
-                          foregroundColor: Colors.black,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(AppSpacing.md),
-                          ),
-                        ),
-                        child: const Text(
-                          UIStrings.continueCapsLabel,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            letterSpacing: 1.5,
-                          ),
-                        ),
+                          );
+                        },
                       ),
                     ],
                   ),
-                ),
-              ],
-            ),
-          ],
+                  const SizedBox(height: AppSpacing.xxl),
+                  // Text and Button
+                  FadeTransition(
+                    opacity: _opacity,
+                    child: Column(
+                      children: [
+                        Text(
+                          UIStrings.trophyUnlocked(_getTrophyName()),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: AppSpacing.sm),
+                        Text(
+                          UIStrings.forGame(widget.gameTitle),
+                          style: const TextStyle(color: Colors.white70, fontSize: 18),
+                        ),
+                        const SizedBox(height: AppSpacing.xxl),
+                        FilledButton(
+                          onPressed: widget.onDismiss,
+                          style: FilledButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 56,
+                              vertical: 18,
+                            ),
+                            backgroundColor: _getTrophyColor(),
+                            foregroundColor: Colors.black,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(AppSpacing.md),
+                            ),
+                          ),
+                          child: const Text(
+                            UIStrings.continueCapsLabel,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              letterSpacing: 1.5,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          loading: () => const SizedBox.shrink(),
+          error: (_, _) => const SizedBox.shrink(),
         ),
         loading: () => const SizedBox.shrink(),
         error: (_, _) => const SizedBox.shrink(),

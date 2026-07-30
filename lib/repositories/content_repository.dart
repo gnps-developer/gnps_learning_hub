@@ -1,7 +1,7 @@
 import 'dart:convert';
+import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import '../data/journey_data.dart';
 import '../models/journey.dart';
 
 class ContentRepository {
@@ -14,12 +14,42 @@ class ContentRepository {
     _box ??= await Hive.openBox(_boxName);
   }
 
+  Future<Journey> getBundledJourney() async {
+    // 1. Load manifest
+    final manifestStr =
+        await rootBundle.loadString('assets/data/journey_manifest.json');
+    final manifest = jsonDecode(manifestStr) as Map<String, dynamic>;
+    final version = manifest['version'] as int;
+    final lessonFiles = (manifest['lessonFiles'] as List).cast<String>();
+    final gameFiles = (manifest['gameFiles'] as List).cast<String>();
+
+    // 2. Load games
+    final gamesJson = <Map<String, dynamic>>[];
+    for (final file in gameFiles) {
+      final gameStr = await rootBundle.loadString('assets/data/games/$file');
+      gamesJson.add(jsonDecode(gameStr) as Map<String, dynamic>);
+    }
+
+    // 3. Load lessons
+    final lessonsJson = <Map<String, dynamic>>[];
+    for (final file in lessonFiles) {
+      final lessonStr = await rootBundle.loadString('assets/data/lessons/$file');
+      lessonsJson.add(jsonDecode(lessonStr) as Map<String, dynamic>);
+    }
+
+    return Journey.fromJson({
+      'version': version,
+      'lessons': lessonsJson,
+      'games': gamesJson,
+    });
+  }
+
   Future<Journey> getLocalJourney() async {
     await _ensureBox();
     final cached = _box!.get(_journeyKey) as String?;
 
     if (cached == null) {
-      return journeyData;
+      return getBundledJourney();
     }
 
     try {
@@ -27,7 +57,7 @@ class ContentRepository {
         jsonDecode(cached) as Map<String, dynamic>,
       );
     } catch (e) {
-      return journeyData;
+      return getBundledJourney();
     }
   }
 
@@ -40,11 +70,12 @@ class ContentRepository {
   /// don't care about the intermediate "checking" / "installing" steps.
   Future<Journey> checkForUpdatesAndSync() async {
     final local = await getLocalJourney();
+    final bundled = await getBundledJourney();
 
     // If bundled data is newer than cache, use that as the new baseline.
-    if (journeyData.version > local.version) {
-      await cacheJourney(journeyData);
-      return journeyData;
+    if (bundled.version > local.version) {
+      await cacheJourney(bundled);
+      return bundled;
     }
 
     return local;

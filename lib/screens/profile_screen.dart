@@ -38,12 +38,13 @@ class ProfileScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final progressAsync = ref.watch(progressProvider);
     final journeyAsync = ref.watch(journeyProvider);
-    final catalog = ref.watch(shopCatalogProvider); // List<ShopItem>, sync
+    final catalogAsync = ref.watch(shopCatalogProvider);
 
     return progressAsync.when(
-      data: (progress) => SingleChildScrollView(
-        padding: const EdgeInsets.all(AppSpacing.lg),
-        child: Column(
+      data: (progress) => catalogAsync.when(
+        data: (catalog) => SingleChildScrollView(
+          padding: const EdgeInsets.all(AppSpacing.lg),
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Row(
@@ -142,6 +143,9 @@ class ProfileScreen extends ConsumerWidget {
             ],
           ),
         ),
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (e, _) => Center(child: Text('Error loading catalog: $e')),
+      ),
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (e, _) => Center(child: Text('Error loading profile: $e')),
     );

@@ -57,101 +57,107 @@ class _ShopContentState extends ConsumerState<_ShopContent> {
   @override
   Widget build(BuildContext context) {
     final service = ref.read(progressServiceProvider);
-    final catalog = ref.watch(shopCatalogProvider);
+    final catalogAsync = ref.watch(shopCatalogProvider);
 
-    final currentBaseId = widget.progress.equippedItemIds[AvatarSlot.base.name];
+    return catalogAsync.when(
+      data: (catalog) {
+        final currentBaseId = widget.progress.equippedItemIds[AvatarSlot.base.name];
 
-    final purchasableCatalog = catalog.where((i) {
-      final isPurchasable = i.price > 0;
-      final isCompatible = i.supportedAvatarIds == null ||
-          (currentBaseId != null &&
-              i.supportedAvatarIds!.contains(currentBaseId));
-      return isPurchasable && isCompatible;
-    }).toList();
+        final purchasableCatalog = catalog.where((i) {
+          final isPurchasable = i.price > 0;
+          final isCompatible = i.supportedAvatarIds == null ||
+              (currentBaseId != null &&
+                  i.supportedAvatarIds!.contains(currentBaseId));
+          return isPurchasable && isCompatible;
+        }).toList();
 
-    // Determine available filters based on content
-    final List<String> filters = ['All'];
-    if (purchasableCatalog.any((i) => i.category == ShopItemCategory.powerUp)) {
-      filters.add('Power-ups');
-    }
-    for (final slot in AvatarSlot.values) {
-      if (slot == AvatarSlot.base || slot == AvatarSlot.skinTone) continue;
-      if (purchasableCatalog.any((i) => i.avatarSlot == slot)) {
-        filters.add(slot.displayName);
-      }
-    }
+        // Determine available filters based on content
+        final List<String> filters = ['All'];
+        if (purchasableCatalog.any((i) => i.category == ShopItemCategory.powerUp)) {
+          filters.add('Power-ups');
+        }
+        for (final slot in AvatarSlot.values) {
+          if (slot == AvatarSlot.base || slot == AvatarSlot.skinTone) continue;
+          if (purchasableCatalog.any((i) => i.avatarSlot == slot)) {
+            filters.add(slot.displayName);
+          }
+        }
 
-    final filteredItems = purchasableCatalog.where((i) {
-      if (_selectedFilter == 'All') return true;
-      if (_selectedFilter == 'Power-ups') {
-        return i.category == ShopItemCategory.powerUp;
-      }
-      return i.avatarSlot?.displayName == _selectedFilter;
-    }).toList();
+        final filteredItems = purchasableCatalog.where((i) {
+          if (_selectedFilter == 'All') return true;
+          if (_selectedFilter == 'Power-ups') {
+            return i.category == ShopItemCategory.powerUp;
+          }
+          return i.avatarSlot?.displayName == _selectedFilter;
+        }).toList();
 
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Shop',
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-              GemBalance(points: widget.progress.totalPoints),
-            ],
-          ),
-        ),
-        const SizedBox(height: 16),
-        SizedBox(
-          height: 44,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            itemCount: filters.length,
-            itemBuilder: (context, index) {
-              final filter = filters[index];
-              return Padding(
-                padding: const EdgeInsets.only(right: 8),
-                child: ChoiceChip(
-                  label: Text(filter),
-                  selected: _selectedFilter == filter,
-                  onSelected: (selected) {
-                    if (selected) setState(() => _selectedFilter = filter);
-                  },
-                ),
-              );
-            },
-          ),
-        ),
-        const SizedBox(height: 8),
-        Expanded(
-          child: filteredItems.isEmpty
-              ? const Center(child: Text('No items found.'))
-              : GridView.builder(
-                  padding: const EdgeInsets.all(16),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 12,
-                    crossAxisSpacing: 12,
-                    childAspectRatio: 0.68,
+        return Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Shop',
+                    style: Theme.of(context).textTheme.headlineMedium,
                   ),
-                  itemCount: filteredItems.length,
-                  itemBuilder: (context, index) {
-                    final item = filteredItems[index];
-                    return ShopItemCard(
-                      item: item,
-                      owned: service.isItemOwned(widget.progress, item.id),
-                      quantity: service.itemQuantity(widget.progress, item.id),
-                      canAfford: widget.progress.totalPoints >= item.price,
-                      onBuy: () => _buy(context, item),
-                    );
-                  },
-                ),
-        ),
-      ],
+                  GemBalance(points: widget.progress.totalPoints),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
+            SizedBox(
+              height: 44,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                itemCount: filters.length,
+                itemBuilder: (context, index) {
+                  final filter = filters[index];
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: ChoiceChip(
+                      label: Text(filter),
+                      selected: _selectedFilter == filter,
+                      onSelected: (selected) {
+                        if (selected) setState(() => _selectedFilter = filter);
+                      },
+                    ),
+                  );
+                },
+              ),
+            ),
+            const SizedBox(height: 8),
+            Expanded(
+              child: filteredItems.isEmpty
+                  ? const Center(child: Text('No items found.'))
+                  : GridView.builder(
+                      padding: const EdgeInsets.all(16),
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 12,
+                        crossAxisSpacing: 12,
+                        childAspectRatio: 0.68,
+                      ),
+                      itemCount: filteredItems.length,
+                      itemBuilder: (context, index) {
+                        final item = filteredItems[index];
+                        return ShopItemCard(
+                          item: item,
+                          owned: service.isItemOwned(widget.progress, item.id),
+                          quantity: service.itemQuantity(widget.progress, item.id),
+                          canAfford: widget.progress.totalPoints >= item.price,
+                          onBuy: () => _buy(context, item),
+                        );
+                      },
+                    ),
+            ),
+          ],
+        );
+      },
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (e, _) => Center(child: Text('Error loading catalog: $e')),
     );
   }
 }

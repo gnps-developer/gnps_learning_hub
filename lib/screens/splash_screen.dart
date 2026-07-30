@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../models/journey.dart';
 import '../providers/content_providers.dart';
 import '../providers/progress_providers.dart';
+import '../providers/shop_providers.dart';
 import 'intro_screen.dart';
 import 'journey_screen.dart';
 
@@ -23,9 +25,12 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   Future<void> _bootstrap() async {
     // Kick off content sync + progress loading in parallel.
     final journeyFuture = ref.read(journeySyncProvider.notifier).ready;
+    final shopFuture = ref.read(shopCatalogProvider.future);
     await ref.read(progressProvider.notifier).registerAppOpen();
 
-    final journey = await journeyFuture;
+    final results = await Future.wait([journeyFuture, shopFuture]);
+    final journey = results[0] as Journey;
+
     await ref
         .read(progressProvider.notifier)
         .ensureFirstLessonUnlocked(journey);

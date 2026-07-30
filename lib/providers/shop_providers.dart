@@ -5,7 +5,7 @@ import '../repositories/shop_repository.dart';
 
 final shopRepositoryProvider = Provider((ref) => ShopRepository());
 
-final shopCatalogProvider = Provider<List<ShopItem>>((ref) {
+final shopCatalogProvider = FutureProvider<List<ShopItem>>((ref) async {
   final repository = ref.watch(shopRepositoryProvider);
   return repository.getCatalog();
 });

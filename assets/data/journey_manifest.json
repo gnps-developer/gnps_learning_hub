@@ -1,0 +1,16 @@
+{
+  "version": 22,
+  "lessonFiles": [
+    "tracing.json",
+    "letter_selection.json",
+    "spelling.json",
+    "matching_images.json",
+    "matching_words.json",
+    "fill_in_blank.json",
+    "arrange_sentence.json"
+  ],
+  "gameFiles": [
+    "bubble_pop_letters.json",
+    "bubble_pop_words.json"
+  ]
+}
