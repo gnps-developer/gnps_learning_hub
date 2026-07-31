@@ -1,0 +1,125 @@
+{
+  "brand": {
+    "appName": "GNPS Learning Hub",
+    "eyebrow": "Punjabi • For Kids",
+    "heroGurmukhiTagline": "ਸਿੱਖੋ, ਖੇਡੋ, ਵਧੋ",
+    "heroSubtitle": "Learn, Play, Grow — the Gurmukhi learning adventure for kids",
+    "gurmukhiTagline": "ਪੰਜਾਬੀ ਸਿੱਖੋ",
+    "developer": "GNPS",
+    "coverSubtitle": "Curriculum Guide",
+    "coverVersionLabel": "VERSION 2026",
+    "logoPath": "assets/logo/logo.jpg"
+  },
+  "colors": {
+    "primary": "#1B2A4A",
+    "primaryDark": "#12203A",
+    "accent": "#F2A93B",
+    "arcade": "#E23E82",
+    "shop": "#4C9A6B",
+    "achievements": "#7C5CFC",
+    "background": "#FBF7EF",
+    "textBody": "#4A4439",
+    "textMuted": "#A39A83"
+  },
+  "sections": {
+    "lessonModule": {
+      "badgeLabel": "Lesson",
+      "footerLabel": "MODULE OVERVIEW"
+    },
+    "journey": {
+      "badgeLabel": "Journey",
+      "title": "Your Journey",
+      "gurmukhiLabel": "ਸਫ਼ਰ",
+      "description": "Every language has a path, and this is where your child walks it. Letters became sounds. Sounds became words. Now those words become sentences — the moment scattered pieces of Punjabi turn into a voice of their own. This is the milestone every lesson before it was building toward.",
+      "screenshot": "listing/google-play-store/phone/phone_journey.png",
+      "footerLabel": "THE JOURNEY",
+      "pills": [
+        "Tracing",
+        "Word-by-Word Building",
+        "Real Sentence Structure",
+        "From Words to Voice",
+        "Unlock Interactive Word Games"
+      ]
+    },
+    "achievements": {
+      "badgeLabel": "Achievements",
+      "title": "Celebrate Every Milestone",
+      "gurmukhiLabel": "ਪ੍ਰਾਪਤੀਆਂ",
+      "description": "Every stroke traced, every word spelled, every sentence built — it all adds up. GNPS Learning Hub marks each milestone with a badge, turning quiet daily practice into visible, shareable pride for kids and parents alike.",
+      "screenshot": "listing/google-play-store/phone/phone_achievements.png",
+      "footerLabel": "ACHIEVEMENTS",
+      "pills": [
+        "Milestone Badges",
+        "Progress Tracking",
+        "Shareable Wins"
+      ]
+    },
+    "finalNotes": {
+      "title": "Thank You",
+      "message": "GNPS Learning Hub was built on a simple belief: language is heritage, and heritage deserves joy. From the first traced letter to the first sentence built, every lesson, game, and reward is designed to keep kids curious, confident, and connected to Punjabi. Sikho, khedo, vadho — learn, play, grow.",
+      "footerLabel": "THANK YOU"
+    },
+    "arcade": {
+      "badgeLabel": "Arcade Mode",
+      "gurmukhiLabel": "Fast-Paced Learning",
+      "footerLabel": "ARCADE SPOTLIGHT",
+      "descriptionTemplate": "High-energy vocabulary reinforcement. This {gameType} challenge is unlocked after the {unlockLesson} module.",
+      "pills": [
+        "Adaptive Difficulty",
+        "Visual & Auditory Cues",
+        "High Score Tracking"
+      ]
+    },
+    "shop": {
+      "badgeLabel": "Rewards",
+      "title": "Your Avatar, Your Style",
+      "gurmukhiLabel": "Shop & Personalize",
+      "description": "Earn gems through focused study and spend them in the shop! Customize your hero with turbans, outfits, and accessories while protecting your progress with streak freezes.",
+      "screenshot": "listing/google-play-store/phone/shop.png",
+      "footerLabel": "CUSTOMIZATION",
+      "pills": [
+        "Interactive Gem Economy",
+        "Dozens of Custom Items",
+        "Gamified Streak System"
+      ]
+    }
+  },
+  "lessons": {
+    "lesson_tracing": {
+      "screenshot": "listing/google-play-store/phone/phone_tracing.png",
+      "copy": "Master the elegant strokes of Gurmukhi. Our guided tracing system uses interactive checkpoints to ensure children learn the correct direction and form of every letter, building tactile memory and confidence."
+    },
+    "lesson_letter_selection": {
+      "screenshot": "listing/google-play-store/phone/phone_letter.png",
+      "copy": "Build a strong auditory foundation. Kids listen to authentic native pronunciations and identify the correct characters, reinforcing the vital link between the spoken sound and the written script."
+    },
+    "lesson_spelling": {
+      "screenshot": "listing/google-play-store/phone/phone_spelling.png",
+      "copy": "Seamlessly transition from letters to complete words. Using a library of vibrant emojis and a tactile letter-bank, students learn to assemble common Punjabi vocabulary in a way that feels like play."
+    },
+    "lesson_matching_images": {
+      "screenshot": "listing/google-play-store/phone/phone_picture.png",
+      "copy": "Accelerate reading through visual association. Children match Punjabi words to their real-world objects, strengthening cognitive paths and building a robust vocabulary of everyday nouns."
+    },
+    "lesson_matching_words": {
+      "screenshot": "listing/google-play-store/phone/phone_match_words.png",
+      "copy": "Cultivate dual-language fluency. This comprehensive module helps young learners bridge the gap between English and Punjabi, teaching them to translate and recognize terms they use every day."
+    },
+    "lesson_fill_in_blank": {
+      "screenshot": "listing/google-play-store/phone/phone_fillinblanks.png",
+      "copy": "Natural grammar in action. By completing missing pieces of common sentences, children learn how words function together, providing the perfect stepping stone toward confident conversation."
+    },
+    "lesson_arrange_sentence": {
+      "screenshot": "listing/google-play-store/phone/phone_sentence.png",
+      "copy": "Master the flow of Punjabi syntax. A fun, puzzle-like challenge where students order words to form correct sentences, internalizing the natural rhythm and structure of the language."
+    }
+  },
+  "games": {
+    "bubble_pop_letters": {
+      "screenshot": "listing/google-play-store/phone/game_bubble_letters.png"
+    },
+    "bubble_pop_words": {
+      "screenshot": "listing/google-play-store/phone/game_bubble_words.png"
+    }
+  }
+}
