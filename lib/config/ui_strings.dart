@@ -21,7 +21,7 @@ class UIStrings {
   static const loading = 'Loading...';
 
   // Support
-  static const supportEmail = 'support@gnps.edu.org.au';
+  static const supportEmail = 'support@gnps.nsw.edu.au';
   static const contactSupport = 'Contact Support';
 
   // Profile

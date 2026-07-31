@@ -6,9 +6,9 @@ import 'dart:io';
 ///
 /// To run this tool, use:
 /// ```bash
-/// flutter test tool/generate_shop_catalog.dart
+/// dart tools/generate_shop_catalog.dart
 /// ```
-void main() {
+void main([List<String> args = const []]) {
   final jsonStr = File('assets/data/shop_items.json').readAsStringSync();
   final List purchasableItems = jsonDecode(jsonStr);
 

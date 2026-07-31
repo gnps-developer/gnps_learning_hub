@@ -6,7 +6,7 @@ import 'dart:io';
 ///
 /// To run this tool, use:
 /// ```bash
-/// flutter test tool/generate_curriculum.dart
+/// dart tools/generate_curriculum.dart
 /// ```
 const Map<String, String> lessonDescriptions = {
   'lesson_tracing': '*Master the strokes of the Gurmukhi script.*',
@@ -15,7 +15,7 @@ const Map<String, String> lessonDescriptions = {
   // Add new lesson descriptions here as they're introduced.
 };
 
-void main() {
+void main([List<String> args = const []]) {
   // 1. Load manifest
   final manifestStr =
       File('assets/data/journey_manifest.json').readAsStringSync();

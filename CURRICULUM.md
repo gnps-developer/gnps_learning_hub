@@ -120,4 +120,4 @@ This document is automatically generated from the app's lesson data.
 - **Word Bubbles**: bubble pop game unlocked after `lesson_matching_words`.
 
 ---
-*Last Updated: 2026-07-30*
+*Last Updated: 2026-07-31*

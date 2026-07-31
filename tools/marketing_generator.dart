@@ -2,49 +2,301 @@
 import 'dart:convert';
 import 'dart:io';
 
-/// Generates a premium, detailed multi-page marketing PDF of the curriculum.
+import 'package:qr/qr.dart';
+
+/// Generates premium marketing PDFs of the curriculum.
 ///
-/// All copy, labels, and colors live in `brochure_content.json`.
-/// All styling lives in `style.css`.
-/// Requires Google Chrome or Chromium to be installed and on PATH.
-void main() async {
-  print('🚀 Starting Brochure Generator...');
-  await generateMarketingPdf();
+/// To run this tool, use:
+/// ```bash
+/// dart tools/marketing_generator.dart [--full] [--flyer]
+/// ```
+///
+/// If no flags are provided, both the full brochure and the flyer are generated.
+void main(List<String> args) async {
+  bool generateFull = args.isEmpty || args.contains('--full') || args.contains('-f');
+  bool generateFlyer = args.isEmpty || args.contains('--flyer') || args.contains('-s');
+
+  if (!generateFull && !generateFlyer) {
+    print('Usage: dart tools/marketing_generator.dart [--full|-f] [--flyer|-s]');
+    return;
+  }
+
+  print('🚀 Starting Marketing Generator...');
+  final generator = await MarketingGenerator.load();
+
+  if (generateFull) {
+    await generator.generateBrochure();
+  }
+
+  if (generateFlyer) {
+    await generator.generateFlyer();
+  }
 }
 
-// Resolve the project root by walking up from the current working directory
-// until we find pubspec.yaml. This is more reliable than Platform.script,
-// which points at a temporary kernel snapshot (not this file) when run via
-// `flutter test` / `dart test`.
+// --------------------------------------------------------------------------
+// Context & Class Definition
+// --------------------------------------------------------------------------
+
+class MarketingGenerator {
+  final _BrochureContext ctx;
+
+  MarketingGenerator._(this.ctx);
+
+  static Future<MarketingGenerator> load() async {
+    final ctx = await _loadContext();
+    return MarketingGenerator._(ctx);
+  }
+
+  /// Generates the multi-page premium brochure.
+  Future<void> generateBrochure() async {
+    print('📄 Building multi-page brochure...');
+    final pages = <String>[_heroPage(ctx.brand, ctx.logoUri, ctx.version)];
+    var pageNum = 2;
+
+    void addPage(String html) {
+      pages.add(html);
+      pageNum++;
+    }
+
+    // 1. Journey Spotlight
+    final journeySection = ctx.sections['journey'] as Map<String, dynamic>;
+    addPage(_featurePage(
+      badgeLabel: journeySection['badgeLabel'] as String,
+      title: journeySection['title'] as String,
+      gurmukhiLabel: journeySection['gurmukhiLabel'] as String,
+      description: journeySection['description'] as String,
+      pillsHtml: _pillList((journeySection['pills'] as List).cast<String>()),
+      imageUri: ctx.journeyUri,
+      footerLeft: journeySection['footerLabel'] as String,
+      pageNum: pageNum,
+    ));
+
+    // 2. Lessons
+    final remainingLessons = List<Map<String, dynamic>>.from(ctx.lessons)
+      ..sort((a, b) {
+        if (a['id'] == 'lesson_arrange_sentence') return 1;
+        if (b['id'] == 'lesson_arrange_sentence') return -1;
+        return 0;
+      });
+
+    final lessonSection = ctx.sections['lessonModule'] as Map<String, dynamic>;
+    for (var i = 0; i < remainingLessons.length; i++) {
+      final lesson = remainingLessons[i];
+      final data = ctx.lessonContent[lesson['id']] as Map<String, dynamic>?;
+      addPage(_featurePage(
+        badgeLabel: '${lessonSection['badgeLabel']} ${i + 1}',
+        title: lesson['title'] as String,
+        gurmukhiLabel: ctx.brand['gurmukhiTagline'] as String,
+        description: data?['copy'] as String? ?? '',
+        pillsHtml: _pillList([
+          for (final s in (lesson['sections'] as List)) s['title'] as String,
+        ]),
+        imageUri: ctx.lessonImages[lesson['id']],
+        footerLeft: lessonSection['footerLabel'] as String,
+        pageNum: pageNum,
+      ));
+    }
+
+    // 3. Shop
+    final shopSection = ctx.sections['shop'] as Map<String, dynamic>;
+    addPage(_featurePage(
+      badgeLabel: shopSection['badgeLabel'] as String,
+      title: shopSection['title'] as String,
+      gurmukhiLabel: shopSection['gurmukhiLabel'] as String,
+      description: shopSection['description'] as String,
+      pillsHtml: _pillList((shopSection['pills'] as List).cast<String>(), variant: 'shop'),
+      imageUri: ctx.shopUri,
+      variant: 'shop',
+      footerLeft: shopSection['footerLabel'] as String,
+      pageNum: pageNum,
+    ));
+
+    // 4. Arcade
+    final arcadeSection = ctx.sections['arcade'] as Map<String, dynamic>;
+    for (final game in ctx.games) {
+      final description = (arcadeSection['descriptionTemplate'] as String)
+          .replaceAll('{gameType}', (game['type'] as String).replaceAll('_', ' '))
+          .replaceAll('{unlockLesson}', (game['unlockAfterLessonId'] as String).replaceAll('lesson_', '').replaceAll('_', ' '));
+      addPage(_featurePage(
+        badgeLabel: arcadeSection['badgeLabel'] as String,
+        title: game['title'] as String,
+        gurmukhiLabel: arcadeSection['gurmukhiLabel'] as String,
+        description: description,
+        pillsHtml: _pillList((arcadeSection['pills'] as List).cast<String>(), variant: 'arcade'),
+        imageUri: ctx.gameImages[game['id']],
+        variant: 'arcade',
+        footerLeft: arcadeSection['footerLabel'] as String,
+        pageNum: pageNum,
+        dark: true,
+      ));
+    }
+
+    // 5. Achievements
+    final achievementsSection = ctx.sections['achievements'] as Map<String, dynamic>;
+    addPage(_featurePage(
+      badgeLabel: achievementsSection['badgeLabel'] as String,
+      title: achievementsSection['title'] as String,
+      gurmukhiLabel: achievementsSection['gurmukhiLabel'] as String,
+      description: achievementsSection['description'] as String,
+      pillsHtml: _pillList((achievementsSection['pills'] as List).cast<String>(), variant: 'achievements'),
+      imageUri: ctx.achievementsUri,
+      variant: 'achievements',
+      footerLeft: achievementsSection['footerLabel'] as String,
+      pageNum: pageNum,
+    ));
+
+    // 6. Closing
+    pages.add(_closingPage(ctx.brand, ctx.sections['finalNotes'] as Map<String, dynamic>));
+
+    await _renderPagesToPdf(
+      pages: pages,
+      css: ctx.css,
+      colors: ctx.colors,
+      outputPath: _brochureOutputPath,
+      tempHtmlName: 'brochure_temp.html',
+    );
+  }
+
+  /// Generates the single-page flyer.
+  Future<void> generateFlyer() async {
+    print('📄 Building single-page flyer...');
+    final onePagerSection = ctx.sections['onePager'] as Map<String, dynamic>?;
+    if (onePagerSection == null) {
+      print('⚠️  No "onePager" section found in brochure_content.json — skipping flyer.');
+      return;
+    }
+
+    final page = _onePagerPage(
+      brand: ctx.brand,
+      onePagerSection: onePagerSection,
+      finalNotesSection: ctx.sections['finalNotes'] as Map<String, dynamic>,
+      logoUri: ctx.logoUri,
+      journeyImageUri: ctx.journeyUri,
+    );
+
+    await _renderPagesToPdf(
+      pages: [page],
+      css: ctx.css,
+      colors: ctx.colors,
+      outputPath: _onePagerOutputPath,
+      tempHtmlName: 'flyer_temp.html',
+    );
+  }
+}
+
+// --------------------------------------------------------------------------
+// Path & Context Resolution (Internal)
+// --------------------------------------------------------------------------
+
 String _findProjectRoot() {
   var dir = Directory.current;
   while (true) {
     if (File('${dir.path}/pubspec.yaml').existsSync()) return dir.path;
     final parent = dir.parent;
-    if (parent.path == dir.path) {
-      // Reached filesystem root without finding pubspec.yaml — fall back
-      // to the current directory rather than looping forever.
-      return Directory.current.path;
-    }
+    if (parent.path == dir.path) return Directory.current.path;
     dir = parent;
   }
 }
 
 final _projectRoot = _findProjectRoot();
-
-// This script itself lives in tools/, alongside style.css.
-String get _contentConfigPath =>
-    '$_projectRoot/assets/data/brochure_content.json';
-
+String get _contentConfigPath => '$_projectRoot/assets/data/brochure_content.json';
 String get _stylesheetPath => '$_projectRoot/tools/style.css';
-
 String get _manifestPath => '$_projectRoot/assets/data/journey_manifest.json';
-
 String get _lessonsDir => '$_projectRoot/assets/data/lessons';
-
 String get _gamesDir => '$_projectRoot/assets/data/games';
+String get _brochureOutputPath => '$_projectRoot/exports/GNPS_Brochure_Premium.pdf';
+String get _onePagerOutputPath => '$_projectRoot/exports/GNPS_OnePager.pdf';
 
-String get _outputPath => '$_projectRoot/exports/GNPS_Brochure_Premium.pdf';
+class _BrochureContext {
+  final Map<String, dynamic> brand;
+  final Map<String, dynamic> colors;
+  final Map<String, dynamic> sections;
+  final Map<String, dynamic> lessonContent;
+  final Map<String, dynamic> gameContent;
+  final String css;
+  final int version;
+  final List<Map<String, dynamic>> lessons;
+  final List<Map<String, dynamic>> games;
+  final String? logoUri;
+  final String? journeyUri;
+  final String? shopUri;
+  final String? achievementsUri;
+  final Map<String, String> lessonImages;
+  final Map<String, String> gameImages;
+
+  _BrochureContext({
+    required this.brand,
+    required this.colors,
+    required this.sections,
+    required this.lessonContent,
+    required this.gameContent,
+    required this.css,
+    required this.version,
+    required this.lessons,
+    required this.games,
+    this.logoUri,
+    this.journeyUri,
+    this.shopUri,
+    this.achievementsUri,
+    required this.lessonImages,
+    required this.gameImages,
+  });
+}
+
+Future<_BrochureContext> _loadContext() async {
+  final config = jsonDecode(File(_contentConfigPath).readAsStringSync()) as Map<String, dynamic>;
+  final brand = config['brand'] as Map<String, dynamic>;
+  final colors = config['colors'] as Map<String, dynamic>;
+  final sections = config['sections'] as Map<String, dynamic>;
+  final lessonContent = config['lessons'] as Map<String, dynamic>;
+  final gameContent = config['games'] as Map<String, dynamic>;
+
+  final css = File(_stylesheetPath).readAsStringSync();
+  final manifest = jsonDecode(File(_manifestPath).readAsStringSync()) as Map<String, dynamic>;
+  final version = manifest['version'] as int;
+  final lessonFiles = (manifest['lessonFiles'] as List).cast<String>();
+  final gameFiles = (manifest['gameFiles'] as List).cast<String>();
+
+  final lessons = [for (final f in lessonFiles) jsonDecode(File('$_lessonsDir/$f').readAsStringSync()) as Map<String, dynamic>];
+  final games = [for (final f in gameFiles) jsonDecode(File('$_gamesDir/$f').readAsStringSync()) as Map<String, dynamic>];
+
+  Future<String?> loadImage(String? rel) => _loadAsDataUri(rel == null ? null : '$_projectRoot/$rel');
+
+  final logoUri = await loadImage(brand['logoPath']);
+  final journeyUri = await loadImage(sections['journey']['screenshot']);
+  final shopUri = await loadImage(sections['shop']['screenshot']);
+  final achievementsUri = await loadImage(sections['achievements']['screenshot']);
+
+  final lessonImages = <String, String>{};
+  for (final e in lessonContent.entries) {
+    final uri = await loadImage(e.value['screenshot']);
+    if (uri != null) lessonImages[e.key] = uri;
+  }
+
+  final gameImages = <String, String>{};
+  for (final e in gameContent.entries) {
+    final uri = await loadImage(e.value['screenshot']);
+    if (uri != null) gameImages[e.key] = uri;
+  }
+
+  return _BrochureContext(
+    brand: brand,
+    colors: colors,
+    sections: sections,
+    lessonContent: lessonContent,
+    gameContent: gameContent,
+    css: css,
+    version: version,
+    lessons: lessons,
+    games: games,
+    logoUri: logoUri,
+    journeyUri: journeyUri,
+    shopUri: shopUri,
+    achievementsUri: achievementsUri,
+    lessonImages: lessonImages,
+    gameImages: gameImages,
+  );
+}
 
 // --------------------------------------------------------------------------
 // Chrome / file helpers
@@ -120,27 +372,58 @@ Future<ProcessResult> _printToPdf(
 }
 
 // --------------------------------------------------------------------------
-// HTML page templates
+// HTML Rendering & Helpers
 // --------------------------------------------------------------------------
 
+Future<void> _renderPagesToPdf({
+  required List<String> pages,
+  required String css,
+  required Map<String, dynamic> colors,
+  required String outputPath,
+  required String tempHtmlName,
+}) async {
+  final html = StringBuffer()
+    ..writeln('<!DOCTYPE html><html><head><meta charset="UTF-8">')
+    ..writeln('<style>$css</style>')
+    ..writeln(_rootColorOverride(colors))
+    ..writeln('</head><body>')
+    ..writeAll(pages)
+    ..writeln('<script src="https://cdn.jsdelivr.net/npm/twemoji@14.0.2/dist/twemoji.min.js"></script>')
+    ..writeln('<script>twemoji.parse(document.body, { folder: "svg", ext: ".svg" });</script>')
+    ..writeln('</body></html>');
+
+  final htmlFile = File(tempHtmlName);
+  await htmlFile.writeAsString(html.toString());
+
+  final chrome = await _findChromeExecutable();
+  if (chrome == null) {
+    print('❌ No Chrome executable found.');
+    if (await htmlFile.exists()) await htmlFile.delete();
+    return;
+  }
+
+  final outputFile = File(outputPath).absolute;
+  await outputFile.parent.create(recursive: true);
+  final result = await _printToPdf(chrome, outputFile.path, htmlFile.absolute.path);
+
+  if (result.exitCode == 0 && await outputFile.exists()) {
+    print('✅ Generated: ${outputFile.path}');
+  } else {
+    print('❌ PDF generation failed for ${outputFile.path}');
+  }
+
+  if (await htmlFile.exists()) await htmlFile.delete();
+}
+
 String _rootColorOverride(Map<String, dynamic> colors) {
-  final vars = colors.entries
-      .map((e) => '--color-${_kebab(e.key)}: ${e.value};')
-      .join(' ');
+  final vars = colors.entries.map((e) => '--color-${_kebab(e.key)}: ${e.value};').join(' ');
   return '<style>:root { $vars }</style>';
 }
 
-String _kebab(String camel) => camel.replaceAllMapped(
-  RegExp(r'[A-Z]'),
-  (m) => '-${m.group(0)!.toLowerCase()}',
-);
+String _kebab(String camel) => camel.replaceAllMapped(RegExp(r'[A-Z]'), (m) => '-${m.group(0)!.toLowerCase()}');
 
 String _heroPage(Map<String, dynamic> brand, String? logoUri, int version) {
-  final logo = logoUri != null
-      ? '<img src="$logoUri" alt="${brand['appName']} Logo" '
-            'style="width: 180px; margin-bottom: 40px; border-radius: 30px; '
-            'box-shadow: 0 20px 40px rgba(0,0,0,0.4);" />'
-      : '';
+  final logo = logoUri != null ? '<img src="$logoUri" alt="${brand['appName']} Logo" style="width: 180px; margin-bottom: 40px; border-radius: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.4);" />' : '';
   return '''
 <div class="page hero-page">
   $logo
@@ -156,27 +439,56 @@ String _heroPage(Map<String, dynamic> brand, String? logoUri, int version) {
 </div>''';
 }
 
-String _closingPage(
-  Map<String, dynamic> brand,
-  Map<String, dynamic> finalNotesSection,
-) {
+String _closingPage(Map<String, dynamic> brand, Map<String, dynamic> finalNotes) {
+  final platforms = (finalNotes['platforms'] as List).cast<Map<String, dynamic>>();
+  final badgesHtml = platforms.map((p) {
+    final available = (p['status'] as String).toLowerCase().contains('available');
+    return '''
+    <div class="store-badge ${available ? 'available' : 'soon'}">
+      <div class="store-badge-icon">${_storeBadgeIcon(p['icon'])}</div>
+      <div class="store-badge-text">
+        <span class="store-badge-status">${p['status']}</span>
+        <span class="store-badge-name">${p['name']}</span>
+      </div>
+    </div>''';
+  }).join();
+
   return '''
 <div class="page closing-page">
-  <h1 style="font-size: 52px; margin: 0 0 24px 0;">${finalNotesSection['title']}</h1>
-  <p style="font-size: 19px; line-height: 1.6; max-width: 640px; color: rgba(251, 247, 239, 0.8);">${finalNotesSection['message']}</p>
-  <div class="footer hero-footer"><span>${finalNotesSection['footerLabel']}</span><span>${brand['appName']}</span></div>
+  <h1 style="font-size: 52px; margin: 0 0 12px 0;">${finalNotes['title']}</h1>
+  <p class="gurmukhi-tag" style="margin: 0 0 20px 0;">${finalNotes['gurmukhiLabel']}</p>
+  <p style="font-size: 19px; line-height: 1.6; max-width: 640px; color: rgba(251, 247, 239, 0.8);">${finalNotes['message']}</p>
+  <div class="store-badges">$badgesHtml</div>
+  ${_qrBlock(finalNotes['googlePlayUrl'], finalNotes['qrCaption'])}
+  <div class="footer hero-footer"><span>${finalNotes['footerLabel']}</span><span>${brand['appName']}</span></div>
 </div>''';
 }
 
-String _pillList(List<String> labels, {String variant = ''}) {
-  final cls = variant.isEmpty ? 'pill' : 'pill $variant';
-  return labels.map((l) => '<div class="$cls">$l</div>').join();
+String _onePagerPage({
+  required Map<String, dynamic> brand,
+  required Map<String, dynamic> onePagerSection,
+  required Map<String, dynamic> finalNotesSection,
+  String? logoUri,
+  String? journeyImageUri,
+}) {
+  final logo = logoUri != null ? '<img src="$logoUri" alt="${brand['appName']} Logo" />' : '';
+  final imageBlock = journeyImageUri == null ? '' : '<div class="onepager-image"><div class="phone-mockup"><div class="phone-screen"><img src="$journeyImageUri" alt="App Preview" /></div></div></div>';
+
+  return '''
+<div class="page onepager-page">
+  <div class="onepager-header">$logo<h1>${brand['appName']}</h1></div>
+  <div class="onepager-body">
+    <div class="onepager-text">
+      <p class="gurmukhi-tag">${onePagerSection['gurmukhiLabel']}</p>
+      <p class="description">${onePagerSection['shortDescription']}</p>
+      <div class="onepager-footer-row">${_qrBlock(finalNotesSection['googlePlayUrl'], finalNotesSection['qrCaption'])}</div>
+    </div>
+    $imageBlock
+  </div>
+  <div class="footer hero-footer"><span>${onePagerSection['footerLabel']}</span><span>${brand['appName']}</span></div>
+</div>''';
 }
 
-/// A generic left/right feature page: badge, title, gurmukhi subtitle,
-/// description, pills, optional phone mockup image, and footer.
-/// `pageNum` drives both the footer's "PAGE N" text and left/right
-/// alternation, so callers never compute those by hand.
 String _featurePage({
   required String badgeLabel,
   required String title,
@@ -186,28 +498,13 @@ String _featurePage({
   required String footerLeft,
   required int pageNum,
   String? imageUri,
-  String variant = '', // '', 'arcade', 'shop', or 'achievements'
+  String variant = '',
   bool dark = false,
 }) {
   final alt = pageNum % 2 != 0;
-  final pageClasses = [
-    'page',
-    'feature-page',
-    if (dark) 'dark-section',
-    if (alt) 'alt',
-  ].join(' ');
-  final withVariant = (String base) =>
-      variant.isEmpty ? base : '$base $variant';
-  final footerClass = dark ? 'footer hero-footer' : 'footer';
-
-  final imageBlock = imageUri == null
-      ? ''
-      : '''
-  <div class="image-side">
-    <div class="${withVariant('phone-mockup')}">
-      <div class="phone-screen"><img src="$imageUri" alt="$title Preview" /></div>
-    </div>
-  </div>''';
+  final pageClasses = ['page', 'feature-page', if (dark) 'dark-section', if (alt) 'alt'].join(' ');
+  final withVariant = (String b) => variant.isEmpty ? b : '$b $variant';
+  final imageBlock = imageUri == null ? '' : '<div class="image-side"><div class="${withVariant('phone-mockup')}"><div class="phone-screen"><img src="$imageUri" alt="$title Preview" /></div></div></div>';
 
   return '''
 <div class="$pageClasses">
@@ -219,240 +516,40 @@ String _featurePage({
     <div class="pill-container">$pillsHtml</div>
   </div>
   $imageBlock
-  <div class="$footerClass"><span>$footerLeft</span><span>PAGE $pageNum</span></div>
+  <div class="${dark ? 'footer hero-footer' : 'footer'}"><span>$footerLeft</span><span>PAGE $pageNum</span></div>
 </div>''';
 }
 
-// --------------------------------------------------------------------------
-// Main generation flow
-// --------------------------------------------------------------------------
+String _pillList(List<String> labels, {String variant = ''}) {
+  final cls = variant.isEmpty ? 'pill' : 'pill $variant';
+  return labels.map((l) => '<div class="$cls">$l</div>').join();
+}
 
-Future<void> generateMarketingPdf() async {
-  // 1. Load content config, curriculum data, and stylesheet.
-  final config =
-      jsonDecode(File(_contentConfigPath).readAsStringSync())
-          as Map<String, dynamic>;
-  final brand = config['brand'] as Map<String, dynamic>;
-  final colors = config['colors'] as Map<String, dynamic>;
-  final sections = config['sections'] as Map<String, dynamic>;
-  final lessonContent = config['lessons'] as Map<String, dynamic>;
-  final gameContent = config['games'] as Map<String, dynamic>;
+String _qrBlock(String? url, String? caption) {
+  if (url == null || url.isEmpty) return '';
+  return '<div class="qr-block"><div class="qr-code">${_qrCodeSvg(url)}</div><span class="qr-caption">${caption ?? 'Scan to download'}</span></div>';
+}
 
-  final css = File(_stylesheetPath).readAsStringSync();
-
-  final manifest =
-      jsonDecode(File(_manifestPath).readAsStringSync())
-          as Map<String, dynamic>;
-  final version = manifest['version'] as int;
-  final lessonFiles = (manifest['lessonFiles'] as List).cast<String>();
-  final gameFiles = (manifest['gameFiles'] as List).cast<String>();
-
-  final lessons = [
-    for (final file in lessonFiles)
-      jsonDecode(File('$_lessonsDir/$file').readAsStringSync()),
-  ];
-  final games = [
-    for (final file in gameFiles)
-      jsonDecode(File('$_gamesDir/$file').readAsStringSync()),
-  ];
-
-  // 2. Preload images as data URIs (paths in the JSON are relative to the
-  // project root, same as assets/data/... above). Missing images log a
-  // warning and simply render the page without a screenshot — no section
-  // is ever dropped because of a missing image.
-  Future<String?> loadImage(String? relativePath) => _loadAsDataUri(
-    relativePath == null ? null : '$_projectRoot/$relativePath',
-  );
-
-  final logoUri = await loadImage(brand['logoPath'] as String?);
-  final shopSection = sections['shop'] as Map<String, dynamic>;
-  final shopUri = await loadImage(shopSection['screenshot'] as String?);
-  final achievementsSection = sections['achievements'] as Map<String, dynamic>;
-  final achievementsUri = await loadImage(
-    achievementsSection['screenshot'] as String?,
-  );
-
-  final lessonImages = <String, String>{};
-  for (final entry in lessonContent.entries) {
-    final uri = await loadImage(entry.value['screenshot'] as String?);
-    if (uri != null) lessonImages[entry.key] = uri;
+String _qrCodeSvg(String data, {int size = 160}) {
+  final qrCode = QrCode.fromData(data: data, errorCorrectLevel: QrErrorCorrectLevel.M);
+  final qrImage = QrImage(qrCode);
+  final moduleCount = qrImage.moduleCount;
+  final cell = size / moduleCount;
+  final modules = StringBuffer();
+  for (var x = 0; x < moduleCount; x++) {
+    for (var y = 0; y < moduleCount; y++) {
+      if (qrImage.isDark(y, x)) {
+        modules.write('<rect x="${(x * cell).toStringAsFixed(2)}" y="${(y * cell).toStringAsFixed(2)}" width="${cell.toStringAsFixed(2)}" height="${cell.toStringAsFixed(2)}" fill="#1B2A4A"/>');
+      }
+    }
   }
+  return '<svg viewBox="0 0 $size $size" xmlns="http://www.w3.org/2000/svg"><rect width="$size" height="$size" fill="white"/>$modules</svg>';
+}
 
-  final gameImages = <String, String>{};
-  for (final entry in gameContent.entries) {
-    final uri = await loadImage(entry.value['screenshot'] as String?);
-    if (uri != null) gameImages[entry.key] = uri;
+String _storeBadgeIcon(String icon) {
+  switch (icon) {
+    case 'android': return '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 9.48l1.84-3.18c.16-.31.04-.69-.26-.85a.637.637 0 00-.83.22l-1.88 3.24a11.463 11.463 0 00-9.02 0L5.57 5.67a.637.637 0 00-.83-.22c-.3.16-.42.54-.26.85L6.32 9.48A10.877 10.877 0 001 18h22a10.877 10.877 0 00-5.4-8.52zM7 15.25a1.25 1.25 0 110-2.5 1.25 1.25 0 010 2.5zm10 0a1.25 1.25 0 110-2.5 1.25 1.25 0 010 2.5z"/></svg>';
+    case 'ios': return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="2" width="12" height="20" rx="2.5"/><line x1="10" y1="19" x2="14" y2="19" stroke-linecap="round"/></svg>';
+    default: return '';
   }
-
-  // 3. Build the page sequence:
-  //    Hero -> Journey -> Lessons -> Shop -> Arcade -> Achievements -> Final Notes
-  // Every section below always renders, even if its screenshot is missing —
-  // a missing image only skips the image, never the whole page.
-  final pages = <String>[_heroPage(brand, logoUri, version)];
-  var pageNum = 2; // page 1 is the hero/cover
-
-  void addPage(String html) {
-    pages.add(html);
-    pageNum++;
-  }
-
-  String pillLabelsFor(Map<String, dynamic> lesson) => _pillList([
-    for (final s in (lesson['sections'] as List)) s['title'] as String,
-  ]);
-
-  // -- Journey (a standalone spotlight page; content comes entirely from
-  //    journeySection in the config, independent of the lessons list) --
-  final journeySection = sections['journey'] as Map<String, dynamic>;
-  final journeyUri = await loadImage(journeySection['screenshot'] as String?);
-
-  addPage(
-    _featurePage(
-      badgeLabel: journeySection['badgeLabel'] as String,
-      title: journeySection['title'] as String,
-      gurmukhiLabel: journeySection['gurmukhiLabel'] as String,
-      description: journeySection['description'] as String,
-      pillsHtml: _pillList((journeySection['pills'] as List).cast<String>()),
-      imageUri: journeyUri,
-      footerLeft: journeySection['footerLabel'] as String,
-      pageNum: pageNum,
-    ),
-  );
-
-  // -- Lessons (all lessons; lesson_arrange_sentence is sorted to the end
-  //    since it works well as the capstone lesson right before Shop) --
-  final remainingLessons = lessons.cast<Map<String, dynamic>>()
-    ..sort((a, b) {
-      if (a['id'] == 'lesson_arrange_sentence') return 1;
-      if (b['id'] == 'lesson_arrange_sentence') return -1;
-      return 0;
-    });
-
-  final lessonSection = sections['lessonModule'] as Map<String, dynamic>;
-  for (var i = 0; i < remainingLessons.length; i++) {
-    final lesson = remainingLessons[i];
-    final data = lessonContent[lesson['id']] as Map<String, dynamic>?;
-    addPage(
-      _featurePage(
-        badgeLabel: '${lessonSection['badgeLabel']} ${i + 1}',
-        title: lesson['title'] as String,
-        gurmukhiLabel: brand['gurmukhiTagline'] as String,
-        description: data?['copy'] as String? ?? '',
-        pillsHtml: pillLabelsFor(lesson),
-        imageUri: lessonImages[lesson['id']],
-        footerLeft: lessonSection['footerLabel'] as String,
-        pageNum: pageNum,
-      ),
-    );
-  }
-
-  // -- Shop --
-  addPage(
-    _featurePage(
-      badgeLabel: shopSection['badgeLabel'] as String,
-      title: shopSection['title'] as String,
-      gurmukhiLabel: shopSection['gurmukhiLabel'] as String,
-      description: shopSection['description'] as String,
-      pillsHtml: _pillList(
-        (shopSection['pills'] as List).cast<String>(),
-        variant: 'shop',
-      ),
-      imageUri: shopUri,
-      variant: 'shop',
-      footerLeft: shopSection['footerLabel'] as String,
-      pageNum: pageNum,
-    ),
-  );
-
-  // -- Arcade / games --
-  final arcadeSection = sections['arcade'] as Map<String, dynamic>;
-  for (final game in games.cast<Map<String, dynamic>>()) {
-    final description = (arcadeSection['descriptionTemplate'] as String)
-        .replaceAll('{gameType}', (game['type'] as String).replaceAll('_', ' '))
-        .replaceAll(
-          '{unlockLesson}',
-          (game['unlockAfterLessonId'] as String)
-              .replaceAll('lesson_', '')
-              .replaceAll('_', ' '),
-        );
-    addPage(
-      _featurePage(
-        badgeLabel: arcadeSection['badgeLabel'] as String,
-        title: game['title'] as String,
-        gurmukhiLabel: arcadeSection['gurmukhiLabel'] as String,
-        description: description,
-        pillsHtml: _pillList(
-          (arcadeSection['pills'] as List).cast<String>(),
-          variant: 'arcade',
-        ),
-        imageUri: gameImages[game['id']],
-        variant: 'arcade',
-        footerLeft: arcadeSection['footerLabel'] as String,
-        pageNum: pageNum,
-        dark: true,
-      ),
-    );
-  }
-
-  // -- Achievements --
-  addPage(
-    _featurePage(
-      badgeLabel: achievementsSection['badgeLabel'] as String,
-      title: achievementsSection['title'] as String,
-      gurmukhiLabel: achievementsSection['gurmukhiLabel'] as String,
-      description: achievementsSection['description'] as String,
-      pillsHtml: _pillList(
-        (achievementsSection['pills'] as List).cast<String>(),
-        variant: 'achievements',
-      ),
-      imageUri: achievementsUri,
-      variant: 'achievements',
-      footerLeft: achievementsSection['footerLabel'] as String,
-      pageNum: pageNum,
-    ),
-  );
-
-  // -- Final Notes (closing page) --
-  final finalNotesSection = sections['finalNotes'] as Map<String, dynamic>;
-  pages.add(_closingPage(brand, finalNotesSection));
-
-  // 4. Assemble the HTML document.
-  final html = StringBuffer()
-    ..writeln('<!DOCTYPE html><html><head><meta charset="UTF-8">')
-    ..writeln('<style>$css</style>')
-    ..writeln(_rootColorOverride(colors))
-    ..writeln('</head><body>')
-    ..writeAll(pages)
-    ..writeln(
-      '<script src="https://cdn.jsdelivr.net/npm/twemoji@14.0.2/dist/twemoji.min.js"></script>',
-    )
-    ..writeln(
-      '<script>twemoji.parse(document.body, { folder: "svg", ext: ".svg" });</script>',
-    )
-    ..writeln('</body></html>');
-
-  // 5. Render to PDF via headless Chrome.
-  final htmlFile = File('curriculum_modern_v3_temp.html');
-  await htmlFile.writeAsString(html.toString());
-
-  final chrome = await _findChromeExecutable();
-  if (chrome == null) {
-    print('❌ No Chrome executable found.');
-    return;
-  }
-
-  final outputFile = File(_outputPath).absolute;
-  await outputFile.parent.create(recursive: true);
-  final result = await _printToPdf(
-    chrome,
-    outputFile.path,
-    htmlFile.absolute.path,
-  );
-
-  if (result.exitCode == 0 && await outputFile.exists()) {
-    print('✅ Brochure generated: ${outputFile.path}');
-  } else {
-    print('❌ PDF generation failed.');
-  }
-
-  if (await htmlFile.exists()) await htmlFile.delete();
 }
