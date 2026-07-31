@@ -474,9 +474,18 @@ String _onePagerPage({
   final logo = logoUri != null ? '<img src="$logoUri" alt="${brand['appName']} Logo" />' : '';
   final imageBlock = journeyImageUri == null ? '' : '<div class="onepager-image"><div class="phone-mockup"><div class="phone-screen"><img src="$journeyImageUri" alt="App Preview" /></div></div></div>';
 
+  final subtitle = finalNotesSection['subtitle'] ?? '';
+  final subtitleHtml = subtitle.isNotEmpty ? '<span class="onepager-subtitle">$subtitle</span>' : '';
+
   return '''
 <div class="page onepager-page">
-  <div class="onepager-header">$logo<h1>${brand['appName']}</h1></div>
+  <div class="onepager-header">
+    $logo
+    <div class="onepager-header-text">
+      <h1>${brand['appName']}</h1>
+      $subtitleHtml
+    </div>
+  </div>
   <div class="onepager-body">
     <div class="onepager-text">
       <p class="gurmukhi-tag">${onePagerSection['gurmukhiLabel']}</p>
