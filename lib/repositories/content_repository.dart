@@ -15,33 +15,51 @@ class ContentRepository {
   }
 
   Future<Journey> getBundledJourney() async {
-    // 1. Load manifest
-    final manifestStr =
-        await rootBundle.loadString('assets/data/journey_manifest.json');
-    final manifest = jsonDecode(manifestStr) as Map<String, dynamic>;
-    final version = manifest['version'] as int;
-    final lessonFiles = (manifest['lessonFiles'] as List).cast<String>();
-    final gameFiles = (manifest['gameFiles'] as List).cast<String>();
+    try {
+      // 1. Load manifest
+      final manifestStr =
+          await rootBundle.loadString('assets/data/journey_manifest.json');
+      final manifest = jsonDecode(manifestStr) as Map<String, dynamic>;
 
-    // 2. Load games
-    final gamesJson = <Map<String, dynamic>>[];
-    for (final file in gameFiles) {
-      final gameStr = await rootBundle.loadString('assets/data/games/$file');
-      gamesJson.add(jsonDecode(gameStr) as Map<String, dynamic>);
+      if (!manifest.containsKey('version') ||
+          !manifest.containsKey('lessonFiles') ||
+          !manifest.containsKey('gameFiles')) {
+        throw const FormatException(
+          'journey_manifest.json is missing required fields (version, lessonFiles, or gameFiles)',
+        );
+      }
+
+      final version = manifest['version'] as int;
+      final lessonFiles = (manifest['lessonFiles'] as List).cast<String>();
+      final gameFiles = (manifest['gameFiles'] as List).cast<String>();
+
+      // 2. Load games
+      final gamesJson = <Map<String, dynamic>>[];
+      for (final file in gameFiles) {
+        final gameStr = await rootBundle.loadString('assets/data/games/$file');
+        gamesJson.add(jsonDecode(gameStr) as Map<String, dynamic>);
+      }
+
+      // 3. Load lessons
+      final lessonsJson = <Map<String, dynamic>>[];
+      for (final file in lessonFiles) {
+        final lessonStr =
+            await rootBundle.loadString('assets/data/lessons/$file');
+        lessonsJson.add(jsonDecode(lessonStr) as Map<String, dynamic>);
+      }
+
+      return Journey.fromJson({
+        'version': version,
+        'lessons': lessonsJson,
+        'games': gamesJson,
+      });
+    } catch (e) {
+      // Re-throw with more context if it's a structural error we caught
+      if (e is FormatException || e is TypeError) {
+        throw Exception('Failed to load bundled content: $e');
+      }
+      rethrow;
     }
-
-    // 3. Load lessons
-    final lessonsJson = <Map<String, dynamic>>[];
-    for (final file in lessonFiles) {
-      final lessonStr = await rootBundle.loadString('assets/data/lessons/$file');
-      lessonsJson.add(jsonDecode(lessonStr) as Map<String, dynamic>);
-    }
-
-    return Journey.fromJson({
-      'version': version,
-      'lessons': lessonsJson,
-      'games': gamesJson,
-    });
   }
 
   Future<Journey> getLocalJourney() async {

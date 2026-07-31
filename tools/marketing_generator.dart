@@ -13,11 +13,15 @@ import 'package:qr/qr.dart';
 ///
 /// If no flags are provided, both the full brochure and the flyer are generated.
 void main(List<String> args) async {
-  bool generateFull = args.isEmpty || args.contains('--full') || args.contains('-f');
-  bool generateFlyer = args.isEmpty || args.contains('--flyer') || args.contains('-s');
+  bool generateFull =
+      args.isEmpty || args.contains('--full') || args.contains('-f');
+  bool generateFlyer =
+      args.isEmpty || args.contains('--flyer') || args.contains('-s');
 
   if (!generateFull && !generateFlyer) {
-    print('Usage: dart tools/marketing_generator.dart [--full|-f] [--flyer|-s]');
+    print(
+      'Usage: dart tools/marketing_generator.dart [--full|-f] [--flyer|-s]',
+    );
     return;
   }
 
@@ -38,9 +42,9 @@ void main(List<String> args) async {
 // --------------------------------------------------------------------------
 
 class MarketingGenerator {
-  final _BrochureContext ctx;
+  final _BrochureContext _ctx;
 
-  MarketingGenerator._(this.ctx);
+  MarketingGenerator._(this._ctx);
 
   static Future<MarketingGenerator> load() async {
     final ctx = await _loadContext();
@@ -50,7 +54,7 @@ class MarketingGenerator {
   /// Generates the multi-page premium brochure.
   Future<void> generateBrochure() async {
     print('📄 Building multi-page brochure...');
-    final pages = <String>[_heroPage(ctx.brand, ctx.logoUri, ctx.version)];
+    final pages = <String>[_heroPage(_ctx.brand, _ctx.logoUri, _ctx.version)];
     var pageNum = 2;
 
     void addPage(String html) {
@@ -59,99 +63,132 @@ class MarketingGenerator {
     }
 
     // 1. Journey Spotlight
-    final journeySection = ctx.sections['journey'] as Map<String, dynamic>;
-    addPage(_featurePage(
-      badgeLabel: journeySection['badgeLabel'] as String,
-      title: journeySection['title'] as String,
-      gurmukhiLabel: journeySection['gurmukhiLabel'] as String,
-      description: journeySection['description'] as String,
-      pillsHtml: _pillList((journeySection['pills'] as List).cast<String>()),
-      imageUri: ctx.journeyUri,
-      footerLeft: journeySection['footerLabel'] as String,
-      pageNum: pageNum,
-    ));
+    final journeySection = _ctx.sections['journey'] as Map<String, dynamic>;
+    addPage(
+      _featurePage(
+        badgeLabel: journeySection['badgeLabel'] as String,
+        title: journeySection['title'] as String,
+        gurmukhiLabel: journeySection['gurmukhiLabel'] as String,
+        description: journeySection['description'] as String,
+        pillsHtml: _pillList((journeySection['pills'] as List).cast<String>()),
+        imageUri: _ctx.journeyUri,
+        footerLeft: journeySection['footerLabel'] as String,
+        pageNum: pageNum,
+      ),
+    );
 
     // 2. Lessons
-    final remainingLessons = List<Map<String, dynamic>>.from(ctx.lessons)
+    final remainingLessons = List<Map<String, dynamic>>.from(_ctx.lessons)
       ..sort((a, b) {
         if (a['id'] == 'lesson_arrange_sentence') return 1;
         if (b['id'] == 'lesson_arrange_sentence') return -1;
         return 0;
       });
 
-    final lessonSection = ctx.sections['lessonModule'] as Map<String, dynamic>;
+    final lessonSection = _ctx.sections['lessonModule'] as Map<String, dynamic>;
     for (var i = 0; i < remainingLessons.length; i++) {
       final lesson = remainingLessons[i];
-      final data = ctx.lessonContent[lesson['id']] as Map<String, dynamic>?;
-      addPage(_featurePage(
-        badgeLabel: '${lessonSection['badgeLabel']} ${i + 1}',
-        title: lesson['title'] as String,
-        gurmukhiLabel: ctx.brand['gurmukhiTagline'] as String,
-        description: data?['copy'] as String? ?? '',
-        pillsHtml: _pillList([
-          for (final s in (lesson['sections'] as List)) s['title'] as String,
-        ]),
-        imageUri: ctx.lessonImages[lesson['id']],
-        footerLeft: lessonSection['footerLabel'] as String,
-        pageNum: pageNum,
-      ));
+      final data = _ctx.lessonContent[lesson['id']] as Map<String, dynamic>?;
+      addPage(
+        _featurePage(
+          badgeLabel: '${lessonSection['badgeLabel']} ${i + 1}',
+          title: lesson['title'] as String,
+          gurmukhiLabel: _ctx.brand['gurmukhiTagline'] as String,
+          description: data?['copy'] as String? ?? '',
+          pillsHtml: _pillList([
+            for (final s in (lesson['sections'] as List)) s['title'] as String,
+          ]),
+          imageUri: _ctx.lessonImages[lesson['id']],
+          footerLeft: lessonSection['footerLabel'] as String,
+          pageNum: pageNum,
+        ),
+      );
     }
 
     // 3. Shop
-    final shopSection = ctx.sections['shop'] as Map<String, dynamic>;
-    addPage(_featurePage(
-      badgeLabel: shopSection['badgeLabel'] as String,
-      title: shopSection['title'] as String,
-      gurmukhiLabel: shopSection['gurmukhiLabel'] as String,
-      description: shopSection['description'] as String,
-      pillsHtml: _pillList((shopSection['pills'] as List).cast<String>(), variant: 'shop'),
-      imageUri: ctx.shopUri,
-      variant: 'shop',
-      footerLeft: shopSection['footerLabel'] as String,
-      pageNum: pageNum,
-    ));
+    final shopSection = _ctx.sections['shop'] as Map<String, dynamic>;
+    addPage(
+      _featurePage(
+        badgeLabel: shopSection['badgeLabel'] as String,
+        title: shopSection['title'] as String,
+        gurmukhiLabel: shopSection['gurmukhiLabel'] as String,
+        description: shopSection['description'] as String,
+        pillsHtml: _pillList(
+          (shopSection['pills'] as List).cast<String>(),
+          variant: 'shop',
+        ),
+        imageUri: _ctx.shopUri,
+        variant: 'shop',
+        footerLeft: shopSection['footerLabel'] as String,
+        pageNum: pageNum,
+      ),
+    );
 
     // 4. Arcade
-    final arcadeSection = ctx.sections['arcade'] as Map<String, dynamic>;
-    for (final game in ctx.games) {
+    final arcadeSection = _ctx.sections['arcade'] as Map<String, dynamic>;
+    for (final game in _ctx.games) {
       final description = (arcadeSection['descriptionTemplate'] as String)
-          .replaceAll('{gameType}', (game['type'] as String).replaceAll('_', ' '))
-          .replaceAll('{unlockLesson}', (game['unlockAfterLessonId'] as String).replaceAll('lesson_', '').replaceAll('_', ' '));
-      addPage(_featurePage(
-        badgeLabel: arcadeSection['badgeLabel'] as String,
-        title: game['title'] as String,
-        gurmukhiLabel: arcadeSection['gurmukhiLabel'] as String,
-        description: description,
-        pillsHtml: _pillList((arcadeSection['pills'] as List).cast<String>(), variant: 'arcade'),
-        imageUri: ctx.gameImages[game['id']],
-        variant: 'arcade',
-        footerLeft: arcadeSection['footerLabel'] as String,
-        pageNum: pageNum,
-        dark: true,
-      ));
+          .replaceAll(
+            '{gameType}',
+            (game['type'] as String).replaceAll('_', ' '),
+          )
+          .replaceAll(
+            '{unlockLesson}',
+            (game['unlockAfterLessonId'] as String)
+                .replaceAll('lesson_', '')
+                .replaceAll('_', ' '),
+          );
+      addPage(
+        _featurePage(
+          badgeLabel: arcadeSection['badgeLabel'] as String,
+          title: game['title'] as String,
+          gurmukhiLabel: arcadeSection['gurmukhiLabel'] as String,
+          description: description,
+          pillsHtml: _pillList(
+            (arcadeSection['pills'] as List).cast<String>(),
+            variant: 'arcade',
+          ),
+          imageUri: _ctx.gameImages[game['id']],
+          variant: 'arcade',
+          footerLeft: arcadeSection['footerLabel'] as String,
+          pageNum: pageNum,
+          dark: true,
+        ),
+      );
     }
 
     // 5. Achievements
-    final achievementsSection = ctx.sections['achievements'] as Map<String, dynamic>;
-    addPage(_featurePage(
-      badgeLabel: achievementsSection['badgeLabel'] as String,
-      title: achievementsSection['title'] as String,
-      gurmukhiLabel: achievementsSection['gurmukhiLabel'] as String,
-      description: achievementsSection['description'] as String,
-      pillsHtml: _pillList((achievementsSection['pills'] as List).cast<String>(), variant: 'achievements'),
-      imageUri: ctx.achievementsUri,
-      variant: 'achievements',
-      footerLeft: achievementsSection['footerLabel'] as String,
-      pageNum: pageNum,
-    ));
+    final achievementsSection =
+        _ctx.sections['achievements'] as Map<String, dynamic>;
+    addPage(
+      _featurePage(
+        badgeLabel: achievementsSection['badgeLabel'] as String,
+        title: achievementsSection['title'] as String,
+        gurmukhiLabel: achievementsSection['gurmukhiLabel'] as String,
+        description: achievementsSection['description'] as String,
+        pillsHtml: _pillList(
+          (achievementsSection['pills'] as List).cast<String>(),
+          variant: 'achievements',
+        ),
+        imageUri: _ctx.achievementsUri,
+        variant: 'achievements',
+        footerLeft: achievementsSection['footerLabel'] as String,
+        pageNum: pageNum,
+      ),
+    );
 
     // 6. Closing
-    pages.add(_closingPage(ctx.brand, ctx.sections['finalNotes'] as Map<String, dynamic>));
+    pages.add(
+      _closingPage(
+        _ctx.brand,
+        _ctx.sections['finalNotes'] as Map<String, dynamic>,
+      ),
+    );
 
     await _renderPagesToPdf(
       pages: pages,
-      css: ctx.css,
-      colors: ctx.colors,
+      css: _ctx.css,
+      colors: _ctx.colors,
       outputPath: _brochureOutputPath,
       tempHtmlName: 'brochure_temp.html',
     );
@@ -160,24 +197,26 @@ class MarketingGenerator {
   /// Generates the single-page flyer.
   Future<void> generateFlyer() async {
     print('📄 Building single-page flyer...');
-    final onePagerSection = ctx.sections['onePager'] as Map<String, dynamic>?;
+    final onePagerSection = _ctx.sections['onePager'] as Map<String, dynamic>?;
     if (onePagerSection == null) {
-      print('⚠️  No "onePager" section found in brochure_content.json — skipping flyer.');
+      print(
+        '⚠️  No "onePager" section found in brochure_content.json — skipping flyer.',
+      );
       return;
     }
 
     final page = _onePagerPage(
-      brand: ctx.brand,
+      brand: _ctx.brand,
       onePagerSection: onePagerSection,
-      finalNotesSection: ctx.sections['finalNotes'] as Map<String, dynamic>,
-      logoUri: ctx.logoUri,
-      journeyImageUri: ctx.journeyUri,
+      finalNotesSection: _ctx.sections['finalNotes'] as Map<String, dynamic>,
+      logoUri: _ctx.logoUri,
+      journeyImageUri: _ctx.journeyUri,
     );
 
     await _renderPagesToPdf(
       pages: [page],
-      css: ctx.css,
-      colors: ctx.colors,
+      css: _ctx.css,
+      colors: _ctx.colors,
       outputPath: _onePagerOutputPath,
       tempHtmlName: 'flyer_temp.html',
     );
@@ -199,12 +238,21 @@ String _findProjectRoot() {
 }
 
 final _projectRoot = _findProjectRoot();
-String get _contentConfigPath => '$_projectRoot/assets/data/brochure_content.json';
+
+String get _contentConfigPath =>
+    '$_projectRoot/assets/data/brochure_content.json';
+
 String get _stylesheetPath => '$_projectRoot/tools/style.css';
+
 String get _manifestPath => '$_projectRoot/assets/data/journey_manifest.json';
+
 String get _lessonsDir => '$_projectRoot/assets/data/lessons';
+
 String get _gamesDir => '$_projectRoot/assets/data/games';
-String get _brochureOutputPath => '$_projectRoot/exports/GNPS_Brochure_Premium.pdf';
+
+String get _brochureOutputPath =>
+    '$_projectRoot/exports/GNPS_Brochure_Premium.pdf';
+
 String get _onePagerOutputPath => '$_projectRoot/exports/GNPS_OnePager.pdf';
 
 class _BrochureContext {
@@ -244,7 +292,9 @@ class _BrochureContext {
 }
 
 Future<_BrochureContext> _loadContext() async {
-  final config = jsonDecode(File(_contentConfigPath).readAsStringSync()) as Map<String, dynamic>;
+  final config =
+      jsonDecode(File(_contentConfigPath).readAsStringSync())
+          as Map<String, dynamic>;
   final brand = config['brand'] as Map<String, dynamic>;
   final colors = config['colors'] as Map<String, dynamic>;
   final sections = config['sections'] as Map<String, dynamic>;
@@ -252,20 +302,33 @@ Future<_BrochureContext> _loadContext() async {
   final gameContent = config['games'] as Map<String, dynamic>;
 
   final css = File(_stylesheetPath).readAsStringSync();
-  final manifest = jsonDecode(File(_manifestPath).readAsStringSync()) as Map<String, dynamic>;
+  final manifest =
+      jsonDecode(File(_manifestPath).readAsStringSync())
+          as Map<String, dynamic>;
   final version = manifest['version'] as int;
   final lessonFiles = (manifest['lessonFiles'] as List).cast<String>();
   final gameFiles = (manifest['gameFiles'] as List).cast<String>();
 
-  final lessons = [for (final f in lessonFiles) jsonDecode(File('$_lessonsDir/$f').readAsStringSync()) as Map<String, dynamic>];
-  final games = [for (final f in gameFiles) jsonDecode(File('$_gamesDir/$f').readAsStringSync()) as Map<String, dynamic>];
+  final lessons = [
+    for (final f in lessonFiles)
+      jsonDecode(File('$_lessonsDir/$f').readAsStringSync())
+          as Map<String, dynamic>,
+  ];
+  final games = [
+    for (final f in gameFiles)
+      jsonDecode(File('$_gamesDir/$f').readAsStringSync())
+          as Map<String, dynamic>,
+  ];
 
-  Future<String?> loadImage(String? rel) => _loadAsDataUri(rel == null ? null : '$_projectRoot/$rel');
+  Future<String?> loadImage(String? rel) =>
+      _loadAsDataUri(rel == null ? null : '$_projectRoot/$rel');
 
   final logoUri = await loadImage(brand['logoPath']);
   final journeyUri = await loadImage(sections['journey']['screenshot']);
   final shopUri = await loadImage(sections['shop']['screenshot']);
-  final achievementsUri = await loadImage(sections['achievements']['screenshot']);
+  final achievementsUri = await loadImage(
+    sections['achievements']['screenshot'],
+  );
 
   final lessonImages = <String, String>{};
   for (final e in lessonContent.entries) {
@@ -388,8 +451,12 @@ Future<void> _renderPagesToPdf({
     ..writeln(_rootColorOverride(colors))
     ..writeln('</head><body>')
     ..writeAll(pages)
-    ..writeln('<script src="https://cdn.jsdelivr.net/npm/twemoji@14.0.2/dist/twemoji.min.js"></script>')
-    ..writeln('<script>twemoji.parse(document.body, { folder: "svg", ext: ".svg" });</script>')
+    ..writeln(
+      '<script src="https://cdn.jsdelivr.net/npm/twemoji@14.0.2/dist/twemoji.min.js"></script>',
+    )
+    ..writeln(
+      '<script>twemoji.parse(document.body, { folder: "svg", ext: ".svg" });</script>',
+    )
     ..writeln('</body></html>');
 
   final htmlFile = File(tempHtmlName);
@@ -404,7 +471,11 @@ Future<void> _renderPagesToPdf({
 
   final outputFile = File(outputPath).absolute;
   await outputFile.parent.create(recursive: true);
-  final result = await _printToPdf(chrome, outputFile.path, htmlFile.absolute.path);
+  final result = await _printToPdf(
+    chrome,
+    outputFile.path,
+    htmlFile.absolute.path,
+  );
 
   if (result.exitCode == 0 && await outputFile.exists()) {
     print('✅ Generated: ${outputFile.path}');
@@ -416,14 +487,21 @@ Future<void> _renderPagesToPdf({
 }
 
 String _rootColorOverride(Map<String, dynamic> colors) {
-  final vars = colors.entries.map((e) => '--color-${_kebab(e.key)}: ${e.value};').join(' ');
+  final vars = colors.entries
+      .map((e) => '--color-${_kebab(e.key)}: ${e.value};')
+      .join(' ');
   return '<style>:root { $vars }</style>';
 }
 
-String _kebab(String camel) => camel.replaceAllMapped(RegExp(r'[A-Z]'), (m) => '-${m.group(0)!.toLowerCase()}');
+String _kebab(String camel) => camel.replaceAllMapped(
+  RegExp(r'[A-Z]'),
+  (m) => '-${m.group(0)!.toLowerCase()}',
+);
 
 String _heroPage(Map<String, dynamic> brand, String? logoUri, int version) {
-  final logo = logoUri != null ? '<img src="$logoUri" alt="${brand['appName']} Logo" style="width: 180px; margin-bottom: 40px; border-radius: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.4);" />' : '';
+  final logo = logoUri != null
+      ? '<img src="$logoUri" alt="${brand['appName']} Logo" style="width: 180px; margin-bottom: 40px; border-radius: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.4);" />'
+      : '';
   return '''
 <div class="page hero-page">
   $logo
@@ -439,10 +517,16 @@ String _heroPage(Map<String, dynamic> brand, String? logoUri, int version) {
 </div>''';
 }
 
-String _closingPage(Map<String, dynamic> brand, Map<String, dynamic> finalNotes) {
-  final platforms = (finalNotes['platforms'] as List).cast<Map<String, dynamic>>();
+String _closingPage(
+  Map<String, dynamic> brand,
+  Map<String, dynamic> finalNotes,
+) {
+  final platforms = (finalNotes['platforms'] as List)
+      .cast<Map<String, dynamic>>();
   final badgesHtml = platforms.map((p) {
-    final available = (p['status'] as String).toLowerCase().contains('available');
+    final available = (p['status'] as String).toLowerCase().contains(
+      'available',
+    );
     return '''
     <div class="store-badge ${available ? 'available' : 'soon'}">
       <div class="store-badge-icon">${_storeBadgeIcon(p['icon'])}</div>
@@ -454,7 +538,9 @@ String _closingPage(Map<String, dynamic> brand, Map<String, dynamic> finalNotes)
   }).join();
 
   final subtitle = finalNotes['subtitle'] ?? '';
-  final subtitleHtml = subtitle.isNotEmpty ? '<p class="closing-subtitle">$subtitle</p>' : '';
+  final subtitleHtml = subtitle.isNotEmpty
+      ? '<p class="closing-subtitle">$subtitle</p>'
+      : '';
 
   return '''
 <div class="page closing-page">
@@ -475,11 +561,17 @@ String _onePagerPage({
   String? logoUri,
   String? journeyImageUri,
 }) {
-  final logo = logoUri != null ? '<img src="$logoUri" alt="${brand['appName']} Logo" />' : '';
-  final imageBlock = journeyImageUri == null ? '' : '<div class="onepager-image"><div class="phone-mockup"><div class="phone-screen"><img src="$journeyImageUri" alt="App Preview" /></div></div></div>';
+  final logo = logoUri != null
+      ? '<img src="$logoUri" alt="${brand['appName']} Logo" />'
+      : '';
+  final imageBlock = journeyImageUri == null
+      ? ''
+      : '<div class="onepager-image"><div class="phone-mockup"><div class="phone-screen"><img src="$journeyImageUri" alt="App Preview" /></div></div></div>';
 
   final subtitle = finalNotesSection['subtitle'] ?? '';
-  final subtitleHtml = subtitle.isNotEmpty ? '<span class="onepager-subtitle">$subtitle</span>' : '';
+  final subtitleHtml = subtitle.isNotEmpty
+      ? '<span class="onepager-subtitle">$subtitle</span>'
+      : '';
 
   final platforms = (finalNotesSection['platforms'] as List)
       .cast<Map<String, dynamic>>();
@@ -489,7 +581,7 @@ String _onePagerPage({
       'available',
     );
     final variant = isAvailable ? 'available' : 'soon';
-    
+
     final String status = p['status'];
 
     return '''
@@ -537,9 +629,16 @@ String _featurePage({
   bool dark = false,
 }) {
   final alt = pageNum % 2 != 0;
-  final pageClasses = ['page', 'feature-page', if (dark) 'dark-section', if (alt) 'alt'].join(' ');
-  final withVariant = (String b) => variant.isEmpty ? b : '$b $variant';
-  final imageBlock = imageUri == null ? '' : '<div class="image-side"><div class="${withVariant('phone-mockup')}"><div class="phone-screen"><img src="$imageUri" alt="$title Preview" /></div></div></div>';
+  final pageClasses = [
+    'page',
+    'feature-page',
+    if (dark) 'dark-section',
+    if (alt) 'alt',
+  ].join(' ');
+  String withVariant(String b) => variant.isEmpty ? b : '$b $variant';
+  final imageBlock = imageUri == null
+      ? ''
+      : '<div class="image-side"><div class="${withVariant('phone-mockup')}"><div class="phone-screen"><img src="$imageUri" alt="$title Preview" /></div></div></div>';
 
   return '''
 <div class="$pageClasses">
@@ -566,7 +665,10 @@ String _qrBlock(String? url, String? caption) {
 }
 
 String _qrCodeSvg(String data, {int size = 200}) {
-  final qrCode = QrCode.fromData(data: data, errorCorrectLevel: QrErrorCorrectLevel.M);
+  final qrCode = QrCode.fromData(
+    data: data,
+    errorCorrectLevel: QrErrorCorrectLevel.M,
+  );
   final qrImage = QrImage(qrCode);
   final moduleCount = qrImage.moduleCount;
   final cell = size / moduleCount;
@@ -574,7 +676,9 @@ String _qrCodeSvg(String data, {int size = 200}) {
   for (var x = 0; x < moduleCount; x++) {
     for (var y = 0; y < moduleCount; y++) {
       if (qrImage.isDark(y, x)) {
-        modules.write('<rect x="${(x * cell).toStringAsFixed(2)}" y="${(y * cell).toStringAsFixed(2)}" width="${cell.toStringAsFixed(2)}" height="${cell.toStringAsFixed(2)}" fill="#1B2A4A"/>');
+        modules.write(
+          '<rect x="${(x * cell).toStringAsFixed(2)}" y="${(y * cell).toStringAsFixed(2)}" width="${cell.toStringAsFixed(2)}" height="${cell.toStringAsFixed(2)}" fill="#1B2A4A"/>',
+        );
       }
     }
   }
@@ -583,8 +687,11 @@ String _qrCodeSvg(String data, {int size = 200}) {
 
 String _storeBadgeIcon(String icon) {
   switch (icon) {
-    case 'android': return '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 9.48l1.84-3.18c.16-.31.04-.69-.26-.85a.637.637 0 00-.83.22l-1.88 3.24a11.463 11.463 0 00-9.02 0L5.57 5.67a.637.637 0 00-.83-.22c-.3.16-.42.54-.26.85L6.32 9.48A10.877 10.877 0 001 18h22a10.877 10.877 0 00-5.4-8.52zM7 15.25a1.25 1.25 0 110-2.5 1.25 1.25 0 010 2.5zm10 0a1.25 1.25 0 110-2.5 1.25 1.25 0 010 2.5z"/></svg>';
-    case 'ios': return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="2" width="12" height="20" rx="2.5"/><line x1="10" y1="19" x2="14" y2="19" stroke-linecap="round"/></svg>';
-    default: return '';
+    case 'android':
+      return '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 9.48l1.84-3.18c.16-.31.04-.69-.26-.85a.637.637 0 00-.83.22l-1.88 3.24a11.463 11.463 0 00-9.02 0L5.57 5.67a.637.637 0 00-.83-.22c-.3.16-.42.54-.26.85L6.32 9.48A10.877 10.877 0 001 18h22a10.877 10.877 0 00-5.4-8.52zM7 15.25a1.25 1.25 0 110-2.5 1.25 1.25 0 010 2.5zm10 0a1.25 1.25 0 110-2.5 1.25 1.25 0 010 2.5z"/></svg>';
+    case 'ios':
+      return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="2" width="12" height="20" rx="2.5"/><line x1="10" y1="19" x2="14" y2="19" stroke-linecap="round"/></svg>';
+    default:
+      return '';
   }
 }

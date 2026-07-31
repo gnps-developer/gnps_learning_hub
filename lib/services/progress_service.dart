@@ -4,6 +4,8 @@ import 'package:gnps_learning_hub/models/progress.dart';
 import 'package:gnps_learning_hub/models/games/game_difficulty.dart';
 import 'package:gnps_learning_hub/models/shop/shop_item.dart';
 import 'package:gnps_learning_hub/repositories/progress_repository.dart';
+import 'package:gnps_learning_hub/config/content_ids.dart';
+import 'package:gnps_learning_hub/config/task_config.dart';
 import 'package:flutter/foundation.dart' show kDebugMode;
 
 enum PurchaseResult { success, insufficientGems, alreadyOwned }
@@ -197,8 +199,9 @@ class ProgressService {
     if (!kDebugMode) return progress;
 
     final updated = progress.clone();
-    updated.unlockedGameDifficulties['bubble_pop_letters'] = 3;
-    updated.unlockedGameDifficulties['bubble_pop_words'] = 3;
+    final allUnlockedValue = TaskConfig.maxGameDifficultyIndex + 1;
+    updated.unlockedGameDifficulties[ContentIds.bubblePopLetters] = allUnlockedValue;
+    updated.unlockedGameDifficulties[ContentIds.bubblePopWords] = allUnlockedValue;
 
     await _repository.save(updated);
     return updated;
@@ -293,7 +296,8 @@ class ProgressService {
     // 2. Unlock next difficulty if won
     if (won) {
       final currentMaxUnlocked = updated.unlockedGameDifficulties[gameId] ?? 0;
-      if (difficulty.index == currentMaxUnlocked && difficulty.index <= 2) {
+      if (difficulty.index == currentMaxUnlocked &&
+          difficulty.index <= TaskConfig.maxGameDifficultyIndex) {
         final nextIndex = difficulty.index + 1;
         updated.unlockedGameDifficulties[gameId] = nextIndex;
         newAchievementIndex = nextIndex;

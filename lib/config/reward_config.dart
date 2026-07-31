@@ -10,4 +10,8 @@ class RewardConfig {
   static const Color color = Color(0xFF4FC3F7);
   static const String labelSingular = 'gem';
   static const String labelPlural = 'gems';
+
+  /// Starting values for new profiles.
+  static const int initialPoints = 0;
+  static const int initialExtraLives = 3;
 }

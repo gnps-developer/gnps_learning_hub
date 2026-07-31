@@ -1,5 +1,6 @@
 import 'avatar/avatar_slot.dart';
 import 'shop/default_item_ids.dart';
+import '../config/reward_config.dart';
 
 class LocalProgress {
   String? userName;
@@ -30,12 +31,12 @@ class LocalProgress {
   };
 
   static const Map<String, int> defaultOwnedItemQuantities = {
-    DefaultItemIds.extraLife: 3,
+    DefaultItemIds.extraLife: RewardConfig.initialExtraLives,
   };
 
   LocalProgress({
     this.userName,
-    this.totalPoints = 0,
+    this.totalPoints = RewardConfig.initialPoints,
     this.currentStreak = 0,
     this.lastActiveDate,
     Set<String>? completedLessonIds,
