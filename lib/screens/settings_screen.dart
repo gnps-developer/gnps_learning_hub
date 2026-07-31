@@ -353,7 +353,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       messenger.clearSnackBars();
       messenger.showSnackBar(
         SnackBar(
-          content: Text('You are $remaining steps away from developer mode.'),
+          content: Text(UIStrings.devModeSteps(remaining)),
         ),
       );
     } else if (remaining <= 0) {
@@ -364,38 +364,73 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
   Future<void> _showUnlockDialog() async {
     final controller = TextEditingController();
+    bool isObscured = true;
+    String? errorMessage;
+
     final result = await showDialog<bool>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Unlock Developer Mode'),
-        content: TextField(
-          controller: controller,
-          obscureText: true,
-          decoration: const InputDecoration(
-            labelText: 'Enter secret code',
-            border: OutlineInputBorder(),
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () {
-              final bytes = utf8.encode(controller.text);
-              final digest = sha256.convert(bytes);
-              if (digest.toString() == DebugConfig.developerModeUnlockHash) {
-                Navigator.of(context).pop(true);
-              } else {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Incorrect code.')),
-                );
-              }
-            },
-            child: const Text('Unlock'),
-          ),
-        ],
+      builder: (context) => StatefulBuilder(
+        builder: (context, setDialogState) {
+          void submit() {
+            final input = controller.text.trim();
+            final bytes = utf8.encode(input);
+            final digest = sha256.convert(bytes);
+            final hex = digest.toString().toLowerCase();
+            final expected = DebugConfig.developerModeUnlockHash.toLowerCase();
+
+            if (hex == expected) {
+              Navigator.of(context).pop(true);
+            } else {
+              setDialogState(() {
+                errorMessage = UIStrings.incorrectCode;
+              });
+            }
+          }
+
+          return AlertDialog(
+            title: const Text(UIStrings.unlockDevModeTitle),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TextField(
+                  controller: controller,
+                  obscureText: isObscured,
+                  autocorrect: false,
+                  enableSuggestions: false,
+                  autofocus: true,
+                  textInputAction: TextInputAction.done,
+                  onSubmitted: (_) => submit(),
+                  decoration: InputDecoration(
+                    labelText: UIStrings.enterSecretCode,
+                    border: const OutlineInputBorder(),
+                    errorText: errorMessage,
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        isObscured ? Icons.visibility : Icons.visibility_off,
+                      ),
+                      onPressed: () {
+                        setDialogState(() {
+                          isObscured = !isObscured;
+                        });
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: const Text(UIStrings.cancel),
+              ),
+              TextButton(
+                onPressed: submit,
+                child: const Text(UIStrings.unlock),
+              ),
+            ],
+          );
+        },
       ),
     );
 
@@ -403,7 +438,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       await ref.read(progressProvider.notifier).updateDeveloperMode(true);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Developer mode unlocked!')),
+          const SnackBar(content: Text(UIStrings.devModeUnlocked)),
         );
       }
     }
