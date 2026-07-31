@@ -453,10 +453,14 @@ String _closingPage(Map<String, dynamic> brand, Map<String, dynamic> finalNotes)
     </div>''';
   }).join();
 
+  final subtitle = finalNotes['subtitle'] ?? '';
+  final subtitleHtml = subtitle.isNotEmpty ? '<p class="closing-subtitle">$subtitle</p>' : '';
+
   return '''
 <div class="page closing-page">
-  <h1 style="font-size: 52px; margin: 0 0 12px 0;">${finalNotes['title']}</h1>
-  <p class="gurmukhi-tag" style="margin: 0 0 20px 0;">${finalNotes['gurmukhiLabel']}</p>
+  <h1 style="font-size: 52px; margin: 0;">${finalNotes['title']}</h1>
+  $subtitleHtml
+  <p class="gurmukhi-tag" style="margin: 16px 0 20px 0;">${finalNotes['gurmukhiLabel']}</p>
   <p style="font-size: 19px; line-height: 1.6; max-width: 640px; color: rgba(251, 247, 239, 0.8);">${finalNotes['message']}</p>
   <div class="store-badges">$badgesHtml</div>
   ${_qrBlock(finalNotes['googlePlayUrl'], finalNotes['qrCaption'])}
@@ -477,6 +481,27 @@ String _onePagerPage({
   final subtitle = finalNotesSection['subtitle'] ?? '';
   final subtitleHtml = subtitle.isNotEmpty ? '<span class="onepager-subtitle">$subtitle</span>' : '';
 
+  final platforms = (finalNotesSection['platforms'] as List)
+      .cast<Map<String, dynamic>>();
+
+  final badgesHtml = platforms.map((p) {
+    final isAvailable = (p['status'] as String).toLowerCase().contains(
+      'available',
+    );
+    final variant = isAvailable ? 'available' : 'soon';
+    
+    final String status = p['status'];
+
+    return '''
+    <div class="store-badge $variant" style="padding: 10px 16px; width: 210px; gap: 10px;">
+      <div class="store-badge-icon" style="width: 24px; height: 24px;">${_storeBadgeIcon(p['icon'] as String)}</div>
+      <div class="store-badge-text">
+        <span class="store-badge-status" style="font-size: 9px;">$status</span>
+        <span class="store-badge-name" style="font-size: 15px;">${p['name']}</span>
+      </div>
+    </div>''';
+  }).join();
+
   return '''
 <div class="page onepager-page">
   <div class="onepager-header">
@@ -490,6 +515,7 @@ String _onePagerPage({
     <div class="onepager-text">
       <p class="gurmukhi-tag">${onePagerSection['gurmukhiLabel']}</p>
       <p class="description">${onePagerSection['shortDescription']}</p>
+      <div class="store-badges" style="margin-top: 24px; justify-content: flex-start; gap: 16px;">$badgesHtml</div>
       <div class="onepager-footer-row">${_qrBlock(finalNotesSection['googlePlayUrl'], finalNotesSection['qrCaption'])}</div>
     </div>
     $imageBlock
@@ -539,7 +565,7 @@ String _qrBlock(String? url, String? caption) {
   return '<div class="qr-block"><div class="qr-code">${_qrCodeSvg(url)}</div><span class="qr-caption">${caption ?? 'Scan to download'}</span></div>';
 }
 
-String _qrCodeSvg(String data, {int size = 160}) {
+String _qrCodeSvg(String data, {int size = 200}) {
   final qrCode = QrCode.fromData(data: data, errorCorrectLevel: QrErrorCorrectLevel.M);
   final qrImage = QrImage(qrCode);
   final moduleCount = qrImage.moduleCount;

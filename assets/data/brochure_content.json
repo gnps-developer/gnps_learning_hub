@@ -61,7 +61,7 @@
       "platforms": [
         {
           "name": "Google Play",
-          "status": "Pre Release Testing",
+          "status": "Pre Release",
           "icon": "android"
         },
         {
