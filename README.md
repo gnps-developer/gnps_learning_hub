@@ -1,87 +1,134 @@
-# GNPS Learning Hub
+# GNPS Learning Hub 🌲🦁
 
-Learn Punjabi through short lessons — earn gems, build streaks, unlock and play word games and customize your own avatar along the way.
+Learn Punjabi through engaging, gamified lessons. Earn gems, build streaks, unlock arcade games, and customize your own avatar as you master Gurmukhi!
 
 [![Flutter](https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev)
+[![Material 3](https://img.shields.io/badge/Material--3-6750A4?style=for-the-badge&logo=materialdesign&logoColor=white)](https://m3.material.io/)
 
 ---
 
 ## ✨ Key Features
 
-- **Interactive Punjabi Lessons**: Short, engaging lessons covering vocabulary, spelling, and sentence structure.
-- **Gamified Progress**: Earn gems, build daily streaks, and unlock achievements.
-- **Customizable Avatars**: Create and personalize your own character in the shop.
-- **Goal Setting**: Choose your own learning pace with customizable daily goals.
-- **Audio Support**: Integrated Text-to-Speech for correct Punjabi pronunciation.
+### 🗺️ Learning Journey
+- **Interactive Map**: A visual roadmap through a lush forest guiding students from letters to complex sentences.
+- **Task Types**: Tracing (with checkpoint verification), Letter Matching, Spelling (drag-and-drop), Picture/Word matching, and Sentence Building.
 
-👉 **[View Detailed Features List](FEATURES.md)**
+### 🎮 Arcade Games
+- **3D Bubble Pop Engine**: Immersive physics-based gameplay to reinforce recognition.
+- **Difficulty Tiers**: Easy, Medium, and Hard modes with dynamic speed and spawn scaling.
+
+### 🏆 Achievement & Personalization
+- **Trophy Room**: Earn Bronze, Silver, and Gold trophies for mastering challenges.
+- **Avatar Customizer**: High-quality SVG-based system for Turbans, clothes, and accessories.
+- **In-App Shop**: Use "Gems" earned through learning to unlock premium cosmetics.
+
+### 🔥 Engagement & UX
+- **Daily Streaks**: Habit-forming tracking with "Streak Freeze" protection.
+- **Immersive Audio**: Integrated Text-to-Speech for authentic Punjabi pronunciation.
+- **Tactile Feedback**: Haptics and dynamic theming for a premium feel.
+
+👉 **[View Full Features Specification](FEATURES.md)**
+
+---
+
+## 📂 Project Structure
+
+The project follows a modular architecture using **Riverpod** for state management and **Hive** for fast local persistence.
+
+```text
+lib/
+├── config/       # App constants, UI strings, and debug configurations.
+├── games/        # Physics-based game engines (Bubble Pop, Word Games).
+├── models/       # Type-safe data models (Journey, Lesson, Progress, Avatar).
+├── providers/    # Riverpod providers for State and Logic orchestration.
+├── repositories/ # Data persistence layer and JSON content loading.
+├── screens/      # High-level UI screens (Splash, Intro, Journey, Settings).
+├── services/     # Cross-cutting concerns (Audio, Haptics, Navigation).
+├── tools/        # Admin utilities, Tracing Recorders, and Content Debuggers.
+├── utils/        # Global helper functions and extensions.
+└── widgets/      # Atomic UI components, Animations, and Themed Layouts.
+```
+
+---
+
+## 📄 Documentation & Marketing Generation
+
+This repository includes a suite of command-line tools to maintain the curriculum and generate high-fidelity marketing materials.
+
+### 📊 Curriculum Overview
+The `CURRICULUM.md` file tracks all lessons and tasks. To refresh it based on the current JSON content:
+```bash
+dart tools/generate_curriculum.dart
+```
+
+### 📄 Brochure PDF Generation
+Generate professional, multi-page brochures and one-pagers that highlight the app features and curriculum.
+
+#### Requirements
+- **Google Chrome** (or Chromium): The tool uses a headless Chrome instance to render HTML/CSS templates into high-quality PDFs.
+- **Data Dependencies**: Ensure `assets/data/brochure_content.json` and the stylesheet `tools/style.css` are present.
+
+#### Usage
+- **Generate Full Brochure & Flyer**:
+  ```bash
+  dart tools/generate_brochure.dart
+  ```
+- **Generate Specific Items**:
+  ```bash
+  dart tools/generate_brochure.dart --full   # Just the premium brochure
+  dart tools/generate_brochure.dart --flyer  # Just the one-page flyer
+  ```
+The generated PDFs will be located in the `exports/` directory.
 
 ---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
+- **Flutter SDK**: [Install Flutter](https://docs.flutter.dev/get-started/install) (latest stable version).
+- **Environment**: Android Studio (with Flutter plugin) or VS Code.
+- **Chrome**: Required for generating PDF marketing materials.
 
-- Flutter SDK (latest stable version)
-- Android Studio / VS Code
+### Installation & Setup
 
-### Installation
+1. **Clone the repository**:
+   ```bash
+   git clone <repository-url>
+   cd gnps_learning_hub
+   ```
 
-1.  **Clone the repository:**
-    ```bash
-    git clone <repository-url>
-    cd gnps_learning_hub
-    ```
+2. **Install dependencies**:
+   ```bash
+   flutter pub get
+   ```
 
-2.  **Install dependencies:**
-    ```bash
-    flutter pub get
-    ```
+3. **Generate Type-safe Adapters**:
+   The project uses Hive for persistence. If you have modified any models, generate the required TypeAdapters:
+   ```bash
+   dart run build_runner build --delete-conflicting-outputs
+   ```
 
-3.  **Run the app:**
-    ```bash
-    flutter run
-    ```
+4. **Prepare Curriculum Data**:
+   Ensure the curriculum manifest is up-to-date with the latest content:
+   ```bash
+   dart tools/generate_curriculum.dart
+   ```
 
----
+### Running the App
 
-## 🛠 Tech Stack
+1. **Start an Emulator or Connect a Device**:
+   - Launch an Android Emulator via Android Studio.
+   - Or connect a physical Android/iOS device.
 
-- **Framework**: [Flutter](https://flutter.dev)
-- **State Management**: [Riverpod](https://riverpod.dev)
-- **Local Database**: [Hive](https://docs.hivedb.dev/)
-- **Audio**: `audioplayers` & `flutter_tts`
-- **Graphics**: `flutter_svg`
+2. **Launch the app**:
+   ```bash
+   flutter run
+   ```
+   *Note: Use `flutter run --release` for a smoother experience when testing the 3D physics bubble pop engine.*
 
----
 
-## 📂 Project Structure
-
-```text
-lib/
-├── config/       # App configurations and constants
-├── data/         # Mock data and initial assets
-├── models/       # Data models (Lesson, Task, Progress, etc.)
-├── providers/    # Riverpod state providers
-├── repositories/ # Data access layer (Local Hive Storage)
-├── screens/      # UI Screens (Journey, Shop, Profile, etc.)
-├── services/     # External services (Audio, TTS)
-└── widgets/      # Reusable UI components
-```
-
----
-
-## 🔧 Configuration
-
-### Local Storage
-User progress and shop items are stored locally using Hive for a seamless offline experience.
-
----
-
-## 🎨 Assets
-- **Logo**: `assets/logo/logo.jpg`
-- **Avatars**: `assets/avatars/`
-- **Sounds**: `assets/sounds/`
+### 🛠 Developer Tools
+To unlock developer mode in the app, navigate to **Settings**, tap the **App Version** 10 times, and enter the secret unlock code.
 
 ---
 

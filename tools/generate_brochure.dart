@@ -8,7 +8,7 @@ import 'package:qr/qr.dart';
 ///
 /// To run this tool, use:
 /// ```bash
-/// dart tools/marketing_generator.dart [--full] [--flyer]
+/// dart tools/generate_brochure.dart [--full] [--flyer]
 /// ```
 ///
 /// If no flags are provided, both the full brochure and the flyer are generated.
@@ -20,7 +20,7 @@ void main(List<String> args) async {
 
   if (!generateFull && !generateFlyer) {
     print(
-      'Usage: dart tools/marketing_generator.dart [--full|-f] [--flyer|-s]',
+      'Usage: dart tools/generate_brochure.dart [--full|-f] [--flyer|-s]',
     );
     return;
   }
