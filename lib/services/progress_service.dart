@@ -130,7 +130,7 @@ class ProgressService {
     required LocalProgress progress,
     required Journey journey,
   }) async {
-    if (!kDebugMode) return progress;
+    if (!kDebugMode && !progress.isDeveloperModeEnabled) return progress;
 
     final updated = progress.clone();
     for (final lesson in journey.activeLessons) {
@@ -159,7 +159,7 @@ class ProgressService {
     required String lessonId,
     required double percent, // 0.0 to 1.0
   }) async {
-    if (!kDebugMode) return progress;
+    if (!kDebugMode && !progress.isDeveloperModeEnabled) return progress;
 
     final updated = progress.clone();
     final lesson = journey.lessons.firstWhere((l) => l.id == lessonId);
@@ -196,7 +196,7 @@ class ProgressService {
   Future<LocalProgress> debugCompleteAllAchievements(
     LocalProgress progress,
   ) async {
-    if (!kDebugMode) return progress;
+    if (!kDebugMode && !progress.isDeveloperModeEnabled) return progress;
 
     final updated = progress.clone();
     final allUnlockedValue = TaskConfig.maxGameDifficultyIndex + 1;
