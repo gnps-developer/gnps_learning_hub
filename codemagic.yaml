@@ -67,7 +67,7 @@ workflows:
     publishing:
       email:
         recipients:
-          - codemanxdev@gmail.com
+          - developer@gnps.nsw.edu.au
         notify:
           success: true
           failure: true
