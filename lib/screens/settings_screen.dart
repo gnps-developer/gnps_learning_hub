@@ -109,12 +109,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
     if (await canLaunchUrl(emailLaunchUri)) {
       await launchUrl(emailLaunchUri);
-    } else {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text(UIStrings.incorrectCode)),
-        );
-      }
     }
   }
 

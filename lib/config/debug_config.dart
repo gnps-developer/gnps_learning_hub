@@ -14,5 +14,5 @@ class DebugConfig {
   /// Windows (PS): [System.BitConverter]::ToString((new-object System.Security.Cryptography.SHA256Managed).ComputeHash([System.Text.Encoding]::UTF8.GetBytes("my_secret"))).Replace("-","").ToLower()
   ///
   static const developerModeUnlockHash =
-      'ecd4ba4260205210a549fd33df5a120a18e78281a0ca290b6a31ed74a8a10f15';
+      '4e957bac97ef1b332338396b99ad955cd20b6a9f4e1679fc52828bd983261926';
 }
