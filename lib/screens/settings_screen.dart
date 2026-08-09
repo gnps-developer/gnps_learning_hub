@@ -107,8 +107,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       query: 'subject=Support Request: GNPS Learning Hub',
     );
 
-    if (await canLaunchUrl(emailLaunchUri)) {
-      await launchUrl(emailLaunchUri);
+    try {
+      await launchUrl(emailLaunchUri, mode: LaunchMode.externalApplication);
+    } catch (e) {
+      debugPrint('Could not launch support email: $e');
     }
   }
 
