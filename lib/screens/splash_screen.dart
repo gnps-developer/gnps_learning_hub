@@ -71,7 +71,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'Developed by GNPS',
+              'GNPS',
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
                 color: onPrimary,
                 letterSpacing: 4,

@@ -90,138 +90,137 @@ class _AvatarCustomizationScreenState
       },
       child: Scaffold(
         appBar: AppBar(title: const Text('Customize Avatar')),
-        body: progressAsync.when(
-          data: (progress) => catalogAsync.when(
-            data: (catalog) {
-              _preview ??= Map<String, String>.from(progress.equippedItemIds);
-              final currentBaseId = _preview![AvatarSlot.base.name];
+        body: SafeArea(
+          child: progressAsync.when(
+            data: (progress) => catalogAsync.when(
+              data: (catalog) {
+                _preview ??= Map<String, String>.from(progress.equippedItemIds);
+                final currentBaseId = _preview![AvatarSlot.base.name];
 
-              final avatarItems = catalog
-                  .where((i) => i.category == ShopItemCategory.item)
-                  .toList();
+                final avatarItems = catalog
+                    .where((i) => i.category == ShopItemCategory.item)
+                    .toList();
 
-              final visibleSlots = AvatarSlot.values.where((slot) {
-                if (slot == AvatarSlot.base) return true;
-                return avatarItems.any((i) =>
-                    i.avatarSlot == slot &&
-                    (i.price == 0 || _isOwned(progress, i)) &&
-                    (i.supportedAvatarIds == null ||
+                final visibleSlots = AvatarSlot.values.where((slot) {
+                  if (slot == AvatarSlot.base) return true;
+                  return avatarItems.any((i) =>
+                      i.avatarSlot == slot &&
+                      (i.price == 0 || _isOwned(progress, i)) &&
+                      (i.supportedAvatarIds == null ||
+                          (currentBaseId != null &&
+                              i.supportedAvatarIds!.contains(currentBaseId))));
+                }).toList();
+
+                // If selected slot is no longer visible (due to base change), revert to base
+                if (!visibleSlots.contains(_selectedSlot)) {
+                  _selectedSlot = AvatarSlot.base;
+                }
+
+                final slotItems = avatarItems
+                    .where((i) => i.avatarSlot == _selectedSlot)
+                    .where((i) => i.price == 0 || _isOwned(progress, i))
+                    .where((i) =>
+                        i.supportedAvatarIds == null ||
                         (currentBaseId != null &&
-                            i.supportedAvatarIds!.contains(currentBaseId))));
-              }).toList();
+                            i.supportedAvatarIds!.contains(currentBaseId)))
+                    .toList();
 
-              // If selected slot is no longer visible (due to base change), revert to base
-              if (!visibleSlots.contains(_selectedSlot)) {
-                _selectedSlot = AvatarSlot.base;
-              }
-
-              final slotItems = avatarItems
-                  .where((i) => i.avatarSlot == _selectedSlot)
-                  .where((i) => i.price == 0 || _isOwned(progress, i))
-                  .where((i) =>
-                      i.supportedAvatarIds == null ||
-                      (currentBaseId != null &&
-                          i.supportedAvatarIds!.contains(currentBaseId)))
-                  .toList();
-
-              return Column(
-                children: [
-                  const SizedBox(height: 16),
-                  SizedBox(
-                    width: 300,
-                    height: 375,
-                    child: AvatarPreview(
-                      equippedItemIds: _preview!,
-                      catalog: catalog,
+                return Column(
+                  children: [
+                    const SizedBox(height: 16),
+                    SizedBox(
+                      width: 300,
+                      height: 375,
+                      child: AvatarPreview(
+                        equippedItemIds: _preview!,
+                        catalog: catalog,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 20),
-                  SizedBox(
-                    height: 44,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      children: visibleSlots.map((slot) {
-                        final selected = slot == _selectedSlot;
-                        return Padding(
-                          padding: const EdgeInsets.only(right: 8),
-                          child: ChoiceChip(
-                            label: Text(slot.displayName),
-                            selected: selected,
-                            onSelected: (_) =>
-                                setState(() => _selectedSlot = slot),
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  Expanded(
-                    child: slotItems.isEmpty
-                        ? Center(
-                            child: Text(
-                              'No owned items in this category yet.',
-                              style: Theme.of(context).textTheme.bodyMedium,
+                    const SizedBox(height: 20),
+                    SizedBox(
+                      height: 44,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        children: visibleSlots.map((slot) {
+                          final selected = slot == _selectedSlot;
+                          return Padding(
+                            padding: const EdgeInsets.only(right: 8),
+                            child: ChoiceChip(
+                              label: Text(slot.displayName),
+                              selected: selected,
+                              onSelected: (_) =>
+                                  setState(() => _selectedSlot = slot),
                             ),
-                          )
-                        : GridView.builder(
-                            padding: const EdgeInsets.all(16),
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 4,
-                                  mainAxisSpacing: 12,
-                                  crossAxisSpacing: 12,
-                                ),
-                            itemCount: slotItems.length,
-                            itemBuilder: (context, index) {
-                              final item = slotItems[index];
-                              final selected =
-                                  _preview![_selectedSlot.name] == item.id;
-                              return _ItemTile(
-                                item: item,
-                                selected: selected,
-                                onTap: () => setState(() {
-                                  final newId = item.id;
-                                  _preview![_selectedSlot.name] = newId;
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    Expanded(
+                      child: slotItems.isEmpty
+                          ? Center(
+                              child: Text(
+                                'No owned items in this category yet.',
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
+                            )
+                          : GridView.builder(
+                              padding: const EdgeInsets.all(16),
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 4,
+                                    mainAxisSpacing: 12,
+                                    crossAxisSpacing: 12,
+                                  ),
+                              itemCount: slotItems.length,
+                              itemBuilder: (context, index) {
+                                final item = slotItems[index];
+                                final selected =
+                                    _preview![_selectedSlot.name] == item.id;
+                                return _ItemTile(
+                                  item: item,
+                                  selected: selected,
+                                  onTap: () => setState(() {
+                                    final newId = item.id;
+                                    _preview![_selectedSlot.name] = newId;
 
-                                  // If base changed, reset incompatible items in other slots
-                                  if (_selectedSlot == AvatarSlot.base) {
-                                    for (final s in AvatarSlot.values) {
-                                      if (s == AvatarSlot.base) continue;
-                                      final eqId = _preview![s.name];
-                                      if (eqId == null) continue;
+                                    // If base changed, reset incompatible items in other slots
+                                    if (_selectedSlot == AvatarSlot.base) {
+                                      for (final s in AvatarSlot.values) {
+                                        if (s == AvatarSlot.base) continue;
+                                        final eqId = _preview![s.name];
+                                        if (eqId == null) continue;
 
-                                      final eqItem = catalog.firstWhere(
-                                        (i) => i.id == eqId,
-                                        orElse: () => avatarItems.first,
-                                      );
-
-                                      if (eqItem.supportedAvatarIds != null &&
-                                          !eqItem.supportedAvatarIds!
-                                              .contains(newId)) {
-                                        // Revert to slot default compatible with new base
-                                        final fallback = avatarItems.firstWhere(
-                                          (i) =>
-                                              i.avatarSlot == s &&
-                                              i.price == 0 &&
-                                              (i.supportedAvatarIds == null ||
-                                                  i.supportedAvatarIds!
-                                                      .contains(newId)),
-                                          orElse: () => avatarItems.firstWhere(
-                                              (i) => i.avatarSlot == s),
+                                        final eqItem = catalog.firstWhere(
+                                          (i) => i.id == eqId,
+                                          orElse: () => avatarItems.first,
                                         );
-                                        _preview![s.name] = fallback.id;
+
+                                        if (eqItem.supportedAvatarIds != null &&
+                                            !eqItem.supportedAvatarIds!
+                                                .contains(newId)) {
+                                          // Revert to slot default compatible with new base
+                                          final fallback = avatarItems.firstWhere(
+                                            (i) =>
+                                                i.avatarSlot == s &&
+                                                i.price == 0 &&
+                                                (i.supportedAvatarIds == null ||
+                                                    i.supportedAvatarIds!
+                                                        .contains(newId)),
+                                            orElse: () => avatarItems.firstWhere(
+                                                (i) => i.avatarSlot == s),
+                                          );
+                                          _preview![s.name] = fallback.id;
+                                        }
                                       }
                                     }
-                                  }
-                                }),
-                              );
-                            },
-                          ),
-                  ),
-                  SafeArea(
-                    top: false,
-                    child: Padding(
+                                  }),
+                                );
+                              },
+                            ),
+                    ),
+                    Padding(
                       padding: const EdgeInsets.all(16),
                       child: FilledButton(
                         onPressed: _hasChanges
@@ -230,15 +229,15 @@ class _AvatarCustomizationScreenState
                         child: const Text('Confirm'),
                       ),
                     ),
-                  ),
-                ],
-              );
-            },
+                  ],
+                );
+              },
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (e, _) => Center(child: Text('Error loading catalog: $e')),
+            ),
             loading: () => const Center(child: CircularProgressIndicator()),
-            error: (e, _) => Center(child: Text('Error loading catalog: $e')),
+            error: (e, _) => Center(child: Text('Error loading progress: $e')),
           ),
-          loading: () => const Center(child: CircularProgressIndicator()),
-          error: (e, _) => Center(child: Text('Error loading progress: $e')),
         ),
       ),
     );

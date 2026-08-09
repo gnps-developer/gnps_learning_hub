@@ -95,15 +95,10 @@ class _Checkpoint {
 class _TraceTaskWidgetState extends ConsumerState<TraceTaskWidget>
     with TickerProviderStateMixin {
   // --- Tunable "feel" constants ---
-  // Keep these roughly in step with each other: if you fatten the visual
-  // stroke a lot, nudge tolerance/hit-radius up too, or the rendered stroke
-  // can visually look like it's covering ink that validation is rejecting.
-  static const double _onTrackTolerance =
-      16; // px a stroke point may sit off the letter's ink and still count
+  // Note: _onTrackTolerance and _coverageHitRadius are now calculated
+  // dynamically based on the mask size to handle large tablet screens.
   static const double _coverageSampleStep =
       6; // grid spacing when scanning the letter for ink pixels
-  static const double _coverageHitRadius =
-      12; // how close a stroke point must get to "cover" a sample
   static const double _requiredCoverage =
       0.55; // fraction of the letter that must be traced to pass
   static const int _alphaThreshold = 40; // min alpha to count a pixel as "ink"
@@ -130,6 +125,10 @@ class _TraceTaskWidgetState extends ConsumerState<TraceTaskWidget>
   List<Offset> _inkSamples = [];
   final Set<int> _coveredSampleIndices = {};
   List<_Checkpoint> _checkpoints = [];
+
+  // Dynamic values based on current mask size
+  double get _currentHitRadius => _maskSize == null ? 12.0 : math.max(12.0, _maskSize!.height * 0.045);
+  double get _currentTolerance => _maskSize == null ? 16.0 : math.max(16.0, _maskSize!.height * 0.06);
 
   bool _failed = false;
   bool _isBuildingMask = false;
@@ -422,6 +421,7 @@ class _TraceTaskWidgetState extends ConsumerState<TraceTaskWidget>
     final width = size.width.round();
     final height = size.height.round();
 
+    final tolerance = _currentTolerance;
     if (_alphaAt(mask, width, height, point.dx, point.dy) > _alphaThreshold) {
       return true;
     }
@@ -429,21 +429,47 @@ class _TraceTaskWidgetState extends ConsumerState<TraceTaskWidget>
     const ringSteps = 8;
     for (int i = 0; i < ringSteps; i++) {
       final angle = (i / ringSteps) * 2 * math.pi;
-      final dx = point.dx + _onTrackTolerance * math.cos(angle);
-      final dy = point.dy + _onTrackTolerance * math.sin(angle);
+      final dx = point.dx + tolerance * math.cos(angle);
+      final dy = point.dy + tolerance * math.sin(angle);
       if (_alphaAt(mask, width, height, dx, dy) > _alphaThreshold) return true;
     }
     return false;
   }
 
-  void _updateCoverage(Offset point) {
-    final hitRadiusSq = _coverageHitRadius * _coverageHitRadius;
+  void _updateCoverage(Offset p1, [Offset? p2]) {
+    final hitRadius = _currentHitRadius;
+    final hitRadiusSq = hitRadius * hitRadius;
+    final segRect = p2 == null
+        ? Rect.fromCircle(center: p1, radius: hitRadius)
+        : Rect.fromPoints(p1, p2).inflate(hitRadius);
+
     for (int i = 0; i < _inkSamples.length; i++) {
       if (_coveredSampleIndices.contains(i)) continue;
       final sample = _inkSamples[i];
-      final dx = sample.dx - point.dx;
-      final dy = sample.dy - point.dy;
-      if (dx * dx + dy * dy <= hitRadiusSq) {
+
+      // Quick bounding box rejection
+      if (!segRect.contains(sample)) continue;
+
+      double distSq;
+      if (p2 == null || p1 == p2) {
+        final dx = sample.dx - p1.dx;
+        final dy = sample.dy - p1.dy;
+        distSq = dx * dx + dy * dy;
+      } else {
+        // Distance from point to segment p1-p2
+        final l2 = (p2 - p1).distanceSquared;
+        final t = (((sample.dx - p1.dx) * (p2.dx - p1.dx) +
+                    (sample.dy - p1.dy) * (p2.dy - p1.dy)) /
+                l2)
+            .clamp(0.0, 1.0);
+        final projection = Offset(
+          p1.dx + t * (p2.dx - p1.dx),
+          p1.dy + t * (p2.dy - p1.dy),
+        );
+        distSq = (sample - projection).distanceSquared;
+      }
+
+      if (distSq <= hitRadiusSq) {
         _coveredSampleIndices.add(i);
       }
     }
@@ -503,6 +529,16 @@ class _TraceTaskWidgetState extends ConsumerState<TraceTaskWidget>
       return; // ignore further input until the child clears and retries
     }
     final rawPoint = details.localPosition;
+    final lastPoint =
+        _points.isNotEmpty && _points.last != Offset.infinite
+            ? _points.last
+            : null;
+
+    // Check if the new point is on the letter.
+    // NOTE: for extreme robustness we could also check points along the
+    // segment from lastPoint to rawPoint, but since failure is a high-friction
+    // event (requires Clear), we keep the strict check to the actual sampled
+    // touch points to avoid "ghost failures" during fast strokes.
     final onLetter = _isOnLetter(rawPoint);
 
     setState(() {
@@ -518,11 +554,15 @@ class _TraceTaskWidgetState extends ConsumerState<TraceTaskWidget>
       if (reachedIndex != null) {
         final checkpointPosition = _checkpoints[reachedIndex].position;
         _points.add(checkpointPosition);
-        _updateCoverage(checkpointPosition);
+
+        // Update coverage for the segment from last touch to the checkpoint
+        _updateCoverage(checkpointPosition, lastPoint);
+
         _straightenSinceCheckpoint(reachedIndex);
       } else {
         _points.add(rawPoint);
-        _updateCoverage(rawPoint);
+        // Update coverage for the segment from last touch to the current touch
+        _updateCoverage(rawPoint, lastPoint);
       }
     });
   }

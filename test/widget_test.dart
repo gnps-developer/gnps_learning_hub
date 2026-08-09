@@ -56,7 +56,7 @@ void main() {
       ),
     );
 
-    expect(find.text('Developed by GNPS'), findsOneWidget);
+    expect(find.text('GNPS'), findsOneWidget);
 
     // Cleanup
     await tester.pumpWidget(Container());

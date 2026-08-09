@@ -280,7 +280,6 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
 
     return Scaffold(
       body: SafeArea(
-        bottom: false,
         child: Column(
           children: [
             progressAsync.when(
