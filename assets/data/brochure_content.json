@@ -52,16 +52,16 @@
     },
     "finalNotes": {
       "title": "GNPS Learning Hub",
-      "subtitle": "Download Now - Early Access Testing",
+      "subtitle": "Download Now",
       "gurmukhiLabel": "ਹੁਣੇ ਡਾਊਨਲੋਡ ਕਰੋ",
-      "message": "GNPS Learning Hub available as early access testing on Android, with iOS to follow shortly after. Sikho, khedo, vadho — learn, play, grow, wherever your family calls home.",
+      "message": "GNPS Learning Hub available on Google Play, with Apple App Store to follow shortly after. Sikho, khedo, vadho — learn, play, grow, wherever your family calls home.",
       "footerLabel": "AVAILABILITY",
       "googlePlayUrl": "https://play.google.com/store/apps/details?id=au.edu.nsw.gnps.learning.hub",
       "qrCaption": "Scan to get it on Google Play",
       "platforms": [
         {
           "name": "Google Play",
-          "status": "Pre Release",
+          "status": "Live",
           "icon": "android"
         },
         {

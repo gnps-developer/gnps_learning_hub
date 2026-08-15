@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter/foundation.dart' show kDebugMode;
+import 'package:flutter/foundation.dart' show kDebugMode, kIsWeb, defaultTargetPlatform;
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:crypto/crypto.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -10,6 +10,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../config/debug_config.dart';
 import '../config/ui_config.dart';
 import '../config/ui_strings.dart';
+import '../providers/audio_providers.dart';
 import '../providers/content_providers.dart';
 import '../providers/progress_providers.dart';
 import '../tools/content_debug_screen.dart';
@@ -112,6 +113,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     } catch (e) {
       debugPrint('Could not launch support email: $e');
     }
+  }
+
+  Future<void> _testSpeech() async {
+    await ref.read(audioServiceProvider).speak(UIStrings.ttsTestPhrase);
+  }
+
+  Future<void> _openTtsSettings() async {
+    await ref.read(audioServiceProvider).openTtsSettings();
   }
 
   @override
@@ -266,6 +275,59 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       trailing: const Icon(Icons.chevron_right),
                     ),
                   ],
+                );
+              },
+            ),
+            const Divider(height: AppSpacing.xl),
+            const _SectionHeader(UIStrings.speechEngineLabel),
+            FutureBuilder<bool>(
+              future: ref.read(audioServiceProvider).isPunjabiAvailable(),
+              builder: (context, snapshot) {
+                final isAvailable = snapshot.data ?? false;
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        leading: Icon(
+                          isAvailable ? Icons.check_circle : Icons.warning,
+                          color: isAvailable ? Colors.green : Colors.orange,
+                        ),
+                        title: Text(
+                          isAvailable
+                              ? UIStrings.ttsStatusAvailable
+                              : UIStrings.ttsStatusUnavailable,
+                        ),
+                        subtitle: isAvailable
+                            ? null
+                            : const Text(UIStrings.ttsInstallInstructions),
+                      ),
+                      const SizedBox(height: AppSpacing.sm),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: OutlinedButton.icon(
+                              onPressed: _testSpeech,
+                              icon: const Icon(Icons.record_voice_over),
+                              label: const Text(UIStrings.testSpeech),
+                            ),
+                          ),
+                          if (!isAvailable && !kIsWeb && defaultTargetPlatform == TargetPlatform.android) ...[
+                            const SizedBox(width: AppSpacing.md),
+                            Expanded(
+                              child: FilledButton.icon(
+                                onPressed: _openTtsSettings,
+                                icon: const Icon(Icons.settings),
+                                label: const Text(UIStrings.openTtsSettings),
+                              ),
+                            ),
+                          ],
+                        ],
+                      ),
+                    ],
+                  ),
                 );
               },
             ),

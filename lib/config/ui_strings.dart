@@ -96,4 +96,13 @@ class UIStrings {
   static const victoryTitle = 'VICTORY!';
   static const gameOverTitle = 'GAME OVER';
   static String finalScore(int n) => 'Final Score: $n';
+
+  // TTS / Speech
+  static const speechEngineLabel = 'Speech Engine';
+  static const ttsStatusAvailable = 'Punjabi speech is ready';
+  static const ttsStatusUnavailable = 'Punjabi speech not installed';
+  static const ttsInstallInstructions = 'To hear Punjabi audio, you may need to install the Punjabi language pack in your device settings.';
+  static const openTtsSettings = 'Open TTS Settings';
+  static const testSpeech = 'Test Speech';
+  static const ttsTestPhrase = 'ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ'; // "Sat Sri Akal"
 }
