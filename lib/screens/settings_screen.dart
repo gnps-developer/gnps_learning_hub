@@ -13,6 +13,7 @@ import '../config/ui_strings.dart';
 import '../providers/audio_providers.dart';
 import '../providers/content_providers.dart';
 import '../providers/progress_providers.dart';
+import '../services/audio_service.dart';
 import '../tools/content_debug_screen.dart';
 import '../tools/tracing_checkpoint_recorder_screen.dart';
 import '../widgets/celebration/achievement_celebration_overlay.dart';
@@ -38,8 +39,34 @@ class SettingsScreen extends ConsumerStatefulWidget {
   ConsumerState<SettingsScreen> createState() => _SettingsScreenState();
 }
 
-class _SettingsScreenState extends ConsumerState<SettingsScreen> {
+class _SettingsScreenState extends ConsumerState<SettingsScreen>
+    with WidgetsBindingObserver {
   int _tapCount = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    // Kick off a fresh check once when the screen is first shown, rather
+    // than re-querying the TTS engine on every rebuild via FutureBuilder.
+    ref.read(audioServiceProvider).recheckAvailability();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // If the user went to system TTS settings and installed the Punjabi
+    // voice pack, re-check on return so the status updates without
+    // requiring the user to leave and re-enter this screen.
+    if (state == AppLifecycleState.resumed) {
+      ref.read(audioServiceProvider).recheckAvailability();
+    }
+  }
 
   Future<void> _confirmAndReset(BuildContext context) async {
     final confirmed = await showDialog<bool>(
@@ -80,7 +107,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     if (context.mounted) {
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (_) => const IntroScreen()),
-        (route) => false,
+            (route) => false,
       );
     }
   }
@@ -88,7 +115,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   Future<void> _debugCompleteAllLessons(BuildContext context) async {
     final journey =
         ref.read(journeyProvider).value ??
-        await ref.read(contentRepositoryProvider).getLocalJourney();
+            await ref.read(contentRepositoryProvider).getLocalJourney();
 
     await ref.read(progressProvider.notifier).debugCompleteAllLessons(journey);
 
@@ -126,6 +153,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     final progressAsync = ref.watch(progressProvider);
+    final audioService = ref.read(audioServiceProvider);
 
     return Scaffold(
       appBar: AppBar(title: const Text(UIStrings.settingsTitle)),
@@ -173,9 +201,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         shape: BoxShape.circle,
                         border: isSelected
                             ? Border.all(
-                                color: Theme.of(context).colorScheme.onSurface,
-                                width: 3,
-                              )
+                          color: Theme.of(context).colorScheme.onSurface,
+                          width: 3,
+                        )
                             : null,
                       ),
                       child: isSelected
@@ -206,7 +234,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 );
                 final totalTasks = journeyAsync.maybeWhen(
                   data: (j) =>
-                      '${j.activeLessons.fold<int>(0, (sum, lesson) => sum + lesson.allTasks.length)}',
+                  '${j.activeLessons.fold<int>(0, (sum, lesson) => sum + lesson.allTasks.length)}',
                   orElse: () => '—',
                 );
                 final totalGames = journeyAsync.maybeWhen(
@@ -280,10 +308,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
             const Divider(height: AppSpacing.xl),
             const _SectionHeader(UIStrings.speechEngineLabel),
-            FutureBuilder<bool>(
-              future: ref.read(audioServiceProvider).isPunjabiAvailable(),
-              builder: (context, snapshot) {
-                final isAvailable = snapshot.data ?? false;
+            ValueListenableBuilder<TtsAvailability>(
+              valueListenable: audioService.ttsAvailability,
+              builder: (context, availability, _) {
+                final isChecking = availability == TtsAvailability.checking;
+                final isAvailable = availability == TtsAvailability.available;
+
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
                   child: Column(
@@ -291,30 +321,41 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     children: [
                       ListTile(
                         contentPadding: EdgeInsets.zero,
-                        leading: Icon(
+                        leading: isChecking
+                            ? const SizedBox(
+                          width: 24,
+                          height: 24,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        )
+                            : Icon(
                           isAvailable ? Icons.check_circle : Icons.warning,
                           color: isAvailable ? Colors.green : Colors.orange,
                         ),
                         title: Text(
-                          isAvailable
+                          isChecking
+                              ? UIStrings.ttsStatusChecking
+                              : isAvailable
                               ? UIStrings.ttsStatusAvailable
                               : UIStrings.ttsStatusUnavailable,
                         ),
-                        subtitle: isAvailable
-                            ? null
-                            : const Text(UIStrings.ttsInstallInstructions),
+                        subtitle: (!isChecking && !isAvailable)
+                            ? const Text(UIStrings.ttsInstallInstructions)
+                            : null,
                       ),
                       const SizedBox(height: AppSpacing.sm),
                       Row(
                         children: [
                           Expanded(
                             child: OutlinedButton.icon(
-                              onPressed: _testSpeech,
+                              onPressed: isChecking ? null : _testSpeech,
                               icon: const Icon(Icons.record_voice_over),
                               label: const Text(UIStrings.testSpeech),
                             ),
                           ),
-                          if (!isAvailable && !kIsWeb && defaultTargetPlatform == TargetPlatform.android) ...[
+                          if (!isChecking &&
+                              !isAvailable &&
+                              !kIsWeb &&
+                              defaultTargetPlatform == TargetPlatform.android) ...[
                             const SizedBox(width: AppSpacing.md),
                             Expanded(
                               child: FilledButton.icon(

@@ -32,8 +32,7 @@ class UIStrings {
   static const streakTitle = 'Streak';
   static String streakDays(int n) => '$n day${n == 1 ? '' : 's'}';
   static String lessonsCompleted(int n) => 'Lessons completed: $n';
-  static String greeting(String? name) =>
-      'Hi${name != null && name.isNotEmpty ? ', $name' : ' there'}! 👋';
+  static const greeting = 'Sat Sri Akal 🙏';
 
   // Achievements
   static const achievementsTitle = 'Achievements';
@@ -97,12 +96,13 @@ class UIStrings {
   static const gameOverTitle = 'GAME OVER';
   static String finalScore(int n) => 'Final Score: $n';
 
-  // TTS / Speech
+// TTS / Speech
   static const speechEngineLabel = 'Speech Engine';
+  static const ttsStatusChecking = 'Checking speech engine…';
   static const ttsStatusAvailable = 'Punjabi speech is ready';
   static const ttsStatusUnavailable = 'Punjabi speech not installed';
   static const ttsInstallInstructions = 'To hear Punjabi audio, you may need to install the Punjabi language pack in your device settings.';
   static const openTtsSettings = 'Open TTS Settings';
   static const testSpeech = 'Test Speech';
-  static const ttsTestPhrase = 'ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ'; // "Sat Sri Akal"
+  static const ttsTestPhrase = 'ਪੰਜਾਬੀ, ਸਿੱਖੋ, ਖੇਡੋ, ਵਧੋ'; // "Punjabi, Sikho, Khedo, Wadho"
 }
