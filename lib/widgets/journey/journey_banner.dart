@@ -65,7 +65,8 @@ class JourneyBanner extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 10),
-                  child: const Text(
+                Flexible(
+                  child: Text(
                     UIStrings.greeting,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
