@@ -20,7 +20,8 @@
               "ਲੀ",
               "ਮ",
               "ਅ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/cat.mp3"
           }
         },
         {
@@ -36,7 +37,8 @@
               "ਤਾ",
               "ਬ",
               "ਲੀ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/dog.mp3"
           }
         },
         {
@@ -52,7 +54,8 @@
               "ਛੀ",
               "ਕੁ",
               "ਤਾ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/fish.mp3"
           }
         },
         {
@@ -68,7 +71,8 @@
               "ਬਿ",
               "ੱ",
               "ਲੀ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/horse.mp3"
           }
         },
         {
@@ -84,7 +88,8 @@
               "ਕੁ",
               "ੱ",
               "ਤਾ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/elephant.mp3"
           }
         },
         {
@@ -100,7 +105,8 @@
               "ਬਾਂ",
               "ਦਰ",
               "ਭਾ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/lion.mp3"
           }
         },
         {
@@ -116,7 +122,8 @@
               "ਸ਼ੇ",
               "ਰ",
               "ਊ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/monkey.mp3"
           }
         },
         {
@@ -132,7 +139,8 @@
               "ਤਖ",
               "ਭਾ",
               "ਲੂ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/duck.mp3"
           }
         },
         {
@@ -148,7 +156,8 @@
               "ਊ",
               "ਠ",
               "ਬ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/bear.mp3"
           }
         },
         {
@@ -164,7 +173,8 @@
               "ਬਾਂ",
               "ਦਰ",
               "ਸ਼ੇ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/camel.mp3"
           }
         }
       ]
@@ -186,7 +196,8 @@
               "ਬ",
               "ਸੂ",
               "ਰਜ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/book.mp3"
           }
         },
         {
@@ -202,7 +213,8 @@
               "ਕਿ",
               "ਤਾ",
               "ਬ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/sun.mp3"
           }
         },
         {
@@ -218,7 +230,8 @@
               "ਤਾ",
               "ਰਾ",
               "ਬ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/ball.mp3"
           }
         },
         {
@@ -234,7 +247,8 @@
               "ਗੇਂ",
               "ਦ",
               "ਸੂ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/star.mp3"
           }
         },
         {
@@ -250,7 +264,8 @@
               "ਤਾ",
               "ਰਾ",
               "ਗੇਂ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/moon.mp3"
           }
         },
         {
@@ -266,7 +281,8 @@
               "ਸੀ",
               "ਵਾ",
               "ਜ਼ਾ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/chair.mp3"
           }
         },
         {
@@ -282,7 +298,8 @@
               "ਜ਼ਾ",
               "ਖਿ",
               "ਕੀ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/door.mp3"
           }
         },
         {
@@ -298,7 +315,8 @@
               "ਕੀ",
               "ਮੰ",
               "ਜਾ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/window.mp3"
           }
         },
         {
@@ -314,7 +332,8 @@
               "ਸੋ",
               "ਫ਼ਾ",
               "ਕੁ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/cot.mp3"
           }
         },
         {
@@ -330,7 +349,8 @@
               "ਦਰ",
               "ਖਿ",
               "ੜ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/sofa.mp3"
           }
         }
       ]
@@ -352,7 +372,8 @@
               "ਕੇ",
               "ਲਾ",
               "ਅੰ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/apple.mp3"
           }
         },
         {
@@ -368,7 +389,8 @@
               "ਸੇ",
               "ਬ",
               "ਅੰ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/banana.mp3"
           }
         },
         {
@@ -384,7 +406,8 @@
               "ਸੇ",
               "ਕੇ",
               "ਲਾ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/mango.mp3"
           }
         },
         {
@@ -400,7 +423,8 @@
               "ਰਾ",
               "ਕੇ",
               "ਲਾ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/orange.mp3"
           }
         },
         {
@@ -416,7 +440,8 @@
               "ਰ",
               "ਸੇ",
               "ਬ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/grapes.mp3"
           }
         },
         {
@@ -432,7 +457,8 @@
               "ਜ਼",
               "ਅ",
               "ਨਾ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/watermelon.mp3"
           }
         },
         {
@@ -448,7 +474,8 @@
               "ਨਾਸ",
               "ਆ",
               "ੜੂ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/pineapple.mp3"
           }
         },
         {
@@ -464,7 +491,8 @@
               "ਨਾਸ਼",
               "ਪਾ",
               "ਤੀ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/peach.mp3"
           }
         },
         {
@@ -480,7 +508,8 @@
               "ਤੀ",
               "ਨਿੰ",
               "ਬੂ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/pear.mp3"
           }
         },
         {
@@ -496,7 +525,8 @@
               "ਤਰ",
               "ਜ਼",
               "ਅ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/lemon.mp3"
           }
         }
       ]
@@ -518,7 +548,8 @@
               "ਨੀ",
               "ਪੀ",
               "ਹ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/red.mp3"
           }
         },
         {
@@ -534,7 +565,8 @@
               "ਪੀ",
               "ਲ",
               "ਹ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/blue.mp3"
           }
         },
         {
@@ -550,7 +582,8 @@
               "ਹ",
               "ਨੀ",
               "ਲ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/yellow.mp3"
           }
         },
         {
@@ -566,7 +599,8 @@
               "ਲਾ",
               "ਲ",
               "ਨੀ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/green.mp3"
           }
         },
         {
@@ -582,7 +616,8 @@
               "ਚਿ",
               "ੱ",
               "ਟਾ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/black.mp3"
           }
         },
         {
@@ -598,7 +633,8 @@
               "ਟਾ",
               "ਕਾ",
               "ਲਾ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/white.mp3"
           }
         },
         {
@@ -614,7 +650,8 @@
               "ਰੀ",
               "ਗੁ",
               "ਲਾ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/orange_color.mp3"
           }
         },
         {
@@ -630,7 +667,8 @@
               "ਬੀ",
               "ਭੂ",
               "ਰਾ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/pink.mp3"
           }
         },
         {
@@ -646,7 +684,8 @@
               "ਜਾ",
               "ਮ",
               "ਨੀ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/brown.mp3"
           }
         },
         {
@@ -662,7 +701,8 @@
               "ਨੀ",
               "ਸੰ",
               "ਰੀ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/purple.mp3"
           }
         }
       ]
@@ -684,7 +724,8 @@
               "ਬ",
               "ੱ",
               "ਸ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/car.mp3"
           }
         },
         {
@@ -700,7 +741,8 @@
               "ਸ",
               "ਕਾ",
               "ਰ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/bus.mp3"
           }
         },
         {
@@ -716,7 +758,8 @@
               "ਡੀ",
               "ਜ",
               "ਹਾ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/train.mp3"
           }
         },
         {
@@ -732,7 +775,8 @@
               "ਜ਼",
               "ਸਾਈ",
               "ਕਲ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/airplane.mp3"
           }
         },
         {
@@ -748,7 +792,8 @@
               "ਰੇਲ",
               "ਗੱ",
               "ਡੀ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/bicycle.mp3"
           }
         },
         {
@@ -764,7 +809,8 @@
               "ਤੀ",
               "ਟੈ",
               "ਕ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/boat.mp3"
           }
         },
         {
@@ -780,7 +826,8 @@
               "ਸੀ",
               "ਟਰੱ",
               "ਮੋ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/taxi.mp3"
           }
         },
         {
@@ -796,7 +843,8 @@
               "ਕ",
               "ਹੈ",
               "ਲੀ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/truck.mp3"
           }
         },
         {
@@ -812,7 +860,8 @@
               "ਸਾਈ",
               "ਕਲ",
               "ਕਿ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/motorcycle.mp3"
           }
         },
         {
@@ -828,7 +877,8 @@
               "ਕਾਪ",
               "ਟਰ",
               "ਟੈ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/helicopter.mp3"
           }
         }
       ]
@@ -850,7 +900,8 @@
               "ਲ",
               "ਬ",
               "ਤਾ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/pencil.mp3"
           }
         },
         {
@@ -866,7 +917,8 @@
               "ਮ",
               "ਗੁ",
               "ਰੂ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/pen.mp3"
           }
         },
         {
@@ -882,7 +934,8 @@
               "ਤਾ",
               "ਤ",
               "ਖ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/bag.mp3"
           }
         },
         {
@@ -898,7 +951,8 @@
               "ਪੈਨ",
               "ਸਿ",
               "ਬ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/teacher_guru.mp3"
           }
         },
         {
@@ -914,7 +968,8 @@
               "ਤੀ",
               "ਕ",
               "ਮ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/slate.mp3"
           }
         },
         {
@@ -930,7 +985,8 @@
               "ਵਿ",
               "ਦਿ",
               "ਆਰ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/class.mp3"
           }
         },
         {
@@ -946,7 +1002,8 @@
               "ਆਰ",
               "ਥੀ",
               "ਰ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/student.mp3"
           }
         },
         {
@@ -962,7 +1019,8 @@
               "ਸ",
               "ਕੂਲ",
               "ਮੇ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/eraser.mp3"
           }
         },
         {
@@ -978,7 +1036,8 @@
               "ਮੇ",
               "ਜ਼",
               "ਜ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/school.mp3"
           }
         },
         {
@@ -994,7 +1053,8 @@
               "ਰ",
               "ਬੜ",
               "ਸ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/table.mp3"
           }
         }
       ]
@@ -1016,7 +1076,8 @@
               "ਬ",
               "ੱ",
               "ਦਲ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/rain.mp3"
           }
         },
         {
@@ -1032,7 +1093,8 @@
               "ਦਲ",
               "ਹ",
               "ਵਾ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/cloud.mp3"
           }
         },
         {
@@ -1048,7 +1110,8 @@
               "ਬ",
               "ਰ",
               "ਫ਼"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/wind.mp3"
           }
         },
         {
@@ -1064,7 +1127,8 @@
               "ਫ਼",
               "ਧੁੰ",
               "ਦ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/ice.mp3"
           }
         },
         {
@@ -1080,7 +1144,8 @@
               "ਮੀਂ",
               "ਹ",
               "ਬ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/fog.mp3"
           }
         },
         {
@@ -1096,7 +1161,8 @@
               "ਗਰ",
               "ਮੀ",
               " "
-            ]
+            ],
+            "audioFile": "audio/lessons/words/sunshine.mp3"
           }
         },
         {
@@ -1112,7 +1178,8 @@
               "ਸਰ",
               "ਦੀ",
               "ਧੁੱ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/summer.mp3"
           }
         },
         {
@@ -1128,7 +1195,8 @@
               "ਬਿਜ",
               "ਲੀ",
               "ਗਰ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/winter.mp3"
           }
         },
         {
@@ -1144,7 +1212,8 @@
               "ਤੂ",
               "ਫ਼ਾਨ",
               "ਸਰ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/electricity.mp3"
           }
         },
         {
@@ -1160,7 +1229,8 @@
               "ਧੁੱ",
               "ਪ",
               "ਗਰ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/storm.mp3"
           }
         }
       ]
@@ -1182,7 +1252,8 @@
               "ਜ਼",
               "ਪੈਂ",
               "ਟ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/shirt.mp3"
           }
         },
         {
@@ -1198,7 +1269,8 @@
               "ਜੁੱ",
               "ਤੀ",
               "ਟੋ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/pants.mp3"
           }
         },
         {
@@ -1214,7 +1286,8 @@
               "ਟੋ",
               "ਪੀ",
               "ਜੁ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/shoe.mp3"
           }
         },
         {
@@ -1230,7 +1303,8 @@
               "ਜੁ",
               "ਰਾਬ",
               "ਸ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/cap.mp3"
           }
         },
         {
@@ -1246,7 +1320,8 @@
               "ਸ",
               "ਵੈ",
               "ਟਰ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/sock.mp3"
           }
         },
         {
@@ -1262,7 +1337,8 @@
               "ਟਰ",
               "ਦਸ",
               "ਨੇ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/sweater.mp3"
           }
         },
         {
@@ -1278,7 +1354,8 @@
               "ਨੇ",
               "ਕੋ",
               "ਟ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/gloves.mp3"
           }
         },
         {
@@ -1294,7 +1371,8 @@
               "ਰੁ",
               "ਮਾਲ",
               "ਪ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/coat.mp3"
           }
         },
         {
@@ -1310,7 +1388,8 @@
               "ਪ",
               "ਜਾ",
               "ਮਾ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/handkerchief.mp3"
           }
         },
         {
@@ -1326,7 +1405,8 @@
               "ਮਾ",
               "ਕ",
               "ਮੀ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/pajama.mp3"
           }
         }
       ]
@@ -1348,7 +1428,8 @@
               "ਕਾਂ",
               "ਟਾ",
               "ਛੁ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/spoon.mp3"
           }
         },
         {
@@ -1364,7 +1445,8 @@
               "ਛੁ",
               "ਰੀ",
               "ਭਾਂ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/fork.mp3"
           }
         },
         {
@@ -1380,7 +1462,8 @@
               "ਭਾਂ",
               "ਡਾ",
               "ਗ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/knife_small.mp3"
           }
         },
         {
@@ -1396,7 +1479,8 @@
               "ਗ",
               "ਲਾਸ",
               "ਪ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/vessel.mp3"
           }
         },
         {
@@ -1412,7 +1496,8 @@
               "ਪ",
               "ਲੇਟ",
               "ਫ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/glass.mp3"
           }
         },
         {
@@ -1428,7 +1513,8 @@
               "ਫ",
               "ਰਿੱ",
               "ਜ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/plate.mp3"
           }
         },
         {
@@ -1444,7 +1530,8 @@
               "ਜ",
               "ਚੁੱ",
               "ਲ੍ਹਾ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/fridge.mp3"
           }
         },
         {
@@ -1460,7 +1547,8 @@
               "ਕ",
               "ੜਾ",
               "ਹੀ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/stove.mp3"
           }
         },
         {
@@ -1476,7 +1564,8 @@
               "ਹੀ",
               "ਥਾ",
               "ਲੀ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/pan.mp3"
           }
         },
         {
@@ -1492,7 +1581,8 @@
               "ਚਮ",
               "ਕਾਂ",
               "ਟਾ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/plate_round.mp3"
           }
         }
       ]
@@ -1514,7 +1604,8 @@
               "ਫੁੱ",
               "ਲ",
               "ਪ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/tree.mp3"
           }
         },
         {
@@ -1530,7 +1621,8 @@
               "ਪ",
               "ਹਾੜ",
               "ਦ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/flower.mp3"
           }
         },
         {
@@ -1546,7 +1638,8 @@
               "ਦ",
               "ਰਿ",
               "ਆ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/mountain.mp3"
           }
         },
         {
@@ -1562,7 +1655,8 @@
               "ਆ",
               "ਸ",
               "ਮੁੰ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/river.mp3"
           }
         },
         {
@@ -1578,7 +1672,8 @@
               "ਦਰ",
               "ਜੰ",
               "ਗਲ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/sea.mp3"
           }
         },
         {
@@ -1594,7 +1689,8 @@
               "ਪੱ",
               "ਤਾ",
               "ਘਾ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/forest.mp3"
           }
         },
         {
@@ -1610,7 +1706,8 @@
               "ਘਾ",
               "ਹ",
               "ਅ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/leaf.mp3"
           }
         },
         {
@@ -1626,7 +1723,8 @@
               "ਅ",
               "ਸ",
               "ਮਾਨ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/grass.mp3"
           }
         },
         {
@@ -1642,7 +1740,8 @@
               "ਮਾਨ",
               "ਰੇ",
               "ਤ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/sky.mp3"
           }
         },
         {
@@ -1658,7 +1757,8 @@
               "ਰੁੱ",
               "ਖ",
               "ਫੁੱ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/sand.mp3"
           }
         }
       ]
@@ -1680,7 +1780,8 @@
               "ਕਾ",
               "ਂ",
               "ਕ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/parrot.mp3"
           }
         },
         {
@@ -1696,7 +1797,8 @@
               "ਕ",
               "ਬੂ",
               "ਤਰ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/crow.mp3"
           }
         },
         {
@@ -1712,7 +1814,8 @@
               "ਤਰ",
               "ਮੋ",
               "ਰ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/pigeon.mp3"
           }
         },
         {
@@ -1728,7 +1831,8 @@
               "ਬਾ",
               "ਜ਼",
               "ਉੱ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/peacock.mp3"
           }
         },
         {
@@ -1744,7 +1848,8 @@
               "ਉੱ",
               "ਲੂ",
               "ਚਿ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/hawk.mp3"
           }
         },
         {
@@ -1760,7 +1865,8 @@
               "ਚਿ",
               "ੜੀ",
               "ਮੁਰ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/owl.mp3"
           }
         },
         {
@@ -1776,7 +1882,8 @@
               "ਮੁਰ",
               "ਗੀ",
               "ਹੰ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/sparrow.mp3"
           }
         },
         {
@@ -1792,7 +1899,8 @@
               "ਹੰ",
               "ਸ",
               "ਚਮ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/hen.mp3"
           }
         },
         {
@@ -1808,7 +1916,8 @@
               "ਚਮ",
               "ਗਿੱ",
               "ਦੜ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/swan.mp3"
           }
         },
         {
@@ -1824,7 +1933,8 @@
               "ਦੜ",
               "ਤੋ",
               "ਤਾ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/bat.mp3"
           }
         }
       ]
@@ -1846,7 +1956,8 @@
               "ਮੰਗਲ",
               "ਬੁੱਧ",
               " "
-            ]
+            ],
+            "audioFile": "audio/lessons/words/monday.mp3"
           }
         },
         {
@@ -1862,7 +1973,8 @@
               "ਬੁੱਧ",
               "ਵੀਰ",
               "ਸੋਮ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/tuesday.mp3"
           }
         },
         {
@@ -1878,7 +1990,8 @@
               "ਵੀਰ",
               "ਸ਼ੁੱਕਰ",
               "ਮੰਗਲ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/wednesday.mp3"
           }
         },
         {
@@ -1894,7 +2007,8 @@
               "ਸ਼ੁੱਕਰ",
               "ਸ਼ਨੀ",
               "ਬੁੱਧ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/thursday.mp3"
           }
         },
         {
@@ -1910,7 +2024,8 @@
               "ਸ਼ਨੀ",
               "ਐਤ",
               "ਵੀਰ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/friday.mp3"
           }
         },
         {
@@ -1926,7 +2041,8 @@
               "ਐਤ",
               "ਸੋਮ",
               "ਸ਼ੁੱਕਰ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/saturday.mp3"
           }
         },
         {
@@ -1942,7 +2058,8 @@
               "ਸੋਮ",
               "ਮੰਗਲ",
               "ਸ਼ਨੀ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/sunday.mp3"
           }
         },
         {
@@ -1958,7 +2075,8 @@
               "ਕੱ",
               "ਲ੍ਹ",
               "ਪਰ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/today.mp3"
           }
         },
         {
@@ -1974,7 +2092,8 @@
               "ਪਰ",
               "ਸੋਂ",
               "ਅੱ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/tomorrow.mp3"
           }
         },
         {
@@ -1990,7 +2109,8 @@
               "ਅੱ",
               "ਜ",
               "ਕੱ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/day_after_tomorrow.mp3"
           }
         }
       ]
@@ -2012,7 +2132,8 @@
               "ਦੱ",
               "ਖਣ",
               "ਪੂਰ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/north.mp3"
           }
         },
         {
@@ -2028,7 +2149,8 @@
               "ਪੂਰ",
               "ਬ",
               "ਪੱ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/south.mp3"
           }
         },
         {
@@ -2044,7 +2166,8 @@
               "ਪੱ",
               "ਛਮ",
               "ਉੱ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/east.mp3"
           }
         },
         {
@@ -2060,7 +2183,8 @@
               "ਉੱ",
               "ਪਰ",
               "ਹੇ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/west.mp3"
           }
         },
         {
@@ -2076,7 +2200,8 @@
               "ਹੇ",
               "ਠਾਂ",
               "ਖੱ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/up.mp3"
           }
         },
         {
@@ -2092,7 +2217,8 @@
               "ਖੱ",
               "ਬੇ",
               "ਸੱ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/down.mp3"
           }
         },
         {
@@ -2108,7 +2234,8 @@
               "ਸੱ",
               "ਜੇ",
               "ਅੱ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/left.mp3"
           }
         },
         {
@@ -2124,7 +2251,8 @@
               "ਅੱ",
               "ਗੇ",
               "ਪਿੱ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/right.mp3"
           }
         },
         {
@@ -2140,7 +2268,8 @@
               "ਪਿੱ",
               "ਛੇ",
               "ਉੱ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/forward.mp3"
           }
         },
         {
@@ -2156,7 +2285,8 @@
               "ਉੱ",
               "ਤਰ",
               "ਦੱ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/backward.mp3"
           }
         }
       ]
@@ -2178,7 +2308,8 @@
               "ਕੰ",
               "ਪਿ",
               "ਊ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/office.mp3"
           }
         },
         {
@@ -2194,7 +2325,8 @@
               "ਊ",
               "ਟਰ",
               "ਫ਼ਾ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/computer.mp3"
           }
         },
         {
@@ -2210,7 +2342,8 @@
               "ਪ੍ਰਿੰ",
               "ਟਰ",
               "ਫੋ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/file.mp3"
           }
         },
         {
@@ -2226,7 +2359,8 @@
               "ਫੋ",
               "ਨ",
               "ਘ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/printer.mp3"
           }
         },
         {
@@ -2242,7 +2376,8 @@
               "ਘ",
               "ੜੀ",
               "ਸ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/phone.mp3"
           }
         },
         {
@@ -2258,7 +2393,8 @@
               "ਸ",
               "ਟੈ",
               "ਪ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/clock.mp3"
           }
         },
         {
@@ -2274,7 +2410,8 @@
               "ਪ",
               "ਲਰ",
               "ਲਿਫ਼ਾ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/stapler.mp3"
           }
         },
         {
@@ -2290,7 +2427,8 @@
               "ਡਾ",
               "ਇ",
               "ਰੀ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/envelope.mp3"
           }
         },
         {
@@ -2306,7 +2444,8 @@
               "ਰੀ",
               "ਅਲ",
               "ਮਾ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/diary.mp3"
           }
         },
         {
@@ -2322,7 +2461,8 @@
               "ਰੀ",
               "ਦਫ਼",
               "ਤਰ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/cupboard.mp3"
           }
         }
       ]
@@ -2344,7 +2484,8 @@
               "ਦੁ",
               "ਕਾਨ",
               "ਬਾ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/money.mp3"
           }
         },
         {
@@ -2360,7 +2501,8 @@
               "ਬਾ",
               "ਜ਼ਾਰ",
               "ਕੀ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/shop.mp3"
           }
         },
         {
@@ -2376,7 +2518,8 @@
               "ਕੀ",
               "ਮਤ",
               "ਥੈ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/market.mp3"
           }
         },
         {
@@ -2392,7 +2535,8 @@
               "ਥੈ",
               "ਲਾ",
               "ਗਾ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/price.mp3"
           }
         },
         {
@@ -2408,7 +2552,8 @@
               "ਗਾ",
               "ਹਕ",
               "ਦੁਕਾਨ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/bag_shop.mp3"
           }
         },
         {
@@ -2424,7 +2569,8 @@
               "ਦੁਕਾਨ",
               "ਦਾਰ",
               "ਨੋ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/customer.mp3"
           }
         },
         {
@@ -2440,7 +2586,8 @@
               "ਨੋ",
               "ਟ",
               "ਸਿੱ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/shopkeeper.mp3"
           }
         },
         {
@@ -2456,7 +2603,8 @@
               "ਸਿੱ",
               "ਕਾ",
               "ਰ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/note.mp3"
           }
         },
         {
@@ -2472,7 +2620,8 @@
               "ਰ",
               "ਸੀਦ",
               "ਪੈ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/coin.mp3"
           }
         },
         {
@@ -2488,7 +2637,8 @@
               "ਪੈ",
               "ਸਾ",
               "ਦੁ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/receipt.mp3"
           }
         }
       ]
@@ -2510,7 +2660,8 @@
               "ਰੋ",
               "ਟੀ",
               "ਦਾ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/food.mp3"
           }
         },
         {
@@ -2526,7 +2677,8 @@
               "ਦਾ",
               "ਲ",
               "ਚਾ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/bread.mp3"
           }
         },
         {
@@ -2542,7 +2694,8 @@
               "ਚਾ",
               "ਵਲ",
               "ਦੁੱ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/lentils.mp3"
           }
         },
         {
@@ -2558,7 +2711,8 @@
               "ਦੁੱ",
               "ਧ",
               "ਪਾ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/rice.mp3"
           }
         },
         {
@@ -2574,7 +2728,8 @@
               "ਪਾ",
               "ਣੀ",
               "ਚਾ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/milk.mp3"
           }
         },
         {
@@ -2590,7 +2745,8 @@
               "ਚਾ",
               "ਹ",
               "ਸ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/water.mp3"
           }
         },
         {
@@ -2606,7 +2762,8 @@
               "ਸ",
               "ਬ",
               "ਜ਼ੀ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/tea.mp3"
           }
         },
         {
@@ -2622,7 +2779,8 @@
               "ਜ਼ੀ",
               "ਮਿੱ",
               "ਠਾ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/vegetable.mp3"
           }
         },
         {
@@ -2638,7 +2796,8 @@
               "ਨਾਸ਼",
               "ਤਾ",
               "ਖਾ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/sweet.mp3"
           }
         },
         {
@@ -2654,7 +2813,8 @@
               "ਖਾ",
               "ਣਾ",
               "ਰੋ"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/breakfast.mp3"
           }
         }
       ]

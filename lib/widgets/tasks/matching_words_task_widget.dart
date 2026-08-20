@@ -79,10 +79,16 @@ class _MatchingWordsTaskWidgetState extends ConsumerState<MatchingWordsTaskWidge
                         child: Draggable<String>(
                           data: word,
                           feedback: _WordTile(word: word, isFeedback: true),
-                          childWhenDragging: _WordTile(word: word, isDragging: true),
+                          childWhenDragging:
+                              _WordTile(word: word, isDragging: true),
                           maxSimultaneousDrags: isCompleted ? 0 : 1,
                           child: GestureDetector(
-                            onTap: () => ref.read(audioServiceProvider).speak(word),
+                            onTap: () {
+                              final mapping = widget.task.content['itemPool']
+                                  as Map<String, dynamic>?;
+                              final audioId = mapping?[word] as String? ?? '';
+                              ref.read(audioServiceProvider).speak(audioId);
+                            },
                             child: _WordTile(word: word),
                           ),
                         ),

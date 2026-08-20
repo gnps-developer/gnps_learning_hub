@@ -50,9 +50,10 @@ class _LetterSelectionTaskWidgetState
     _options = [correct, ...distractors.take(3)]..shuffle(Random());
 
     // Auto-play the letter sound after a short delay
+    final audioFile = widget.task.content['audioFile'] as String? ?? '';
     Future.delayed(TaskConfig.autoPlayDelay, () {
       if (mounted) {
-        ref.read(audioServiceProvider).speak(correct);
+        ref.read(audioServiceProvider).speak(audioFile);
       }
     });
   }
@@ -83,7 +84,6 @@ class _LetterSelectionTaskWidgetState
 
   @override
   Widget build(BuildContext context) {
-    final correctLetter = widget.task.content['correctLetter'] as String;
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(12, 16, 12, 24),
@@ -91,7 +91,10 @@ class _LetterSelectionTaskWidgetState
         children: [
           const TaskHeader(title: 'Listen and select the correct letter'),
           const SizedBox(height: 32),
-          TaskSpeakerButton(textToSpeak: correctLetter, iconSize: 64),
+          TaskSpeakerButton(
+            audioId: widget.task.content['audioFile'] as String? ?? '',
+            iconSize: 64,
+          ),
           const SizedBox(height: 48),
           Expanded(
             child: AnimatedBuilder(

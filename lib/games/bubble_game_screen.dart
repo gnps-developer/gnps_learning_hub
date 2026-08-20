@@ -118,9 +118,8 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
 
   Future<void> _initGame() async {
     final content = widget.game.content;
-    final List<String> letters = (content['letters'] as List? ?? [])
-        .map((e) => e.toString())
-        .toList();
+    final Map<String, dynamic>? mapping = content['itemPool'];
+    final List<String> letters = mapping?.keys.toList() ?? [];
 
     setState(() {
       _letterPool = letters.isEmpty ? ['ੳ', 'ਅ', 'ੲ', 'ਸ', 'ਹ'] : letters;
@@ -154,7 +153,9 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
   }
 
   Future<void> _speakTarget() async {
-    ref.read(audioServiceProvider).speak(_targetLetter);
+    final mapping = widget.game.content['itemPool'] as Map<String, dynamic>?;
+    final path = mapping?[_targetLetter] as String? ?? '';
+    ref.read(audioServiceProvider).speak(path);
   }
 
   void _spawnBubble() {
@@ -439,7 +440,9 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
                           ),
                           const SizedBox(height: AppSpacing.sm),
                           TaskSpeakerButton(
-                            textToSpeak: _targetLetter,
+                            audioId: (widget.game.content['itemPool']
+                                    as Map<String, dynamic>?)?[_targetLetter] ??
+                                '',
                             iconSize: 40,
                           ),
                         ],

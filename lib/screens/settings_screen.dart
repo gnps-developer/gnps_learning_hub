@@ -1,19 +1,18 @@
 import 'dart:convert';
+
+import 'package:crypto/crypto.dart';
+import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter/foundation.dart' show kDebugMode, kIsWeb, defaultTargetPlatform;
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:crypto/crypto.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../config/debug_config.dart';
 import '../config/ui_config.dart';
 import '../config/ui_strings.dart';
-import '../providers/audio_providers.dart';
 import '../providers/content_providers.dart';
 import '../providers/progress_providers.dart';
-import '../services/audio_service.dart';
 import '../tools/content_debug_screen.dart';
 import '../tools/tracing_checkpoint_recorder_screen.dart';
 import '../widgets/celebration/achievement_celebration_overlay.dart';
@@ -39,34 +38,8 @@ class SettingsScreen extends ConsumerStatefulWidget {
   ConsumerState<SettingsScreen> createState() => _SettingsScreenState();
 }
 
-class _SettingsScreenState extends ConsumerState<SettingsScreen>
-    with WidgetsBindingObserver {
+class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   int _tapCount = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addObserver(this);
-    // Kick off a fresh check once when the screen is first shown, rather
-    // than re-querying the TTS engine on every rebuild via FutureBuilder.
-    ref.read(audioServiceProvider).recheckAvailability();
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    // If the user went to system TTS settings and installed the Punjabi
-    // voice pack, re-check on return so the status updates without
-    // requiring the user to leave and re-enter this screen.
-    if (state == AppLifecycleState.resumed) {
-      ref.read(audioServiceProvider).recheckAvailability();
-    }
-  }
 
   Future<void> _confirmAndReset(BuildContext context) async {
     final confirmed = await showDialog<bool>(
@@ -142,18 +115,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
     }
   }
 
-  Future<void> _testSpeech() async {
-    await ref.read(audioServiceProvider).speak(UIStrings.ttsTestPhrase);
-  }
-
-  Future<void> _openTtsSettings() async {
-    await ref.read(audioServiceProvider).openTtsSettings();
-  }
-
   @override
   Widget build(BuildContext context) {
     final progressAsync = ref.watch(progressProvider);
-    final audioService = ref.read(audioServiceProvider);
 
     return Scaffold(
       appBar: AppBar(title: const Text(UIStrings.settingsTitle)),
@@ -303,72 +267,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
                       trailing: const Icon(Icons.chevron_right),
                     ),
                   ],
-                );
-              },
-            ),
-            const Divider(height: AppSpacing.xl),
-            const _SectionHeader(UIStrings.speechEngineLabel),
-            ValueListenableBuilder<TtsAvailability>(
-              valueListenable: audioService.ttsAvailability,
-              builder: (context, availability, _) {
-                final isChecking = availability == TtsAvailability.checking;
-                final isAvailable = availability == TtsAvailability.available;
-
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ListTile(
-                        contentPadding: EdgeInsets.zero,
-                        leading: isChecking
-                            ? const SizedBox(
-                          width: 24,
-                          height: 24,
-                          child: CircularProgressIndicator(strokeWidth: 2),
-                        )
-                            : Icon(
-                          isAvailable ? Icons.check_circle : Icons.warning,
-                          color: isAvailable ? Colors.green : Colors.orange,
-                        ),
-                        title: Text(
-                          isChecking
-                              ? UIStrings.ttsStatusChecking
-                              : isAvailable
-                              ? UIStrings.ttsStatusAvailable
-                              : UIStrings.ttsStatusUnavailable,
-                        ),
-                        subtitle: (!isChecking && !isAvailable)
-                            ? const Text(UIStrings.ttsInstallInstructions)
-                            : null,
-                      ),
-                      const SizedBox(height: AppSpacing.sm),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: OutlinedButton.icon(
-                              onPressed: isChecking ? null : _testSpeech,
-                              icon: const Icon(Icons.record_voice_over),
-                              label: const Text(UIStrings.testSpeech),
-                            ),
-                          ),
-                          if (!isChecking &&
-                              !isAvailable &&
-                              !kIsWeb &&
-                              defaultTargetPlatform == TargetPlatform.android) ...[
-                            const SizedBox(width: AppSpacing.md),
-                            Expanded(
-                              child: FilledButton.icon(
-                                onPressed: _openTtsSettings,
-                                icon: const Icon(Icons.settings),
-                                label: const Text(UIStrings.openTtsSettings),
-                              ),
-                            ),
-                          ],
-                        ],
-                      ),
-                    ],
-                  ),
                 );
               },
             ),

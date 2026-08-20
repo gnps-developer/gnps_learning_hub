@@ -17,6 +17,12 @@
               "ਫ਼ਰਵਰੀ": "February",
               "ਮਾਰਚ": "March",
               "ਅਪ੍ਰੈਲ": "April"
+            },
+            "itemPool": {
+              "ਜਨਵਰੀ": "audio/lessons/words/january.mp3",
+              "ਫ਼ਰਵਰੀ": "audio/lessons/words/february.mp3",
+              "ਮਾਰਚ": "audio/lessons/words/march.mp3",
+              "ਅਪ੍ਰੈਲ": "audio/lessons/words/april.mp3"
             }
           }
         },
@@ -30,6 +36,12 @@
               "ਜੂਨ": "June",
               "ਜੁਲਾਈ": "July",
               "ਅਗਸਤ": "August"
+            },
+            "itemPool": {
+              "ਮਈ": "audio/lessons/words/may.mp3",
+              "ਜੂਨ": "audio/lessons/words/june.mp3",
+              "ਜੁਲਾਈ": "audio/lessons/words/july.mp3",
+              "ਅਗਸਤ": "audio/lessons/words/august.mp3"
             }
           }
         },
@@ -43,6 +55,12 @@
               "ਅਕਤੂਬਰ": "October",
               "ਨਵੰਬਰ": "November",
               "ਦਸੰਬਰ": "December"
+            },
+            "itemPool": {
+              "ਸਤੰਬਰ": "audio/lessons/words/september.mp3",
+              "ਅਕਤੂਬਰ": "audio/lessons/words/october.mp3",
+              "ਨਵੰਬਰ": "audio/lessons/words/november.mp3",
+              "ਦਸੰਬਰ": "audio/lessons/words/december.mp3"
             }
           }
         }
@@ -62,6 +80,12 @@
               "ਨੀਲਾ": "Blue",
               "ਪੀਲਾ": "Yellow",
               "ਹਰਾ": "Green"
+            },
+            "itemPool": {
+              "ਲਾਲ": "audio/lessons/words/red.mp3",
+              "ਨੀਲਾ": "audio/lessons/words/blue.mp3",
+              "ਪੀਲਾ": "audio/lessons/words/yellow.mp3",
+              "ਹਰਾ": "audio/lessons/words/green.mp3"
             }
           }
         },
@@ -75,6 +99,12 @@
               "ਚਿੱਟਾ": "White",
               "ਸੰਤਰੀ": "Orange",
               "ਗੁਲਾਬੀ": "Pink"
+            },
+            "itemPool": {
+              "ਕਾਲਾ": "audio/lessons/words/black.mp3",
+              "ਚਿੱਟਾ": "audio/lessons/words/white.mp3",
+              "ਸੰਤਰੀ": "audio/lessons/words/orange_color.mp3",
+              "ਗੁਲਾਬੀ": "audio/lessons/words/pink.mp3"
             }
           }
         }
@@ -94,6 +124,12 @@
               "ਕੁੱਤਾ": "Dog",
               "ਹਾਥੀ": "Elephant",
               "ਸ਼ੇਰ": "Lion"
+            },
+            "itemPool": {
+              "ਬਿੱਲੀ": "audio/lessons/words/cat.mp3",
+              "ਕੁੱਤਾ": "audio/lessons/words/dog.mp3",
+              "ਹਾਥੀ": "audio/lessons/words/elephant.mp3",
+              "ਸ਼ੇਰ": "audio/lessons/words/lion.mp3"
             }
           }
         },
@@ -107,6 +143,12 @@
               "ਮੱਛੀ": "Fish",
               "ਬਾਂਦਰ": "Monkey",
               "ਊਠ": "Camel"
+            },
+            "itemPool": {
+              "ਘੋੜਾ": "audio/lessons/words/horse.mp3",
+              "ਮੱਛੀ": "audio/lessons/words/fish.mp3",
+              "ਬਾਂਦਰ": "audio/lessons/words/monkey.mp3",
+              "ਊਠ": "audio/lessons/words/camel.mp3"
             }
           }
         }
@@ -126,6 +168,12 @@
               "ਪਾਣੀ": "Water",
               "ਦੁੱਧ": "Milk",
               "ਚਾਵਲ": "Rice"
+            },
+            "itemPool": {
+              "ਰੋਟੀ": "audio/lessons/words/bread.mp3",
+              "ਪਾਣੀ": "audio/lessons/words/water.mp3",
+              "ਦੁੱਧ": "audio/lessons/words/milk.mp3",
+              "ਚਾਵਲ": "audio/lessons/words/rice.mp3"
             }
           }
         },
@@ -139,6 +187,12 @@
               "ਕੇਲਾ": "Banana",
               "ਅੰਬ": "Mango",
               "ਅਨਾਰ": "Pomegranate"
+            },
+            "itemPool": {
+              "ਸੇਬ": "audio/lessons/words/apple.mp3",
+              "ਕੇਲਾ": "audio/lessons/words/banana.mp3",
+              "ਅੰਬ": "audio/lessons/words/mango.mp3",
+              "ਅਨਾਰ": "audio/lessons/words/pomegranate.mp3"
             }
           }
         }
@@ -158,6 +212,12 @@
               "ਮੰਗਲਵਾਰ": "Tuesday",
               "ਬੁੱਧਵਾਰ": "Wednesday",
               "ਵੀਰਵਾਰ": "Thursday"
+            },
+            "itemPool": {
+              "ਸੋਮਵਾਰ": "audio/lessons/words/monday.mp3",
+              "ਮੰਗਲਵਾਰ": "audio/lessons/words/tuesday.mp3",
+              "ਬੁੱਧਵਾਰ": "audio/lessons/words/wednesday.mp3",
+              "ਵੀਰਵਾਰ": "audio/lessons/words/thursday.mp3"
             }
           }
         },
@@ -171,6 +231,12 @@
               "ਸ਼ਨੀਵਾਰ": "Saturday",
               "ਐਤਵਾਰ": "Sunday",
               "ਅੱਜ": "Today"
+            },
+            "itemPool": {
+              "ਸ਼ੁੱਕਰਵਾਰ": "audio/lessons/words/friday.mp3",
+              "ਸ਼ਨੀਵਾਰ": "audio/lessons/words/saturday.mp3",
+              "ਐਤਵਾਰ": "audio/lessons/words/sunday.mp3",
+              "ਅੱਜ": "audio/lessons/words/today.mp3"
             }
           }
         }
@@ -190,6 +256,12 @@
               "ਦੱਖਣ": "South",
               "ਪੂਰਬ": "East",
               "ਪੱਛਮ": "West"
+            },
+            "itemPool": {
+              "ਉੱਤਰ": "audio/lessons/words/north.mp3",
+              "ਦੱਖਣ": "audio/lessons/words/south.mp3",
+              "ਪੂਰਬ": "audio/lessons/words/east.mp3",
+              "ਪੱਛਮ": "audio/lessons/words/west.mp3"
             }
           }
         },
@@ -203,6 +275,12 @@
               "ਹੇਠਾਂ": "Down",
               "ਖੱਬੇ": "Left",
               "ਸੱਜੇ": "Right"
+            },
+            "itemPool": {
+              "ਉੱਪਰ": "audio/lessons/words/up.mp3",
+              "ਹੇਠਾਂ": "audio/lessons/words/down.mp3",
+              "ਖੱਬੇ": "audio/lessons/words/left.mp3",
+              "ਸੱਜੇ": "audio/lessons/words/right.mp3"
             }
           }
         }
@@ -222,6 +300,12 @@
               "ਫੁੱਲ": "Flower",
               "ਪਹਾੜ": "Mountain",
               "ਦਰਿਆ": "River"
+            },
+            "itemPool": {
+              "ਰੁੱਖ": "audio/lessons/words/tree.mp3",
+              "ਫੁੱਲ": "audio/lessons/words/flower.mp3",
+              "ਪਹਾੜ": "audio/lessons/words/mountain.mp3",
+              "ਦਰਿਆ": "audio/lessons/words/river.mp3"
             }
           }
         },
@@ -235,6 +319,12 @@
               "ਜੰਗਲ": "Forest",
               "ਅਸਮਾਨ": "Sky",
               "ਰੇਤ": "Sand"
+            },
+            "itemPool": {
+              "ਸਮੁੰਦਰ": "audio/lessons/words/sea.mp3",
+              "ਜੰਗਲ": "audio/lessons/words/forest.mp3",
+              "ਅਸਮਾਨ": "audio/lessons/words/sky.mp3",
+              "ਰੇਤ": "audio/lessons/words/sand.mp3"
             }
           }
         }
@@ -254,6 +344,12 @@
               "ਕਲਮ": "Pen",
               "ਮੇਜ਼": "Table",
               "ਕੁਰਸੀ": "Chair"
+            },
+            "itemPool": {
+              "ਕਿਤਾਬ": "audio/lessons/words/book.mp3",
+              "ਕਲਮ": "audio/lessons/words/pen.mp3",
+              "ਮੇਜ਼": "audio/lessons/words/table.mp3",
+              "ਕੁਰਸੀ": "audio/lessons/words/chair.mp3"
             }
           }
         },
@@ -267,6 +363,12 @@
               "ਘੜੀ": "Clock",
               "ਘਰ": "House",
               "ਪਾਣੀ": "Water"
+            },
+            "itemPool": {
+              "ਬਸਤਾ": "audio/lessons/words/bag.mp3",
+              "ਘੜੀ": "audio/lessons/words/clock.mp3",
+              "ਘਰ": "audio/lessons/words/house.mp3",
+              "ਪਾਣੀ": "audio/lessons/words/water.mp3"
             }
           }
         }

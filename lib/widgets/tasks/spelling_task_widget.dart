@@ -54,10 +54,10 @@ class _SpellingTaskWidgetState extends ConsumerState<SpellingTaskWidget>
     ]..shuffle(Random());
 
     // Auto-play the target word sound after a short delay
-    final targetWord = widget.task.content['targetWord'] as String;
+    final audioFile = widget.task.content['audioFile'] as String? ?? '';
     Future.delayed(TaskConfig.autoPlayDelay, () {
       if (mounted) {
-        ref.read(audioServiceProvider).speak(targetWord);
+        ref.read(audioServiceProvider).speak(audioFile);
       }
     });
   }
@@ -102,7 +102,7 @@ class _SpellingTaskWidgetState extends ConsumerState<SpellingTaskWidget>
   @override
   Widget build(BuildContext context) {
     final emoji = widget.task.content['emoji'] as String;
-    final targetWord = widget.task.content['targetWord'] as String;
+    final audioFile = widget.task.content['audioFile'] as String? ?? '';
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(12, 16, 12, 24),
@@ -121,7 +121,7 @@ class _SpellingTaskWidgetState extends ConsumerState<SpellingTaskWidget>
                     ),
                   ),
                   const SizedBox(height: 4),
-                  TaskSpeakerButton(textToSpeak: targetWord),
+                  TaskSpeakerButton(audioId: audioFile),
                   const SizedBox(height: 16),
 
                   // Integrated Build Area + Preview

@@ -61,6 +61,17 @@ The `CURRICULUM.md` file tracks all lessons and tasks. To refresh it based on th
 dart tools/generate_curriculum.dart
 ```
 
+### 🔊 Content Audio Generation
+To ensure 100% reliability across all devices, the app can use pre-recorded audio snippets instead of relying on the system TTS engine. To generate audio for all current lessons:
+```bash
+dart tools/generate_audio.dart
+```
+To generate audio for specific lessons only, provide the lesson IDs as arguments:
+```bash
+dart tools/generate_audio.dart lesson_tracing lesson_spelling
+```
+This script will scan your JSON content and download missing `.mp3` files to `assets/audio/lessons/`, organized by lesson and shared common folders for efficient reuse.
+
 ### 📄 Brochure PDF Generation
 Generate professional, multi-page brochures and one-pagers that highlight the app features and curriculum.
 
@@ -129,6 +140,14 @@ The generated PDFs will be located in the `exports/` directory.
 
 ### 🛠 Developer Tools
 To unlock developer mode in the app, navigate to **Settings**, tap the **App Version** 10 times, and enter the secret unlock code.
+
+---
+
+## 🎨 Assets
+- **Logo**: `assets/logo/logo.jpg`
+- **Avatars**: `assets/avatars/`
+- **Audio**: `assets/audio/` (Lessons)
+- **Sounds**: `assets/sounds/` (SFX)
 
 ---
 

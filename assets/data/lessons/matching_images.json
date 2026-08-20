@@ -18,7 +18,8 @@
               "🦮",
               "📖",
               "☀️"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/cat.mp3"
           }
         },
         {
@@ -32,7 +33,8 @@
               "🐱",
               "🐟",
               "🐴"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/dog.mp3"
           }
         },
         {
@@ -46,7 +48,8 @@
               "🐘",
               "🐱",
               "🦮"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/fish.mp3"
           }
         },
         {
@@ -60,7 +63,8 @@
               "🐘",
               "🐒",
               "🐫"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/horse.mp3"
           }
         },
         {
@@ -74,7 +78,8 @@
               "🦁",
               "🦆",
               "🐱"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/elephant.mp3"
           }
         },
         {
@@ -88,7 +93,8 @@
               "🐒",
               "🐻",
               "🦮"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/lion.mp3"
           }
         },
         {
@@ -102,7 +108,8 @@
               "🦆",
               "🐫",
               "🐟"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/monkey.mp3"
           }
         },
         {
@@ -116,7 +123,8 @@
               "🐻",
               "🐱",
               "🐴"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/duck.mp3"
           }
         },
         {
@@ -130,7 +138,8 @@
               "🐫",
               "🦮",
               "🐘"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/bear.mp3"
           }
         },
         {
@@ -144,7 +153,8 @@
               "🐱",
               "🐟",
               "🦁"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/camel.mp3"
           }
         }
       ]
@@ -164,7 +174,8 @@
               "☀️",
               "⭐",
               "🚪"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/book.mp3"
           }
         },
         {
@@ -178,7 +189,8 @@
               "⚽",
               "🌙",
               "🪟"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/sun.mp3"
           }
         },
         {
@@ -192,7 +204,8 @@
               "⭐",
               "🪑",
               "🛏️"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/ball.mp3"
           }
         },
         {
@@ -206,7 +219,8 @@
               "🌙",
               "🚪",
               "🛋️"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/star.mp3"
           }
         },
         {
@@ -220,7 +234,8 @@
               "🪑",
               "🪟",
               "📖"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/moon.mp3"
           }
         },
         {
@@ -234,7 +249,8 @@
               "🚪",
               "🛏️",
               "☀️"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/chair.mp3"
           }
         },
         {
@@ -248,7 +264,8 @@
               "🪟",
               "🛋️",
               "⚽"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/door.mp3"
           }
         },
         {
@@ -262,7 +279,8 @@
               "🛏️",
               "📖",
               "⭐"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/window.mp3"
           }
         },
         {
@@ -276,7 +294,8 @@
               "🛋️",
               "☀️",
               "🌙"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/cot.mp3"
           }
         },
         {
@@ -290,7 +309,8 @@
               "📖",
               "⚽",
               "🪑"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/sofa.mp3"
           }
         }
       ]
@@ -310,7 +330,8 @@
               "🍌",
               "🍊",
               "🍍"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/apple.mp3"
           }
         },
         {
@@ -324,7 +345,8 @@
               "🥭",
               "🍇",
               "🍑"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/banana.mp3"
           }
         },
         {
@@ -338,7 +360,8 @@
               "🍊",
               "🍉",
               "🍐"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/mango.mp3"
           }
         },
         {
@@ -352,7 +375,8 @@
               "🍇",
               "🍍",
               "🍋"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/orange.mp3"
           }
         },
         {
@@ -366,7 +390,8 @@
               "🍉",
               "🍑",
               "🍎"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/grapes.mp3"
           }
         },
         {
@@ -380,7 +405,8 @@
               "🍍",
               "🍐",
               "🍌"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/watermelon.mp3"
           }
         },
         {
@@ -394,7 +420,8 @@
               "🍑",
               "🍋",
               "🥭"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/pineapple.mp3"
           }
         },
         {
@@ -408,7 +435,8 @@
               "🍐",
               "🍎",
               "🍊"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/peach.mp3"
           }
         },
         {
@@ -422,7 +450,8 @@
               "🍋",
               "🍌",
               "🍇"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/pear.mp3"
           }
         },
         {
@@ -436,7 +465,8 @@
               "🍎",
               "🥭",
               "🍉"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/lemon.mp3"
           }
         }
       ]
@@ -456,7 +486,8 @@
               "🔵",
               "🟡",
               "🟢"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/red.mp3"
           }
         },
         {
@@ -470,7 +501,8 @@
               "⚫",
               "⚪",
               "🔵"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/green.mp3"
           }
         },
         {
@@ -484,7 +516,8 @@
               "🟡",
               "⚫",
               "🩷"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/blue.mp3"
           }
         },
         {
@@ -498,7 +531,8 @@
               "🟢",
               "⚪",
               "🟤"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/yellow.mp3"
           }
         },
         {
@@ -512,7 +546,8 @@
               "⚪",
               "🩷",
               "🔴"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/black.mp3"
           }
         },
         {
@@ -526,7 +561,8 @@
               "🟠",
               "🟤",
               "🔵"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/white.mp3"
           }
         },
         {
@@ -540,7 +576,8 @@
               "🩷",
               "🟣",
               "🟡"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/orange_color.mp3"
           }
         },
         {
@@ -554,7 +591,8 @@
               "🟤",
               "🔴",
               "🟢"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/pink.mp3"
           }
         },
         {
@@ -568,7 +606,8 @@
               "🟣",
               "🔵",
               "⚫"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/brown.mp3"
           }
         },
         {
@@ -582,7 +621,8 @@
               "🔴",
               "🟡",
               "⚪"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/purple.mp3"
           }
         }
       ]
@@ -602,7 +642,8 @@
               "🚌",
               "✈️",
               "🚕"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/car.mp3"
           }
         },
         {
@@ -616,7 +657,8 @@
               "🚆",
               "🚲",
               "🚚"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/bus.mp3"
           }
         },
         {
@@ -630,7 +672,8 @@
               "✈️",
               "🚤",
               "🏍️"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/train.mp3"
           }
         },
         {
@@ -644,7 +687,8 @@
               "🚲",
               "🚕",
               "🚁"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/airplane.mp3"
           }
         },
         {
@@ -658,7 +702,8 @@
               "🚤",
               "🚚",
               "🚗"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/bicycle.mp3"
           }
         },
         {
@@ -672,7 +717,8 @@
               "🚕",
               "🏍️",
               "🚌"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/boat.mp3"
           }
         },
         {
@@ -686,7 +732,8 @@
               "🚚",
               "🚁",
               "🚆"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/taxi.mp3"
           }
         },
         {
@@ -700,7 +747,8 @@
               "🏍️",
               "🚗",
               "✈️"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/truck.mp3"
           }
         },
         {
@@ -714,7 +762,8 @@
               "🚁",
               "🚌",
               "🚲"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/motorcycle.mp3"
           }
         },
         {
@@ -728,7 +777,8 @@
               "🚗",
               "🚆",
               "🚤"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/helicopter.mp3"
           }
         }
       ]
@@ -748,7 +798,8 @@
               "🖊️",
               "🧑‍🏫",
               "🧑‍🎓"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/pencil.mp3"
           }
         },
         {
@@ -762,7 +813,8 @@
               "🎒",
               "📝",
               "🧼"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/pen.mp3"
           }
         },
         {
@@ -776,7 +828,8 @@
               "🧑‍🏫",
               "🏫",
               "🏢"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/bag.mp3"
           }
         },
         {
@@ -790,7 +843,8 @@
               "📝",
               "🧑‍🎓",
               "🪑"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/teacher_guru.mp3"
           }
         },
         {
@@ -804,7 +858,8 @@
               "🏫",
               "🧼",
               "✏️"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/slate.mp3"
           }
         },
         {
@@ -818,7 +873,8 @@
               "🧑‍🎓",
               "🏢",
               "🖊️"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/class.mp3"
           }
         },
         {
@@ -832,7 +888,8 @@
               "🧼",
               "🪑",
               "🎒"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/student.mp3"
           }
         },
         {
@@ -846,7 +903,8 @@
               "🏢",
               "✏️",
               "🧑‍🏫"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/eraser.mp3"
           }
         },
         {
@@ -860,7 +918,8 @@
               "🪑",
               "🖊️",
               "📝"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/school.mp3"
           }
         },
         {
@@ -874,7 +933,8 @@
               "✏️",
               "🎒",
               "🏫"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/table.mp3"
           }
         }
       ]
@@ -894,7 +954,8 @@
               "☁️",
               "❄️",
               "🥵"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/rain.mp3"
           }
         },
         {
@@ -908,7 +969,8 @@
               "💨",
               "🌫️",
               "🥶"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/cloud.mp3"
           }
         },
         {
@@ -922,7 +984,8 @@
               "❄️",
               "☀️",
               "⚡"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/wind.mp3"
           }
         },
         {
@@ -936,7 +999,8 @@
               "🌫️",
               "🥵",
               "🌪️"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/ice.mp3"
           }
         },
         {
@@ -950,7 +1014,8 @@
               "☀️",
               "🥶",
               "🌧️"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/fog.mp3"
           }
         },
         {
@@ -964,7 +1029,8 @@
               "🥵",
               "⚡",
               "☁️"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/sunshine.mp3"
           }
         },
         {
@@ -978,7 +1044,8 @@
               "🥶",
               "🌪️",
               "💨"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/summer.mp3"
           }
         },
         {
@@ -992,7 +1059,8 @@
               "⚡",
               "🌧️",
               "❄️"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/winter.mp3"
           }
         },
         {
@@ -1006,7 +1074,8 @@
               "🌪️",
               "☁️",
               "🌫️"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/electricity.mp3"
           }
         },
         {
@@ -1020,7 +1089,8 @@
               "🌧️",
               "💨",
               "☀️"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/storm.mp3"
           }
         }
       ]
@@ -1040,7 +1110,8 @@
               "👖",
               "🧢",
               "🧤"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/shirt.mp3"
           }
         },
         {
@@ -1054,7 +1125,8 @@
               "👟",
               "🧦",
               "🧥"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/pants.mp3"
           }
         },
         {
@@ -1068,7 +1140,8 @@
               "🧢",
               "🧥",
               "🧣"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/shoe.mp3"
           }
         },
         {
@@ -1082,7 +1155,8 @@
               "🧦",
               "🧤",
               "👘"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/cap.mp3"
           }
         },
         {
@@ -1096,7 +1170,8 @@
               "🧥",
               "👟",
               "👕"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/sock.mp3"
           }
         },
         {
@@ -1110,7 +1185,8 @@
               "🧤",
               "🧣",
               "👖"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/sweater.mp3"
           }
         },
         {
@@ -1124,7 +1200,8 @@
               "🧥",
               "👘",
               "👟"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/gloves.mp3"
           }
         },
         {
@@ -1138,7 +1215,8 @@
               "🧣",
               "👕",
               "🧢"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/coat.mp3"
           }
         },
         {
@@ -1152,7 +1230,8 @@
               "👘",
               "👖",
               "🧦"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/handkerchief.mp3"
           }
         },
         {
@@ -1166,7 +1245,8 @@
               "👕",
               "👟",
               "🧥"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/pajama.mp3"
           }
         }
       ]
@@ -1186,7 +1266,8 @@
               "🍴",
               "🍲",
               "🧊"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/spoon.mp3"
           }
         },
         {
@@ -1200,7 +1281,8 @@
               "🔪",
               "🥛",
               "🔥"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/fork.mp3"
           }
         },
         {
@@ -1214,7 +1296,8 @@
               "🍲",
               "🍽️",
               "🍳"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/knife_small.mp3"
           }
         },
         {
@@ -1228,7 +1311,8 @@
               "🥛",
               "🧊",
               "🍛"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/vessel.mp3"
           }
         },
         {
@@ -1242,7 +1326,8 @@
               "🍽️",
               "🔥",
               "🥄"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/glass.mp3"
           }
         },
         {
@@ -1256,7 +1341,8 @@
               "🧊",
               "🍳",
               "🍴"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/plate.mp3"
           }
         },
         {
@@ -1270,7 +1356,8 @@
               "🔥",
               "🍛",
               "🔪"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/fridge.mp3"
           }
         },
         {
@@ -1284,7 +1371,8 @@
               "🍳",
               "🥄",
               "🍲"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/stove.mp3"
           }
         },
         {
@@ -1298,7 +1386,8 @@
               "🍛",
               "🍴",
               "🥛"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/pan.mp3"
           }
         },
         {
@@ -1312,7 +1401,8 @@
               "🥄",
               "🔪",
               "🍽️"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/plate_round.mp3"
           }
         }
       ]
@@ -1332,7 +1422,8 @@
               "🌸",
               "🏞️",
               "🍃"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/tree.mp3"
           }
         },
         {
@@ -1346,7 +1437,8 @@
               "⛰️",
               "🌊",
               "🌿"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/flower.mp3"
           }
         },
         {
@@ -1360,7 +1452,8 @@
               "🏞️",
               "🌲",
               "🌌"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/mountain.mp3"
           }
         },
         {
@@ -1374,7 +1467,8 @@
               "🌊",
               "🍃",
               "🏖️"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/river.mp3"
           }
         },
         {
@@ -1388,7 +1482,8 @@
               "🌲",
               "🌿",
               "🌳"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/sea.mp3"
           }
         },
         {
@@ -1402,7 +1497,8 @@
               "🍃",
               "🌌",
               "🌸"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/forest.mp3"
           }
         },
         {
@@ -1416,7 +1512,8 @@
               "🌿",
               "🏖️",
               "⛰️"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/leaf.mp3"
           }
         },
         {
@@ -1430,7 +1527,8 @@
               "🌌",
               "🌳",
               "🏞️"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/grass.mp3"
           }
         },
         {
@@ -1444,7 +1542,8 @@
               "🏖️",
               "🌸",
               "🌊"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/sky.mp3"
           }
         },
         {
@@ -1458,7 +1557,8 @@
               "🌳",
               "⛰️",
               "🌲"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/sand.mp3"
           }
         }
       ]
@@ -1478,7 +1578,8 @@
               "🐦‍⬛",
               "🦚",
               "🐦"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/parrot.mp3"
           }
         },
         {
@@ -1492,7 +1593,8 @@
               "🕊️",
               "🦅",
               "🐔"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/crow.mp3"
           }
         },
         {
@@ -1506,7 +1608,8 @@
               "🦚",
               "🦉",
               "🦢"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/pigeon.mp3"
           }
         },
         {
@@ -1520,7 +1623,8 @@
               "🦅",
               "🐦",
               "🦇"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/peacock.mp3"
           }
         },
         {
@@ -1534,7 +1638,8 @@
               "🦉",
               "🐔",
               "🦜"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/hawk.mp3"
           }
         },
         {
@@ -1548,7 +1653,8 @@
               "🐦",
               "🦢",
               "🐦‍⬛"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/owl.mp3"
           }
         },
         {
@@ -1562,7 +1668,8 @@
               "🐔",
               "🦇",
               "🕊️"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/sparrow.mp3"
           }
         },
         {
@@ -1576,7 +1683,8 @@
               "🦢",
               "🦜",
               "🦚"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/hen.mp3"
           }
         },
         {
@@ -1590,7 +1698,8 @@
               "🦇",
               "🐦‍⬛",
               "🦅"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/swan.mp3"
           }
         },
         {
@@ -1604,7 +1713,8 @@
               "🦜",
               "🕊️",
               "🦉"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/bat.mp3"
           }
         }
       ]
@@ -1624,7 +1734,8 @@
               "⬇️",
               "⬅️",
               "◀️"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/north.mp3"
           }
         },
         {
@@ -1638,7 +1749,8 @@
               "➡️",
               "🔼",
               "▶️"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/south.mp3"
           }
         },
         {
@@ -1652,7 +1764,8 @@
               "⬅️",
               "🔽",
               "⏩"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/east.mp3"
           }
         },
         {
@@ -1666,7 +1779,8 @@
               "🔼",
               "◀️",
               "⏪"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/west.mp3"
           }
         },
         {
@@ -1680,7 +1794,8 @@
               "🔽",
               "▶️",
               "⬆️"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/up.mp3"
           }
         },
         {
@@ -1694,7 +1809,8 @@
               "◀️",
               "⏩",
               "⬇️"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/down.mp3"
           }
         },
         {
@@ -1708,7 +1824,8 @@
               "▶️",
               "⏪",
               "➡️"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/left.mp3"
           }
         },
         {
@@ -1722,7 +1839,8 @@
               "⏩",
               "⬆️",
               "⬅️"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/right.mp3"
           }
         },
         {
@@ -1736,7 +1854,8 @@
               "⏪",
               "⬇️",
               "🔼"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/forward.mp3"
           }
         },
         {
@@ -1750,7 +1869,8 @@
               "⬆️",
               "➡️",
               "🔽"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/backward.mp3"
           }
         }
       ]
@@ -1770,7 +1890,8 @@
               "💻",
               "🖨️",
               "📎"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/office.mp3"
           }
         },
         {
@@ -1784,7 +1905,8 @@
               "📁",
               "📞",
               "✉️"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/computer.mp3"
           }
         },
         {
@@ -1798,7 +1920,8 @@
               "🖨️",
               "⏰",
               "📔"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/file.mp3"
           }
         },
         {
@@ -1812,7 +1935,8 @@
               "📞",
               "📎",
               "🗄️"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/printer.mp3"
           }
         },
         {
@@ -1826,7 +1950,8 @@
               "⏰",
               "✉️",
               "🏢"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/phone.mp3"
           }
         },
         {
@@ -1840,7 +1965,8 @@
               "📎",
               "📔",
               "💻"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/clock.mp3"
           }
         },
         {
@@ -1854,7 +1980,8 @@
               "✉️",
               "🗄️",
               "📁"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/stapler.mp3"
           }
         },
         {
@@ -1868,7 +1995,8 @@
               "📔",
               "🏢",
               "🖨️"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/envelope.mp3"
           }
         },
         {
@@ -1882,7 +2010,8 @@
               "🗄️",
               "💻",
               "📞"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/diary.mp3"
           }
         },
         {
@@ -1896,7 +2025,8 @@
               "🏢",
               "📁",
               "⏰"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/cupboard.mp3"
           }
         }
       ]
@@ -1916,7 +2046,8 @@
               "🏪",
               "🏷️",
               "🧑‍💼"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/money.mp3"
           }
         },
         {
@@ -1930,7 +2061,8 @@
               "🏬",
               "👜",
               "💵"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/shop.mp3"
           }
         },
         {
@@ -1944,7 +2076,8 @@
               "🏷️",
               "🙋",
               "🪙"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/market.mp3"
           }
         },
         {
@@ -1958,7 +2091,8 @@
               "👜",
               "🧑‍💼",
               "🧾"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/price.mp3"
           }
         },
         {
@@ -1972,7 +2106,8 @@
               "🙋",
               "💵",
               "💰"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/bag_shop.mp3"
           }
         },
         {
@@ -1986,7 +2121,8 @@
               "🧑‍💼",
               "🪙",
               "🏪"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/customer.mp3"
           }
         },
         {
@@ -2000,7 +2136,8 @@
               "💵",
               "🧾",
               "🏬"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/shopkeeper.mp3"
           }
         },
         {
@@ -2014,7 +2151,8 @@
               "🪙",
               "💰",
               "🏷️"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/note.mp3"
           }
         },
         {
@@ -2028,7 +2166,8 @@
               "🧾",
               "🏪",
               "👜"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/coin.mp3"
           }
         },
         {
@@ -2042,7 +2181,8 @@
               "💰",
               "🏬",
               "🙋"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/receipt.mp3"
           }
         }
       ]
@@ -2062,7 +2202,8 @@
               "🫓",
               "🍚",
               "☕"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/food.mp3"
           }
         },
         {
@@ -2076,7 +2217,8 @@
               "🍲",
               "🥛",
               "🥦"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/bread.mp3"
           }
         },
         {
@@ -2090,7 +2232,8 @@
               "🍚",
               "💧",
               "🍮"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/lentils.mp3"
           }
         },
         {
@@ -2104,7 +2247,8 @@
               "🥛",
               "☕",
               "🍳"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/rice.mp3"
           }
         },
         {
@@ -2118,7 +2262,8 @@
               "💧",
               "🥦",
               "🍽️"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/milk.mp3"
           }
         },
         {
@@ -2132,7 +2277,8 @@
               "☕",
               "🍮",
               "🫓"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/water.mp3"
           }
         },
         {
@@ -2146,7 +2292,8 @@
               "🥦",
               "🍳",
               "🍲"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/tea.mp3"
           }
         },
         {
@@ -2160,7 +2307,8 @@
               "🍮",
               "🍽️",
               "🍚"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/vegetable.mp3"
           }
         },
         {
@@ -2174,7 +2322,8 @@
               "🍳",
               "🫓",
               "🥛"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/sweet.mp3"
           }
         },
         {
@@ -2188,7 +2337,8 @@
               "🍽️",
               "🍲",
               "💧"
-            ]
+            ],
+            "audioFile": "audio/lessons/words/breakfast.mp3"
           }
         }
       ]

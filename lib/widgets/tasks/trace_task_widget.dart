@@ -178,10 +178,10 @@ class _TraceTaskWidgetState extends ConsumerState<TraceTaskWidget>
   void initState() {
     super.initState();
     // Auto-play the letter sound after a short delay
-    final letter = widget.task.content['letter'] as String;
+    final audioFile = widget.task.content['audioFile'] as String? ?? '';
     Future.delayed(TaskConfig.autoPlayDelay, () {
       if (mounted) {
-        ref.read(audioServiceProvider).speak(letter);
+        ref.read(audioServiceProvider).speak(audioFile);
       }
     });
   }
@@ -584,6 +584,7 @@ class _TraceTaskWidgetState extends ConsumerState<TraceTaskWidget>
     final letter = widget.task.content['letter'] as String;
     final transliteration =
         widget.task.content['transliteration'] as String? ?? '';
+    final audioFile = widget.task.content['audioFile'] as String? ?? '';
 
     return Padding(
       padding: const EdgeInsets.all(24),
@@ -593,7 +594,9 @@ class _TraceTaskWidgetState extends ConsumerState<TraceTaskWidget>
           const SizedBox(height: 8),
           Column(
             children: [
-              TaskSpeakerButton(textToSpeak: letter),
+              TaskSpeakerButton(
+                audioId: audioFile,
+              ),
               const SizedBox(height: 8),
               Text(
                 transliteration,

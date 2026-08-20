@@ -17,7 +17,8 @@
               "ਅ",
               "ੲ",
               "ਸ"
-            ]
+            ],
+            "audioFile": "audio/lessons/alphabets/ura.mp3"
           }
         },
         {
@@ -30,7 +31,8 @@
               "ੳ",
               "ੲ",
               "ਹ"
-            ]
+            ],
+            "audioFile": "audio/lessons/alphabets/aira.mp3"
           }
         },
         {
@@ -43,7 +45,8 @@
               "ੳ",
               "ਸ",
               "ਹ"
-            ]
+            ],
+            "audioFile": "audio/lessons/alphabets/iri.mp3"
           }
         },
         {
@@ -56,7 +59,8 @@
               "ਅ",
               "ੲ",
               "ਹ"
-            ]
+            ],
+            "audioFile": "audio/lessons/alphabets/sa.mp3"
           }
         },
         {
@@ -69,7 +73,8 @@
               "ੳ",
               "ਅ",
               "ਸ"
-            ]
+            ],
+            "audioFile": "audio/lessons/alphabets/ha.mp3"
           }
         }
       ]
@@ -88,7 +93,8 @@
               "ਖ",
               "ਗ",
               "ਘ"
-            ]
+            ],
+            "audioFile": "audio/lessons/alphabets/ka.mp3"
           }
         },
         {
@@ -101,7 +107,8 @@
               "ਕ",
               "ਗ",
               "ਙ"
-            ]
+            ],
+            "audioFile": "audio/lessons/alphabets/kha.mp3"
           }
         },
         {
@@ -114,7 +121,8 @@
               "ਕ",
               "ਖ",
               "ਘ"
-            ]
+            ],
+            "audioFile": "audio/lessons/alphabets/ga.mp3"
           }
         },
         {
@@ -127,7 +135,8 @@
               "ਖ",
               "ਗ",
               "ਙ"
-            ]
+            ],
+            "audioFile": "audio/lessons/alphabets/gha.mp3"
           }
         },
         {
@@ -140,7 +149,8 @@
               "ਕ",
               "ਗ",
               "ਘ"
-            ]
+            ],
+            "audioFile": "audio/lessons/alphabets/nga.mp3"
           }
         }
       ]
@@ -159,7 +169,8 @@
               "ਛ",
               "ਜ",
               "ਝ"
-            ]
+            ],
+            "audioFile": "audio/lessons/alphabets/cha.mp3"
           }
         },
         {
@@ -172,7 +183,8 @@
               "ਚ",
               "ਜ",
               "ਞ"
-            ]
+            ],
+            "audioFile": "audio/lessons/alphabets/chha.mp3"
           }
         },
         {
@@ -185,7 +197,8 @@
               "ਚ",
               "ਛ",
               "ਝ"
-            ]
+            ],
+            "audioFile": "audio/lessons/alphabets/ja.mp3"
           }
         },
         {
@@ -198,7 +211,8 @@
               "ਛ",
               "ਜ",
               "ਞ"
-            ]
+            ],
+            "audioFile": "audio/lessons/alphabets/jha.mp3"
           }
         },
         {
@@ -211,7 +225,8 @@
               "ਚ",
               "ਜ",
               "ਝ"
-            ]
+            ],
+            "audioFile": "audio/lessons/alphabets/nya.mp3"
           }
         }
       ]
@@ -230,7 +245,8 @@
               "ਠ",
               "ਡ",
               "ਢ"
-            ]
+            ],
+            "audioFile": "audio/lessons/alphabets/tta.mp3"
           }
         },
         {
@@ -243,7 +259,8 @@
               "ਟ",
               "ਡ",
               "ਣ"
-            ]
+            ],
+            "audioFile": "audio/lessons/alphabets/ttha.mp3"
           }
         },
         {
@@ -256,7 +273,8 @@
               "ਟ",
               "ਠ",
               "ਢ"
-            ]
+            ],
+            "audioFile": "audio/lessons/alphabets/dda.mp3"
           }
         },
         {
@@ -269,7 +287,8 @@
               "ਠ",
               "ਡ",
               "ਣ"
-            ]
+            ],
+            "audioFile": "audio/lessons/alphabets/ddha.mp3"
           }
         },
         {
@@ -282,7 +301,8 @@
               "ਟ",
               "ਡ",
               "ਢ"
-            ]
+            ],
+            "audioFile": "audio/lessons/alphabets/nna.mp3"
           }
         }
       ]
@@ -301,7 +321,8 @@
               "ਥ",
               "ਦ",
               "ਧ"
-            ]
+            ],
+            "audioFile": "audio/lessons/alphabets/ta.mp3"
           }
         },
         {
@@ -314,7 +335,8 @@
               "ਤ",
               "ਦ",
               "ਨ"
-            ]
+            ],
+            "audioFile": "audio/lessons/alphabets/tha.mp3"
           }
         },
         {
@@ -327,7 +349,8 @@
               "ਤ",
               "ਥ",
               "ਧ"
-            ]
+            ],
+            "audioFile": "audio/lessons/alphabets/da.mp3"
           }
         },
         {
@@ -340,7 +363,8 @@
               "ਥ",
               "ਦ",
               "ਨ"
-            ]
+            ],
+            "audioFile": "audio/lessons/alphabets/dha.mp3"
           }
         },
         {
@@ -353,7 +377,8 @@
               "ਤ",
               "ਦ",
               "ਧ"
-            ]
+            ],
+            "audioFile": "audio/lessons/alphabets/na.mp3"
           }
         }
       ]
@@ -372,7 +397,8 @@
               "ਫ",
               "ਬ",
               "ਭ"
-            ]
+            ],
+            "audioFile": "audio/lessons/alphabets/pa.mp3"
           }
         },
         {
@@ -385,7 +411,8 @@
               "ਪ",
               "ਬ",
               "ਮ"
-            ]
+            ],
+            "audioFile": "audio/lessons/alphabets/pha.mp3"
           }
         },
         {
@@ -398,7 +425,8 @@
               "ਪ",
               "ਫ",
               "ਭ"
-            ]
+            ],
+            "audioFile": "audio/lessons/alphabets/ba.mp3"
           }
         },
         {
@@ -411,7 +439,8 @@
               "ਫ",
               "ਬ",
               "ਮ"
-            ]
+            ],
+            "audioFile": "audio/lessons/alphabets/bha.mp3"
           }
         },
         {
@@ -424,7 +453,8 @@
               "ਪ",
               "ਬ",
               "ਭ"
-            ]
+            ],
+            "audioFile": "audio/lessons/alphabets/ma.mp3"
           }
         }
       ]
@@ -443,7 +473,8 @@
               "ਰ",
               "ਲ",
               "ਵ"
-            ]
+            ],
+            "audioFile": "audio/lessons/alphabets/ya.mp3"
           }
         },
         {
@@ -456,7 +487,8 @@
               "ਯ",
               "ਲ",
               "ੜ"
-            ]
+            ],
+            "audioFile": "audio/lessons/alphabets/ra.mp3"
           }
         },
         {
@@ -469,7 +501,8 @@
               "ਰ",
               "ਵ",
               "ੜ"
-            ]
+            ],
+            "audioFile": "audio/lessons/alphabets/la.mp3"
           }
         },
         {
@@ -482,7 +515,8 @@
               "ਯ",
               "ਲ",
               "ੜ"
-            ]
+            ],
+            "audioFile": "audio/lessons/alphabets/va.mp3"
           }
         },
         {
@@ -495,7 +529,8 @@
               "ਰ",
               "ਲ",
               "ਵ"
-            ]
+            ],
+            "audioFile": "audio/lessons/alphabets/rra.mp3"
           }
         }
       ]

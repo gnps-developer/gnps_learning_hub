@@ -4,12 +4,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../providers/audio_providers.dart';
 
 class TaskSpeakerButton extends ConsumerWidget {
-  final String textToSpeak;
+  final String audioId;
   final double iconSize;
 
   const TaskSpeakerButton({
     super.key,
-    required this.textToSpeak,
+    required this.audioId,
     this.iconSize = 48,
   });
 
@@ -28,7 +28,7 @@ class TaskSpeakerButton extends ConsumerWidget {
       ),
       child: IconButton(
         icon: Icon(Icons.campaign, size: iconSize),
-        onPressed: () => ref.read(audioServiceProvider).speak(textToSpeak),
+        onPressed: () => ref.read(audioServiceProvider).speak(audioId),
         tooltip: 'Hear pronunciation',
         color: colorScheme.onPrimaryContainer,
       ),

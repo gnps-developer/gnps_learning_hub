@@ -47,10 +47,10 @@ class _MatchingPicturesTaskWidgetState
     _options = [correct, ...distractors]..shuffle(Random());
 
     // Auto-play the target word sound after a short delay
-    final word = widget.task.content['word'] as String;
+    final audioFile = widget.task.content['audioFile'] as String? ?? '';
     Future.delayed(TaskConfig.autoPlayDelay, () {
       if (mounted) {
-        ref.read(audioServiceProvider).speak(word);
+        ref.read(audioServiceProvider).speak(audioFile);
       }
     });
   }
@@ -90,7 +90,9 @@ class _MatchingPicturesTaskWidgetState
           const SizedBox(height: 4),
           Column(
             children: [
-              TaskSpeakerButton(textToSpeak: word),
+              TaskSpeakerButton(
+                audioId: widget.task.content['audioFile'] as String? ?? '',
+              ),
               const SizedBox(height: 12),
               Text(word, style: Theme.of(context).textTheme.displaySmall),
             ],

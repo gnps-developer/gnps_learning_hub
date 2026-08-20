@@ -51,10 +51,10 @@ class _ArrangeSentenceTaskWidgetState
     ]..shuffle(Random());
 
     // Auto-play the full sentence sound after a short delay
-    final fullSentence = words.join(' ');
+    final audioFile = widget.task.content['audioFile'] as String? ?? '';
     Future.delayed(TaskConfig.autoPlayDelay, () {
       if (mounted) {
-        ref.read(audioServiceProvider).speak(fullSentence);
+        ref.read(audioServiceProvider).speak(audioFile);
       }
     });
   }
@@ -104,9 +104,6 @@ class _ArrangeSentenceTaskWidgetState
 
   @override
   Widget build(BuildContext context) {
-    final fullSentence = (List<String>.from(
-      widget.task.content['words'] as List,
-    )).join(' ');
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(12, 16, 12, 24),
@@ -118,7 +115,9 @@ class _ArrangeSentenceTaskWidgetState
                 children: [
                   const TaskHeader(title: 'Arrange the sentence'),
                   const SizedBox(height: 4),
-                  TaskSpeakerButton(textToSpeak: fullSentence),
+                  TaskSpeakerButton(
+                    audioId: widget.task.content['audioFile'] as String? ?? '',
+                  ),
                   const SizedBox(height: 12),
 
                   TaskInteractiveBuildArea<_WordTile>(

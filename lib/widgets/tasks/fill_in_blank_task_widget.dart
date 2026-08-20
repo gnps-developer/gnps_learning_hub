@@ -47,13 +47,11 @@ class _FillInBlankTaskWidgetState extends ConsumerState<FillInBlankTaskWidget>
           ..shuffle(Random());
 
     // Auto-play the sentence sound after a short delay
-    final parts = List<String>.from(widget.task.content['sentenceParts'] as List);
-    final correctWord = widget.task.content['correctWord'] as String;
-    final fullSentence = parts.map((p) => p == '___' ? correctWord : p).join(' ');
+    final audioFile = widget.task.content['audioFile'] as String? ?? '';
 
     Future.delayed(TaskConfig.autoPlayDelay, () {
       if (mounted) {
-        ref.read(audioServiceProvider).speak(fullSentence);
+        ref.read(audioServiceProvider).speak(audioFile);
       }
     });
   }
@@ -85,7 +83,6 @@ class _FillInBlankTaskWidgetState extends ConsumerState<FillInBlankTaskWidget>
     final parts = List<String>.from(
       widget.task.content['sentenceParts'] as List,
     );
-    final correctWord = widget.task.content['correctWord'] as String;
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(12, 16, 12, 24),
@@ -94,9 +91,7 @@ class _FillInBlankTaskWidgetState extends ConsumerState<FillInBlankTaskWidget>
           const TaskHeader(title: 'Fill in the blank'),
           const SizedBox(height: 12),
           TaskSpeakerButton(
-            textToSpeak: parts
-                .map((p) => p == '___' ? correctWord : p)
-                .join(' '),
+            audioId: widget.task.content['audioFile'] as String? ?? '',
           ),
           const SizedBox(height: 12),
 
