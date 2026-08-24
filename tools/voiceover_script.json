@@ -1,0 +1,30 @@
+{
+  "language": "pa",
+  "segments": [
+    {
+      "id": "01_welcome",
+      "text": "ਜੀ ਐਨ ਪੀ ਐਸ ਲਰਨਿੰਗ ਹੱਬ ਵਿੱਚ ਤੁਹਾਡਾ ਸੁਆਗਤ ਹੈ!",
+      "description": "Welcome message"
+    },
+    {
+      "id": "02_tracing_id",
+      "text": "ਅੱਖਰ ਲਿਖਣਾ ਸਿੱਖੋ ਅਤੇ ਪਛਾਣ ਕਰੋ।",
+      "description": "Tracing and identification"
+    },
+    {
+      "id": "03_bubble_game",
+      "text": "ਬੁਲਬੁਲੇ ਵਾਲੀ ਖੇਡ ਦਾ ਅਨੰਦ ਲਓ।",
+      "description": "Bubble game"
+    },
+    {
+      "id": "04_activities",
+      "text": "ਤਸਵੀਰਾਂ ਤੇ ਸ਼ਬਦ ਮਿਲਾਓ, ਦੁਕਾਨ ਤੋਂ ਚੀਜ਼ਾਂ ਖਰੀਦੋ ਅਤੇ ਆਪਣਾ ਅਵਤਾਰ ਸਜਾਓ।",
+      "description": "Matching, shop, and avatar"
+    },
+    {
+      "id": "05_tagline",
+      "text": "ਆਓ, ਮਿਲ ਕੇ ਪੰਜਾਬੀ ਸਿੱਖੋ, ਖੇਡੋ, ਵਧੋ!",
+      "description": "App tagline"
+    }
+  ]
+}
