@@ -1339,7 +1339,7 @@
             "correctEmoji": "🍽️",
             "distractorEmojis": [
               "🧊",
-              "🍳",
+              "🥘",
               "🍴"
             ],
             "audioFile": "audio/lessons/words/plate.mp3"
@@ -1368,7 +1368,7 @@
             "word": "ਚੁੱਲ੍ਹਾ",
             "correctEmoji": "🔥",
             "distractorEmojis": [
-              "🍳",
+              "🥘",
               "🥄",
               "🍲"
             ],
@@ -1381,7 +1381,7 @@
           "pointsAwarded": 15,
           "content": {
             "word": "ਕੜਾਹੀ",
-            "correctEmoji": "🍳",
+            "correctEmoji": "🥘",
             "distractorEmojis": [
               "🍛",
               "🍴",
@@ -2290,7 +2290,7 @@
             "correctEmoji": "☕",
             "distractorEmojis": [
               "🥦",
-              "🍳",
+              "🥘",
               "🍲"
             ],
             "audioFile": "audio/lessons/words/tea.mp3"
@@ -2319,7 +2319,7 @@
             "word": "ਮਿੱਠਾ",
             "correctEmoji": "🍮",
             "distractorEmojis": [
-              "🍳",
+              "🥘",
               "🫓",
               "🥛"
             ],
@@ -2332,7 +2332,7 @@
           "pointsAwarded": 15,
           "content": {
             "word": "ਨਾਸ਼ਤਾ",
-            "correctEmoji": "🍳",
+            "correctEmoji": "🥣",
             "distractorEmojis": [
               "🍽️",
               "🍲",
