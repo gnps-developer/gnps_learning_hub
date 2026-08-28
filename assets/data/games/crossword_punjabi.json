@@ -46,7 +46,7 @@
         "gridSize": 5,
         "words": [
           { "answer": "ਕਮਲ", "syllables": ["ਕ", "ਮ", "ਲ"], "row": 1, "col": 1, "isHorizontal": true },
-          { "answer": "ਬਲ", "syllables": ["ਬ", "ਲ"], "row": 1, "col": 3, "isHorizontal": false }
+          { "answer": "ਬਲ", "syllables": ["ਬ", "ਲ"], "row": 0, "col": 3, "isHorizontal": false }
         ],
         "dialLetters": ["ਕ", "ਮ", "ਲ", "ਬ"]
       },
@@ -64,7 +64,7 @@
         "gridSize": 5,
         "words": [
           { "answer": "ਨਮਕ", "syllables": ["ਨ", "ਮ", "ਕ"], "row": 2, "col": 0, "isHorizontal": true },
-          { "answer": "ਕਲਮ", "syllables": ["ਕ", "ਲ", "ਮ"], "row": 0, "col": 2, "isHorizontal": false }
+          { "answer": "ਕਲਮ", "syllables": ["ਕ", "ਲ", "ਮ"], "row": 2, "col": 2, "isHorizontal": false }
         ],
         "dialLetters": ["ਨ", "ਮ", "ਕ", "ਲ"]
       },
@@ -119,7 +119,7 @@
         "words": [
           { "answer": "ਥਲ", "syllables": ["ਥ", "ਲ"], "row": 3, "col": 2, "isHorizontal": true },
           { "answer": "ਜਲ", "syllables": ["ਜ", "ਲ"], "row": 2, "col": 3, "isHorizontal": false },
-          { "answer": "ਫਲ", "syllables": ["ਫ", "ਲ"], "row": 3, "col": 2, "isHorizontal": false }
+          { "answer": "ਫਲ", "syllables": ["ਫ", "ਲ"], "row": 5, "col": 2, "isHorizontal": true }
         ],
         "dialLetters": ["ਥ", "ਲ", "ਜ", "ਫ"]
       },
@@ -129,7 +129,7 @@
         "words": [
           { "answer": "ਪਲ", "syllables": ["ਪ", "ਲ"], "row": 3, "col": 2, "isHorizontal": true },
           { "answer": "ਬਲ", "syllables": ["ਬ", "ਲ"], "row": 2, "col": 3, "isHorizontal": false },
-          { "answer": "ਕਲ", "syllables": ["ਕ", "ਲ"], "row": 3, "col": 2, "isHorizontal": false }
+          { "answer": "ਕਲ", "syllables": ["ਕ", "ਲ"], "row": 5, "col": 2, "isHorizontal": true }
         ],
         "dialLetters": ["ਪ", "ਲ", "ਬ", "ਕ"]
       },
@@ -148,7 +148,7 @@
       "ਬਸ": "audio/lessons/words/bus.mp3",
       "ਰਸ": "audio/lessons/words/juice.mp3",
       "ਫਲ": "audio/lessons/words/fruit.mp3",
-      "ਜਲ": "audio/lessons/words/water.mp3",
+      "ਜਲ": "audio/lessons/words/jal.mp3",
       "ਘਰ": "audio/lessons/words/house.mp3",
       "ਕਰ": "audio/lessons/words/do.mp3",
       "ਕਲਮ": "audio/lessons/words/pen.mp3",

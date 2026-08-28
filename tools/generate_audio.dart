@@ -95,6 +95,7 @@ void main(List<String> args) async {
     final file = File('${assetsRoot.path}/$assetPath');
     
     if (file.existsSync() && !forceDownload) {
+      print('⏭️  Skipping existing: $assetPath');
       skipped++;
       continue;
     }
