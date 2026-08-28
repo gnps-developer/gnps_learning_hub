@@ -61,10 +61,10 @@ void main([List<String> args = const []]) {
   buffer.writeln('---');
   buffer.writeln('*Last Updated: ${DateTime.now().toString().split(' ')[0]}*');
 
-  final file = File('SHOP_ITEMS.md');
+  final file = File('guides/SHOP_ITEMS.md');
   file.writeAsStringSync(buffer.toString());
 
-  print('✅ SHOP_ITEMS.md has been refreshed!');
+  print('✅ guides/SHOP_ITEMS.md has been refreshed!');
 }
 
 void _writeSection(

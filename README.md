@@ -27,7 +27,7 @@ Learn Punjabi through engaging, gamified lessons. Earn gems, build streaks, unlo
 - **Immersive Audio**: Integrated Text-to-Speech for authentic Punjabi pronunciation.
 - **Tactile Feedback**: Haptics and dynamic theming for a premium feel.
 
-👉 **[View Full Features Specification](FEATURES.md)**
+👉 **[View Full Features Specification](guides/FEATURES.md)**
 
 ---
 
@@ -47,6 +47,8 @@ lib/
 ├── tools/        # Admin utilities, Tracing Recorders, and Content Debuggers.
 ├── utils/        # Global helper functions and extensions.
 └── widgets/      # Atomic UI components, Animations, and Themed Layouts.
+
+guides/           # Project documentation, specifications, and release guides.
 ```
 
 ---
@@ -56,7 +58,7 @@ lib/
 This repository includes a suite of command-line tools to maintain the curriculum and generate high-fidelity marketing materials.
 
 ### 📊 Curriculum Overview
-The `CURRICULUM.md` file tracks all lessons and tasks. To refresh it based on the current JSON content:
+The `guides/CURRICULUM.md` file tracks all lessons and tasks. To refresh it based on the current JSON content:
 ```bash
 dart tools/generate_curriculum.dart
 ```
@@ -120,7 +122,7 @@ The generated PDFs will be located in the `exports/` directory.
    ```
 
 4. **Prepare Curriculum Data**:
-   Ensure the curriculum manifest is up-to-date with the latest content:
+   Ensure the curriculum manifest and documentation are up-to-date with the latest content:
    ```bash
    dart tools/generate_curriculum.dart
    ```

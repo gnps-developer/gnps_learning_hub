@@ -106,8 +106,8 @@ void main([List<String> args = const []]) {
   buffer.writeln('---');
   buffer.writeln('*Last Updated: ${DateTime.now().toString().split(' ')[0]}*');
 
-  final file = File('CURRICULUM.md');
+  final file = File('guides/CURRICULUM.md');
   file.writeAsStringSync(buffer.toString());
 
-  print('✅ CURRICULUM.md has been refreshed!');
+  print('✅ guides/CURRICULUM.md has been refreshed!');
 }
