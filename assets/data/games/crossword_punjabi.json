@@ -1,0 +1,175 @@
+{
+  "id": "crossword_punjabi",
+  "title": "Punjabi Crossword",
+  "unlockAfterLessonId": "lesson_arrange_sentence",
+  "type": "crossword",
+  "content": {
+    "levels": [
+      {
+        "levelNumber": 1,
+        "gridSize": 4,
+        "words": [
+          { "answer": "ਬਸ", "syllables": ["ਬ", "ਸ"], "row": 1, "col": 0, "isHorizontal": true },
+          { "answer": "ਰਸ", "syllables": ["ਰ", "ਸ"], "row": 0, "col": 1, "isHorizontal": false }
+        ],
+        "dialLetters": ["ਬ", "ਸ", "ਰ"]
+      },
+      {
+        "levelNumber": 2,
+        "gridSize": 4,
+        "words": [
+          { "answer": "ਫਲ", "syllables": ["ਫ", "ਲ"], "row": 1, "col": 0, "isHorizontal": true },
+          { "answer": "ਜਲ", "syllables": ["ਜ", "ਲ"], "row": 0, "col": 1, "isHorizontal": false }
+        ],
+        "dialLetters": ["ਫ", "ਲ", "ਜ"]
+      },
+      {
+        "levelNumber": 3,
+        "gridSize": 4,
+        "words": [
+          { "answer": "ਘਰ", "syllables": ["ਘ", "ਰ"], "row": 1, "col": 0, "isHorizontal": true },
+          { "answer": "ਕਰ", "syllables": ["ਕ", "ਰ"], "row": 0, "col": 1, "isHorizontal": false }
+        ],
+        "dialLetters": ["ਘ", "ਰ", "ਕ"]
+      },
+      {
+        "levelNumber": 4,
+        "gridSize": 5,
+        "words": [
+          { "answer": "ਕਲਮ", "syllables": ["ਕ", "ਲ", "ਮ"], "row": 1, "col": 1, "isHorizontal": true },
+          { "answer": "ਮਲ", "syllables": ["ਮ", "ਲ"], "row": 1, "col": 3, "isHorizontal": false }
+        ],
+        "dialLetters": ["ਕ", "ਲ", "ਮ"]
+      },
+      {
+        "levelNumber": 5,
+        "gridSize": 5,
+        "words": [
+          { "answer": "ਕਮਲ", "syllables": ["ਕ", "ਮ", "ਲ"], "row": 1, "col": 1, "isHorizontal": true },
+          { "answer": "ਬਲ", "syllables": ["ਬ", "ਲ"], "row": 1, "col": 3, "isHorizontal": false }
+        ],
+        "dialLetters": ["ਕ", "ਮ", "ਲ", "ਬ"]
+      },
+      {
+        "levelNumber": 6,
+        "gridSize": 5,
+        "words": [
+          { "answer": "ਬਸ", "syllables": ["ਬ", "ਸ"], "row": 1, "col": 1, "isHorizontal": true },
+          { "answer": "ਸੜਕ", "syllables": ["ਸ", "ੜ", "ਕ"], "row": 1, "col": 2, "isHorizontal": false }
+        ],
+        "dialLetters": ["ਬ", "ਸ", "ੜ", "ਕ"]
+      },
+      {
+        "levelNumber": 7,
+        "gridSize": 5,
+        "words": [
+          { "answer": "ਨਮਕ", "syllables": ["ਨ", "ਮ", "ਕ"], "row": 2, "col": 0, "isHorizontal": true },
+          { "answer": "ਕਲਮ", "syllables": ["ਕ", "ਲ", "ਮ"], "row": 0, "col": 2, "isHorizontal": false }
+        ],
+        "dialLetters": ["ਨ", "ਮ", "ਕ", "ਲ"]
+      },
+      {
+        "levelNumber": 8,
+        "gridSize": 6,
+        "words": [
+          { "answer": "ਸਰਕਸ", "syllables": ["ਸ", "ਰ", "ਕ", "ਸ"], "row": 2, "col": 1, "isHorizontal": true },
+          { "answer": "ਕਰ", "syllables": ["ਕ", "ਰ"], "row": 2, "col": 3, "isHorizontal": false }
+        ],
+        "dialLetters": ["ਸ", "ਰ", "ਕ"]
+      },
+      {
+        "levelNumber": 9,
+        "gridSize": 6,
+        "words": [
+          { "answer": "ਅਦਰਕ", "syllables": ["ਅ", "ਦ", "ਰ", "ਕ"], "row": 2, "col": 1, "isHorizontal": true },
+          { "answer": "ਕਰ", "syllables": ["ਕ", "ਰ"], "row": 2, "col": 4, "isHorizontal": false }
+        ],
+        "dialLetters": ["ਅ", "ਦ", "ਰ", "ਕ"]
+      },
+      {
+        "levelNumber": 10,
+        "gridSize": 6,
+        "words": [
+          { "answer": "ਬਰਤਨ", "syllables": ["ਬ", "ਰ", "ਤ", "ਨ"], "row": 1, "col": 1, "isHorizontal": true },
+          { "answer": "ਨਮਕ", "syllables": ["ਨ", "ਮ", "ਕ"], "row": 1, "col": 4, "isHorizontal": false }
+        ],
+        "dialLetters": ["ਬ", "ਰ", "ਤ", "ਨ", "ਮ", "ਕ"]
+      },
+      {
+        "levelNumber": 11,
+        "gridSize": 6,
+        "words": [
+          { "answer": "ਮਟਰ", "syllables": ["ਮ", "ਟ", "ਰ"], "row": 2, "col": 1, "isHorizontal": true },
+          { "answer": "ਰਸ", "syllables": ["ਰ", "ਸ"], "row": 2, "col": 3, "isHorizontal": false }
+        ],
+        "dialLetters": ["ਮ", "ਟ", "ਰ", "ਸ"]
+      },
+      {
+        "levelNumber": 12,
+        "gridSize": 6,
+        "words": [
+          { "answer": "ਚਮਚ", "syllables": ["ਚ", "ਮ", "ਚ"], "row": 2, "col": 1, "isHorizontal": true },
+          { "answer": "ਮਲ", "syllables": ["ਮ", "ਲ"], "row": 2, "col": 2, "isHorizontal": false }
+        ],
+        "dialLetters": ["ਚ", "ਮ", "ਲ"]
+      },
+      {
+        "levelNumber": 13,
+        "gridSize": 7,
+        "words": [
+          { "answer": "ਥਲ", "syllables": ["ਥ", "ਲ"], "row": 3, "col": 2, "isHorizontal": true },
+          { "answer": "ਜਲ", "syllables": ["ਜ", "ਲ"], "row": 2, "col": 3, "isHorizontal": false },
+          { "answer": "ਫਲ", "syllables": ["ਫ", "ਲ"], "row": 3, "col": 2, "isHorizontal": false }
+        ],
+        "dialLetters": ["ਥ", "ਲ", "ਜ", "ਫ"]
+      },
+      {
+        "levelNumber": 14,
+        "gridSize": 7,
+        "words": [
+          { "answer": "ਪਲ", "syllables": ["ਪ", "ਲ"], "row": 3, "col": 2, "isHorizontal": true },
+          { "answer": "ਬਲ", "syllables": ["ਬ", "ਲ"], "row": 2, "col": 3, "isHorizontal": false },
+          { "answer": "ਕਲ", "syllables": ["ਕ", "ਲ"], "row": 3, "col": 2, "isHorizontal": false }
+        ],
+        "dialLetters": ["ਪ", "ਲ", "ਬ", "ਕ"]
+      },
+      {
+        "levelNumber": 15,
+        "gridSize": 7,
+        "words": [
+          { "answer": "ਕਲਮ", "syllables": ["ਕ", "ਲ", "ਮ"], "row": 2, "col": 2, "isHorizontal": true },
+          { "answer": "ਮਲ", "syllables": ["ਮ", "ਲ"], "row": 2, "col": 4, "isHorizontal": false },
+          { "answer": "ਕਮਲ", "syllables": ["ਕ", "ਮ", "ਲ"], "row": 2, "col": 2, "isHorizontal": false }
+        ],
+        "dialLetters": ["ਕ", "ਲ", "ਮ"]
+      }
+    ],
+    "itemPool": {
+      "ਬਸ": "audio/lessons/words/bus.mp3",
+      "ਰਸ": "audio/lessons/words/juice.mp3",
+      "ਫਲ": "audio/lessons/words/fruit.mp3",
+      "ਜਲ": "audio/lessons/words/water.mp3",
+      "ਘਰ": "audio/lessons/words/house.mp3",
+      "ਕਰ": "audio/lessons/words/do.mp3",
+      "ਕਲਮ": "audio/lessons/words/pen.mp3",
+      "ਮਲ": "audio/lessons/words/rub.mp3",
+      "ਕਮਲ": "audio/lessons/words/lotus.mp3",
+      "ਬਲ": "audio/lessons/words/strength.mp3",
+      "ਸੜਕ": "audio/lessons/words/road.mp3",
+      "ਨਮਕ": "audio/lessons/words/salt.mp3",
+      "ਸਰਕਸ": "audio/lessons/words/circus.mp3",
+      "ਅਦਰਕ": "audio/lessons/words/ginger.mp3",
+      "ਬਰਤਨ": "audio/lessons/words/utensil.mp3",
+      "ਮਟਰ": "audio/lessons/words/peas.mp3",
+      "ਚਮਚ": "audio/lessons/words/spoon.mp3",
+      "ਥਲ": "audio/lessons/words/land.mp3",
+      "ਪਲ": "audio/lessons/words/moment.mp3",
+      "ਕਲ": "audio/lessons/words/tomorrow.mp3"
+    },
+    "winBonusPoints": 20
+  },
+  "mapXOffset": 100.0,
+  "mapYOffset": -50.0,
+  "icon": "videogame_asset",
+  "iconColor": 4294938624
+}

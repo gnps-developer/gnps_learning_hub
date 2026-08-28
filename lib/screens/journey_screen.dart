@@ -21,6 +21,7 @@ import '../models/game_config.dart';
 import '../models/shop/default_item_ids.dart';
 import '../providers/navigation_providers.dart';
 import '../games/bubble_game_screen.dart';
+import '../games/crossword_game_screen.dart';
 import '../widgets/celebration/achievement_celebration_overlay.dart';
 
 class JourneyScreen extends ConsumerStatefulWidget {
@@ -70,7 +71,11 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
     }
 
     final result = await Navigator.of(context).push<Map<String, dynamic>>(
-      MaterialPageRoute(builder: (_) => BubbleGameScreen(game: game)),
+      MaterialPageRoute(
+        builder: (_) => game.type == 'crossword'
+            ? CrosswordGameScreen(game: game)
+            : BubbleGameScreen(game: game),
+      ),
     );
 
     if (result != null && mounted) {
