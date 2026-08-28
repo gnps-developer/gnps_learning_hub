@@ -308,6 +308,19 @@ class ProgressService {
     return (updated, newAchievementIndex);
   }
 
+  /// Directly saves the current level/progress index for a game.
+  /// Useful for multi-level games like Crossword.
+  Future<LocalProgress> saveGameLevel({
+    required LocalProgress progress,
+    required String gameId,
+    required int levelIndex,
+  }) async {
+    final updated = progress.clone();
+    updated.unlockedGameDifficulties[gameId] = levelIndex;
+    await _repository.save(updated);
+    return updated;
+  }
+
   /// How many of [itemId] the user currently owns (0 if none).
   int itemQuantity(LocalProgress progress, String itemId) =>
       progress.ownedItemQuantities[itemId] ?? 0;

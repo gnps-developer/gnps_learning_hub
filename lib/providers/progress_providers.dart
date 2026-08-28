@@ -232,6 +232,21 @@ class ProgressNotifier extends StateNotifier<AsyncValue<LocalProgress>> {
     state = AsyncValue.data(updated);
     return newAchievementIndex;
   }
+
+  Future<void> saveGameLevel({
+    required String gameId,
+    required int levelIndex,
+  }) async {
+    await _initialLoad;
+    final current = state.value;
+    if (current == null) return;
+    final updated = await _service.saveGameLevel(
+      progress: current,
+      gameId: gameId,
+      levelIndex: levelIndex,
+    );
+    state = AsyncValue.data(updated);
+  }
 }
 
 final progressProvider =

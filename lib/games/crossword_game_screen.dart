@@ -11,7 +11,6 @@ import '../providers/progress_providers.dart';
 import '../providers/audio_providers.dart';
 import '../widgets/games/crossword_grid_widget.dart';
 import '../widgets/games/letter_dial_widget.dart';
-import '../widgets/confetti/confetti_overlay.dart';
 
 class CrosswordGameScreen extends ConsumerStatefulWidget {
   final GameConfig game;
@@ -24,11 +23,10 @@ class CrosswordGameScreen extends ConsumerStatefulWidget {
 
 class _CrosswordGameScreenState extends ConsumerState<CrosswordGameScreen> {
   late CrosswordData _crosswordData;
-  final GlobalKey<ConfettiOverlayState> _confettiKey = GlobalKey();
 
   int _currentLevelIndex = 0;
   int _wordsFoundInLevel = 0;
-  bool _levelComplete = false;
+  bool _isTransitioning = false;
   bool _gameFinished = false;
 
   @override
@@ -45,7 +43,7 @@ class _CrosswordGameScreenState extends ConsumerState<CrosswordGameScreen> {
   CrosswordLevel get _currentLevel => _crosswordData.levels[_currentLevelIndex];
 
   void _onWordCompleted(String word) {
-    if (_levelComplete || _gameFinished) return;
+    if (_isTransitioning || _gameFinished) return;
 
     bool found = false;
     setState(() {
@@ -69,40 +67,41 @@ class _CrosswordGameScreenState extends ConsumerState<CrosswordGameScreen> {
     if (found) {
       if (_wordsFoundInLevel >= _currentLevel.words.length) {
         _onLevelComplete();
+        _advanceToNextLevel();
       }
     } else {
       ref.read(audioServiceProvider).playFailure();
     }
   }
 
-  void _onLevelComplete() async {
+  void _onLevelComplete() {
+    // Hook for future winning feedback effects (animations, sounds, etc.)
+  }
+
+  void _advanceToNextLevel() async {
     setState(() {
-      _levelComplete = true;
+      _isTransitioning = true;
     });
-    
-    _confettiKey.currentState?.play();
-    ref.read(audioServiceProvider).playGameWon();
-    
+
     final winBonus = widget.game.content['winBonusPoints'] ?? 20;
     ref.read(progressProvider.notifier).addPoints(winBonus);
 
-    // Save level progress (we repurpose unlockedGameDifficulties for level index)
-    await ref.read(progressProvider.notifier).recordGameScore(
+    // Save level progress
+    await ref.read(progressProvider.notifier).saveGameLevel(
       gameId: widget.game.id,
-      score: _currentLevelIndex + 1,
-      difficulty: GameDifficulty.easy, // Not used but required by API
-      won: true,
+      levelIndex: _currentLevelIndex + 1,
     );
 
-    await Future.delayed(const Duration(milliseconds: 2500));
+    // Short delay to allow the last word revelation to be seen
+    await Future.delayed(const Duration(milliseconds: 1000));
     if (!mounted) return;
 
     if (_currentLevelIndex < _crosswordData.levels.length - 1) {
       setState(() {
         _currentLevelIndex++;
         _wordsFoundInLevel = 0;
-        _levelComplete = false;
-        // Reset word revealed states for the next level if they were reused
+        _isTransitioning = false;
+        // Reset word revealed states for the next level
         for (var w in _currentLevel.words) {
           w.revealed = false;
         }
@@ -175,12 +174,6 @@ class _CrosswordGameScreenState extends ConsumerState<CrosswordGameScreen> {
               ),
             ),
 
-            if (_levelComplete && !_gameFinished)
-              _TransitionOverlay(
-                title: 'Level Complete!',
-                subtitle: 'Moving to Level ${_currentLevel.levelNumber}...',
-              ),
-
             if (_gameFinished)
               Container(
                 color: AppColors.barrierDark.withValues(alpha: 0.7),
@@ -219,8 +212,6 @@ class _CrosswordGameScreenState extends ConsumerState<CrosswordGameScreen> {
                   ),
                 ),
               ),
-
-            Positioned.fill(child: ConfettiOverlay(key: _confettiKey)),
           ],
         ),
       ),

@@ -14,12 +14,11 @@ void main(List<String> args) async {
   final assetsRoot = Directory('$projectRoot/assets');
   final audioLessonsRoot = Directory('$projectRoot/assets/audio/lessons');
 
-  // CLEAN RUN: Delete and recreate the audio/lessons directory
-  if (audioLessonsRoot.existsSync()) {
-    print('🧹 Cleaning old audio files...');
-    audioLessonsRoot.deleteSync(recursive: true);
+  // 0. Ensure directory exists (DO NOT DELETE EXISTING FILES)
+  if (!audioLessonsRoot.existsSync()) {
+    print('📁 Creating audio directory...');
+    audioLessonsRoot.createSync(recursive: true);
   }
-  audioLessonsRoot.createSync(recursive: true);
 
   final lessonsDir = Directory('$projectRoot/assets/data/lessons');
   final gamesDir = Directory('$projectRoot/assets/data/games');
@@ -77,6 +76,11 @@ void main(List<String> args) async {
     final punjabiText = entry.value;
 
     final file = File('${assetsRoot.path}/$assetPath');
+    if (file.existsSync()) {
+      print('⏭️  Skipping existing: $assetPath');
+      continue;
+    }
+
     if (!file.parent.existsSync()) {
       file.parent.createSync(recursive: true);
     }
