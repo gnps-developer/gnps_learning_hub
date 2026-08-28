@@ -1,6 +1,6 @@
 # Release Process Guide - GNPS Learning Hub
 
-This guide defines the streamlined workflow for publishing new versions to the Google Play and App Store using Codemagic and Git tagging.
+This guide defines the streamlined workflow for publishing new versions to the Google Play and App Store using Git tagging.
 
 ## Prerequisites
 - You must be on the `develop` branch.
@@ -24,11 +24,8 @@ Run the preparation script with your desired version tag (e.g., `v1.0.20`).
 4. Creates a local Git tag `v1.0.20`.
 5. Pushes the tag to your remote repository.
 
-### 2. Codemagic Build
-Once the tag is pushed, **Codemagic will detect the new tag** and automatically start the Production Build and submission to the stores (depending on your Codemagic workflow configuration).
-
-### 3. Finalize the Release
-Once the build is successful and you are ready to update the production record in Git:
+### 2. Finalize the Release
+Once you are ready to update the production record in Git:
 
 ```bash
 ./tools/finish_release.sh
