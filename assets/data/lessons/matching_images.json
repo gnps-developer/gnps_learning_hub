@@ -913,7 +913,7 @@
           "pointsAwarded": 15,
           "content": {
             "word": "ਸਕੂਲ",
-            "correctEmoji": "🏢",
+            "correctEmoji": "🏫",
             "distractorEmojis": [
               "🪑",
               "🖊️",
@@ -928,7 +928,7 @@
           "pointsAwarded": 15,
           "content": {
             "word": "ਮੇਜ਼",
-            "correctEmoji": "🪑",
+            "correctEmoji": "┳━┳",
             "distractorEmojis": [
               "✏️",
               "🎒",
@@ -1240,7 +1240,7 @@
           "pointsAwarded": 15,
           "content": {
             "word": "ਪਜਾਮਾ",
-            "correctEmoji": "👘",
+            "correctEmoji": "👖",
             "distractorEmojis": [
               "👕",
               "👟",
