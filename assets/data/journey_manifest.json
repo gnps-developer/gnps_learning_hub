@@ -11,6 +11,7 @@
   ],
   "gameFiles": [
     "bubble_pop_letters.json",
-    "bubble_pop_words.json"
+    "bubble_pop_words.json",
+    "crossword_punjabi.json"
   ]
 }
