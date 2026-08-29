@@ -168,7 +168,7 @@
     },
     "winBonusPoints": 20
   },
-  "mapXOffset": 100.0,
+  "mapXOffset": -140.0,
   "mapYOffset": -50.0,
   "icon": "videogame_asset",
   "iconColor": 4294938624
