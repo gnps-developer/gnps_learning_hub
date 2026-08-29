@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/game_config.dart';
 import '../models/games/crossword_data.dart';
-import '../models/games/game_difficulty.dart';
 import '../config/ui_config.dart';
 import '../config/ui_strings.dart';
 import '../providers/progress_providers.dart';
@@ -212,40 +211,6 @@ class _CrosswordGameScreenState extends ConsumerState<CrosswordGameScreen> {
                   ),
                 ),
               ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _TransitionOverlay extends StatelessWidget {
-  final String title;
-  final String subtitle;
-
-  const _TransitionOverlay({required this.title, required this.subtitle});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.black.withValues(alpha: 0.3),
-      child: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              title,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 36,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              subtitle,
-              style: const TextStyle(color: Colors.white70, fontSize: 18),
-            ),
           ],
         ),
       ),
