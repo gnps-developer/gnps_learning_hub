@@ -48,8 +48,51 @@ class ContentDebugScreen extends ConsumerWidget {
                       _DebugButton(
                         label: 'Unlock All Lessons (No Points)',
                         color: Colors.blue.shade700,
-                        onPressed: () {
-                          // This could be another helper if needed
+                        onPressed: () async {
+                          await ref
+                              .read(progressProvider.notifier)
+                              .debugUnlockAllLessons(journey);
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('All lessons unlocked!'),
+                              ),
+                            );
+                          }
+                        },
+                      ),
+                      const SizedBox(height: 12),
+                      _DebugButton(
+                        label: 'Unlock All Game Achievements',
+                        color: Colors.orange.shade800,
+                        onPressed: () async {
+                          await ref
+                              .read(progressProvider.notifier)
+                              .debugCompleteAllAchievements();
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('All game trophies unlocked!'),
+                              ),
+                            );
+                          }
+                        },
+                      ),
+                      const SizedBox(height: 12),
+                      _DebugButton(
+                        label: 'Reset Crossword to Level 1',
+                        color: Colors.red.shade700,
+                        onPressed: () async {
+                          await ref
+                              .read(progressProvider.notifier)
+                              .debugResetCrosswordProgress();
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Crossword progress reset!'),
+                              ),
+                            );
+                          }
                         },
                       ),
                     ],
@@ -179,29 +222,6 @@ class ContentDebugScreen extends ConsumerWidget {
                       const Text(
                         'Unlock all trophies (Bronze, Silver, Gold) for Letter and Word Bubbles games.',
                         style: TextStyle(color: Colors.grey),
-                      ),
-                      const SizedBox(height: 16),
-                      SizedBox(
-                        width: double.infinity,
-                        child: Column(
-                          children: [
-                            _DebugButton(
-                              label: 'Unlock All Game Achievements',
-                              color: Colors.orange.shade800,
-                              onPressed: () => ref
-                                  .read(progressProvider.notifier)
-                                  .debugCompleteAllAchievements(),
-                            ),
-                            const SizedBox(height: 12),
-                            _DebugButton(
-                              label: 'Reset Crossword to Level 1',
-                              color: Colors.red.shade700,
-                              onPressed: () => ref
-                                  .read(progressProvider.notifier)
-                                  .debugResetCrosswordProgress(),
-                            ),
-                          ],
-                        ),
                       ),
                     ],
                   ),

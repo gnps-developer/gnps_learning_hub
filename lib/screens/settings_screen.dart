@@ -85,22 +85,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     }
   }
 
-  Future<void> _debugCompleteAllLessons(BuildContext context) async {
-    final journey =
-        ref.read(journeyProvider).value ??
-            await ref.read(contentRepositoryProvider).getLocalJourney();
-
-    await ref.read(progressProvider.notifier).debugCompleteAllLessons(journey);
-
-    if (context.mounted) {
-      final messenger = ScaffoldMessenger.of(context);
-      messenger.clearSnackBars();
-      messenger.showSnackBar(
-        const SnackBar(content: Text(UIStrings.markAllCompleteLabel)),
-      );
-    }
-  }
-
   Future<void> _contactSupport() async {
     final Uri emailLaunchUri = Uri(
       scheme: 'mailto',
@@ -290,12 +274,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             if (kDebugMode || progress.isDeveloperModeEnabled) ...[
               const Divider(height: AppSpacing.xl),
               const _SectionHeader(UIStrings.debugToolsLabel),
-              _SettingsActionButton(
-                onPressed: () => _debugCompleteAllLessons(context),
-                icon: Icons.done_all,
-                label: UIStrings.markAllCompleteLabel,
-              ),
-              const SizedBox(height: AppSpacing.ms),
               _SettingsActionButton(
                 onPressed: () => Navigator.of(context).push(
                   MaterialPageRoute(builder: (_) => const ContentDebugScreen()),
