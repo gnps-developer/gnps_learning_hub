@@ -7,76 +7,98 @@ import 'dart:io';
 ///
 /// Usage:
 /// ```bash
-/// dart tools/generate_audio.dart [id_1] [id_2] ...
+/// # Generate for all JSON files
+/// dart tools/generate_audio.dart
+///
+/// # Generate for specific lesson ID
+/// dart tools/generate_audio.dart lesson_spelling
+///
+/// # Generate a specific word manually
+/// dart tools/generate_audio.dart --word "ਸਤਿਨਾਮ" --path "audio/lessons/words/satnam.mp3"
 /// ```
 void main(List<String> args) async {
   final projectRoot = _findProjectRoot();
   final assetsRoot = Directory('$projectRoot/assets');
-  final audioLessonsRoot = Directory('$projectRoot/assets/audio/lessons');
-
-  // CLEAN RUN: Delete and recreate the audio/lessons directory
-  if (audioLessonsRoot.existsSync()) {
-    print('🧹 Cleaning old audio files...');
-    audioLessonsRoot.deleteSync(recursive: true);
-  }
-  audioLessonsRoot.createSync(recursive: true);
-
-  final lessonsDir = Directory('$projectRoot/assets/data/lessons');
-  final gamesDir = Directory('$projectRoot/assets/data/games');
   
   // Maps Full Asset Path -> Punjabi Text to synthesize
   final downloadQueue = <String, String>{};
+  bool forceDownload = args.contains('--force');
 
-  final List<String> targetIds = args.where((a) => !a.startsWith('-')).toList();
-  final bool isFiltering = targetIds.isNotEmpty;
-
-  if (isFiltering) {
-    print('🔍 Scanning specific items: ${targetIds.join(', ')}');
+  // Handle Manual Word Generation
+  if (args.contains('--word')) {
+    final wordIndex = args.indexOf('--word');
+    final pathIndex = args.indexOf('--path');
+    
+    if (wordIndex != -1 && wordIndex + 1 < args.length && pathIndex != -1 && pathIndex + 1 < args.length) {
+      final word = args[wordIndex + 1];
+      final path = args[pathIndex + 1];
+      downloadQueue[path] = word;
+      print('📝 Manual mode: Queuing "$word" -> $path');
+    } else {
+      print('❌ Error: Manual mode requires both --word and --path arguments.');
+      return;
+    }
   } else {
-    print('🔍 Scanning all content for explicit audio definitions...');
-  }
+    // Standard Scan Mode
+    final List<String> targetIds = args.where((a) => !a.startsWith('-')).toList();
+    final bool isFiltering = targetIds.isNotEmpty;
 
-  // 1. Scan Lessons
-  if (lessonsDir.existsSync()) {
-    for (final file in lessonsDir.listSync().whereType<File>().where((f) => f.path.endsWith('.json'))) {
-      try {
-        final json = jsonDecode(file.readAsStringSync());
-        if (isFiltering && !targetIds.contains(json['id'])) continue;
-        _extractExplicitAudio(json, downloadQueue);
-      } catch (e) {
-        print('⚠️  Error parsing ${file.path}: $e');
+    if (isFiltering) {
+      print('🔍 Scanning specific items: ${targetIds.join(', ')}');
+    } else {
+      print('🔍 Scanning all content for explicit audio definitions...');
+    }
+
+    final lessonsDir = Directory('$projectRoot/assets/data/lessons');
+    final gamesDir = Directory('$projectRoot/assets/data/games');
+
+    // 1. Scan Lessons
+    if (lessonsDir.existsSync()) {
+      for (final file in lessonsDir.listSync().whereType<File>().where((f) => f.path.endsWith('.json'))) {
+        try {
+          final json = jsonDecode(file.readAsStringSync());
+          if (isFiltering && !targetIds.contains(json['id'])) continue;
+          _extractExplicitAudio(json, downloadQueue);
+        } catch (e) {
+          print('⚠️  Error parsing ${file.path}: $e');
+        }
       }
     }
-  }
 
-  // 2. Scan Games
-  if (gamesDir.existsSync()) {
-    for (final file in gamesDir.listSync().whereType<File>().where((f) => f.path.endsWith('.json'))) {
-      try {
-        final json = jsonDecode(file.readAsStringSync());
-        if (isFiltering && !targetIds.contains(json['id'])) continue;
-        _extractExplicitAudio(json, downloadQueue);
-      } catch (e) {
-        print('⚠️  Error parsing ${file.path}: $e');
+    // 2. Scan Games
+    if (gamesDir.existsSync()) {
+      for (final file in gamesDir.listSync().whereType<File>().where((f) => f.path.endsWith('.json'))) {
+        try {
+          final json = jsonDecode(file.readAsStringSync());
+          if (isFiltering && !targetIds.contains(json['id'])) continue;
+          _extractExplicitAudio(json, downloadQueue);
+        } catch (e) {
+          print('⚠️  Error parsing ${file.path}: $e');
+        }
       }
     }
   }
 
   if (downloadQueue.isEmpty) {
-    print('⚠️  No explicit audio definitions found.');
+    print('⚠️  No audio definitions found.');
     return;
   }
 
-  print('🎯 Found ${downloadQueue.length} unique audio items to generate.');
-
   final client = HttpClient();
   int downloaded = 0;
+  int skipped = 0;
 
   for (final entry in downloadQueue.entries) {
-    final assetPath = entry.key; // e.g. "audio/lessons/alphabets/ura.mp3"
+    final assetPath = entry.key; 
     final punjabiText = entry.value;
 
     final file = File('${assetsRoot.path}/$assetPath');
+    
+    if (file.existsSync() && !forceDownload) {
+      skipped++;
+      continue;
+    }
+
     if (!file.parent.existsSync()) {
       file.parent.createSync(recursive: true);
     }
@@ -94,7 +116,7 @@ void main(List<String> args) async {
 
       if (response.statusCode == 200) {
         final bytes = await response.fold<List<int>>([], (p, e) => p..addAll(e));
-        file.writeAsBytesBytesSync(bytes);
+        file.writeAsBytesSync(bytes);
         downloaded++;
         // Throttling to respect the service
         await Future.delayed(const Duration(milliseconds: 700));
@@ -102,25 +124,19 @@ void main(List<String> args) async {
         print('❌ Failed: HTTP ${response.statusCode}');
       }
     } catch (e) {
-      print('❌ Error: $e');
+      print('❌ Error downloading "$punjabiText": $e');
     }
   }
 
   client.close();
   print('\n✅ Done!');
-  print('✨ Downloaded: $downloaded');
-  print('📁 Audio saved to: assets/audio/lessons/');
-}
-
-extension FileExt on File {
-  void writeAsBytesBytesSync(List<int> bytes) => writeAsBytesSync(bytes);
+  print('✨ New: $downloaded | ⏩ Skipped: $skipped');
 }
 
 void _extractExplicitAudio(dynamic data, Map<String, String> queue) {
   if (data is Map) {
     final content = data['content'];
     if (content is Map) {
-      // 1. Single audio file definition
       if (content.containsKey('audioFile')) {
         final path = content['audioFile'] as String;
         final text = content['letter'] ?? content['targetWord'] ?? content['correctLetter'] ?? content['word'] ?? content['fullSentence'];
@@ -129,7 +145,6 @@ void _extractExplicitAudio(dynamic data, Map<String, String> queue) {
         }
       }
       
-      // 2. Mapping definitions (Matching Words & Games)
       if (content.containsKey('itemPool')) {
         final mapping = content['itemPool'] as Map;
         for (final entry in mapping.entries) {
