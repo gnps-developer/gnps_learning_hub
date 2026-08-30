@@ -138,25 +138,39 @@ class _CrosswordGameScreenState extends ConsumerState<CrosswordGameScreen> {
                 child: Column(
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         IconButton(
-                          icon: const Icon(Icons.close, size: 32),
+                          icon: const Icon(Icons.close, size: 28),
                           onPressed: () => Navigator.of(context).pop(),
-                        ),
-                        Text(
-                          'Level ${_currentLevel.levelNumber} / ${_crosswordData.levels.length}',
-                          style: const TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
+                          style: IconButton.styleFrom(
+                            backgroundColor: Theme.of(context).colorScheme.surfaceContainerHigh.withValues(alpha: 0.3),
                           ),
                         ),
-                        const SizedBox(width: 48), // Spacer
+                        const Spacer(),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: AppSpacing.md,
+                            vertical: AppSpacing.sm,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.surfaceContainerHigh.withValues(alpha: 0.3),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Text(
+                            'Level ${_currentLevel.levelNumber} / ${_crosswordData.levels.length}',
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        const Spacer(),
+                        const SizedBox(width: 48),
                       ],
                     ),
                     const SizedBox(height: AppSpacing.md),
                     Expanded(
-                      flex: 2,
+                      flex: 3,
                       child: Center(
                         child: CrosswordGridWidget(
                           gridSize: _currentLevel.gridSize,
@@ -164,7 +178,7 @@ class _CrosswordGameScreenState extends ConsumerState<CrosswordGameScreen> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: AppSpacing.lg),
+                    const SizedBox(height: AppSpacing.md),
                     Expanded(
                       flex: 2,
                       child: LetterDialWidget(
@@ -179,23 +193,26 @@ class _CrosswordGameScreenState extends ConsumerState<CrosswordGameScreen> {
 
             if (_gameFinished)
               Container(
-                color: AppColors.barrierDark.withValues(alpha: 0.7),
+                color: Theme.of(context).colorScheme.scrim.withValues(alpha: 0.7),
                 child: Center(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Text(
+                      Text(
                         'Congratulations! 🎉',
                         style: TextStyle(
-                          color: Colors.yellow,
+                          color: Theme.of(context).colorScheme.primary,
                           fontSize: 40,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       const SizedBox(height: AppSpacing.md),
-                      const Text(
+                      Text(
                         'You finished all levels!',
-                        style: TextStyle(color: Colors.white, fontSize: 24),
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onSurface,
+                          fontSize: 24,
+                        ),
                       ),
                       const SizedBox(height: AppSpacing.xl),
                       ElevatedButton(

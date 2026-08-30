@@ -57,7 +57,7 @@ class _LetterDialWidgetState extends State<LetterDialWidget> {
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.2),
+                        color: Theme.of(context).colorScheme.shadow.withValues(alpha: 0.2),
                         blurRadius: 25,
                         offset: const Offset(0, 8),
                       )
@@ -105,18 +105,18 @@ class _LetterDialWidgetState extends State<LetterDialWidget> {
                       decoration: BoxDecoration(
                         color: isSelected
                             ? Theme.of(context).colorScheme.primary
-                            : Colors.white,
+                            : Theme.of(context).colorScheme.surface,
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withValues(alpha: 0.2),
+                            color: Theme.of(context).colorScheme.shadow.withValues(alpha: 0.2),
                             blurRadius: 10,
                             offset: const Offset(0, 5),
                           )
                         ],
                         border: Border.all(
                           color: isSelected 
-                            ? Colors.white 
+                            ? Theme.of(context).colorScheme.onPrimary.withValues(alpha: 0.5)
                             : Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
                           width: 4,
                         ),
@@ -127,7 +127,9 @@ class _LetterDialWidgetState extends State<LetterDialWidget> {
                           style: TextStyle(
                             fontSize: 42,
                             fontWeight: FontWeight.bold,
-                            color: isSelected ? Colors.white : Colors.black87,
+                            color: isSelected 
+                              ? Theme.of(context).colorScheme.onPrimary 
+                              : Theme.of(context).colorScheme.onSurface,
                           ),
                         ),
                       ),

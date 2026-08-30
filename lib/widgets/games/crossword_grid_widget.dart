@@ -75,30 +75,31 @@ class CrosswordGridWidget extends StatelessWidget {
         child: AspectRatio(
           aspectRatio: 1,
           child: Container(
-            padding: const EdgeInsets.all(12.0),
+            padding: const EdgeInsets.all(8.0),
             decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.3),
-              borderRadius: BorderRadius.circular(24),
-              border: Border.all(color: Colors.white.withValues(alpha: 0.2), width: 2),
+              color: Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.25),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: Theme.of(context).colorScheme.outlineVariant.withValues(alpha: 0.2), width: 1.5),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.05),
-                  blurRadius: 10,
+                  color: Theme.of(context).colorScheme.shadow.withValues(alpha: 0.05),
+                  blurRadius: 15,
                   spreadRadius: 2,
                 )
               ],
             ),
             child: LayoutBuilder(
               builder: (context, constraints) {
+                const spacing = 2.0;
                 final cellSize =
-                    (constraints.maxWidth - (gridSize - 1) * 6 - 24) / gridSize;
+                    (constraints.maxWidth - (gridSize - 1) * spacing - 16) / gridSize;
 
                 return GridView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: gridSize,
-                    crossAxisSpacing: 6,
-                    mainAxisSpacing: 6,
+                    crossAxisSpacing: spacing,
+                    mainAxisSpacing: spacing,
                   ),
                   itemCount: gridSize * gridSize,
                   itemBuilder: (context, index) {
@@ -106,7 +107,16 @@ class CrosswordGridWidget extends StatelessWidget {
                     int c = index % gridSize;
 
                     if (!isPartOfWord[r][c]) {
-                      return const SizedBox.shrink();
+                      return Container(
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.08),
+                          borderRadius: BorderRadius.circular(4),
+                          border: Border.all(
+                            color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
+                            width: 0.5,
+                          ),
+                        ),
+                      );
                     }
 
                     return AnimatedContainer(
@@ -116,15 +126,15 @@ class CrosswordGridWidget extends StatelessWidget {
                         color:
                             revealed[r][c]
                                 ? Theme.of(context).colorScheme.primaryContainer
-                                : Colors.white.withValues(alpha: 0.9),
-                        borderRadius: BorderRadius.circular(12),
+                                : Theme.of(context).colorScheme.surface.withValues(alpha: 0.95),
+                        borderRadius: BorderRadius.circular(4),
                         boxShadow:
                             revealed[r][c]
                                 ? [
                                   BoxShadow(
-                                    color: Colors.black.withValues(alpha: 0.1),
-                                    blurRadius: 4,
-                                    offset: const Offset(0, 2),
+                                    color: Theme.of(context).colorScheme.shadow.withValues(alpha: 0.1),
+                                    blurRadius: 2,
+                                    offset: const Offset(0, 1),
                                   ),
                                 ]
                                 : [],
@@ -132,8 +142,8 @@ class CrosswordGridWidget extends StatelessWidget {
                           color:
                               revealed[r][c]
                                   ? Theme.of(context).colorScheme.primary
-                                  : Colors.grey.shade300,
-                          width: revealed[r][c] ? 2.5 : 1.5,
+                                  : Theme.of(context).colorScheme.outline.withValues(alpha: 0.4),
+                          width: revealed[r][c] ? 2.0 : 1.0,
                         ),
                       ),
                       child: Center(
