@@ -7,6 +7,7 @@ void main() {
   final dataDir = Directory('$projectRoot/assets/data');
   final audioDir = Directory('$projectRoot/assets/audio');
   final soundsDir = Directory('$projectRoot/assets/sounds');
+  final pubspecFile = File('$projectRoot/pubspec.yaml');
 
   /**
    * AUDIO ASSET SYNCHRONIZATION TEST
@@ -14,6 +15,7 @@ void main() {
    * IT ALSO ENSURES THERE ARE NO UNUSED AUDIO FILES LINGERING IN THE ASSETS FOLDER.
    * MAINTAINING A 1:1 MAPPING HELPS KEEP THE APP BUNDLE SIZE OPTIMIZED.
    * SYSTEM SOUNDS ARE ALSO VERIFIED FOR COMPLETENESS.
+   * FINALLY, IT VERIFIES THAT ALL AUDIO FOLDERS ARE REGISTERED IN PUBSPEC.YAML.
    */
 
   group('Audio Asset Synchronization', () {
@@ -34,8 +36,10 @@ void main() {
       }
     }
 
-    // 2. Collect all files on disk
+    // 2. Collect all files and directories on disk
     final audioFilesOnDisk = <String>{};
+    final requiredAudioDirectories = <String>{};
+    
     if (audioDir.existsSync()) {
       audioDir
           .listSync(recursive: true)
@@ -44,6 +48,10 @@ void main() {
           .forEach((f) {
         final relativePath = f.path.split('assets/').last;
         audioFilesOnDisk.add(relativePath);
+        
+        // Track the directory this file is in (relative to assets/)
+        final parentPath = f.parent.path.split('assets/').last;
+        requiredAudioDirectories.add('assets/$parentPath/');
       });
     }
 
@@ -62,6 +70,27 @@ void main() {
       if (extraFiles.isNotEmpty) {
         fail('The following audio files exist on disk but are NOT referenced in any JSON data file:\n'
              '${extraFiles.join("\n")}');
+      }
+    });
+
+    test('All audio directories must be registered in pubspec.yaml', () {
+      if (!pubspecFile.existsSync()) {
+        fail('pubspec.yaml not found at ${pubspecFile.path}');
+      }
+      
+      final pubspecContent = pubspecFile.readAsStringSync();
+      final missingRegistrations = <String>[];
+
+      for (final dir in requiredAudioDirectories) {
+        if (!pubspecContent.contains('- $dir')) {
+          missingRegistrations.add(dir);
+        }
+      }
+
+      if (missingRegistrations.isNotEmpty) {
+        fail('The following audio directories contain files but are NOT registered in pubspec.yaml assets:\n'
+             '${missingRegistrations.join("\n")}\n\n'
+             'Flutter will not include these assets in the build unless they are added to pubspec.yaml.');
       }
     });
 

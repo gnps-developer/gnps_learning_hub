@@ -4,7 +4,7 @@ This document is automatically generated from the app's lesson data.
 
 ### 📊 App Statistics
 - **Total Lessons**: 7
-- **Total Interactive Tasks**: 557
+- **Total Interactive Tasks**: 532
 - **Total Games**: 2
 
 ---
@@ -31,38 +31,38 @@ This document is automatically generated from the app's lesson data.
 - **Labial Sounds** (5 tasks)
 - **Semivowels** (5 tasks)
 
-### 3. Spelling (160 tasks)
+### 3. Spelling (146 tasks)
 - **Animals** (10 tasks)
 - **Everyday Objects & Household** (10 tasks)
 - **Fruits** (10 tasks)
 - **Colors** (10 tasks)
 - **Travel & Transport** (10 tasks)
-- **School** (10 tasks)
+- **School** (7 tasks)
 - **Weather** (10 tasks)
 - **Clothes** (10 tasks)
-- **Kitchen** (10 tasks)
+- **Kitchen** (9 tasks)
 - **Nature** (10 tasks)
 - **Birds** (10 tasks)
-- **Days** (10 tasks)
-- **Directions** (10 tasks)
-- **Office** (10 tasks)
+- **Days** (7 tasks)
+- **Directions** (4 tasks)
+- **Office** (9 tasks)
 - **Shopping** (10 tasks)
 - **Eating** (10 tasks)
 
-### 4. Match the Picture (150 tasks)
+### 4. Match the Picture (139 tasks)
 - **Animals** (10 tasks)
 - **Everyday Objects & Household** (10 tasks)
 - **Fruits** (10 tasks)
 - **Colors** (10 tasks)
 - **Travel & Transport** (10 tasks)
-- **School** (10 tasks)
+- **School** (7 tasks)
 - **Weather** (10 tasks)
 - **Clothes** (10 tasks)
-- **Kitchen** (10 tasks)
+- **Kitchen** (9 tasks)
 - **Nature** (10 tasks)
 - **Birds** (10 tasks)
-- **Directions** (10 tasks)
-- **Office** (10 tasks)
+- **Directions** (4 tasks)
+- **Office** (9 tasks)
 - **Shopping** (10 tasks)
 - **Eating** (10 tasks)
 
@@ -120,4 +120,4 @@ This document is automatically generated from the app's lesson data.
 - **Word Bubbles**: bubble pop game unlocked after `lesson_matching_words`.
 
 ---
-*Last Updated: 2026-08-28*
+*Last Updated: 2026-08-30*
