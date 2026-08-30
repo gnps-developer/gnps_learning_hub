@@ -18,6 +18,50 @@ class ContentDebugScreen extends ConsumerWidget {
           data: (progress) => ListView(
             padding: const EdgeInsets.all(16),
             children: [
+              const Text(
+                'Master Controls',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 16),
+              Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    children: [
+                      _DebugButton(
+                        label: 'Complete All Lessons',
+                        color: Colors.green.shade700,
+                        onPressed: () async {
+                          await ref
+                              .read(progressProvider.notifier)
+                              .debugCompleteAllLessons(journey);
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('All lessons marked complete!'),
+                              ),
+                            );
+                          }
+                        },
+                      ),
+                      const SizedBox(height: 12),
+                      _DebugButton(
+                        label: 'Unlock All Lessons (No Points)',
+                        color: Colors.blue.shade700,
+                        onPressed: () {
+                          // This could be another helper if needed
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 24),
+              const Text(
+                'Individual Lessons',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 16),
               ...journey.lessons.map((lesson) {
                 final isCompleted =
                     progress.completedLessonIds.contains(lesson.id);
@@ -139,12 +183,24 @@ class ContentDebugScreen extends ConsumerWidget {
                       const SizedBox(height: 16),
                       SizedBox(
                         width: double.infinity,
-                        child: _DebugButton(
-                          label: 'Unlock All Game Achievements',
-                          color: Colors.orange.shade800,
-                          onPressed: () => ref
-                              .read(progressProvider.notifier)
-                              .debugCompleteAllAchievements(),
+                        child: Column(
+                          children: [
+                            _DebugButton(
+                              label: 'Unlock All Game Achievements',
+                              color: Colors.orange.shade800,
+                              onPressed: () => ref
+                                  .read(progressProvider.notifier)
+                                  .debugCompleteAllAchievements(),
+                            ),
+                            const SizedBox(height: 12),
+                            _DebugButton(
+                              label: 'Reset Crossword to Level 1',
+                              color: Colors.red.shade700,
+                              onPressed: () => ref
+                                  .read(progressProvider.notifier)
+                                  .debugResetCrosswordProgress(),
+                            ),
+                          ],
                         ),
                       ),
                     ],

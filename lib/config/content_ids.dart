@@ -13,4 +13,5 @@ class ContentIds {
   // Games
   static const bubblePopLetters = 'bubble_pop_letters';
   static const bubblePopWords = 'bubble_pop_words';
+  static const crosswordPunjabi = 'crossword_punjabi';
 }

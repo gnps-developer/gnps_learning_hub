@@ -84,6 +84,18 @@ class ProgressNotifier extends StateNotifier<AsyncValue<LocalProgress>> {
     state = AsyncValue.data(updated);
   }
 
+  /// DEBUG ONLY. Unlocks every lesson.
+  Future<void> debugUnlockAllLessons(Journey journey) async {
+    await _initialLoad;
+    final current = state.value;
+    if (current == null) return;
+    final updated = await _service.debugUnlockAllLessons(
+      progress: current,
+      journey: journey,
+    );
+    state = AsyncValue.data(updated);
+  }
+
   /// DEBUG ONLY. Manually updates progress for a specific lesson.
   Future<void> debugUpdateLessonProgress({
     required Journey journey,
@@ -108,6 +120,15 @@ class ProgressNotifier extends StateNotifier<AsyncValue<LocalProgress>> {
     final current = state.value;
     if (current == null) return;
     final updated = await _service.debugCompleteAllAchievements(current);
+    state = AsyncValue.data(updated);
+  }
+
+  /// DEBUG ONLY. Resets crossword progress.
+  Future<void> debugResetCrosswordProgress() async {
+    await _initialLoad;
+    final current = state.value;
+    if (current == null) return;
+    final updated = await _service.debugResetCrosswordProgress(current);
     state = AsyncValue.data(updated);
   }
 

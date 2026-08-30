@@ -17,7 +17,8 @@ class CrosswordGameScreen extends ConsumerStatefulWidget {
   const CrosswordGameScreen({super.key, required this.game});
 
   @override
-  ConsumerState<CrosswordGameScreen> createState() => _CrosswordGameScreenState();
+  ConsumerState<CrosswordGameScreen> createState() =>
+      _CrosswordGameScreenState();
 }
 
 class _CrosswordGameScreenState extends ConsumerState<CrosswordGameScreen> {
@@ -32,7 +33,7 @@ class _CrosswordGameScreenState extends ConsumerState<CrosswordGameScreen> {
   void initState() {
     super.initState();
     _crosswordData = CrosswordData.fromJson(widget.game.content);
-    
+
     // Load saved progress for this game if available
     final progress = ref.read(progressProvider).value;
     final savedLevel = progress?.unlockedGameDifficulties[widget.game.id] ?? 0;
@@ -51,7 +52,7 @@ class _CrosswordGameScreenState extends ConsumerState<CrosswordGameScreen> {
           cw.revealed = true;
           _wordsFoundInLevel++;
           found = true;
-          
+
           final audioPath = _crosswordData.itemPool[word];
           if (audioPath != null) {
             ref.read(audioServiceProvider).speak(audioPath);
@@ -86,10 +87,12 @@ class _CrosswordGameScreenState extends ConsumerState<CrosswordGameScreen> {
     ref.read(progressProvider.notifier).addPoints(winBonus);
 
     // Save level progress
-    await ref.read(progressProvider.notifier).saveGameLevel(
-      gameId: widget.game.id,
-      levelIndex: _currentLevelIndex + 1,
-    );
+    await ref
+        .read(progressProvider.notifier)
+        .saveGameLevel(
+          gameId: widget.game.id,
+          levelIndex: _currentLevelIndex + 1,
+        );
 
     // Short delay to allow the last word revelation to be seen
     await Future.delayed(const Duration(milliseconds: 1000));
@@ -97,13 +100,14 @@ class _CrosswordGameScreenState extends ConsumerState<CrosswordGameScreen> {
 
     if (_currentLevelIndex < _crosswordData.levels.length - 1) {
       setState(() {
-        _currentLevelIndex++;
-        _wordsFoundInLevel = 0;
-        _isTransitioning = false;
-        // Reset word revealed states for the next level
+        // Reset word revealed states for the level just completed,
+        // BEFORE advancing the index (so _currentLevel still points at it)
         for (var w in _currentLevel.words) {
           w.revealed = false;
         }
+        _currentLevelIndex++;
+        _wordsFoundInLevel = 0;
+        _isTransitioning = false;
       });
     } else {
       setState(() {
@@ -191,10 +195,7 @@ class _CrosswordGameScreenState extends ConsumerState<CrosswordGameScreen> {
                       const SizedBox(height: AppSpacing.md),
                       const Text(
                         'You finished all levels!',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 24,
-                        ),
+                        style: TextStyle(color: Colors.white, fontSize: 24),
                       ),
                       const SizedBox(height: AppSpacing.xl),
                       ElevatedButton(

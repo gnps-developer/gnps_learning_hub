@@ -151,6 +151,23 @@ class ProgressService {
     return updated;
   }
 
+  /// DEBUG ONLY. Unlocks every lesson in the journey without marking them complete
+  /// or awarding points. Useful for testing later lessons without jumping ahead.
+  Future<LocalProgress> debugUnlockAllLessons({
+    required LocalProgress progress,
+    required Journey journey,
+  }) async {
+    if (!kDebugMode && !progress.isDeveloperModeEnabled) return progress;
+
+    final updated = progress.clone();
+    for (final lesson in journey.activeLessons) {
+      updated.unlockedLessonIds.add(lesson.id);
+    }
+
+    await _repository.save(updated);
+    return updated;
+  }
+
   /// DEBUG ONLY. Manually updates progress for a specific lesson to help test
   /// UI states (Reset, Partial, Complete).
   Future<LocalProgress> debugUpdateLessonProgress({
@@ -202,6 +219,19 @@ class ProgressService {
     final allUnlockedValue = TaskConfig.maxGameDifficultyIndex + 1;
     updated.unlockedGameDifficulties[ContentIds.bubblePopLetters] = allUnlockedValue;
     updated.unlockedGameDifficulties[ContentIds.bubblePopWords] = allUnlockedValue;
+
+    await _repository.save(updated);
+    return updated;
+  }
+
+  /// DEBUG ONLY. Resets crossword game progress.
+  Future<LocalProgress> debugResetCrosswordProgress(
+    LocalProgress progress,
+  ) async {
+    if (!kDebugMode && !progress.isDeveloperModeEnabled) return progress;
+
+    final updated = progress.clone();
+    updated.unlockedGameDifficulties[ContentIds.crosswordPunjabi] = 0;
 
     await _repository.save(updated);
     return updated;

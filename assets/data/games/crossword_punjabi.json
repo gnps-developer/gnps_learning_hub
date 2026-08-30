@@ -115,23 +115,21 @@
       },
       {
         "levelNumber": 13,
-        "gridSize": 7,
+        "gridSize": 5,
         "words": [
-          { "answer": "ਥਲ", "syllables": ["ਥ", "ਲ"], "row": 3, "col": 2, "isHorizontal": true },
-          { "answer": "ਜਲ", "syllables": ["ਜ", "ਲ"], "row": 2, "col": 3, "isHorizontal": false },
-          { "answer": "ਫਲ", "syllables": ["ਫ", "ਲ"], "row": 5, "col": 2, "isHorizontal": true }
+          { "answer": "ਥਲ", "syllables": ["ਥ", "ਲ"], "row": 2, "col": 1, "isHorizontal": true },
+          { "answer": "ਜਲ", "syllables": ["ਜ", "ਲ"], "row": 1, "col": 2, "isHorizontal": false }
         ],
-        "dialLetters": ["ਥ", "ਲ", "ਜ", "ਫ"]
+        "dialLetters": ["ਥ", "ਲ", "ਜ"]
       },
       {
         "levelNumber": 14,
-        "gridSize": 7,
+        "gridSize": 5,
         "words": [
-          { "answer": "ਪਲ", "syllables": ["ਪ", "ਲ"], "row": 3, "col": 2, "isHorizontal": true },
-          { "answer": "ਬਲ", "syllables": ["ਬ", "ਲ"], "row": 2, "col": 3, "isHorizontal": false },
-          { "answer": "ਕਲ", "syllables": ["ਕ", "ਲ"], "row": 5, "col": 2, "isHorizontal": true }
+          { "answer": "ਪਲ", "syllables": ["ਪ", "ਲ"], "row": 2, "col": 1, "isHorizontal": true },
+          { "answer": "ਬਲ", "syllables": ["ਬ", "ਲ"], "row": 1, "col": 2, "isHorizontal": false }
         ],
-        "dialLetters": ["ਪ", "ਲ", "ਬ", "ਕ"]
+        "dialLetters": ["ਪ", "ਲ", "ਬ"]
       },
       {
         "levelNumber": 15,
