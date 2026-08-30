@@ -939,23 +939,6 @@
           }
         },
         {
-          "id": "school_04",
-          "type": "spelling",
-          "pointsAwarded": 15,
-          "content": {
-            "emoji": "🧑‍🏫",
-            "targetWord": "ਗੁਰੂ",
-            "letterBank": [
-              "ਗੁ",
-              "ਰੂ",
-              "ਪੈਨ",
-              "ਸਿ",
-              "ਬ"
-            ],
-            "audioFile": "audio/lessons/words/teacher_guru.mp3"
-          }
-        },
-        {
           "id": "school_05",
           "type": "spelling",
           "pointsAwarded": 15,
@@ -987,40 +970,6 @@
               "ਆਰ"
             ],
             "audioFile": "audio/lessons/words/class.mp3"
-          }
-        },
-        {
-          "id": "school_07",
-          "type": "spelling",
-          "pointsAwarded": 15,
-          "content": {
-            "emoji": "🧑‍🎓",
-            "targetWord": "ਵਿਦਿਆਰਥੀ",
-            "letterBank": [
-              "ਵਿ",
-              "ਦਿ",
-              "ਆਰ",
-              "ਥੀ",
-              "ਰ"
-            ],
-            "audioFile": "audio/lessons/words/student.mp3"
-          }
-        },
-        {
-          "id": "school_08",
-          "type": "spelling",
-          "pointsAwarded": 15,
-          "content": {
-            "emoji": "🧼",
-            "targetWord": "ਰਬੜ",
-            "letterBank": [
-              "ਰ",
-              "ਬੜ",
-              "ਸ",
-              "ਕੂਲ",
-              "ਮੇ"
-            ],
-            "audioFile": "audio/lessons/words/eraser.mp3"
           }
         },
         {
@@ -1329,7 +1278,7 @@
           "type": "spelling",
           "pointsAwarded": 15,
           "content": {
-            "emoji": "🧥",
+            "emoji": "👚",
             "targetWord": "ਸਵੈਟਰ",
             "letterBank": [
               "ਸ",
@@ -1380,7 +1329,7 @@
           "type": "spelling",
           "pointsAwarded": 15,
           "content": {
-            "emoji": "🧣",
+            "emoji": "🥠",
             "targetWord": "ਰੁਮਾਲ",
             "letterBank": [
               "ਰੁ",
@@ -1471,7 +1420,7 @@
           "type": "spelling",
           "pointsAwarded": 15,
           "content": {
-            "emoji": "🍲",
+            "emoji": "🍶",
             "targetWord": "ਭਾਂਡਾ",
             "letterBank": [
               "ਭਾਂ",
@@ -1535,28 +1484,11 @@
           }
         },
         {
-          "id": "kitchen_08",
-          "type": "spelling",
-          "pointsAwarded": 15,
-          "content": {
-            "emoji": "🔥",
-            "targetWord": "ਚੁੱਲ੍ਹਾ",
-            "letterBank": [
-              "ਚੁੱ",
-              "ਲ੍ਹਾ",
-              "ਕ",
-              "ੜਾ",
-              "ਹੀ"
-            ],
-            "audioFile": "audio/lessons/words/stove.mp3"
-          }
-        },
-        {
           "id": "kitchen_09",
           "type": "spelling",
           "pointsAwarded": 15,
           "content": {
-            "emoji": "🥘",
+            "emoji": "🥣",
             "targetWord": "ਕੜਾਹੀ",
             "letterBank": [
               "ਕ",
@@ -1573,7 +1505,7 @@
           "type": "spelling",
           "pointsAwarded": 15,
           "content": {
-            "emoji": "🍛",
+            "emoji": "🔘",
             "targetWord": "ਥਾਲੀ",
             "letterBank": [
               "ਥਾ",
@@ -1948,7 +1880,7 @@
           "type": "spelling",
           "pointsAwarded": 15,
           "content": {
-            "emoji": "📅",
+            "emoji": "🗓️",
             "targetWord": "ਸੋਮਵਾਰ",
             "letterBank": [
               "ਸੋਮ",
@@ -1965,7 +1897,7 @@
           "type": "spelling",
           "pointsAwarded": 15,
           "content": {
-            "emoji": "📅",
+            "emoji": "🗓️",
             "targetWord": "ਮੰਗਲਵਾਰ",
             "letterBank": [
               "ਮੰਗਲ",
@@ -1982,7 +1914,7 @@
           "type": "spelling",
           "pointsAwarded": 15,
           "content": {
-            "emoji": "📅",
+            "emoji": "🗓️",
             "targetWord": "ਬੁੱਧਵਾਰ",
             "letterBank": [
               "ਬੁੱਧ",
@@ -1999,7 +1931,7 @@
           "type": "spelling",
           "pointsAwarded": 15,
           "content": {
-            "emoji": "📅",
+            "emoji": "🗓️",
             "targetWord": "ਵੀਰਵਾਰ",
             "letterBank": [
               "ਵੀਰ",
@@ -2016,7 +1948,7 @@
           "type": "spelling",
           "pointsAwarded": 15,
           "content": {
-            "emoji": "📅",
+            "emoji": "🗓️",
             "targetWord": "ਸ਼ੁੱਕਰਵਾਰ",
             "letterBank": [
               "ਸ਼ੁੱਕਰ",
@@ -2033,7 +1965,7 @@
           "type": "spelling",
           "pointsAwarded": 15,
           "content": {
-            "emoji": "📅",
+            "emoji": "🗓️",
             "targetWord": "ਸ਼ਨੀਵਾਰ",
             "letterBank": [
               "ਸ਼ਨੀ",
@@ -2050,7 +1982,7 @@
           "type": "spelling",
           "pointsAwarded": 15,
           "content": {
-            "emoji": "📅",
+            "emoji": "🗓️",
             "targetWord": "ਐਤਵਾਰ",
             "letterBank": [
               "ਐਤ",
@@ -2060,57 +1992,6 @@
               "ਸ਼ਨੀ"
             ],
             "audioFile": "audio/lessons/words/sunday.mp3"
-          }
-        },
-        {
-          "id": "days_08",
-          "type": "spelling",
-          "pointsAwarded": 15,
-          "content": {
-            "emoji": "👉",
-            "targetWord": "ਅੱਜ",
-            "letterBank": [
-              "ਅੱ",
-              "ਜ",
-              "ਕੱ",
-              "ਲ੍ਹ",
-              "ਪਰ"
-            ],
-            "audioFile": "audio/lessons/words/today.mp3"
-          }
-        },
-        {
-          "id": "days_09",
-          "type": "spelling",
-          "pointsAwarded": 15,
-          "content": {
-            "emoji": "⏭️",
-            "targetWord": "ਕੱਲ੍ਹ",
-            "letterBank": [
-              "ਕੱ",
-              "ਲ੍ਹ",
-              "ਪਰ",
-              "ਸੋਂ",
-              "ਅੱ"
-            ],
-            "audioFile": "audio/lessons/words/tomorrow.mp3"
-          }
-        },
-        {
-          "id": "days_10",
-          "type": "spelling",
-          "pointsAwarded": 15,
-          "content": {
-            "emoji": "⏭️",
-            "targetWord": "ਪਰਸੋਂ",
-            "letterBank": [
-              "ਪਰ",
-              "ਸੋਂ",
-              "ਅੱ",
-              "ਜ",
-              "ਕੱ"
-            ],
-            "audioFile": "audio/lessons/words/day_after_tomorrow.mp3"
           }
         }
       ]
@@ -2124,143 +2005,7 @@
           "type": "spelling",
           "pointsAwarded": 15,
           "content": {
-            "emoji": "⬆️",
-            "targetWord": "ਉੱਤਰ",
-            "letterBank": [
-              "ਉੱ",
-              "ਤਰ",
-              "ਦੱ",
-              "ਖਣ",
-              "ਪੂਰ"
-            ],
-            "audioFile": "audio/lessons/words/north.mp3"
-          }
-        },
-        {
-          "id": "directions_02",
-          "type": "spelling",
-          "pointsAwarded": 15,
-          "content": {
-            "emoji": "⬇️",
-            "targetWord": "ਦੱਖਣ",
-            "letterBank": [
-              "ਦੱ",
-              "ਖਣ",
-              "ਪੂਰ",
-              "ਬ",
-              "ਪੱ"
-            ],
-            "audioFile": "audio/lessons/words/south.mp3"
-          }
-        },
-        {
-          "id": "directions_03",
-          "type": "spelling",
-          "pointsAwarded": 15,
-          "content": {
-            "emoji": "➡️",
-            "targetWord": "ਪੂਰਬ",
-            "letterBank": [
-              "ਪੂਰ",
-              "ਬ",
-              "ਪੱ",
-              "ਛਮ",
-              "ਉੱ"
-            ],
-            "audioFile": "audio/lessons/words/east.mp3"
-          }
-        },
-        {
-          "id": "directions_04",
-          "type": "spelling",
-          "pointsAwarded": 15,
-          "content": {
-            "emoji": "⬅️",
-            "targetWord": "ਪੱਛਮ",
-            "letterBank": [
-              "ਪੱ",
-              "ਛਮ",
-              "ਉੱ",
-              "ਪਰ",
-              "ਹੇ"
-            ],
-            "audioFile": "audio/lessons/words/west.mp3"
-          }
-        },
-        {
-          "id": "directions_05",
-          "type": "spelling",
-          "pointsAwarded": 15,
-          "content": {
             "emoji": "🔼",
-            "targetWord": "ਉੱਪਰ",
-            "letterBank": [
-              "ਉੱ",
-              "ਪਰ",
-              "ਹੇ",
-              "ਠਾਂ",
-              "ਖੱ"
-            ],
-            "audioFile": "audio/lessons/words/up.mp3"
-          }
-        },
-        {
-          "id": "directions_06",
-          "type": "spelling",
-          "pointsAwarded": 15,
-          "content": {
-            "emoji": "🔽",
-            "targetWord": "ਹੇਠਾਂ",
-            "letterBank": [
-              "ਹੇ",
-              "ਠਾਂ",
-              "ਖੱ",
-              "ਬੇ",
-              "ਸੱ"
-            ],
-            "audioFile": "audio/lessons/words/down.mp3"
-          }
-        },
-        {
-          "id": "directions_07",
-          "type": "spelling",
-          "pointsAwarded": 15,
-          "content": {
-            "emoji": "◀️",
-            "targetWord": "ਖੱਬੇ",
-            "letterBank": [
-              "ਖੱ",
-              "ਬੇ",
-              "ਸੱ",
-              "ਜੇ",
-              "ਅੱ"
-            ],
-            "audioFile": "audio/lessons/words/left.mp3"
-          }
-        },
-        {
-          "id": "directions_08",
-          "type": "spelling",
-          "pointsAwarded": 15,
-          "content": {
-            "emoji": "▶️",
-            "targetWord": "ਸੱਜੇ",
-            "letterBank": [
-              "ਸੱ",
-              "ਜੇ",
-              "ਅੱ",
-              "ਗੇ",
-              "ਪਿੱ"
-            ],
-            "audioFile": "audio/lessons/words/right.mp3"
-          }
-        },
-        {
-          "id": "directions_09",
-          "type": "spelling",
-          "pointsAwarded": 15,
-          "content": {
-            "emoji": "⏩",
             "targetWord": "ਅੱਗੇ",
             "letterBank": [
               "ਅੱ",
@@ -2273,11 +2018,11 @@
           }
         },
         {
-          "id": "directions_10",
+          "id": "directions_02",
           "type": "spelling",
           "pointsAwarded": 15,
           "content": {
-            "emoji": "⏪",
+            "emoji": "🔽",
             "targetWord": "ਪਿੱਛੇ",
             "letterBank": [
               "ਪਿੱ",
@@ -2287,6 +2032,40 @@
               "ਦੱ"
             ],
             "audioFile": "audio/lessons/words/backward.mp3"
+          }
+        },
+        {
+          "id": "directions_03",
+          "type": "spelling",
+          "pointsAwarded": 15,
+          "content": {
+            "emoji": "➡️",
+            "targetWord": "ਸੱਜੇ",
+            "letterBank": [
+              "ਸੱ",
+              "ਜੇ",
+              "ਅੱ",
+              "ਗੇ",
+              "ਪਿੱ"
+            ],
+            "audioFile": "audio/lessons/words/right.mp3"
+          }
+        },
+        {
+          "id": "directions_04",
+          "type": "spelling",
+          "pointsAwarded": 15,
+          "content": {
+            "emoji": "⬅️",
+            "targetWord": "ਖੱਬੇ",
+            "letterBank": [
+              "ਖੱ",
+              "ਬੇ",
+              "ਸੱ",
+              "ਜੇ",
+              "ਅੱ"
+            ],
+            "audioFile": "audio/lessons/words/left.mp3"
           }
         }
       ]
@@ -2395,23 +2174,6 @@
               "ਪ"
             ],
             "audioFile": "audio/lessons/words/clock.mp3"
-          }
-        },
-        {
-          "id": "office_07",
-          "type": "spelling",
-          "pointsAwarded": 15,
-          "content": {
-            "emoji": "📎",
-            "targetWord": "ਸਟੈਪਲਰ",
-            "letterBank": [
-              "ਸ",
-              "ਟੈ",
-              "ਪ",
-              "ਲਰ",
-              "ਲਿਫ਼ਾ"
-            ],
-            "audioFile": "audio/lessons/words/stapler.mp3"
           }
         },
         {
@@ -2652,7 +2414,7 @@
           "type": "spelling",
           "pointsAwarded": 15,
           "content": {
-            "emoji": "🍽️",
+            "emoji": "🥗️",
             "targetWord": "ਖਾਣਾ",
             "letterBank": [
               "ਖਾ",
@@ -2788,7 +2550,7 @@
           "type": "spelling",
           "pointsAwarded": 15,
           "content": {
-            "emoji": "🍮",
+            "emoji": "🍨",
             "targetWord": "ਮਿੱਠਾ",
             "letterBank": [
               "ਮਿੱ",

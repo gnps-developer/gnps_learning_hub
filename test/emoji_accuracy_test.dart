@@ -6,7 +6,16 @@ void main() {
   final projectRoot = _findProjectRoot();
   final lessonsDir = Directory('$projectRoot/assets/data/lessons');
 
-  // Source of Truth for Emojis
+  /**
+   * SOURCE OF TRUTH FOR ANY VISUALS USED IN THE APP (emojis).
+   * WE NEED TO MAKE SURE THESE ARE ACCURATE
+   * THIS IS THE MASTER LIST OF EMOJIS THAT SHOULD BE USED.
+   * IF THERE ARE ANY EMOJIS NOT IN THIS LIST THEY SHOULD NOT BE USED.
+   * BECAUSE WE WANT TO MAINTAIN HIGH ACCURACY OF ALL IMAGERY.
+   * AND ALSO ENSURE THEY ALIGN WITH SIKH TRADITION.
+   * TESTS SHOULD FAIL IF THE LESSONS USE ANY OTHER EMOJIS APART FROM THESE.
+   */
+
   final Map<String, String> referenceEmojiMap = {
     // Animals
     'ਬਿੱਲੀ': '🐱',
@@ -72,11 +81,8 @@ void main() {
     'ਪੈਨਸਿਲ': '✏️',
     'ਕਲਮ': '🖊️',
     'ਬਸਤਾ': '🎒',
-    'ਗੁਰੂ': '🧑‍🏫',
     'ਤਖਤੀ': '📝',
     'ਜਮਾਤ': '🏫',
-    'ਵਿਦਿਆਰਥੀ': '🧑‍🎓',
-    'ਰਬੜ': '🧼',
     'ਸਕੂਲ': '🏫',
     'ਮੇਜ਼': '┳━┳',
 
@@ -98,23 +104,22 @@ void main() {
     'ਜੁੱਤੀ': '👟',
     'ਟੋਪੀ': '🧢',
     'ਜੁਰਾਬ': '🧦',
-    'ਸਵੈਟਰ': '🧥',
+    'ਸਵੈਟਰ': '👚',
     'ਦਸਤਾਨੇ': '🧤',
     'ਕੋਟ': '🧥',
-    'ਰੁਮਾਲ': '🧣',
+    'ਰੁਮਾਲ': '🥠',
     'ਪਜਾਮਾ': '👖',
 
     // Kitchen
     'ਚਮਚ': '🥄',
     'ਕਾਂਟਾ': '🍴',
     'ਛੁਰੀ': '🔪',
-    'ਭਾਂਡਾ': '🍲',
+    'ਭਾਂਡਾ': '🍶',
     'ਗਲਾਸ': '🥛',
     'ਪਲੇਟ': '🍽️',
     'ਫਰਿੱਜ': '🧊',
-    'ਚੁੱਲ੍ਹਾ': '🔥',
-    'ਕੜਾਹੀ': '🥘',
-    'ਥਾਲੀ': '🍛',
+    'ਕੜਾਹੀ': '🥣',
+    'ਥਾਲੀ': '🔘',
 
     // Nature
     'ਰੁੱਖ': '🌳',
@@ -153,7 +158,7 @@ void main() {
     'ਰਸੀਦ': '🧾',
 
     // Eating
-    'ਖਾਣਾ': '🍽️',
+    'ਖਾਣਾ': '🥗️',
     'ਰੋਟੀ': '🫓',
     'ਦਾਲ': '🍲',
     'ਚਾਵਲ': '🍚',
@@ -161,9 +166,37 @@ void main() {
     'ਪਾਣੀ': '💧',
     'ਚਾਹ': '☕',
     'ਸਬਜ਼ੀ': '🥦',
-    'ਮਿੱਠਾ': '🍮',
+    'ਮਿੱਠਾ': '🍨',
     'ਨਾਸ਼ਤਾ': '🥣',
+
+    //Directions
+    'ਅੱਗੇ': '🔼',
+    'ਪਿੱਛੇ': '🔽',
+    'ਸੱਜੇ': '➡️',
+    'ਖੱਬੇ': '⬅️',
+
+    //Office
+    'ਦਫ਼ਤਰ': '🏢',
+    'ਕੰਪਿਊਟਰ': '💻',
+    'ਫ਼ਾਈਲ': '📁',
+    'ਪ੍ਰਿੰਟਰ': '🖨️',
+    'ਫੋਨ': '📞',
+    'ਘੜੀ': '⏰',
+    'ਲਿਫ਼ਾਫ਼ਾ': '✉️',
+    'ਡਾਇਰੀ': '📔',
+    'ਅਲਮਾਰੀ': '🗄️',
+
+    //Days of Week
+    'ਸੋਮਵਾਰ': '🗓️',
+    'ਮੰਗਲਵਾਰ': '🗓️',
+    'ਬੁੱਧਵਾਰ': '🗓️',
+    'ਵੀਰਵਾਰ': '🗓️',
+    'ਸ਼ੁੱਕਰਵਾਰ': '🗓️',
+    'ਸ਼ਨੀਵਾਰ': '🗓️',
+    'ਐਤਵਾਰ': '🗓️',
   };
+
+  final Set<String> allowedEmojis = referenceEmojiMap.values.toSet();
 
   group('Emoji Accuracy Audit', () {
     if (lessonsDir.existsSync()) {
@@ -188,36 +221,68 @@ void main() {
               if (type == 'matchingPictures') {
                 final word = taskContent['word'] as String;
                 final emoji = taskContent['correctEmoji'] as String;
+                final distractorEmojis = List<String>.from(
+                  taskContent['distractorEmojis'] as List,
+                );
 
-                test(
-                  'Task $taskId: Word "$word" should have accurate emoji',
-                  () {
+                test('Task $taskId: All emojis must be in reference list', () {
+                  // 1. Verify correct emoji mapping
+                  if (referenceEmojiMap.containsKey(word)) {
+                    expect(
+                      emoji,
+                      equals(referenceEmojiMap[word]),
+                      reason:
+                          'Incorrect correctEmoji for "$word" in task $taskId',
+                    );
+                  } else {
+                    fail(
+                      'Word "$word" in task $taskId is not defined in referenceEmojiMap.',
+                    );
+                  }
+
+                  // 2. Verify that the correct emoji itself is in the allowed set
+                  expect(
+                    allowedEmojis.contains(emoji),
+                    isTrue,
+                    reason:
+                        'correctEmoji "$emoji" in task $taskId is not in the master list.',
+                  );
+
+                  // 3. Verify all distractors
+                  for (final distractor in distractorEmojis) {
+                    expect(
+                      allowedEmojis.contains(distractor),
+                      isTrue,
+                      reason:
+                          'Distractor emoji "$distractor" in task $taskId is not in the master reference list.',
+                    );
+                  }
+                });
+              } else if (type == 'spelling') {
+                final word = taskContent['targetWord'] as String;
+                final emoji = taskContent['emoji'] as String?;
+
+                if (emoji != null) {
+                  test('Task $taskId: Emoji must be in reference list', () {
                     if (referenceEmojiMap.containsKey(word)) {
                       expect(
                         emoji,
                         equals(referenceEmojiMap[word]),
                         reason: 'Incorrect emoji for "$word" in task $taskId',
                       );
+                    } else {
+                      fail(
+                        'Word "$word" in task $taskId is not defined in referenceEmojiMap.',
+                      );
                     }
-                  },
-                );
-              } else if (type == 'spelling') {
-                final word = taskContent['targetWord'] as String;
-                final emoji = taskContent['emoji'] as String?;
 
-                if (emoji != null) {
-                  test(
-                    'Task $taskId: Word "$word" should have accurate emoji',
-                    () {
-                      if (referenceEmojiMap.containsKey(word)) {
-                        expect(
-                          emoji,
-                          equals(referenceEmojiMap[word]),
-                          reason: 'Incorrect emoji for "$word" in task $taskId',
-                        );
-                      }
-                    },
-                  );
+                    expect(
+                      allowedEmojis.contains(emoji),
+                      isTrue,
+                      reason:
+                          'Emoji "$emoji" in task $taskId is not in the master reference list.',
+                    );
+                  });
                 }
               }
             }

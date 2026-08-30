@@ -796,8 +796,8 @@
             "correctEmoji": "✏️",
             "distractorEmojis": [
               "🖊️",
-              "🧑‍🏫",
-              "🧑‍🎓"
+              "🧦",
+              "🔽"
             ],
             "audioFile": "audio/lessons/words/pencil.mp3"
           }
@@ -812,7 +812,7 @@
             "distractorEmojis": [
               "🎒",
               "📝",
-              "🧼"
+              "☕"
             ],
             "audioFile": "audio/lessons/words/pen.mp3"
           }
@@ -825,26 +825,11 @@
             "word": "ਬਸਤਾ",
             "correctEmoji": "🎒",
             "distractorEmojis": [
-              "🧑‍🏫",
+              "🟤",
               "🏫",
               "🏢"
             ],
             "audioFile": "audio/lessons/words/bag.mp3"
-          }
-        },
-        {
-          "id": "school_04",
-          "type": "matchingPictures",
-          "pointsAwarded": 15,
-          "content": {
-            "word": "ਗੁਰੂ",
-            "correctEmoji": "🧑‍🏫",
-            "distractorEmojis": [
-              "📝",
-              "🧑‍🎓",
-              "🪑"
-            ],
-            "audioFile": "audio/lessons/words/teacher_guru.mp3"
           }
         },
         {
@@ -856,7 +841,7 @@
             "correctEmoji": "📝",
             "distractorEmojis": [
               "🏫",
-              "🧼",
+              "┳━┳",
               "✏️"
             ],
             "audioFile": "audio/lessons/words/slate.mp3"
@@ -870,41 +855,11 @@
             "word": "ਜਮਾਤ",
             "correctEmoji": "🏫",
             "distractorEmojis": [
-              "🧑‍🎓",
+              "⭐",
               "🏢",
               "🖊️"
             ],
             "audioFile": "audio/lessons/words/class.mp3"
-          }
-        },
-        {
-          "id": "school_07",
-          "type": "matchingPictures",
-          "pointsAwarded": 15,
-          "content": {
-            "word": "ਵਿਦਿਆਰਥੀ",
-            "correctEmoji": "🧑‍🎓",
-            "distractorEmojis": [
-              "🧼",
-              "🪑",
-              "🎒"
-            ],
-            "audioFile": "audio/lessons/words/student.mp3"
-          }
-        },
-        {
-          "id": "school_08",
-          "type": "matchingPictures",
-          "pointsAwarded": 15,
-          "content": {
-            "word": "ਰਬੜ",
-            "correctEmoji": "🧼",
-            "distractorEmojis": [
-              "🏢",
-              "✏️",
-              "🧑‍🏫"
-            ],
-            "audioFile": "audio/lessons/words/eraser.mp3"
           }
         },
         {
@@ -1139,7 +1094,7 @@
             "distractorEmojis": [
               "🧢",
               "🧥",
-              "🧣"
+              "🥛"
             ],
             "audioFile": "audio/lessons/words/shoe.mp3"
           }
@@ -1154,7 +1109,7 @@
             "distractorEmojis": [
               "🧦",
               "🧤",
-              "👘"
+              "💵"
             ],
             "audioFile": "audio/lessons/words/cap.mp3"
           }
@@ -1180,10 +1135,10 @@
           "pointsAwarded": 15,
           "content": {
             "word": "ਸਵੈਟਰ",
-            "correctEmoji": "🧥",
+            "correctEmoji": "👚",
             "distractorEmojis": [
               "🧤",
-              "🧣",
+              "🥣",
               "👖"
             ],
             "audioFile": "audio/lessons/words/sweater.mp3"
@@ -1198,7 +1153,7 @@
             "correctEmoji": "🧤",
             "distractorEmojis": [
               "🧥",
-              "👘",
+              "🦅",
               "👟"
             ],
             "audioFile": "audio/lessons/words/gloves.mp3"
@@ -1212,7 +1167,7 @@
             "word": "ਕੋਟ",
             "correctEmoji": "🧥",
             "distractorEmojis": [
-              "🧣",
+              "✈️",
               "👕",
               "🧢"
             ],
@@ -1225,9 +1180,9 @@
           "pointsAwarded": 15,
           "content": {
             "word": "ਰੁਮਾਲ",
-            "correctEmoji": "🧣",
+            "correctEmoji": "🥠",
             "distractorEmojis": [
-              "👘",
+              "🍍",
               "👖",
               "🧦"
             ],
@@ -1264,7 +1219,7 @@
             "correctEmoji": "🥄",
             "distractorEmojis": [
               "🍴",
-              "🍲",
+              "🥣",
               "🧊"
             ],
             "audioFile": "audio/lessons/words/spoon.mp3"
@@ -1280,7 +1235,7 @@
             "distractorEmojis": [
               "🔪",
               "🥛",
-              "🔥"
+              "🗓️"
             ],
             "audioFile": "audio/lessons/words/fork.mp3"
           }
@@ -1293,9 +1248,9 @@
             "word": "ਛੁਰੀ",
             "correctEmoji": "🔪",
             "distractorEmojis": [
-              "🍲",
+              "🥣",
               "🍽️",
-              "🍳"
+              "🍶"
             ],
             "audioFile": "audio/lessons/words/knife_small.mp3"
           }
@@ -1306,11 +1261,11 @@
           "pointsAwarded": 15,
           "content": {
             "word": "ਭਾਂਡਾ",
-            "correctEmoji": "🍲",
+            "correctEmoji": "🍶",
             "distractorEmojis": [
               "🥛",
               "🧊",
-              "🍛"
+              "🍨"
             ],
             "audioFile": "audio/lessons/words/vessel.mp3"
           }
@@ -1324,7 +1279,7 @@
             "correctEmoji": "🥛",
             "distractorEmojis": [
               "🍽️",
-              "🔥",
+              "⚽",
               "🥄"
             ],
             "audioFile": "audio/lessons/words/glass.mp3"
@@ -1339,7 +1294,7 @@
             "correctEmoji": "🍽️",
             "distractorEmojis": [
               "🧊",
-              "🥘",
+              "🥣",
               "🍴"
             ],
             "audioFile": "audio/lessons/words/plate.mp3"
@@ -1353,26 +1308,11 @@
             "word": "ਫਰਿੱਜ",
             "correctEmoji": "🧊",
             "distractorEmojis": [
-              "🔥",
-              "🍛",
+              "🥣",
+              "🍶",
               "🔪"
             ],
             "audioFile": "audio/lessons/words/fridge.mp3"
-          }
-        },
-        {
-          "id": "kitchen_08",
-          "type": "matchingPictures",
-          "pointsAwarded": 15,
-          "content": {
-            "word": "ਚੁੱਲ੍ਹਾ",
-            "correctEmoji": "🔥",
-            "distractorEmojis": [
-              "🥘",
-              "🥄",
-              "🍲"
-            ],
-            "audioFile": "audio/lessons/words/stove.mp3"
           }
         },
         {
@@ -1381,9 +1321,9 @@
           "pointsAwarded": 15,
           "content": {
             "word": "ਕੜਾਹੀ",
-            "correctEmoji": "🥘",
+            "correctEmoji": "🥣",
             "distractorEmojis": [
-              "🍛",
+              "💰",
               "🍴",
               "🥛"
             ],
@@ -1396,7 +1336,7 @@
           "pointsAwarded": 15,
           "content": {
             "word": "ਥਾਲੀ",
-            "correctEmoji": "🍛",
+            "correctEmoji": "🔘",
             "distractorEmojis": [
               "🥄",
               "🔪",
@@ -1728,14 +1668,14 @@
           "type": "matchingPictures",
           "pointsAwarded": 15,
           "content": {
-            "word": "ਉੱਤਰ",
-            "correctEmoji": "⬆️",
+            "word": "ਅੱਗੇ",
+            "correctEmoji": "🔼",
             "distractorEmojis": [
-              "⬇️",
-              "⬅️",
-              "◀️"
+              "🔽",
+              "➡️",
+              "⬅️"
             ],
-            "audioFile": "audio/lessons/words/north.mp3"
+            "audioFile": "audio/lessons/words/forward.mp3"
           }
         },
         {
@@ -1743,14 +1683,14 @@
           "type": "matchingPictures",
           "pointsAwarded": 15,
           "content": {
-            "word": "ਦੱਖਣ",
-            "correctEmoji": "⬇️",
+            "word": "ਪਿੱਛੇ",
+            "correctEmoji": "🔽",
             "distractorEmojis": [
-              "➡️",
               "🔼",
-              "▶️"
+              "➡️",
+              "⬅️"
             ],
-            "audioFile": "audio/lessons/words/south.mp3"
+            "audioFile": "audio/lessons/words/backward.mp3"
           }
         },
         {
@@ -1758,14 +1698,14 @@
           "type": "matchingPictures",
           "pointsAwarded": 15,
           "content": {
-            "word": "ਪੂਰਬ",
+            "word": "ਸੱਜੇ",
             "correctEmoji": "➡️",
             "distractorEmojis": [
-              "⬅️",
+              "🔼",
               "🔽",
-              "⏩"
+              "⬅️"
             ],
-            "audioFile": "audio/lessons/words/east.mp3"
+            "audioFile": "audio/lessons/words/right.mp3"
           }
         },
         {
@@ -1773,104 +1713,14 @@
           "type": "matchingPictures",
           "pointsAwarded": 15,
           "content": {
-            "word": "ਪੱਛਮ",
+            "word": "ਖੱਬੇ",
             "correctEmoji": "⬅️",
             "distractorEmojis": [
               "🔼",
-              "◀️",
-              "⏪"
-            ],
-            "audioFile": "audio/lessons/words/west.mp3"
-          }
-        },
-        {
-          "id": "directions_05",
-          "type": "matchingPictures",
-          "pointsAwarded": 15,
-          "content": {
-            "word": "ਉੱਪਰ",
-            "correctEmoji": "🔼",
-            "distractorEmojis": [
               "🔽",
-              "▶️",
-              "⬆️"
-            ],
-            "audioFile": "audio/lessons/words/up.mp3"
-          }
-        },
-        {
-          "id": "directions_06",
-          "type": "matchingPictures",
-          "pointsAwarded": 15,
-          "content": {
-            "word": "ਹੇਠਾਂ",
-            "correctEmoji": "🔽",
-            "distractorEmojis": [
-              "◀️",
-              "⏩",
-              "⬇️"
-            ],
-            "audioFile": "audio/lessons/words/down.mp3"
-          }
-        },
-        {
-          "id": "directions_07",
-          "type": "matchingPictures",
-          "pointsAwarded": 15,
-          "content": {
-            "word": "ਖੱਬੇ",
-            "correctEmoji": "◀️",
-            "distractorEmojis": [
-              "▶️",
-              "⏪",
               "➡️"
             ],
             "audioFile": "audio/lessons/words/left.mp3"
-          }
-        },
-        {
-          "id": "directions_08",
-          "type": "matchingPictures",
-          "pointsAwarded": 15,
-          "content": {
-            "word": "ਸੱਜੇ",
-            "correctEmoji": "▶️",
-            "distractorEmojis": [
-              "⏩",
-              "⬆️",
-              "⬅️"
-            ],
-            "audioFile": "audio/lessons/words/right.mp3"
-          }
-        },
-        {
-          "id": "directions_09",
-          "type": "matchingPictures",
-          "pointsAwarded": 15,
-          "content": {
-            "word": "ਅੱਗੇ",
-            "correctEmoji": "⏩",
-            "distractorEmojis": [
-              "⏪",
-              "⬇️",
-              "🔼"
-            ],
-            "audioFile": "audio/lessons/words/forward.mp3"
-          }
-        },
-        {
-          "id": "directions_10",
-          "type": "matchingPictures",
-          "pointsAwarded": 15,
-          "content": {
-            "word": "ਪਿੱਛੇ",
-            "correctEmoji": "⏪",
-            "distractorEmojis": [
-              "⬆️",
-              "➡️",
-              "🔽"
-            ],
-            "audioFile": "audio/lessons/words/backward.mp3"
           }
         }
       ]
@@ -1889,7 +1739,7 @@
             "distractorEmojis": [
               "💻",
               "🖨️",
-              "📎"
+              "➡️"
             ],
             "audioFile": "audio/lessons/words/office.mp3"
           }
@@ -1933,7 +1783,7 @@
             "correctEmoji": "🖨️",
             "distractorEmojis": [
               "📞",
-              "📎",
+              "👕",
               "🗄️"
             ],
             "audioFile": "audio/lessons/words/printer.mp3"
@@ -1962,26 +1812,11 @@
             "word": "ਘੜੀ",
             "correctEmoji": "⏰",
             "distractorEmojis": [
-              "📎",
+              "🐟",
               "📔",
               "💻"
             ],
             "audioFile": "audio/lessons/words/clock.mp3"
-          }
-        },
-        {
-          "id": "office_07",
-          "type": "matchingPictures",
-          "pointsAwarded": 15,
-          "content": {
-            "word": "ਸਟੈਪਲਰ",
-            "correctEmoji": "📎",
-            "distractorEmojis": [
-              "✉️",
-              "🗄️",
-              "📁"
-            ],
-            "audioFile": "audio/lessons/words/stapler.mp3"
           }
         },
         {
@@ -2197,7 +2032,7 @@
           "pointsAwarded": 15,
           "content": {
             "word": "ਖਾਣਾ",
-            "correctEmoji": "🍽️",
+            "correctEmoji": "🥗️",
             "distractorEmojis": [
               "🫓",
               "🍚",
@@ -2214,7 +2049,7 @@
             "word": "ਰੋਟੀ",
             "correctEmoji": "🫓",
             "distractorEmojis": [
-              "🍲",
+              "🥣",
               "🥛",
               "🥦"
             ],
@@ -2231,7 +2066,7 @@
             "distractorEmojis": [
               "🍚",
               "💧",
-              "🍮"
+              "🏍️"
             ],
             "audioFile": "audio/lessons/words/lentils.mp3"
           }
@@ -2246,7 +2081,7 @@
             "distractorEmojis": [
               "🥛",
               "☕",
-              "🍳"
+              "🍶"
             ],
             "audioFile": "audio/lessons/words/rice.mp3"
           }
@@ -2275,7 +2110,7 @@
             "correctEmoji": "💧",
             "distractorEmojis": [
               "☕",
-              "🍮",
+              "✈️",
               "🫓"
             ],
             "audioFile": "audio/lessons/words/water.mp3"
@@ -2290,8 +2125,8 @@
             "correctEmoji": "☕",
             "distractorEmojis": [
               "🥦",
-              "🥘",
-              "🍲"
+              "🥣",
+              "🍶"
             ],
             "audioFile": "audio/lessons/words/tea.mp3"
           }
@@ -2304,7 +2139,7 @@
             "word": "ਸਬਜ਼ੀ",
             "correctEmoji": "🥦",
             "distractorEmojis": [
-              "🍮",
+              "🥣",
               "🍽️",
               "🍚"
             ],
@@ -2317,9 +2152,9 @@
           "pointsAwarded": 15,
           "content": {
             "word": "ਮਿੱਠਾ",
-            "correctEmoji": "🍮",
+            "correctEmoji": "🍨",
             "distractorEmojis": [
-              "🥘",
+              "🥣",
               "🫓",
               "🥛"
             ],
@@ -2335,7 +2170,7 @@
             "correctEmoji": "🥣",
             "distractorEmojis": [
               "🍽️",
-              "🍲",
+              "🍶",
               "💧"
             ],
             "audioFile": "audio/lessons/words/breakfast.mp3"
