@@ -23,13 +23,22 @@ void main() {
   final lessonsDir = Directory('$projectRoot/assets/data/lessons');
   late MockAudioService mockAudioService;
 
+  /**
+   * AUDIO PLAYBACK LOGIC TEST
+   * THIS IS A WIDGET TEST THAT RENDERS EVERY TASK UI TO ENSURE THE CODE IS
+   * CORRECTLY WIRED TO THE AUDIO SERVICE.
+   * IT VERIFIES THAT THE 'SPEAK' COMMAND IS TRIGGERED WHEN A TASK LOADS
+   * OR WHEN A USER INTERACTS WITH TILES.
+   * UNLIKE THE ASSETS TEST, THIS FOCUSES ON FUNCTIONAL UI WIRING.
+   */
+
   setUp(() {
     mockAudioService = MockAudioService();
     when(() => mockAudioService.speak(any())).thenAnswer((_) async {});
   });
 
   if (!lessonsDir.existsSync()) {
-    print('⚠️  Skipping completeness test: Lessons directory not found.');
+    print('⚠️  Skipping audio playback test: Lessons directory not found.');
     return;
   }
 
@@ -38,7 +47,7 @@ void main() {
       .whereType<File>()
       .where((f) => f.path.endsWith('.json'));
 
-  group('Curriculum Audio Completeness Audit', () {
+  group('Audio Playback Wiring Validation', () {
     for (final file in files) {
       final json = jsonDecode(file.readAsStringSync());
       final lessonId = json['id'] as String;
@@ -51,7 +60,7 @@ void main() {
             final taskId = taskData['id'] as String;
             final taskType = taskData['type'] as String;
 
-            testWidgets('Task $taskId ($taskType) should play its defined audio',
+            testWidgets('Task $taskId ($taskType) should trigger audio playback',
                 (tester) async {
               final task = Task.fromJson(taskData);
               final expectedPath = task.content['audioFile'] as String?;
