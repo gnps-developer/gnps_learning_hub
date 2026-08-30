@@ -25,7 +25,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_an_01.mp3"
           }
         },
         {
@@ -46,7 +47,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_an_02.mp3"
           }
         },
         {
@@ -65,7 +67,8 @@
               1,
               2,
               3
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_an_03.mp3"
           }
         },
         {
@@ -86,7 +89,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_an_04.mp3"
           }
         },
         {
@@ -105,7 +109,8 @@
               1,
               2,
               3
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_an_05.mp3"
           }
         }
       ]
@@ -132,7 +137,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_ho_01.mp3"
           }
         },
         {
@@ -153,7 +159,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_ho_02.mp3"
           }
         },
         {
@@ -172,7 +179,8 @@
               1,
               2,
               3
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_ho_03.mp3"
           }
         },
         {
@@ -191,7 +199,8 @@
               1,
               2,
               3
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_ho_04.mp3"
           }
         },
         {
@@ -210,7 +219,8 @@
               1,
               2,
               3
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_ho_05.mp3"
           }
         }
       ]
@@ -235,7 +245,8 @@
               1,
               2,
               3
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_fr_01.mp3"
           }
         },
         {
@@ -254,7 +265,8 @@
               1,
               2,
               3
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_fr_02.mp3"
           }
         },
         {
@@ -275,7 +287,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_fr_03.mp3"
           }
         },
         {
@@ -296,7 +309,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_fr_04.mp3"
           }
         },
         {
@@ -317,7 +331,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_fr_05.mp3"
           }
         }
       ]
@@ -340,7 +355,8 @@
               0,
               1,
               2
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_cl_01.mp3"
           }
         },
         {
@@ -357,7 +373,8 @@
               0,
               1,
               2
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_cl_02.mp3"
           }
         },
         {
@@ -374,7 +391,8 @@
               0,
               1,
               2
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_cl_03.mp3"
           }
         },
         {
@@ -393,7 +411,8 @@
               1,
               2,
               3
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_cl_04.mp3"
           }
         },
         {
@@ -414,7 +433,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_cl_05.mp3"
           }
         }
       ]
@@ -441,7 +461,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_tr_01.mp3"
           }
         },
         {
@@ -460,7 +481,8 @@
               1,
               2,
               3
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_tr_02.mp3"
           }
         },
         {
@@ -483,7 +505,8 @@
               3,
               4,
               5
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_tr_03.mp3"
           }
         },
         {
@@ -504,7 +527,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_tr_04.mp3"
           }
         },
         {
@@ -525,7 +549,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_tr_05.mp3"
           }
         }
       ]
@@ -552,7 +577,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_sc_01.mp3"
           }
         },
         {
@@ -573,7 +599,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_sc_02.mp3"
           }
         },
         {
@@ -594,7 +621,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_sc_03.mp3"
           }
         },
         {
@@ -615,7 +643,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_sc_04.mp3"
           }
         },
         {
@@ -636,7 +665,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_sc_05.mp3"
           }
         }
       ]
@@ -663,7 +693,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_we_01.mp3"
           }
         },
         {
@@ -684,7 +715,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_we_02.mp3"
           }
         },
         {
@@ -705,7 +737,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_we_03.mp3"
           }
         },
         {
@@ -724,7 +757,8 @@
               1,
               2,
               3
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_we_04.mp3"
           }
         },
         {
@@ -747,7 +781,8 @@
               3,
               4,
               5
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_we_05.mp3"
           }
         }
       ]
@@ -774,7 +809,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_ct_01.mp3"
           }
         },
         {
@@ -795,7 +831,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_ct_02.mp3"
           }
         },
         {
@@ -814,7 +851,8 @@
               1,
               2,
               3
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_ct_03.mp3"
           }
         },
         {
@@ -835,7 +873,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_ct_04.mp3"
           }
         },
         {
@@ -858,7 +897,8 @@
               3,
               4,
               5
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_ct_05.mp3"
           }
         }
       ]
@@ -885,7 +925,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_ki_01.mp3"
           }
         },
         {
@@ -904,7 +945,8 @@
               1,
               2,
               3
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_ki_02.mp3"
           }
         },
         {
@@ -923,7 +965,8 @@
               1,
               2,
               3
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_ki_03.mp3"
           }
         },
         {
@@ -942,7 +985,8 @@
               1,
               2,
               3
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_ki_04.mp3"
           }
         },
         {
@@ -961,7 +1005,8 @@
               1,
               2,
               3
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_ki_05.mp3"
           }
         }
       ]
@@ -990,7 +1035,8 @@
               3,
               4,
               5
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_na_01.mp3"
           }
         },
         {
@@ -1011,7 +1057,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_na_02.mp3"
           }
         },
         {
@@ -1032,7 +1079,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_na_03.mp3"
           }
         },
         {
@@ -1053,7 +1101,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_na_04.mp3"
           }
         },
         {
@@ -1072,7 +1121,8 @@
               1,
               2,
               3
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_na_05.mp3"
           }
         }
       ]
@@ -1101,7 +1151,8 @@
               3,
               4,
               5
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_bi_01.mp3"
           }
         },
         {
@@ -1120,7 +1171,8 @@
               1,
               2,
               3
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_bi_02.mp3"
           }
         },
         {
@@ -1141,7 +1193,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_bi_03.mp3"
           }
         },
         {
@@ -1164,7 +1217,8 @@
               3,
               4,
               5
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_bi_04.mp3"
           }
         },
         {
@@ -1185,7 +1239,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_bi_05.mp3"
           }
         }
       ]
@@ -1212,7 +1267,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_da_01.mp3"
           }
         },
         {
@@ -1233,7 +1289,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_da_02.mp3"
           }
         },
         {
@@ -1256,7 +1313,8 @@
               3,
               4,
               5
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_da_03.mp3"
           }
         },
         {
@@ -1273,7 +1331,8 @@
               0,
               1,
               2
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_da_04.mp3"
           }
         },
         {
@@ -1296,7 +1355,8 @@
               3,
               4,
               5
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_da_05.mp3"
           }
         }
       ]
@@ -1323,7 +1383,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_di_01.mp3"
           }
         },
         {
@@ -1344,7 +1405,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_di_02.mp3"
           }
         },
         {
@@ -1363,7 +1425,8 @@
               1,
               2,
               3
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_di_03.mp3"
           }
         },
         {
@@ -1382,7 +1445,8 @@
               1,
               2,
               3
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_di_04.mp3"
           }
         },
         {
@@ -1401,7 +1465,8 @@
               1,
               2,
               3
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_di_05.mp3"
           }
         }
       ]
@@ -1430,7 +1495,8 @@
               3,
               4,
               5
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_of_01.mp3"
           }
         },
         {
@@ -1449,7 +1515,8 @@
               1,
               2,
               3
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_of_02.mp3"
           }
         },
         {
@@ -1468,7 +1535,8 @@
               1,
               2,
               3
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_of_03.mp3"
           }
         },
         {
@@ -1489,7 +1557,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_of_04.mp3"
           }
         },
         {
@@ -1510,7 +1579,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_of_05.mp3"
           }
         }
       ]
@@ -1537,7 +1607,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_sh_01.mp3"
           }
         },
         {
@@ -1558,7 +1629,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_sh_02.mp3"
           }
         },
         {
@@ -1579,7 +1651,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_sh_03.mp3"
           }
         },
         {
@@ -1598,7 +1671,8 @@
               1,
               2,
               3
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_sh_04.mp3"
           }
         },
         {
@@ -1617,7 +1691,8 @@
               1,
               2,
               3
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_sh_05.mp3"
           }
         }
       ]
@@ -1646,7 +1721,8 @@
               3,
               4,
               5
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_ea_01.mp3"
           }
         },
         {
@@ -1667,7 +1743,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_ea_02.mp3"
           }
         },
         {
@@ -1688,7 +1765,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_ea_03.mp3"
           }
         },
         {
@@ -1709,7 +1787,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_ea_04.mp3"
           }
         },
         {
@@ -1730,7 +1809,8 @@
               2,
               3,
               4
-            ]
+            ],
+            "audioFile": "audio/lessons/sentences/as_ea_05.mp3"
           }
         }
       ]

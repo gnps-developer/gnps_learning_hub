@@ -15,6 +15,7 @@ void main() {
    * 2. NO DUPLICATE ANSWERS EXIST (CORRECT ANSWER IS NOT PRESENT IN DISTRACTORS).
    * 3. DATA IS CLEAN (NO NULLS, NO EMPTY STRINGS, AND NO HIDDEN TRAILING WHITESPACE).
    * 4. LOGICAL CONSISTENCY (FILL-IN-BLANK OPTIONS CONTAIN THE ANSWER, SENTENCE LENGTHS MATCH).
+   * 5. AUDIO COMPLETENESS (EVERY TASK MUST HAVE A VALID AUDIOFILE OR ITEMPOOL DEFINED).
    * THIS PREVENTS "BROKEN" CONTENT OR IMPOSSIBLE PUZZLES FROM REACHING THE USER.
    */
 
@@ -77,6 +78,18 @@ void _validateTaskContent(String id, String type, Map<String, dynamic> content) 
     expect(s, isNotNull, reason: 'Task $id: $label is null');
     expect(s!.isNotEmpty, isTrue, reason: 'Task $id: $label is empty');
     expect(s.trim(), equals(s), reason: 'Task $id: $label "$s" has hidden whitespace');
+  }
+
+  // 1. Mandatory Audio Verification
+  if (type == 'matchingWords') {
+    expect(content.containsKey('itemPool'), isTrue,
+        reason: 'Task $id: matchingWords must define an itemPool for audio.');
+    final pool = content['itemPool'] as Map;
+    expect(pool.isNotEmpty, isTrue, reason: 'Task $id: itemPool cannot be empty');
+  } else {
+    expect(content.containsKey('audioFile'), isTrue,
+        reason: 'Task $id: $type must define an audioFile.');
+    checkString(content['audioFile'] as String?, 'audioFile');
   }
 
   switch (type) {
