@@ -1,0 +1,111 @@
+import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import '../models/games/crossword_data.dart';
+import '../widgets/games/crossword_grid_widget.dart';
+import '../config/ui_config.dart';
+
+class CrosswordDebugScreen extends StatefulWidget {
+  const CrosswordDebugScreen({super.key});
+
+  @override
+  State<CrosswordDebugScreen> createState() => _CrosswordDebugScreenState();
+}
+
+class _CrosswordDebugScreenState extends State<CrosswordDebugScreen> {
+  CrosswordData? _crosswordData;
+  String? _error;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadData();
+  }
+
+  Future<void> _loadData() async {
+    try {
+      final jsonString = await rootBundle.loadString('assets/data/games/crossword_punjabi.json');
+      final jsonData = jsonDecode(jsonString);
+      setState(() {
+        _crosswordData = CrosswordData.fromJson(jsonData['content'] ?? jsonData);
+      });
+    } catch (e) {
+      setState(() {
+        _error = e.toString();
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Crossword Layout Debug'),
+      ),
+      body: _buildBody(),
+    );
+  }
+
+  Widget _buildBody() {
+    if (_error != null) {
+      return Center(child: Text('Error: $_error', style: const TextStyle(color: Colors.red)));
+    }
+
+    if (_crosswordData == null) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    return ListView.builder(
+      padding: const EdgeInsets.all(AppSpacing.md),
+      itemCount: _crosswordData!.levels.length,
+      itemBuilder: (context, index) {
+        final level = _crosswordData!.levels[index];
+        
+        // Clone words and mark them as revealed for debug view
+        final revealedWords = level.words.map((w) {
+          return CrosswordWord(
+            answer: w.answer,
+            syllables: w.syllables,
+            row: w.row,
+            col: w.col,
+            isHorizontal: w.isHorizontal,
+            revealed: true,
+          );
+        }).toList();
+
+        return Card(
+          margin: const EdgeInsets.only(bottom: AppSpacing.lg),
+          child: Padding(
+            padding: const EdgeInsets.all(AppSpacing.md),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Level ${level.levelNumber} (Grid: ${level.gridSize}x${level.gridSize})',
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: AppSpacing.sm),
+                Text('Words: ${level.words.map((w) => w.answer).join(', ')}'),
+                const SizedBox(height: AppSpacing.md),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.primaryContainer.withValues(alpha: 0.1),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  height: 350,
+                  width: double.infinity,
+                  child: Center(
+                    child: CrosswordGridWidget(
+                      gridSize: level.gridSize,
+                      words: revealedWords,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}

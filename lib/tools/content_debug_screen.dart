@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/content_providers.dart';
 import '../providers/progress_providers.dart';
+import 'crossword_debug_screen.dart';
 
 class ContentDebugScreen extends ConsumerWidget {
   const ContentDebugScreen({super.key});
@@ -18,94 +19,74 @@ class ContentDebugScreen extends ConsumerWidget {
           data: (progress) => ListView(
             padding: const EdgeInsets.all(16),
             children: [
-              const Text(
-                'Master Controls',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 16),
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    children: [
-                      _DebugButton(
-                        label: 'Complete All Lessons',
-                        color: Colors.green.shade700,
-                        onPressed: () async {
-                          await ref
-                              .read(progressProvider.notifier)
-                              .debugCompleteAllLessons(journey);
-                          if (context.mounted) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('All lessons marked complete!'),
-                              ),
-                            );
-                          }
-                        },
-                      ),
-                      const SizedBox(height: 12),
-                      _DebugButton(
-                        label: 'Unlock All Lessons (No Points)',
-                        color: Colors.blue.shade700,
-                        onPressed: () async {
-                          await ref
-                              .read(progressProvider.notifier)
-                              .debugUnlockAllLessons(journey);
-                          if (context.mounted) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('All lessons unlocked!'),
-                              ),
-                            );
-                          }
-                        },
-                      ),
-                      const SizedBox(height: 12),
-                      _DebugButton(
-                        label: 'Unlock All Game Achievements',
-                        color: Colors.orange.shade800,
-                        onPressed: () async {
-                          await ref
-                              .read(progressProvider.notifier)
-                              .debugCompleteAllAchievements();
-                          if (context.mounted) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('All game trophies unlocked!'),
-                              ),
-                            );
-                          }
-                        },
-                      ),
-                      const SizedBox(height: 12),
-                      _DebugButton(
-                        label: 'Reset Crossword to Level 1',
-                        color: Colors.red.shade700,
-                        onPressed: () async {
-                          await ref
-                              .read(progressProvider.notifier)
-                              .debugResetCrosswordProgress();
-                          if (context.mounted) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('Crossword progress reset!'),
-                              ),
-                            );
-                          }
-                        },
-                      ),
-                    ],
+              const _SectionHeader('Progress Shortcuts'),
+              const SizedBox(height: 8),
+              _DebugActionGrid(
+                children: [
+                  _DebugButton(
+                    label: 'Unlock All',
+                    icon: Icons.lock_open,
+                    color: Colors.blue.shade700,
+                    onPressed: () async {
+                      await ref.read(progressProvider.notifier).debugUnlockAllLessons(journey);
+                      if (context.mounted) _showSnack(context, 'All lessons unlocked!');
+                    },
                   ),
-                ),
+                  _DebugButton(
+                    label: 'Complete All',
+                    icon: Icons.done_all,
+                    color: Colors.green.shade700,
+                    onPressed: () async {
+                      await ref.read(progressProvider.notifier).debugCompleteAllLessons(journey);
+                      if (context.mounted) _showSnack(context, 'All lessons marked complete!');
+                    },
+                  ),
+                ],
               ),
+              
               const SizedBox(height: 24),
-              const Text(
-                'Individual Lessons',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              const _SectionHeader('Game Management'),
+              const SizedBox(height: 8),
+              _DebugActionGrid(
+                children: [
+                  _DebugButton(
+                    label: 'All Trophies',
+                    icon: Icons.emoji_events,
+                    color: Colors.orange.shade800,
+                    onPressed: () async {
+                      await ref.read(progressProvider.notifier).debugCompleteAllAchievements();
+                      if (context.mounted) _showSnack(context, 'All game trophies unlocked!');
+                    },
+                  ),
+                  _DebugButton(
+                    label: 'Reset Crossword',
+                    icon: Icons.refresh,
+                    color: Colors.red.shade700,
+                    onPressed: () async {
+                      await ref.read(progressProvider.notifier).debugResetCrosswordProgress();
+                      if (context.mounted) _showSnack(context, 'Crossword progress reset!');
+                    },
+                  ),
+                  _DebugButton(
+                    label: 'Inspect Layouts',
+                    icon: Icons.grid_on,
+                    color: Colors.purple.shade700,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const CrosswordDebugScreen()),
+                      );
+                    },
+                  ),
+                ],
               ),
-              const SizedBox(height: 16),
+
+              const SizedBox(height: 32),
+              const _SectionHeader('Individual Lessons'),
+              const SizedBox(height: 12),
               ...journey.lessons.map((lesson) {
+
+
                 final isCompleted =
                     progress.completedLessonIds.contains(lesson.id);
                 final isUnlocked =
@@ -207,26 +188,6 @@ class ContentDebugScreen extends ConsumerWidget {
                   ),
                 );
               }),
-              const SizedBox(height: 24),
-              const Text(
-                'Games & Achievements',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 16),
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Unlock all trophies (Bronze, Silver, Gold) for Letter and Word Bubbles games.',
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
               const SizedBox(height: 40),
             ],
           ),
@@ -305,28 +266,75 @@ class _ShuffleIndicator extends StatelessWidget {
   }
 }
 
+void _showSnack(BuildContext context, String message) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(content: Text(message), duration: const Duration(seconds: 2)),
+  );
+}
+
+class _SectionHeader extends StatelessWidget {
+  final String title;
+  const _SectionHeader(this.title);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      title.toUpperCase(),
+      style: TextStyle(
+        fontSize: 13,
+        fontWeight: FontWeight.bold,
+        color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.8),
+        letterSpacing: 1.2,
+      ),
+    );
+  }
+}
+
+class _DebugActionGrid extends StatelessWidget {
+  final List<Widget> children;
+  const _DebugActionGrid({required this.children});
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.count(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      crossAxisCount: 2,
+      childAspectRatio: 2.8,
+      crossAxisSpacing: 12,
+      mainAxisSpacing: 12,
+      children: children,
+    );
+  }
+}
+
 class _DebugButton extends StatelessWidget {
   final String label;
+  final IconData? icon;
   final Color color;
   final VoidCallback onPressed;
 
   const _DebugButton({
     required this.label,
+    this.icon,
     required this.color,
     required this.onPressed,
   });
 
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton(
+    return OutlinedButton.icon(
       onPressed: onPressed,
+      icon: icon != null ? Icon(icon, size: 18) : const SizedBox.shrink(),
+      label: Text(label, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
       style: OutlinedButton.styleFrom(
         foregroundColor: color,
-        side: BorderSide(color: color),
-        padding: const EdgeInsets.symmetric(horizontal: 12),
-        minimumSize: const Size(80, 36),
+        side: BorderSide(color: color.withValues(alpha: 0.5)),
+        backgroundColor: color.withValues(alpha: 0.05),
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
-      child: Text(label, style: const TextStyle(fontWeight: FontWeight.bold)),
     );
   }
 }
+

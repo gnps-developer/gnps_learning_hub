@@ -17,11 +17,11 @@ class CrosswordWord {
 
   factory CrosswordWord.fromJson(Map<String, dynamic> json) {
     return CrosswordWord(
-      answer: json['answer'] as String,
-      syllables: List<String>.from(json['syllables'] as List),
-      row: json['row'] as int,
-      col: json['col'] as int,
-      isHorizontal: json['isHorizontal'] as bool,
+      answer: json['answer'] as String? ?? '',
+      syllables: List<String>.from(json['syllables'] as List? ?? []),
+      row: json['row'] as int? ?? 0,
+      col: json['col'] as int? ?? 0,
+      isHorizontal: json['isHorizontal'] as bool? ?? true,
       revealed: json['revealed'] as bool? ?? false,
     );
   }
@@ -53,10 +53,10 @@ class CrosswordLevel {
     return CrosswordLevel(
       levelNumber: json['levelNumber'] as int? ?? 1,
       gridSize: json['gridSize'] as int? ?? 8,
-      words: (json['words'] as List)
+      words: (json['words'] as List? ?? [])
           .map((w) => CrosswordWord.fromJson(w as Map<String, dynamic>))
           .toList(),
-      dialLetters: List<String>.from(json['dialLetters'] as List),
+      dialLetters: List<String>.from(json['dialLetters'] as List? ?? []),
     );
   }
 
@@ -79,7 +79,7 @@ class CrosswordData {
 
   factory CrosswordData.fromJson(Map<String, dynamic> json) {
     return CrosswordData(
-      levels: (json['levels'] as List)
+      levels: (json['levels'] as List? ?? [])
           .map((l) => CrosswordLevel.fromJson(l as Map<String, dynamic>))
           .toList(),
       itemPool: Map<String, String>.from(json['itemPool'] as Map? ?? {}),
