@@ -86,6 +86,29 @@ class _CrosswordDebugScreenState extends State<CrosswordDebugScreen> {
                 ),
                 const SizedBox(height: AppSpacing.sm),
                 Text('Words: ${level.words.map((w) => w.answer).join(', ')}'),
+                const SizedBox(height: 4),
+                Row(
+                  children: [
+                    const Text('Dial: ', style: TextStyle(fontWeight: FontWeight.w500)),
+                    Expanded(
+                      child: Wrap(
+                        spacing: 4,
+                        children: level.dialLetters.map((l) => Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.secondaryContainer,
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Text(l, style: TextStyle(
+                            fontSize: 12,
+                            color: Theme.of(context).colorScheme.onSecondaryContainer,
+                            fontWeight: FontWeight.bold,
+                          )),
+                        )).toList(),
+                      ),
+                    ),
+                  ],
+                ),
                 const SizedBox(height: AppSpacing.md),
                 Container(
                   decoration: BoxDecoration(

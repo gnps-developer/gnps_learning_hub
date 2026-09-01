@@ -24,7 +24,7 @@ class ContentDebugScreen extends ConsumerWidget {
               _DebugActionGrid(
                 children: [
                   _DebugButton(
-                    label: 'Unlock All',
+                    label: 'Unlock All Lessons',
                     icon: Icons.lock_open,
                     color: Colors.blue.shade700,
                     onPressed: () async {
@@ -33,7 +33,7 @@ class ContentDebugScreen extends ConsumerWidget {
                     },
                   ),
                   _DebugButton(
-                    label: 'Complete All',
+                    label: 'Complete All Lessons',
                     icon: Icons.done_all,
                     color: Colors.green.shade700,
                     onPressed: () async {
@@ -50,7 +50,7 @@ class ContentDebugScreen extends ConsumerWidget {
               _DebugActionGrid(
                 children: [
                   _DebugButton(
-                    label: 'All Trophies',
+                    label: 'Unlock All Trophies',
                     icon: Icons.emoji_events,
                     color: Colors.orange.shade800,
                     onPressed: () async {
