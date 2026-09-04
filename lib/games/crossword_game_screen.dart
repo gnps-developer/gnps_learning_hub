@@ -53,9 +53,9 @@ class _CrosswordGameScreenState extends ConsumerState<CrosswordGameScreen> {
           _wordsFoundInLevel++;
           found = true;
 
-          final audioPath = _crosswordData.itemPool[word];
-          if (audioPath != null) {
-            ref.read(audioServiceProvider).speak(audioPath);
+          final item = _crosswordData.itemPool[word];
+          if (item != null && item.audio.isNotEmpty) {
+            ref.read(audioServiceProvider).speak(item.audio);
           } else {
             ref.read(audioServiceProvider).playSuccess();
           }
@@ -90,9 +90,9 @@ class _CrosswordGameScreenState extends ConsumerState<CrosswordGameScreen> {
     await ref
         .read(progressProvider.notifier)
         .saveGameLevel(
-          gameId: widget.game.id,
-          levelIndex: _currentLevelIndex + 1,
-        );
+      gameId: widget.game.id,
+      levelIndex: _currentLevelIndex + 1,
+    );
 
     // Short delay to allow the last word revelation to be seen
     await Future.delayed(const Duration(milliseconds: 1000));
@@ -114,6 +114,51 @@ class _CrosswordGameScreenState extends ConsumerState<CrosswordGameScreen> {
         _gameFinished = true;
       });
     }
+  }
+
+  void _showHints() {
+    final words = [..._currentLevel.words]
+      ..sort((a, b) {
+        final an = a.number ?? 0;
+        final bn = b.number ?? 0;
+        if (an != bn) return an.compareTo(bn);
+        return a.isHorizontal == b.isHorizontal ? 0 : (a.isHorizontal ? -1 : 1);
+      });
+
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return SafeArea(
+          child: ListView(
+            padding: const EdgeInsets.all(AppSpacing.md),
+            shrinkWrap: true,
+            children: [
+              Text(
+                'Hints', // TODO: move to UIStrings if you keep a strings file
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              const SizedBox(height: AppSpacing.sm),
+              for (final w in words)
+                ListTile(
+                  leading: CircleAvatar(
+                    radius: 14,
+                    child: Text('${w.number ?? ''}'),
+                  ),
+                  title: Text(
+                    w.revealed ? w.answer : '_' * w.syllables.length,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text(w.hint.isNotEmpty ? w.hint : '—'),
+                  trailing: Icon(
+                    w.isHorizontal ? Icons.arrow_forward : Icons.arrow_downward,
+                    size: 18,
+                  ),
+                ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -165,7 +210,13 @@ class _CrosswordGameScreenState extends ConsumerState<CrosswordGameScreen> {
                           ),
                         ),
                         const Spacer(),
-                        const SizedBox(width: 48),
+                        IconButton(
+                          icon: const Icon(Icons.lightbulb_outline, size: 26),
+                          onPressed: _showHints,
+                          style: IconButton.styleFrom(
+                            backgroundColor: Theme.of(context).colorScheme.surfaceContainerHigh.withValues(alpha: 0.3),
+                          ),
+                        ),
                       ],
                     ),
                     const SizedBox(height: AppSpacing.md),
@@ -173,7 +224,8 @@ class _CrosswordGameScreenState extends ConsumerState<CrosswordGameScreen> {
                       flex: 3,
                       child: Center(
                         child: CrosswordGridWidget(
-                          gridSize: _currentLevel.gridSize,
+                          gridWidth: _currentLevel.gridWidth,
+                          gridHeight: _currentLevel.gridHeight,
                           words: _currentLevel.words,
                         ),
                       ),
