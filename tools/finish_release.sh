@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# GNPS Learning Hub - Finish Release Script
+# Finish Release Script
 # Merges develop into main and pushes.
 
 echo "🚢 Finalizing release: Merging develop into main..."

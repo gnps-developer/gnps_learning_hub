@@ -89,7 +89,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     final Uri emailLaunchUri = Uri(
       scheme: 'mailto',
       path: UIStrings.supportEmail,
-      query: 'subject=Support Request: GNPS Learning Hub',
+      query: 'subject=Support Request: Gurmukhi Sikho',
     );
 
     try {

@@ -1,6 +1,6 @@
-# Features - GNPS Learning Hub
+# Features
 
-GNPS Learning Hub is designed to make learning Punjabi engaging and fun for children through gamification and interactive lessons.
+Gurmukhi Sikho is designed to make learning Punjabi engaging and fun for children through gamification and interactive lessons.
 
 ## 🗺️ Learning Journey
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# GNPS Learning Hub - Release Preparation Script
+# Release Preparation Script
 # Usage: ./tools/prepare_release.sh <version_tag>
 
 VERSION=$1

@@ -1,6 +1,6 @@
-# Google Play Store Listing - GNPS Learning Hub
+# Google Play Store Listing - Gurmukhi Sikho
 
-This document contains the store listing for GNPS Learning Hub, optimized for visibility and clarity.
+This document contains the store listing, optimized for visibility and clarity.
 
 ## 📝 Short Description (Max 80 characters)
 Learn Punjabi through fun games and interactive lessons for kids!
@@ -9,9 +9,9 @@ Learn Punjabi through fun games and interactive lessons for kids!
 
 Make Punjabi & Gurmukhi Come Alive — One Fun Lesson at a Time!
 
-GNPS Learning Hub is a gamified Punjabi learning app built for kids, guiding them from their very first Gurmukhi letter to full sentences through play, not pressure. Designed for children ages 4–10, it turns language learning into an adventure your child will actually look forward to.
+This is a gamified Punjabi learning app built for kids, guiding them from their very first Gurmukhi letter to full sentences through play, not pressure. Designed for children ages 4–10, it turns language learning into an adventure your child will actually look forward to.
 
-🌟 Why Choose GNPS Learning Hub
+🌟 Why Choose Gurmukhi Sikho
 
 🎓 A Structured Learning Path A curated, step-by-step curriculum meets your child exactly where they are — from tracing their first Gurmukhi character to building confident vocabulary and sentences.
 
@@ -32,7 +32,7 @@ Fun accessories like sunglasses
 
 🔊 Authentic Pronunciation High-quality text-to-speech lets kids hear correct Punjabi pronunciation on every word, building real speaking confidence from day one.
 
-Join users around the world using GNPS Learning Hub to keep Punjabi and Sikh heritage alive for the next generation. Download free today and watch your child grow into a confident Punjabi speaker!
+Join users around the world to keep Punjabi and Sikh heritage alive for the next generation. Download free today and watch your child grow into a confident Punjabi speaker!
 
 🏷 Keywords
 

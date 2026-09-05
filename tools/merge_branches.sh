@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# GNPS Learning Hub - Branch Merge Utility
+# Branch Merge Utility
 # Automates the fast-forward merge from a source branch to a target branch.
 
 SOURCE_BRANCH=$1

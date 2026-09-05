@@ -1,4 +1,4 @@
-# GNPS Learning Hub - Curriculum Overview
+# Curriculum Overview
 
 This document is automatically generated from the app's lesson data.
 

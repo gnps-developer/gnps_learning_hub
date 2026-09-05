@@ -1,6 +1,6 @@
 {
   "brand": {
-    "appName": "GNPS Learning Hub",
+    "appName": "Gurmukhi Sikho",
     "eyebrow": "Punjabi • For Kids",
     "heroGurmukhiTagline": "ਸਿੱਖੋ, ਖੇਡੋ, ਵਧੋ",
     "heroSubtitle": "Learn, Play, Grow — the Gurmukhi learning adventure for kids",
@@ -45,16 +45,16 @@
       "badgeLabel": "Achievements",
       "title": "Celebrate Every Milestone",
       "gurmukhiLabel": "ਪ੍ਰਾਪਤੀਆਂ",
-      "description": "Every stroke traced, every word spelled, every sentence built — it all adds up. GNPS Learning Hub marks each milestone with a badge, turning quiet daily practice into visible, shareable pride for kids and parents alike.",
+      "description": "Every stroke traced, every word spelled, every sentence built — it all adds up. We mark each milestone with a badge, turning quiet daily practice into visible, shareable pride for kids and parents alike.",
       "screenshot": "listing/google-play-store/phone/phone_achievements.png",
       "footerLabel": "ACHIEVEMENTS",
       "pills": ["Milestone Badges", "Progress Tracking", "Shareable Wins"]
     },
     "finalNotes": {
-      "title": "GNPS Learning Hub",
+      "title": "Gurmukhi Sikho",
       "subtitle": "Download Now",
       "gurmukhiLabel": "ਹੁਣੇ ਡਾਊਨਲੋਡ ਕਰੋ",
-      "message": "GNPS Learning Hub available on Google Play, with Apple App Store to follow shortly after. Sikho, khedo, vadho — learn, play, grow, wherever your family calls home.",
+      "message": "Available on Google Play, with Apple App Store to follow shortly after. Sikho, khedo, vadho — learn, play, grow, wherever your family calls home.",
       "footerLabel": "AVAILABILITY",
       "googlePlayUrl": "https://play.google.com/store/apps/details?id=au.edu.nsw.gnps.learning.hub",
       "qrCaption": "Scan to get it on Google Play",
@@ -96,7 +96,7 @@
       ]
     },
     "onePager": {
-      "title": "GNPS Learning Hub",
+      "title": "Gurmukhi Sikho",
       "gurmukhiLabel": "ਸਿੱਖੋ, ਖੇਡੋ, ਵਧੋ",
       "shortDescription": "A joyful Gurmukhi learning adventure for kids — tracing, spelling, matching, and sentence-building games that turn Punjabi practice into play. Launching soon on Android, with iOS to follow.",
       "footerLabel": "ONE-PAGE OVERVIEW"

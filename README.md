@@ -1,4 +1,4 @@
-# GNPS Learning Hub 🌲🦁
+# Gurmukhi Sikho 🌲🦁
 
 Learn Punjabi through engaging, gamified lessons. Earn gems, build streaks, unlock arcade games, and customize your own avatar as you master Gurmukhi!
 

@@ -45,7 +45,7 @@ void main([List<String> args = const []]) {
   };
 
   final buffer = StringBuffer();
-  buffer.writeln('# GNPS Learning Hub - Curriculum Overview');
+  buffer.writeln('# Gurmukhi Sikho - Curriculum Overview');
   buffer.writeln();
   buffer.writeln(
     'This document is automatically generated from the app\'s lesson data.',

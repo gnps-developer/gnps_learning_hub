@@ -35,7 +35,7 @@ class LearningHubApp extends ConsumerWidget {
     );
 
     return MaterialApp(
-      title: 'GNPS - Learn Punjabi',
+      title: 'Gurmukhi Sikho',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: seedColor),

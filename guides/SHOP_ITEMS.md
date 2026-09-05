@@ -1,4 +1,4 @@
-# Shop Items Catalog - GNPS Learning Hub
+# Shop Items Catalog - Gurmukhi Sikho
 
 This document is automatically generated from the app's shop data.
 

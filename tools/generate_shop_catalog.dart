@@ -13,7 +13,7 @@ void main([List<String> args = const []]) {
   final List purchasableItems = jsonDecode(jsonStr);
 
   final buffer = StringBuffer();
-  buffer.writeln('# Shop Items Catalog - GNPS Learning Hub');
+  buffer.writeln('# Shop Items Catalog - Gurmukhi Sikho');
   buffer.writeln();
   buffer.writeln(
     'This document is automatically generated from the app\'s shop data.',

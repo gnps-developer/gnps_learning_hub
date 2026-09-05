@@ -1,4 +1,4 @@
-# Release Process Guide - GNPS Learning Hub
+# Release Process Guide - Gurmukhi Sikho
 
 This guide defines the streamlined workflow for publishing new versions to the Google Play and App Store using Git tagging.
 
