@@ -251,9 +251,9 @@ String get _lessonsDir => '$_projectRoot/assets/data/lessons';
 String get _gamesDir => '$_projectRoot/assets/data/games';
 
 String get _brochureOutputPath =>
-    '$_projectRoot/exports/GNPS_Brochure_Premium.pdf';
+    '$_projectRoot/exports/Gurmukhi_Sikho_Brochure.pdf';
 
-String get _onePagerOutputPath => '$_projectRoot/exports/GNPS_OnePager.pdf';
+String get _onePagerOutputPath => '$_projectRoot/exports/Gurmukhi_Sikho_OnePager.pdf';
 
 class _BrochureContext {
   final Map<String, dynamic> brand;

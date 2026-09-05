@@ -39,6 +39,10 @@ workflows:
         script: |
           flutter test
 
+      - name: Generate Marketing Brochure
+        script: |
+          dart tools/generate_brochure.dart
+
       - name: Build Android App Bundle
         script: |
           flutter build appbundle --release \
@@ -61,6 +65,7 @@ workflows:
       - build/app/outputs/**/*.aab
       - build/app/outputs/**/mapping.txt
       - build/ios/ipa/*.ipa
+      - exports/*.pdf
       - /tmp/xcodebuild_logs/*.log
       - flutter_drive.log
 
