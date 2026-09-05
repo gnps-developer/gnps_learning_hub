@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../config/ui_strings.dart';
 import '../providers/content_providers.dart';
 import '../providers/progress_providers.dart';
 import 'crossword_debug_screen.dart';
@@ -13,7 +14,7 @@ class ContentDebugScreen extends ConsumerWidget {
     final progressAsync = ref.watch(progressProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Content Debug Tool')),
+      appBar: AppBar(title: const Text(UIStrings.contentDebugLabel)),
       body: journeyAsync.when(
         data: (journey) => progressAsync.when(
           data: (progress) => ListView(

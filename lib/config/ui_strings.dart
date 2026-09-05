@@ -62,7 +62,8 @@ class UIStrings {
   static const factoryResetLabel = 'Factory Reset';
   static const debugToolsLabel = 'Debug Tools';
   static const markAllCompleteLabel = 'Mark All Lessons Complete';
-  static const contentDebugLabel = 'Content Progress Debug';
+  static const contentDebugLabel = 'Content Review Tools';
+  static const crosswordDebugLabel = 'Crossword Layout Review';
   static const tracingRecorderLabel = 'Tracing Checkpoint Recorder';
   static const testCelebrationLabel = 'Test Achievement Celebration';
   static const disableDevModeLabel = 'Disable Developer Mode';

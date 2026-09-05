@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import '../models/games/crossword_data.dart';
 import '../widgets/games/crossword_grid_widget.dart';
 import '../config/ui_config.dart';
+import '../config/ui_strings.dart';
 
 class CrosswordDebugScreen extends StatefulWidget {
   const CrosswordDebugScreen({super.key});
@@ -43,7 +44,7 @@ class _CrosswordDebugScreenState extends State<CrosswordDebugScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Crossword Layout Debug')),
+      appBar: AppBar(title: const Text(UIStrings.crosswordDebugLabel)),
       body: _buildBody(),
     );
   }
@@ -68,12 +69,12 @@ class _CrosswordDebugScreenState extends State<CrosswordDebugScreen> {
       itemBuilder: (context, index) {
         final level = _crosswordData!.levels[index];
 
-        // Clone words and mark them as revealed for debug view
+        // Create a deep copy of words and force them to be revealed for inspection
         final revealedWords = level.words.map((w) {
           return CrosswordWord(
             number: w.number,
             answer: w.answer,
-            syllables: w.syllables,
+            syllables: List.from(w.syllables),
             row: w.row,
             col: w.col,
             isHorizontal: w.isHorizontal,
@@ -82,115 +83,67 @@ class _CrosswordDebugScreenState extends State<CrosswordDebugScreen> {
           );
         }).toList();
 
-        // Sanity flags a human reviewer cares about at a glance: does the
-        // word count look like a real crossword (>=2 words, at least one
-        // intersection), and are both directions actually represented.
         final hasAcross = level.words.any((w) => w.isHorizontal);
         final hasDown = level.words.any((w) => !w.isHorizontal);
-        final looksSparse = level.words.length < 6;
 
         return Card(
           margin: const EdgeInsets.only(bottom: AppSpacing.lg),
-          child: Padding(
-            padding: const EdgeInsets.all(AppSpacing.md),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      'Level ${level.levelNumber}  '
-                      '(Grid: ${level.gridWidth}x${level.gridHeight}, '
-                      '${level.words.length} words)',
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(width: AppSpacing.sm),
-                    if (looksSparse || !hasAcross || !hasDown)
-                      const Icon(
-                        Icons.warning_amber_rounded,
-                        color: Colors.orange,
-                        size: 20,
-                      ),
-                  ],
-                ),
-                const SizedBox(height: AppSpacing.sm),
-                for (final w in level.words)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 1),
-                    child: Text(
-                      '#${w.number ?? '-'} '
-                      '${w.isHorizontal ? '→' : '↓'} '
-                      '${w.answer}  (${w.row},${w.col})'
-                      '${w.hint.isNotEmpty ? '  — ${w.hint}' : ''}',
-                      style: const TextStyle(
-                        fontSize: 13,
-                        fontFamily: 'monospace',
-                      ),
-                    ),
-                  ),
-                const SizedBox(height: 4),
-                Row(
-                  children: [
-                    const Text(
-                      'Dial: ',
-                      style: TextStyle(fontWeight: FontWeight.w500),
-                    ),
-                    Expanded(
-                      child: Wrap(
-                        spacing: 4,
-                        children: level.dialLetters
-                            .map(
-                              (l) => Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 6,
-                                  vertical: 2,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: Theme.of(
-                                    context,
-                                  ).colorScheme.secondaryContainer,
-                                  borderRadius: BorderRadius.circular(4),
-                                ),
-                                child: Text(
-                                  l,
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Theme.of(
-                                      context,
-                                    ).colorScheme.onSecondaryContainer,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            )
-                            .toList(),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: AppSpacing.md),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Theme.of(
-                      context,
-                    ).colorScheme.primaryContainer.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  height: 420,
-                  width: double.infinity,
-                  child: Center(
-                    child: CrosswordGridWidget(
-                      gridWidth: level.gridWidth,
-                      gridHeight: level.gridHeight,
-                      words: revealedWords,
-                    ),
-                  ),
-                ),
-              ],
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          child: ExpansionTile(
+            initiallyExpanded: index == 0,
+            title: Text(
+              'Level ${level.levelNumber}  (${level.gridWidth}x${level.gridHeight})',
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
+            subtitle: Text('${level.words.length} words • Dial: ${level.dialLetters.join(", ")}'),
+            trailing: (!hasAcross || !hasDown) 
+                ? const Icon(Icons.warning_amber_rounded, color: Colors.orange) 
+                : null,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(AppSpacing.md),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('WORDS & HINTS', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.grey)),
+                    const SizedBox(height: 8),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 4,
+                      children: level.words.map((w) => Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.surfaceContainerHigh,
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Text(
+                          '${w.isHorizontal ? "→" : "↓"} ${w.answer}: ${w.hint}',
+                          style: const TextStyle(fontSize: 12),
+                        ),
+                      )).toList(),
+                    ),
+                    const SizedBox(height: AppSpacing.lg),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primaryContainer.withValues(alpha: 0.05),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant.withValues(alpha: 0.3)),
+                      ),
+                      height: 380,
+                      width: double.infinity,
+                      child: Center(
+                        child: CrosswordGridWidget(
+                          gridWidth: level.gridWidth,
+                          gridHeight: level.gridHeight,
+                          words: revealedWords,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: AppSpacing.md),
+                  ],
+                ),
+              ),
+            ],
           ),
         );
       },
