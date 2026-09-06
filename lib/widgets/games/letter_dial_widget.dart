@@ -91,7 +91,7 @@ class _LetterDialWidgetState extends State<LetterDialWidget> {
                       child: Opacity(
                         opacity: 0.15,
                         child: Icon(
-                          Icons.park_rounded,
+                          Icons.menu_book_rounded,
                           size: dialSize * 0.45,
                           color: Theme.of(
                             context,

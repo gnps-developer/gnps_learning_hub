@@ -13,6 +13,11 @@ class UIStrings {
   static const close = 'Close';
   static const copy = 'Copy';
 
+  // Splash Screen
+  static const appNameCaps = 'GURMUKHI SIKHO';
+  static const appNameGurmukhi = 'ਗੁਰਮੁਖੀ ਸਿੱਖੋ';
+  static const byGNPS = 'BY GNPS';
+
   // Common Labels
   static const taskLabel = 'Task';
   static const ofLabel = 'of';

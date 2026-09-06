@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../config/ui_strings.dart';
 import '../models/journey.dart';
 import '../providers/content_providers.dart';
 import '../providers/progress_providers.dart';
@@ -66,46 +67,75 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'GNPS',
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: onPrimary,
-                letterSpacing: 4,
-                fontWeight: FontWeight.w600,
-              ),
+      body: Stack(
+        children: [
+          Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  UIStrings.appNameCaps,
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        color: onPrimary,
+                        letterSpacing: 2,
+                        fontWeight: FontWeight.w800,
+                      ),
+                ),
+                const SizedBox(height: 24),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(40),
+                  child: Image.asset(
+                    'assets/logo/logo.jpg',
+                    width: 240,
+                    height: 240,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                const SizedBox(height: 24),
+                Text(
+                  UIStrings.appNameGurmukhi,
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineMedium
+                      ?.copyWith(color: onPrimary, fontWeight: FontWeight.w500),
+                ),
+                const SizedBox(height: 48),
+                SizedBox(
+                  width: 24,
+                  height: 24,
+                  child: CircularProgressIndicator(
+                    color: onPrimary,
+                    strokeWidth: 3,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  _statusText(syncState),
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: onPrimary.withValues(alpha: 0.7),
+                      ),
+                ),
+              ],
             ),
-            const SizedBox(height: 8),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(24),
-              child: Image.asset(
-                'assets/logo/logo.jpg',
-                width: 120,
-                height: 120,
-                fit: BoxFit.cover,
-              ),
+          ),
+          Positioned(
+            bottom: 40,
+            left: 0,
+            right: 0,
+            child: Column(
+              children: [
+                Text(
+                  UIStrings.byGNPS,
+                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                        color: onPrimary.withValues(alpha: 0.7),
+                        letterSpacing: 5,
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+              ],
             ),
-            const SizedBox(height: 16),
-            Text(
-              'ਪੰਜਾਬੀ ਸਿੱਖੋ',
-              style: Theme.of(
-                context,
-              ).textTheme.headlineMedium?.copyWith(color: onPrimary),
-            ),
-            const SizedBox(height: 32),
-            CircularProgressIndicator(color: onPrimary),
-            const SizedBox(height: 16),
-            Text(
-              _statusText(syncState),
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: onPrimary.withValues(alpha: 0.8),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
