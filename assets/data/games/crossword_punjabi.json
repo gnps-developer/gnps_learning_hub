@@ -7,141 +7,139 @@
     "levels": [
       {
         "levelNumber": 1,
-        "gridWidth": 5,
+        "gridWidth": 6,
         "gridHeight": 6,
         "words": [
           {
             "number": 1,
-            "answer": "ਮਗ",
+            "answer": "ਨਦਰ",
             "syllables": [
-              "ਮ",
-              "ਗ"
+              "ਨ",
+              "ਦ",
+              "ਰ"
             ],
             "row": 1,
-            "col": 4,
+            "col": 3,
             "isHorizontal": false,
-            "hint": "Mug"
+            "hint": "Grace/glance"
           },
           {
             "number": 2,
-            "answer": "ਮਗਰ",
+            "answer": "ਦਲ",
             "syllables": [
-              "ਮ",
-              "ਗ",
-              "ਰ"
+              "ਦ",
+              "ਲ"
+            ],
+            "row": 1,
+            "col": 6,
+            "isHorizontal": false,
+            "hint": "Group"
+          },
+          {
+            "number": 3,
+            "answer": "ਦਲਦਲ",
+            "syllables": [
+              "ਦ",
+              "ਲ",
+              "ਦ",
+              "ਲ"
             ],
             "row": 2,
             "col": 3,
             "isHorizontal": true,
-            "hint": "But/behind"
+            "hint": "Swamp"
           },
           {
-            "number": 2,
-            "answer": "ਮਟਰ",
+            "number": 4,
+            "answer": "ਦਰਦ",
             "syllables": [
-              "ਮ",
-              "ਟ",
-              "ਰ"
-            ],
-            "row": 2,
-            "col": 3,
-            "isHorizontal": false,
-            "hint": "Peas"
-          },
-          {
-            "number": 3,
-            "answer": "ਰਲ",
-            "syllables": [
+              "ਦ",
               "ਰ",
-              "ਲ"
+              "ਦ"
             ],
             "row": 2,
             "col": 5,
             "isHorizontal": false,
-            "hint": "Mix"
-          },
-          {
-            "number": 4,
-            "answer": "ਗਰਮ",
-            "syllables": [
-              "ਗ",
-              "ਰ",
-              "ਮ"
-            ],
-            "row": 4,
-            "col": 2,
-            "isHorizontal": true,
-            "hint": "Hot"
-          },
-          {
-            "number": 4,
-            "answer": "ਗਲ",
-            "syllables": [
-              "ਗ",
-              "ਲ"
-            ],
-            "row": 4,
-            "col": 2,
-            "isHorizontal": false,
-            "hint": "Throat"
+            "hint": "Pain"
           },
           {
             "number": 5,
-            "answer": "ਮਰ",
+            "answer": "ਰਬਰ",
             "syllables": [
-              "ਮ",
+              "ਰ",
+              "ਬ",
               "ਰ"
             ],
-            "row": 4,
-            "col": 4,
-            "isHorizontal": false,
-            "hint": "Die"
+            "row": 3,
+            "col": 1,
+            "isHorizontal": true,
+            "hint": "Rubber"
           },
           {
             "number": 6,
-            "answer": "ਮਲ",
+            "answer": "ਬਦਲ",
             "syllables": [
-              "ਮ",
+              "ਬ",
+              "ਦ",
               "ਲ"
+            ],
+            "row": 3,
+            "col": 2,
+            "isHorizontal": false,
+            "hint": "Cloud"
+          },
+          {
+            "number": 7,
+            "answer": "ਰਦ",
+            "syllables": [
+              "ਰ",
+              "ਦ"
+            ],
+            "row": 4,
+            "col": 4,
+            "isHorizontal": true,
+            "hint": "Reject"
+          },
+          {
+            "number": 8,
+            "answer": "ਬਲਦ",
+            "syllables": [
+              "ਬ",
+              "ਲ",
+              "ਦ"
             ],
             "row": 5,
             "col": 1,
             "isHorizontal": true,
-            "hint": "Rub"
-          },
-          {
-            "number": 7,
-            "answer": "ਰਟ",
-            "syllables": [
-              "ਰ",
-              "ਟ"
-            ],
-            "row": 5,
-            "col": 4,
-            "isHorizontal": true,
-            "hint": "Recite"
+            "hint": "Ox"
           },
           {
             "number": 8,
-            "answer": "ਟਲ",
+            "answer": "ਬਨ",
             "syllables": [
-              "ਟ",
-              "ਲ"
+              "ਬ",
+              "ਨ"
             ],
             "row": 5,
-            "col": 5,
+            "col": 1,
             "isHorizontal": false,
-            "hint": "Postpone"
+            "hint": "Make"
           }
         ],
         "dialLetters": [
-          "ਗ",
-          "ਟ",
-          "ਮ",
+          "ਦ",
+          "ਨ",
+          "ਬ",
           "ਰ",
           "ਲ"
         ],
-        "unusedCandidateWords": []
+        "unusedCandidateWords": [
+          "ਦਰ",
+          "ਨਰ",
+          "ਨਲ",
+          "ਬਲ",
+          "ਰਲ"
+        ]
       },
       {
         "levelNumber": 2,
@@ -150,135 +148,134 @@
         "words": [
           {
             "number": 1,
-            "answer": "ਤਲ",
+            "answer": "ਬਸ",
             "syllables": [
-              "ਤ",
-              "ਲ"
+              "ਬ",
+              "ਸ"
+            ],
+            "row": 1,
+            "col": 1,
+            "isHorizontal": true,
+            "hint": "Bus"
+          },
+          {
+            "number": 1,
+            "answer": "ਬਰਸ",
+            "syllables": [
+              "ਬ",
+              "ਰ",
+              "ਸ"
+            ],
+            "row": 1,
+            "col": 1,
+            "isHorizontal": false,
+            "hint": "Year (poetic)"
+          },
+          {
+            "number": 2,
+            "answer": "ਸਬਰ",
+            "syllables": [
+              "ਸ",
+              "ਬ",
+              "ਰ"
+            ],
+            "row": 1,
+            "col": 4,
+            "isHorizontal": false,
+            "hint": "Patience"
+          },
+          {
+            "number": 3,
+            "answer": "ਸਰ",
+            "syllables": [
+              "ਸ",
+              "ਰ"
             ],
             "row": 1,
             "col": 6,
             "isHorizontal": false,
-            "hint": "Surface"
-          },
-          {
-            "number": 2,
-            "answer": "ਗਲ",
-            "syllables": [
-              "ਗ",
-              "ਲ"
-            ],
-            "row": 2,
-            "col": 5,
-            "isHorizontal": true,
-            "hint": "Throat"
-          },
-          {
-            "number": 2,
-            "answer": "ਗਤ",
-            "syllables": [
-              "ਗ",
-              "ਤ"
-            ],
-            "row": 2,
-            "col": 5,
-            "isHorizontal": false,
-            "hint": "Condition"
-          },
-          {
-            "number": 3,
-            "answer": "ਮਤ",
-            "syllables": [
-              "ਮ",
-              "ਤ"
-            ],
-            "row": 3,
-            "col": 4,
-            "isHorizontal": true,
-            "hint": "Vote"
-          },
-          {
-            "number": 3,
-            "answer": "ਮਲ",
-            "syllables": [
-              "ਮ",
-              "ਲ"
-            ],
-            "row": 3,
-            "col": 4,
-            "isHorizontal": false,
-            "hint": "Rub"
+            "hint": "Lake"
           },
           {
             "number": 4,
-            "answer": "ਤਕ",
+            "answer": "ਬਸਰ",
             "syllables": [
-              "ਤ",
-              "ਕ"
+              "ਬ",
+              "ਸ",
+              "ਰ"
             ],
-            "row": 4,
-            "col": 1,
-            "isHorizontal": false,
-            "hint": "Until"
-          },
-          {
-            "number": 5,
-            "answer": "ਕਲ",
-            "syllables": [
-              "ਕ",
-              "ਲ"
-            ],
-            "row": 4,
-            "col": 3,
+            "row": 2,
+            "col": 4,
             "isHorizontal": true,
-            "hint": "Tomorrow"
+            "hint": "To pass (time)"
           },
           {
             "number": 5,
-            "answer": "ਕਲਮ",
+            "answer": "ਸਰਵਰ",
             "syllables": [
-              "ਕ",
-              "ਲ",
-              "ਮ"
+              "ਸ",
+              "ਰ",
+              "ਵ",
+              "ਰ"
             ],
-            "row": 4,
-            "col": 3,
-            "isHorizontal": false,
-            "hint": "Pen"
+            "row": 3,
+            "col": 1,
+            "isHorizontal": true,
+            "hint": "Pond"
           },
           {
             "number": 6,
-            "answer": "ਕਮਲ",
+            "answer": "ਰਬਰ",
             "syllables": [
-              "ਕ",
-              "ਮ",
-              "ਲ"
+              "ਰ",
+              "ਬ",
+              "ਰ"
+            ],
+            "row": 3,
+            "col": 2,
+            "isHorizontal": false,
+            "hint": "Rubber"
+          },
+          {
+            "number": 7,
+            "answer": "ਸਰਬ",
+            "syllables": [
+              "ਸ",
+              "ਰ",
+              "ਬ"
             ],
             "row": 5,
             "col": 1,
             "isHorizontal": true,
-            "hint": "Lotus"
+            "hint": "All"
           },
           {
-            "number": 7,
-            "answer": "ਮਗ",
+            "number": 8,
+            "answer": "ਬਨ",
             "syllables": [
-              "ਮ",
-              "ਗ"
+              "ਬ",
+              "ਨ"
             ],
-            "row": 6,
+            "row": 5,
             "col": 3,
-            "isHorizontal": true,
-            "hint": "Mug"
+            "isHorizontal": false,
+            "hint": "Make"
           }
         ],
         "dialLetters": [
-          "ਕ",
-          "ਗ",
-          "ਤ",
-          "ਮ",
-          "ਲ"
+          "ਨ",
+          "ਬ",
+          "ਰ",
+          "ਵ",
+          "ਸ"
         ],
-        "unusedCandidateWords": []
+        "unusedCandidateWords": [
+          "ਨਰ",
+          "ਨਸ",
+          "ਰਸ",
+          "ਵਨ",
+          "ਵਰ"
+        ]
       },
       {
         "levelNumber": 3,
@@ -287,27 +284,822 @@
         "words": [
           {
             "number": 1,
-            "answer": "ਪਰ",
+            "answer": "ਸਬਰ",
             "syllables": [
-              "ਪ",
+              "ਸ",
+              "ਬ",
               "ਰ"
             ],
             "row": 1,
-            "col": 5,
+            "col": 3,
             "isHorizontal": false,
-            "hint": "But"
+            "hint": "Patience"
           },
           {
             "number": 2,
-            "answer": "ਸਰ",
+            "answer": "ਬਸਰ",
+            "syllables": [
+              "ਬ",
+              "ਸ",
+              "ਰ"
+            ],
+            "row": 2,
+            "col": 3,
+            "isHorizontal": true,
+            "hint": "To pass (time)"
+          },
+          {
+            "number": 3,
+            "answer": "ਰਬਰ",
+            "syllables": [
+              "ਰ",
+              "ਬ",
+              "ਰ"
+            ],
+            "row": 2,
+            "col": 5,
+            "isHorizontal": false,
+            "hint": "Rubber"
+          },
+          {
+            "number": 4,
+            "answer": "ਮਗਰ",
+            "syllables": [
+              "ਮ",
+              "ਗ",
+              "ਰ"
+            ],
+            "row": 3,
+            "col": 1,
+            "isHorizontal": true,
+            "hint": "But/behind"
+          },
+          {
+            "number": 4,
+            "answer": "ਮਰਗ",
+            "syllables": [
+              "ਮ",
+              "ਰ",
+              "ਗ"
+            ],
+            "row": 3,
+            "col": 1,
+            "isHorizontal": false,
+            "hint": "Path"
+          },
+          {
+            "number": 5,
+            "answer": "ਸਰਬ",
             "syllables": [
               "ਸ",
+              "ਰ",
+              "ਬ"
+            ],
+            "row": 4,
+            "col": 4,
+            "isHorizontal": true,
+            "hint": "All"
+          },
+          {
+            "number": 6,
+            "answer": "ਬਰਸ",
+            "syllables": [
+              "ਬ",
+              "ਰ",
+              "ਸ"
+            ],
+            "row": 4,
+            "col": 6,
+            "isHorizontal": false,
+            "hint": "Year (poetic)"
+          },
+          {
+            "number": 7,
+            "answer": "ਗਰਮ",
+            "syllables": [
+              "ਗ",
+              "ਰ",
+              "ਮ"
+            ],
+            "row": 5,
+            "col": 1,
+            "isHorizontal": true,
+            "hint": "Hot"
+          },
+          {
+            "number": 8,
+            "answer": "ਮਰ",
+            "syllables": [
+              "ਮ",
+              "ਰ"
+            ],
+            "row": 5,
+            "col": 3,
+            "isHorizontal": false,
+            "hint": "Die"
+          },
+          {
+            "number": 9,
+            "answer": "ਰਸ",
+            "syllables": [
+              "ਰ",
+              "ਸ"
+            ],
+            "row": 6,
+            "col": 5,
+            "isHorizontal": true,
+            "hint": "Juice"
+          }
+        ],
+        "dialLetters": [
+          "ਗ",
+          "ਬ",
+          "ਮ",
+          "ਰ",
+          "ਸ"
+        ],
+        "unusedCandidateWords": [
+          "ਬਸ",
+          "ਮਗ",
+          "ਸਰ"
+        ]
+      },
+      {
+        "levelNumber": 4,
+        "gridWidth": 7,
+        "gridHeight": 7,
+        "words": [
+          {
+            "number": 1,
+            "answer": "ਦਮ",
+            "syllables": [
+              "ਦ",
+              "ਮ"
+            ],
+            "row": 1,
+            "col": 2,
+            "isHorizontal": false,
+            "hint": "Breath"
+          },
+          {
+            "number": 2,
+            "answer": "ਚਮਚ",
+            "syllables": [
+              "ਚ",
+              "ਮ",
+              "ਚ"
+            ],
+            "row": 2,
+            "col": 1,
+            "isHorizontal": true,
+            "hint": "Spoon"
+          },
+          {
+            "number": 3,
+            "answer": "ਚਰਮ",
+            "syllables": [
+              "ਚ",
+              "ਰ",
+              "ਮ"
+            ],
+            "row": 2,
+            "col": 3,
+            "isHorizontal": false,
+            "hint": "Skin/leather"
+          },
+          {
+            "number": 4,
+            "answer": "ਮਦਦ",
+            "syllables": [
+              "ਮ",
+              "ਦ",
+              "ਦ"
+            ],
+            "row": 3,
+            "col": 5,
+            "isHorizontal": false,
+            "hint": "Help"
+          },
+          {
+            "number": 5,
+            "answer": "ਮਰਦ",
+            "syllables": [
+              "ਮ",
+              "ਰ",
+              "ਦ"
+            ],
+            "row": 4,
+            "col": 3,
+            "isHorizontal": true,
+            "hint": "Man"
+          },
+          {
+            "number": 6,
+            "answer": "ਦਰਦ",
+            "syllables": [
+              "ਦ",
+              "ਰ",
+              "ਦ"
+            ],
+            "row": 5,
+            "col": 5,
+            "isHorizontal": true,
+            "hint": "Pain"
+          },
+          {
+            "number": 7,
+            "answer": "ਰਸਦ",
+            "syllables": [
+              "ਰ",
+              "ਸ",
+              "ਦ"
+            ],
+            "row": 5,
+            "col": 6,
+            "isHorizontal": false,
+            "hint": "Supplies"
+          },
+          {
+            "number": 8,
+            "answer": "ਦਸ",
+            "syllables": [
+              "ਦ",
+              "ਸ"
+            ],
+            "row": 6,
+            "col": 4,
+            "isHorizontal": false,
+            "hint": "Ten"
+          },
+          {
+            "number": 9,
+            "answer": "ਸਰਦ",
+            "syllables": [
+              "ਸ",
+              "ਰ",
+              "ਦ"
+            ],
+            "row": 7,
+            "col": 4,
+            "isHorizontal": true,
+            "hint": "Cold"
+          }
+        ],
+        "dialLetters": [
+          "ਚ",
+          "ਦ",
+          "ਮ",
+          "ਰ",
+          "ਸ"
+        ],
+        "unusedCandidateWords": [
+          "ਦਰ",
+          "ਮਰ",
+          "ਰਦ",
+          "ਰਸ",
+          "ਸਰ"
+        ]
+      },
+      {
+        "levelNumber": 5,
+        "gridWidth": 7,
+        "gridHeight": 7,
+        "words": [
+          {
+            "number": 1,
+            "answer": "ਚਮਨ",
+            "syllables": [
+              "ਚ",
+              "ਮ",
+              "ਨ"
+            ],
+            "row": 1,
+            "col": 2,
+            "isHorizontal": true,
+            "hint": "Garden"
+          },
+          {
+            "number": 1,
+            "answer": "ਚਰਮ",
+            "syllables": [
+              "ਚ",
+              "ਰ",
+              "ਮ"
+            ],
+            "row": 1,
+            "col": 2,
+            "isHorizontal": false,
+            "hint": "Skin/leather"
+          },
+          {
+            "number": 2,
+            "answer": "ਨਰ",
+            "syllables": [
+              "ਨ",
+              "ਰ"
+            ],
+            "row": 1,
+            "col": 4,
+            "isHorizontal": false,
+            "hint": "Man"
+          },
+          {
+            "number": 3,
+            "answer": "ਚਮਚ",
+            "syllables": [
+              "ਚ",
+              "ਮ",
+              "ਚ"
+            ],
+            "row": 3,
+            "col": 1,
+            "isHorizontal": true,
+            "hint": "Spoon"
+          },
+          {
+            "number": 4,
+            "answer": "ਚਰਨ",
+            "syllables": [
+              "ਚ",
+              "ਰ",
+              "ਨ"
+            ],
+            "row": 3,
+            "col": 3,
+            "isHorizontal": false,
+            "hint": "Feet"
+          },
+          {
+            "number": 5,
+            "answer": "ਤਨਮਨ",
+            "syllables": [
+              "ਤ",
+              "ਨ",
+              "ਮ",
+              "ਨ"
+            ],
+            "row": 5,
+            "col": 2,
+            "isHorizontal": true,
+            "hint": "Body and mind"
+          },
+          {
+            "number": 5,
+            "answer": "ਤਰ",
+            "syllables": [
+              "ਤ",
+              "ਰ"
+            ],
+            "row": 5,
+            "col": 2,
+            "isHorizontal": false,
+            "hint": "Swim"
+          },
+          {
+            "number": 6,
+            "answer": "ਨਰਮ",
+            "syllables": [
+              "ਨ",
+              "ਰ",
+              "ਮ"
+            ],
+            "row": 5,
+            "col": 5,
+            "isHorizontal": false,
+            "hint": "Soft"
+          },
+          {
+            "number": 7,
+            "answer": "ਤਨ",
+            "syllables": [
+              "ਤ",
+              "ਨ"
+            ],
+            "row": 5,
+            "col": 7,
+            "isHorizontal": false,
+            "hint": "Body"
+          },
+          {
+            "number": 8,
+            "answer": "ਰਤਨ",
+            "syllables": [
+              "ਰ",
+              "ਤ",
+              "ਨ"
+            ],
+            "row": 6,
+            "col": 5,
+            "isHorizontal": true,
+            "hint": "Jewel"
+          }
+        ],
+        "dialLetters": [
+          "ਚ",
+          "ਤ",
+          "ਨ",
+          "ਮ",
+          "ਰ"
+        ],
+        "unusedCandidateWords": [
+          "ਮਤ",
+          "ਮਰ"
+        ]
+      },
+      {
+        "levelNumber": 6,
+        "gridWidth": 7,
+        "gridHeight": 7,
+        "words": [
+          {
+            "number": 1,
+            "answer": "ਮਰ",
+            "syllables": [
+              "ਮ",
+              "ਰ"
+            ],
+            "row": 1,
+            "col": 6,
+            "isHorizontal": true,
+            "hint": "Die"
+          },
+          {
+            "number": 1,
+            "answer": "ਮਰਦ",
+            "syllables": [
+              "ਮ",
+              "ਰ",
+              "ਦ"
+            ],
+            "row": 1,
+            "col": 6,
+            "isHorizontal": false,
+            "hint": "Man"
+          },
+          {
+            "number": 2,
+            "answer": "ਦਲ",
+            "syllables": [
+              "ਦ",
+              "ਲ"
+            ],
+            "row": 2,
+            "col": 2,
+            "isHorizontal": false,
+            "hint": "Group"
+          },
+          {
+            "number": 3,
+            "answer": "ਕਦਰ",
+            "syllables": [
+              "ਕ",
+              "ਦ",
               "ਰ"
             ],
             "row": 2,
             "col": 4,
             "isHorizontal": true,
-            "hint": "Lake"
+            "hint": "Respect"
+          },
+          {
+            "number": 3,
+            "answer": "ਕਲਮ",
+            "syllables": [
+              "ਕ",
+              "ਲ",
+              "ਮ"
+            ],
+            "row": 2,
+            "col": 4,
+            "isHorizontal": false,
+            "hint": "Pen"
+          },
+          {
+            "number": 4,
+            "answer": "ਦਲਦਲ",
+            "syllables": [
+              "ਦ",
+              "ਲ",
+              "ਦ",
+              "ਲ"
+            ],
+            "row": 3,
+            "col": 1,
+            "isHorizontal": true,
+            "hint": "Swamp"
+          },
+          {
+            "number": 4,
+            "answer": "ਦਰਦ",
+            "syllables": [
+              "ਦ",
+              "ਰ",
+              "ਦ"
+            ],
+            "row": 3,
+            "col": 1,
+            "isHorizontal": false,
+            "hint": "Pain"
+          },
+          {
+            "number": 5,
+            "answer": "ਦਮ",
+            "syllables": [
+              "ਦ",
+              "ਮ"
+            ],
+            "row": 4,
+            "col": 7,
+            "isHorizontal": false,
+            "hint": "Breath"
+          },
+          {
+            "number": 6,
+            "answer": "ਦਮਕ",
+            "syllables": [
+              "ਦ",
+              "ਮ",
+              "ਕ"
+            ],
+            "row": 5,
+            "col": 1,
+            "isHorizontal": true,
+            "hint": "Glow"
+          },
+          {
+            "number": 7,
+            "answer": "ਕਮਲ",
+            "syllables": [
+              "ਕ",
+              "ਮ",
+              "ਲ"
+            ],
+            "row": 5,
+            "col": 3,
+            "isHorizontal": false,
+            "hint": "Lotus"
+          },
+          {
+            "number": 8,
+            "answer": "ਕਰਮ",
+            "syllables": [
+              "ਕ",
+              "ਰ",
+              "ਮ"
+            ],
+            "row": 5,
+            "col": 5,
+            "isHorizontal": true,
+            "hint": "Deed"
+          },
+          {
+            "number": 8,
+            "answer": "ਕਦਮ",
+            "syllables": [
+              "ਕ",
+              "ਦ",
+              "ਮ"
+            ],
+            "row": 5,
+            "col": 5,
+            "isHorizontal": false,
+            "hint": "Step"
+          },
+          {
+            "number": 9,
+            "answer": "ਮਦਦ",
+            "syllables": [
+              "ਮ",
+              "ਦ",
+              "ਦ"
+            ],
+            "row": 6,
+            "col": 3,
+            "isHorizontal": true,
+            "hint": "Help"
+          }
+        ],
+        "dialLetters": [
+          "ਕ",
+          "ਦ",
+          "ਮ",
+          "ਰ",
+          "ਲ"
+        ],
+        "unusedCandidateWords": [
+          "ਕਦ",
+          "ਕਰ",
+          "ਦਰ",
+          "ਰਦ",
+          "ਕਲ",
+          "ਮਲ",
+          "ਰਲ"
+        ]
+      },
+      {
+        "levelNumber": 7,
+        "gridWidth": 8,
+        "gridHeight": 8,
+        "words": [
+          {
+            "number": 1,
+            "answer": "ਨਰਮ",
+            "syllables": [
+              "ਨ",
+              "ਰ",
+              "ਮ"
+            ],
+            "row": 1,
+            "col": 2,
+            "isHorizontal": false,
+            "hint": "Soft"
+          },
+          {
+            "number": 2,
+            "answer": "ਮਰ",
+            "syllables": [
+              "ਮ",
+              "ਰ"
+            ],
+            "row": 2,
+            "col": 1,
+            "isHorizontal": true,
+            "hint": "Die"
+          },
+          {
+            "number": 3,
+            "answer": "ਮਦਦ",
+            "syllables": [
+              "ਮ",
+              "ਦ",
+              "ਦ"
+            ],
+            "row": 3,
+            "col": 2,
+            "isHorizontal": true,
+            "hint": "Help"
+          },
+          {
+            "number": 4,
+            "answer": "ਦਮਨ",
+            "syllables": [
+              "ਦ",
+              "ਮ",
+              "ਨ"
+            ],
+            "row": 3,
+            "col": 3,
+            "isHorizontal": false,
+            "hint": "Suppression"
+          },
+          {
+            "number": 5,
+            "answer": "ਦਰਦ",
+            "syllables": [
+              "ਦ",
+              "ਰ",
+              "ਦ"
+            ],
+            "row": 3,
+            "col": 7,
+            "isHorizontal": false,
+            "hint": "Pain"
+          },
+          {
+            "number": 6,
+            "answer": "ਨਦਰ",
+            "syllables": [
+              "ਨ",
+              "ਦ",
+              "ਰ"
+            ],
+            "row": 4,
+            "col": 5,
+            "isHorizontal": true,
+            "hint": "Grace/glance"
+          },
+          {
+            "number": 6,
+            "answer": "ਨਗਰ",
+            "syllables": [
+              "ਨ",
+              "ਗ",
+              "ਰ"
+            ],
+            "row": 4,
+            "col": 5,
+            "isHorizontal": false,
+            "hint": "Town"
+          },
+          {
+            "number": 7,
+            "answer": "ਮਗਨ",
+            "syllables": [
+              "ਮ",
+              "ਗ",
+              "ਨ"
+            ],
+            "row": 5,
+            "col": 1,
+            "isHorizontal": true,
+            "hint": "Engrossed"
+          },
+          {
+            "number": 8,
+            "answer": "ਗਰਮ",
+            "syllables": [
+              "ਗ",
+              "ਰ",
+              "ਮ"
+            ],
+            "row": 5,
+            "col": 2,
+            "isHorizontal": false,
+            "hint": "Hot"
+          },
+          {
+            "number": 9,
+            "answer": "ਦਰ",
+            "syllables": [
+              "ਦ",
+              "ਰ"
+            ],
+            "row": 5,
+            "col": 7,
+            "isHorizontal": true,
+            "hint": "Door"
+          },
+          {
+            "number": 10,
+            "answer": "ਮਰਦ",
+            "syllables": [
+              "ਮ",
+              "ਰ",
+              "ਦ"
+            ],
+            "row": 6,
+            "col": 4,
+            "isHorizontal": true,
+            "hint": "Man"
+          },
+          {
+            "number": 10,
+            "answer": "ਮਗਰ",
+            "syllables": [
+              "ਮ",
+              "ਗ",
+              "ਰ"
+            ],
+            "row": 6,
+            "col": 4,
+            "isHorizontal": false,
+            "hint": "But/behind"
+          },
+          {
+            "number": 11,
+            "answer": "ਮਰਗ",
+            "syllables": [
+              "ਮ",
+              "ਰ",
+              "ਗ"
+            ],
+            "row": 7,
+            "col": 2,
+            "isHorizontal": true,
+            "hint": "Path"
+          }
+        ],
+        "dialLetters": [
+          "ਗ",
+          "ਦ",
+          "ਨ",
+          "ਮ",
+          "ਰ"
+        ],
+        "unusedCandidateWords": [
+          "ਦਮ",
+          "ਨਰ",
+          "ਮਗ",
+          "ਰਦ"
+        ]
+      },
+      {
+        "levelNumber": 8,
+        "gridWidth": 8,
+        "gridHeight": 8,
+        "words": [
+          {
+            "number": 1,
+            "answer": "ਰਸਦ",
+            "syllables": [
+              "ਰ",
+              "ਸ",
+              "ਦ"
+            ],
+            "row": 1,
+            "col": 3,
+            "isHorizontal": false,
+            "hint": "Supplies"
           },
           {
             "number": 2,
@@ -318,36 +1110,75 @@
               "ਕ"
             ],
             "row": 2,
-            "col": 4,
-            "isHorizontal": false,
+            "col": 3,
+            "isHorizontal": true,
             "hint": "Lesson"
           },
           {
             "number": 3,
-            "answer": "ਪਕ",
+            "answer": "ਕਸਰ",
             "syllables": [
-              "ਪ",
-              "ਕ"
+              "ਕ",
+              "ਸ",
+              "ਰ"
+            ],
+            "row": 2,
+            "col": 5,
+            "isHorizontal": false,
+            "hint": "Shortfall"
+          },
+          {
+            "number": 4,
+            "answer": "ਬਰਸ",
+            "syllables": [
+              "ਬ",
+              "ਰ",
+              "ਸ"
+            ],
+            "row": 2,
+            "col": 7,
+            "isHorizontal": false,
+            "hint": "Year (poetic)"
+          },
+          {
+            "number": 5,
+            "answer": "ਦਰਦ",
+            "syllables": [
+              "ਦ",
+              "ਰ",
+              "ਦ"
             ],
             "row": 3,
             "col": 1,
             "isHorizontal": true,
-            "hint": "Cook"
-          },
-          {
-            "number": 4,
-            "answer": "ਕਸ",
-            "syllables": [
-              "ਕ",
-              "ਸ"
-            ],
-            "row": 3,
-            "col": 2,
-            "isHorizontal": false,
-            "hint": "Tighten"
+            "hint": "Pain"
           },
           {
             "number": 5,
+            "answer": "ਦਸ",
+            "syllables": [
+              "ਦ",
+              "ਸ"
+            ],
+            "row": 3,
+            "col": 1,
+            "isHorizontal": false,
+            "hint": "Ten"
+          },
+          {
+            "number": 6,
+            "answer": "ਰਸ",
+            "syllables": [
+              "ਰ",
+              "ਸ"
+            ],
+            "row": 3,
+            "col": 7,
+            "isHorizontal": true,
+            "hint": "Juice"
+          },
+          {
+            "number": 7,
             "answer": "ਸਰਕਸ",
             "syllables": [
               "ਸ",
@@ -356,1592 +1187,9 @@
               "ਸ"
             ],
             "row": 4,
-            "col": 2,
+            "col": 4,
             "isHorizontal": true,
             "hint": "Circus"
-          },
-          {
-            "number": 6,
-            "answer": "ਰਸ",
-            "syllables": [
-              "ਰ",
-              "ਸ"
-            ],
-            "row": 4,
-            "col": 3,
-            "isHorizontal": false,
-            "hint": "Juice"
-          },
-          {
-            "number": 7,
-            "answer": "ਸਬਰ",
-            "syllables": [
-              "ਸ",
-              "ਬ",
-              "ਰ"
-            ],
-            "row": 4,
-            "col": 5,
-            "isHorizontal": false,
-            "hint": "Patience"
-          },
-          {
-            "number": 8,
-            "answer": "ਬਸ",
-            "syllables": [
-              "ਬ",
-              "ਸ"
-            ],
-            "row": 5,
-            "col": 5,
-            "isHorizontal": true,
-            "hint": "Bus"
-          },
-          {
-            "number": 9,
-            "answer": "ਕਰ",
-            "syllables": [
-              "ਕ",
-              "ਰ"
-            ],
-            "row": 6,
-            "col": 4,
-            "isHorizontal": true,
-            "hint": "Do"
-          }
-        ],
-        "dialLetters": [
-          "ਕ",
-          "ਪ",
-          "ਬ",
-          "ਰ",
-          "ਸ"
-        ],
-        "unusedCandidateWords": []
-      },
-      {
-        "levelNumber": 4,
-        "gridWidth": 6,
-        "gridHeight": 6,
-        "words": [
-          {
-            "number": 1,
-            "answer": "ਵਰ",
-            "syllables": [
-              "ਵ",
-              "ਰ"
-            ],
-            "row": 1,
-            "col": 3,
-            "isHorizontal": false,
-            "hint": "Groom"
-          },
-          {
-            "number": 2,
-            "answer": "ਕਸ",
-            "syllables": [
-              "ਕ",
-              "ਸ"
-            ],
-            "row": 1,
-            "col": 5,
-            "isHorizontal": true,
-            "hint": "Tighten"
-          },
-          {
-            "number": 2,
-            "answer": "ਕਰ",
-            "syllables": [
-              "ਕ",
-              "ਰ"
-            ],
-            "row": 1,
-            "col": 5,
-            "isHorizontal": false,
-            "hint": "Do"
-          },
-          {
-            "number": 3,
-            "answer": "ਸਰਵਰ",
-            "syllables": [
-              "ਸ",
-              "ਰ",
-              "ਵ",
-              "ਰ"
-            ],
-            "row": 2,
-            "col": 2,
-            "isHorizontal": true,
-            "hint": "Pond"
-          },
-          {
-            "number": 3,
-            "answer": "ਸਰਕਸ",
-            "syllables": [
-              "ਸ",
-              "ਰ",
-              "ਕ",
-              "ਸ"
-            ],
-            "row": 2,
-            "col": 2,
-            "isHorizontal": false,
-            "hint": "Circus"
-          },
-          {
-            "number": 4,
-            "answer": "ਵਲ",
-            "syllables": [
-              "ਵ",
-              "ਲ"
-            ],
-            "row": 2,
-            "col": 4,
-            "isHorizontal": false,
-            "hint": "Towards"
-          },
-          {
-            "number": 5,
-            "answer": "ਸਰ",
-            "syllables": [
-              "ਸ",
-              "ਰ"
-            ],
-            "row": 3,
-            "col": 1,
-            "isHorizontal": true,
-            "hint": "Lake"
-          },
-          {
-            "number": 6,
-            "answer": "ਕਲ",
-            "syllables": [
-              "ਕ",
-              "ਲ"
-            ],
-            "row": 4,
-            "col": 2,
-            "isHorizontal": true,
-            "hint": "Tomorrow"
-          },
-          {
-            "number": 7,
-            "answer": "ਰਸ",
-            "syllables": [
-              "ਰ",
-              "ਸ"
-            ],
-            "row": 5,
-            "col": 1,
-            "isHorizontal": true,
-            "hint": "Juice"
-          },
-          {
-            "number": 7,
-            "answer": "ਰਲ",
-            "syllables": [
-              "ਰ",
-              "ਲ"
-            ],
-            "row": 5,
-            "col": 1,
-            "isHorizontal": false,
-            "hint": "Mix"
-          }
-        ],
-        "dialLetters": [
-          "ਕ",
-          "ਰ",
-          "ਲ",
-          "ਵ",
-          "ਸ"
-        ],
-        "unusedCandidateWords": []
-      },
-      {
-        "levelNumber": 5,
-        "gridWidth": 6,
-        "gridHeight": 6,
-        "words": [
-          {
-            "number": 1,
-            "answer": "ਨਰ",
-            "syllables": [
-              "ਨ",
-              "ਰ"
-            ],
-            "row": 1,
-            "col": 1,
-            "isHorizontal": true,
-            "hint": "Man"
-          },
-          {
-            "number": 2,
-            "answer": "ਰਸ",
-            "syllables": [
-              "ਰ",
-              "ਸ"
-            ],
-            "row": 1,
-            "col": 2,
-            "isHorizontal": false,
-            "hint": "Juice"
-          },
-          {
-            "number": 3,
-            "answer": "ਨਸ",
-            "syllables": [
-              "ਨ",
-              "ਸ"
-            ],
-            "row": 1,
-            "col": 5,
-            "isHorizontal": false,
-            "hint": "Vein"
-          },
-          {
-            "number": 4,
-            "answer": "ਸਰਕਸ",
-            "syllables": [
-              "ਸ",
-              "ਰ",
-              "ਕ",
-              "ਸ"
-            ],
-            "row": 2,
-            "col": 2,
-            "isHorizontal": true,
-            "hint": "Circus"
-          },
-          {
-            "number": 5,
-            "answer": "ਕਰਮ",
-            "syllables": [
-              "ਕ",
-              "ਰ",
-              "ਮ"
-            ],
-            "row": 2,
-            "col": 4,
-            "isHorizontal": false,
-            "hint": "Deed"
-          },
-          {
-            "number": 6,
-            "answer": "ਨਮਕ",
-            "syllables": [
-              "ਨ",
-              "ਮ",
-              "ਕ"
-            ],
-            "row": 4,
-            "col": 3,
-            "isHorizontal": true,
-            "hint": "Salt"
-          },
-          {
-            "number": 6,
-            "answer": "ਨਰਮ",
-            "syllables": [
-              "ਨ",
-              "ਰ",
-              "ਮ"
-            ],
-            "row": 4,
-            "col": 3,
-            "isHorizontal": false,
-            "hint": "Soft"
-          },
-          {
-            "number": 7,
-            "answer": "ਕਸ",
-            "syllables": [
-              "ਕ",
-              "ਸ"
-            ],
-            "row": 4,
-            "col": 5,
-            "isHorizontal": false,
-            "hint": "Tighten"
-          },
-          {
-            "number": 8,
-            "answer": "ਕਰ",
-            "syllables": [
-              "ਕ",
-              "ਰ"
-            ],
-            "row": 5,
-            "col": 2,
-            "isHorizontal": true,
-            "hint": "Do"
-          },
-          {
-            "number": 9,
-            "answer": "ਸਰ",
-            "syllables": [
-              "ਸ",
-              "ਰ"
-            ],
-            "row": 5,
-            "col": 5,
-            "isHorizontal": true,
-            "hint": "Lake"
-          },
-          {
-            "number": 10,
-            "answer": "ਮਰ",
-            "syllables": [
-              "ਮ",
-              "ਰ"
-            ],
-            "row": 6,
-            "col": 3,
-            "isHorizontal": true,
-            "hint": "Die"
-          }
-        ],
-        "dialLetters": [
-          "ਕ",
-          "ਨ",
-          "ਮ",
-          "ਰ",
-          "ਸ"
-        ],
-        "unusedCandidateWords": []
-      },
-      {
-        "levelNumber": 6,
-        "gridWidth": 7,
-        "gridHeight": 7,
-        "words": [
-          {
-            "number": 1,
-            "answer": "ਦਰਦ",
-            "syllables": [
-              "ਦ",
-              "ਰ",
-              "ਦ"
-            ],
-            "row": 1,
-            "col": 7,
-            "isHorizontal": false,
-            "hint": "Pain"
-          },
-          {
-            "number": 2,
-            "answer": "ਪਦ",
-            "syllables": [
-              "ਪ",
-              "ਦ"
-            ],
-            "row": 3,
-            "col": 6,
-            "isHorizontal": true,
-            "hint": "Rank"
-          },
-          {
-            "number": 2,
-            "answer": "ਪਰ",
-            "syllables": [
-              "ਪ",
-              "ਰ"
-            ],
-            "row": 3,
-            "col": 6,
-            "isHorizontal": false,
-            "hint": "But"
-          },
-          {
-            "number": 3,
-            "answer": "ਦਰ",
-            "syllables": [
-              "ਦ",
-              "ਰ"
-            ],
-            "row": 4,
-            "col": 5,
-            "isHorizontal": true,
-            "hint": "Door"
-          },
-          {
-            "number": 3,
-            "answer": "ਦਲ",
-            "syllables": [
-              "ਦ",
-              "ਲ"
-            ],
-            "row": 4,
-            "col": 5,
-            "isHorizontal": false,
-            "hint": "Group"
-          },
-          {
-            "number": 4,
-            "answer": "ਰਲ",
-            "syllables": [
-              "ਰ",
-              "ਲ"
-            ],
-            "row": 5,
-            "col": 4,
-            "isHorizontal": true,
-            "hint": "Mix"
-          },
-          {
-            "number": 4,
-            "answer": "ਰਟ",
-            "syllables": [
-              "ਰ",
-              "ਟ"
-            ],
-            "row": 5,
-            "col": 4,
-            "isHorizontal": false,
-            "hint": "Recite"
-          },
-          {
-            "number": 5,
-            "answer": "ਪਲਟ",
-            "syllables": [
-              "ਪ",
-              "ਲ",
-              "ਟ"
-            ],
-            "row": 6,
-            "col": 2,
-            "isHorizontal": true,
-            "hint": "Turn"
-          },
-          {
-            "number": 5,
-            "answer": "ਪਲ",
-            "syllables": [
-              "ਪ",
-              "ਲ"
-            ],
-            "row": 6,
-            "col": 2,
-            "isHorizontal": false,
-            "hint": "Moment"
-          },
-          {
-            "number": 6,
-            "answer": "ਟਲ",
-            "syllables": [
-              "ਟ",
-              "ਲ"
-            ],
-            "row": 7,
-            "col": 1,
-            "isHorizontal": true,
-            "hint": "Postpone"
-          }
-        ],
-        "dialLetters": [
-          "ਟ",
-          "ਦ",
-          "ਪ",
-          "ਰ",
-          "ਲ"
-        ],
-        "unusedCandidateWords": []
-      },
-      {
-        "levelNumber": 7,
-        "gridWidth": 5,
-        "gridHeight": 7,
-        "words": [
-          {
-            "number": 1,
-            "answer": "ਸਤ",
-            "syllables": [
-              "ਸ",
-              "ਤ"
-            ],
-            "row": 1,
-            "col": 3,
-            "isHorizontal": false,
-            "hint": "Truth"
-          },
-          {
-            "number": 2,
-            "answer": "ਬਰਤਨ",
-            "syllables": [
-              "ਬ",
-              "ਰ",
-              "ਤ",
-              "ਨ"
-            ],
-            "row": 2,
-            "col": 1,
-            "isHorizontal": true,
-            "hint": "Utensil"
-          },
-          {
-            "number": 3,
-            "answer": "ਰਤਨ",
-            "syllables": [
-              "ਰ",
-              "ਤ",
-              "ਨ"
-            ],
-            "row": 2,
-            "col": 2,
-            "isHorizontal": false,
-            "hint": "Jewel"
-          },
-          {
-            "number": 4,
-            "answer": "ਨਰ",
-            "syllables": [
-              "ਨ",
-              "ਰ"
-            ],
-            "row": 2,
-            "col": 4,
-            "isHorizontal": false,
-            "hint": "Man"
-          },
-          {
-            "number": 5,
-            "answer": "ਰਸ",
-            "syllables": [
-              "ਰ",
-              "ਸ"
-            ],
-            "row": 3,
-            "col": 4,
-            "isHorizontal": true,
-            "hint": "Juice"
-          },
-          {
-            "number": 6,
-            "answer": "ਸਰ",
-            "syllables": [
-              "ਸ",
-              "ਰ"
-            ],
-            "row": 3,
-            "col": 5,
-            "isHorizontal": false,
-            "hint": "Lake"
-          },
-          {
-            "number": 7,
-            "answer": "ਨਸ",
-            "syllables": [
-              "ਨ",
-              "ਸ"
-            ],
-            "row": 4,
-            "col": 2,
-            "isHorizontal": true,
-            "hint": "Vein"
-          },
-          {
-            "number": 8,
-            "answer": "ਸਬਰ",
-            "syllables": [
-              "ਸ",
-              "ਬ",
-              "ਰ"
-            ],
-            "row": 4,
-            "col": 3,
-            "isHorizontal": false,
-            "hint": "Patience"
-          },
-          {
-            "number": 9,
-            "answer": "ਬਸ",
-            "syllables": [
-              "ਬ",
-              "ਸ"
-            ],
-            "row": 5,
-            "col": 3,
-            "isHorizontal": true,
-            "hint": "Bus"
-          },
-          {
-            "number": 10,
-            "answer": "ਤਰ",
-            "syllables": [
-              "ਤ",
-              "ਰ"
-            ],
-            "row": 6,
-            "col": 2,
-            "isHorizontal": true,
-            "hint": "Swim"
-          },
-          {
-            "number": 10,
-            "answer": "ਤਨ",
-            "syllables": [
-              "ਤ",
-              "ਨ"
-            ],
-            "row": 6,
-            "col": 2,
-            "isHorizontal": false,
-            "hint": "Body"
-          },
-          {
-            "number": 11,
-            "answer": "ਬਨ",
-            "syllables": [
-              "ਬ",
-              "ਨ"
-            ],
-            "row": 7,
-            "col": 1,
-            "isHorizontal": true,
-            "hint": "Make"
-          }
-        ],
-        "dialLetters": [
-          "ਤ",
-          "ਨ",
-          "ਬ",
-          "ਰ",
-          "ਸ"
-        ],
-        "unusedCandidateWords": []
-      },
-      {
-        "levelNumber": 8,
-        "gridWidth": 6,
-        "gridHeight": 7,
-        "words": [
-          {
-            "number": 1,
-            "answer": "ਮਰ",
-            "syllables": [
-              "ਮ",
-              "ਰ"
-            ],
-            "row": 1,
-            "col": 3,
-            "isHorizontal": false,
-            "hint": "Die"
-          },
-          {
-            "number": 2,
-            "answer": "ਗਰਮ",
-            "syllables": [
-              "ਗ",
-              "ਰ",
-              "ਮ"
-            ],
-            "row": 2,
-            "col": 2,
-            "isHorizontal": true,
-            "hint": "Hot"
-          },
-          {
-            "number": 3,
-            "answer": "ਮਗਰ",
-            "syllables": [
-              "ਮ",
-              "ਗ",
-              "ਰ"
-            ],
-            "row": 2,
-            "col": 4,
-            "isHorizontal": false,
-            "hint": "But/behind"
-          },
-          {
-            "number": 4,
-            "answer": "ਸਰਦ",
-            "syllables": [
-              "ਸ",
-              "ਰ",
-              "ਦ"
-            ],
-            "row": 4,
-            "col": 3,
-            "isHorizontal": true,
-            "hint": "Cold"
-          },
-          {
-            "number": 4,
-            "answer": "ਸਰ",
-            "syllables": [
-              "ਸ",
-              "ਰ"
-            ],
-            "row": 4,
-            "col": 3,
-            "isHorizontal": false,
-            "hint": "Lake"
-          },
-          {
-            "number": 5,
-            "answer": "ਦਰਦ",
-            "syllables": [
-              "ਦ",
-              "ਰ",
-              "ਦ"
-            ],
-            "row": 4,
-            "col": 5,
-            "isHorizontal": false,
-            "hint": "Pain"
-          },
-          {
-            "number": 6,
-            "answer": "ਦਰ",
-            "syllables": [
-              "ਦ",
-              "ਰ"
-            ],
-            "row": 5,
-            "col": 2,
-            "isHorizontal": true,
-            "hint": "Door"
-          },
-          {
-            "number": 6,
-            "answer": "ਦਸ",
-            "syllables": [
-              "ਦ",
-              "ਸ"
-            ],
-            "row": 5,
-            "col": 2,
-            "isHorizontal": false,
-            "hint": "Ten"
-          },
-          {
-            "number": 7,
-            "answer": "ਰਸ",
-            "syllables": [
-              "ਰ",
-              "ਸ"
-            ],
-            "row": 6,
-            "col": 1,
-            "isHorizontal": true,
-            "hint": "Juice"
-          },
-          {
-            "number": 8,
-            "answer": "ਦਮ",
-            "syllables": [
-              "ਦ",
-              "ਮ"
-            ],
-            "row": 6,
-            "col": 5,
-            "isHorizontal": true,
-            "hint": "Breath"
-          },
-          {
-            "number": 9,
-            "answer": "ਮਗ",
-            "syllables": [
-              "ਮ",
-              "ਗ"
-            ],
-            "row": 6,
-            "col": 6,
-            "isHorizontal": false,
-            "hint": "Mug"
-          }
-        ],
-        "dialLetters": [
-          "ਗ",
-          "ਦ",
-          "ਮ",
-          "ਰ",
-          "ਸ"
-        ],
-        "unusedCandidateWords": []
-      },
-      {
-        "levelNumber": 9,
-        "gridWidth": 7,
-        "gridHeight": 6,
-        "words": [
-          {
-            "number": 1,
-            "answer": "ਵਨ",
-            "syllables": [
-              "ਵ",
-              "ਨ"
-            ],
-            "row": 1,
-            "col": 6,
-            "isHorizontal": true,
-            "hint": "Forest"
-          },
-          {
-            "number": 1,
-            "answer": "ਵਰ",
-            "syllables": [
-              "ਵ",
-              "ਰ"
-            ],
-            "row": 1,
-            "col": 6,
-            "isHorizontal": false,
-            "hint": "Groom"
-          },
-          {
-            "number": 2,
-            "answer": "ਨਰ",
-            "syllables": [
-              "ਨ",
-              "ਰ"
-            ],
-            "row": 2,
-            "col": 5,
-            "isHorizontal": true,
-            "hint": "Man"
-          },
-          {
-            "number": 2,
-            "answer": "ਨਸ",
-            "syllables": [
-              "ਨ",
-              "ਸ"
-            ],
-            "row": 2,
-            "col": 5,
-            "isHorizontal": false,
-            "hint": "Vein"
-          },
-          {
-            "number": 3,
-            "answer": "ਸਰਦ",
-            "syllables": [
-              "ਸ",
-              "ਰ",
-              "ਦ"
-            ],
-            "row": 3,
-            "col": 2,
-            "isHorizontal": false,
-            "hint": "Cold"
-          },
-          {
-            "number": 4,
-            "answer": "ਦਸ",
-            "syllables": [
-              "ਦ",
-              "ਸ"
-            ],
-            "row": 3,
-            "col": 4,
-            "isHorizontal": true,
-            "hint": "Ten"
-          },
-          {
-            "number": 4,
-            "answer": "ਦਰਦ",
-            "syllables": [
-              "ਦ",
-              "ਰ",
-              "ਦ"
-            ],
-            "row": 3,
-            "col": 4,
-            "isHorizontal": false,
-            "hint": "Pain"
-          },
-          {
-            "number": 5,
-            "answer": "ਸਰਵਰ",
-            "syllables": [
-              "ਸ",
-              "ਰ",
-              "ਵ",
-              "ਰ"
-            ],
-            "row": 4,
-            "col": 1,
-            "isHorizontal": true,
-            "hint": "Pond"
-          },
-          {
-            "number": 6,
-            "answer": "ਦਰ",
-            "syllables": [
-              "ਦ",
-              "ਰ"
-            ],
-            "row": 5,
-            "col": 4,
-            "isHorizontal": true,
-            "hint": "Door"
-          },
-          {
-            "number": 7,
-            "answer": "ਰਸ",
-            "syllables": [
-              "ਰ",
-              "ਸ"
-            ],
-            "row": 5,
-            "col": 5,
-            "isHorizontal": false,
-            "hint": "Juice"
-          },
-          {
-            "number": 8,
-            "answer": "ਸਰ",
-            "syllables": [
-              "ਸ",
-              "ਰ"
-            ],
-            "row": 6,
-            "col": 5,
-            "isHorizontal": true,
-            "hint": "Lake"
-          }
-        ],
-        "dialLetters": [
-          "ਦ",
-          "ਨ",
-          "ਰ",
-          "ਵ",
-          "ਸ"
-        ],
-        "unusedCandidateWords": []
-      },
-      {
-        "levelNumber": 10,
-        "gridWidth": 8,
-        "gridHeight": 7,
-        "words": [
-          {
-            "number": 1,
-            "answer": "ਤਰ",
-            "syllables": [
-              "ਤ",
-              "ਰ"
-            ],
-            "row": 1,
-            "col": 7,
-            "isHorizontal": true,
-            "hint": "Swim"
-          },
-          {
-            "number": 1,
-            "answer": "ਤਨ",
-            "syllables": [
-              "ਤ",
-              "ਨ"
-            ],
-            "row": 1,
-            "col": 7,
-            "isHorizontal": false,
-            "hint": "Body"
-          },
-          {
-            "number": 2,
-            "answer": "ਵਨ",
-            "syllables": [
-              "ਵ",
-              "ਨ"
-            ],
-            "row": 2,
-            "col": 6,
-            "isHorizontal": true,
-            "hint": "Forest"
-          },
-          {
-            "number": 2,
-            "answer": "ਵਤਨ",
-            "syllables": [
-              "ਵ",
-              "ਤ",
-              "ਨ"
-            ],
-            "row": 2,
-            "col": 6,
-            "isHorizontal": false,
-            "hint": "Homeland"
-          },
-          {
-            "number": 3,
-            "answer": "ਰਤਨ",
-            "syllables": [
-              "ਰ",
-              "ਤ",
-              "ਨ"
-            ],
-            "row": 4,
-            "col": 4,
-            "isHorizontal": true,
-            "hint": "Jewel"
-          },
-          {
-            "number": 3,
-            "answer": "ਰਲ",
-            "syllables": [
-              "ਰ",
-              "ਲ"
-            ],
-            "row": 4,
-            "col": 4,
-            "isHorizontal": false,
-            "hint": "Mix"
-          },
-          {
-            "number": 4,
-            "answer": "ਵਲ",
-            "syllables": [
-              "ਵ",
-              "ਲ"
-            ],
-            "row": 5,
-            "col": 3,
-            "isHorizontal": true,
-            "hint": "Towards"
-          },
-          {
-            "number": 4,
-            "answer": "ਵਰ",
-            "syllables": [
-              "ਵ",
-              "ਰ"
-            ],
-            "row": 5,
-            "col": 3,
-            "isHorizontal": false,
-            "hint": "Groom"
-          },
-          {
-            "number": 5,
-            "answer": "ਨਰ",
-            "syllables": [
-              "ਨ",
-              "ਰ"
-            ],
-            "row": 6,
-            "col": 2,
-            "isHorizontal": true,
-            "hint": "Man"
-          },
-          {
-            "number": 5,
-            "answer": "ਨਲ",
-            "syllables": [
-              "ਨ",
-              "ਲ"
-            ],
-            "row": 6,
-            "col": 2,
-            "isHorizontal": false,
-            "hint": "Tap"
-          },
-          {
-            "number": 6,
-            "answer": "ਤਲ",
-            "syllables": [
-              "ਤ",
-              "ਲ"
-            ],
-            "row": 7,
-            "col": 1,
-            "isHorizontal": true,
-            "hint": "Surface"
-          }
-        ],
-        "dialLetters": [
-          "ਤ",
-          "ਨ",
-          "ਰ",
-          "ਲ",
-          "ਵ"
-        ],
-        "unusedCandidateWords": []
-      },
-      {
-        "levelNumber": 11,
-        "gridWidth": 7,
-        "gridHeight": 7,
-        "words": [
-          {
-            "number": 1,
-            "answer": "ਗਤ",
-            "syllables": [
-              "ਗ",
-              "ਤ"
-            ],
-            "row": 1,
-            "col": 6,
-            "isHorizontal": true,
-            "hint": "Condition"
-          },
-          {
-            "number": 1,
-            "answer": "ਗਰਮ",
-            "syllables": [
-              "ਗ",
-              "ਰ",
-              "ਮ"
-            ],
-            "row": 1,
-            "col": 6,
-            "isHorizontal": false,
-            "hint": "Hot"
-          },
-          {
-            "number": 2,
-            "answer": "ਨਗਰ",
-            "syllables": [
-              "ਨ",
-              "ਗ",
-              "ਰ"
-            ],
-            "row": 2,
-            "col": 4,
-            "isHorizontal": true,
-            "hint": "Town"
-          },
-          {
-            "number": 2,
-            "answer": "ਨਰਮ",
-            "syllables": [
-              "ਨ",
-              "ਰ",
-              "ਮ"
-            ],
-            "row": 2,
-            "col": 4,
-            "isHorizontal": false,
-            "hint": "Soft"
-          },
-          {
-            "number": 3,
-            "answer": "ਮਗਰ",
-            "syllables": [
-              "ਮ",
-              "ਗ",
-              "ਰ"
-            ],
-            "row": 3,
-            "col": 2,
-            "isHorizontal": true,
-            "hint": "But/behind"
-          },
-          {
-            "number": 3,
-            "answer": "ਮਰ",
-            "syllables": [
-              "ਮ",
-              "ਰ"
-            ],
-            "row": 3,
-            "col": 2,
-            "isHorizontal": false,
-            "hint": "Die"
-          },
-          {
-            "number": 4,
-            "answer": "ਮਗ",
-            "syllables": [
-              "ਮ",
-              "ਗ"
-            ],
-            "row": 3,
-            "col": 6,
-            "isHorizontal": true,
-            "hint": "Mug"
-          },
-          {
-            "number": 5,
-            "answer": "ਤਰ",
-            "syllables": [
-              "ਤ",
-              "ਰ"
-            ],
-            "row": 4,
-            "col": 1,
-            "isHorizontal": true,
-            "hint": "Swim"
-          },
-          {
-            "number": 6,
-            "answer": "ਮਤ",
-            "syllables": [
-              "ਮ",
-              "ਤ"
-            ],
-            "row": 4,
-            "col": 4,
-            "isHorizontal": true,
-            "hint": "Vote"
-          },
-          {
-            "number": 7,
-            "answer": "ਤਨ",
-            "syllables": [
-              "ਤ",
-              "ਨ"
-            ],
-            "row": 4,
-            "col": 5,
-            "isHorizontal": false,
-            "hint": "Body"
-          },
-          {
-            "number": 8,
-            "answer": "ਨਰ",
-            "syllables": [
-              "ਨ",
-              "ਰ"
-            ],
-            "row": 5,
-            "col": 5,
-            "isHorizontal": true,
-            "hint": "Man"
-          },
-          {
-            "number": 9,
-            "answer": "ਰਤਨ",
-            "syllables": [
-              "ਰ",
-              "ਤ",
-              "ਨ"
-            ],
-            "row": 5,
-            "col": 6,
-            "isHorizontal": false,
-            "hint": "Jewel"
-          }
-        ],
-        "dialLetters": [
-          "ਗ",
-          "ਤ",
-          "ਨ",
-          "ਮ",
-          "ਰ"
-        ],
-        "unusedCandidateWords": []
-      },
-      {
-        "levelNumber": 12,
-        "gridWidth": 7,
-        "gridHeight": 7,
-        "words": [
-          {
-            "number": 1,
-            "answer": "ਬਲ",
-            "syllables": [
-              "ਬ",
-              "ਲ"
-            ],
-            "row": 1,
-            "col": 6,
-            "isHorizontal": true,
-            "hint": "Strength"
-          },
-          {
-            "number": 1,
-            "answer": "ਬਸ",
-            "syllables": [
-              "ਬ",
-              "ਸ"
-            ],
-            "row": 1,
-            "col": 6,
-            "isHorizontal": false,
-            "hint": "Bus"
-          },
-          {
-            "number": 2,
-            "answer": "ਦਸ",
-            "syllables": [
-              "ਦ",
-              "ਸ"
-            ],
-            "row": 2,
-            "col": 5,
-            "isHorizontal": true,
-            "hint": "Ten"
-          },
-          {
-            "number": 2,
-            "answer": "ਦਰਦ",
-            "syllables": [
-              "ਦ",
-              "ਰ",
-              "ਦ"
-            ],
-            "row": 2,
-            "col": 5,
-            "isHorizontal": false,
-            "hint": "Pain"
-          },
-          {
-            "number": 3,
-            "answer": "ਸਬਰ",
-            "syllables": [
-              "ਸ",
-              "ਬ",
-              "ਰ"
-            ],
-            "row": 3,
-            "col": 3,
-            "isHorizontal": true,
-            "hint": "Patience"
-          },
-          {
-            "number": 3,
-            "answer": "ਸਰਦ",
-            "syllables": [
-              "ਸ",
-              "ਰ",
-              "ਦ"
-            ],
-            "row": 3,
-            "col": 3,
-            "isHorizontal": false,
-            "hint": "Cold"
-          },
-          {
-            "number": 4,
-            "answer": "ਦਰ",
-            "syllables": [
-              "ਦ",
-              "ਰ"
-            ],
-            "row": 4,
-            "col": 5,
-            "isHorizontal": true,
-            "hint": "Door"
-          },
-          {
-            "number": 5,
-            "answer": "ਰਸ",
-            "syllables": [
-              "ਰ",
-              "ਸ"
-            ],
-            "row": 4,
-            "col": 6,
-            "isHorizontal": false,
-            "hint": "Juice"
-          },
-          {
-            "number": 6,
-            "answer": "ਬਦਲ",
-            "syllables": [
-              "ਬ",
-              "ਦ",
-              "ਲ"
-            ],
-            "row": 5,
-            "col": 2,
-            "isHorizontal": true,
-            "hint": "Cloud"
-          },
-          {
-            "number": 6,
-            "answer": "ਬਲਦ",
-            "syllables": [
-              "ਬ",
-              "ਲ",
-              "ਦ"
-            ],
-            "row": 5,
-            "col": 2,
-            "isHorizontal": false,
-            "hint": "Ox"
-          },
-          {
-            "number": 7,
-            "answer": "ਸਰ",
-            "syllables": [
-              "ਸ",
-              "ਰ"
-            ],
-            "row": 5,
-            "col": 6,
-            "isHorizontal": true,
-            "hint": "Lake"
-          },
-          {
-            "number": 8,
-            "answer": "ਰਲ",
-            "syllables": [
-              "ਰ",
-              "ਲ"
-            ],
-            "row": 6,
-            "col": 1,
-            "isHorizontal": true,
-            "hint": "Mix"
-          },
-          {
-            "number": 9,
-            "answer": "ਦਲ",
-            "syllables": [
-              "ਦ",
-              "ਲ"
-            ],
-            "row": 7,
-            "col": 2,
-            "isHorizontal": true,
-            "hint": "Group"
-          }
-        ],
-        "dialLetters": [
-          "ਦ",
-          "ਬ",
-          "ਰ",
-          "ਲ",
-          "ਸ"
-        ],
-        "unusedCandidateWords": []
-      },
-      {
-        "levelNumber": 13,
-        "gridWidth": 8,
-        "gridHeight": 8,
-        "words": [
-          {
-            "number": 1,
-            "answer": "ਦਰਦ",
-            "syllables": [
-              "ਦ",
-              "ਰ",
-              "ਦ"
-            ],
-            "row": 1,
-            "col": 2,
-            "isHorizontal": false,
-            "hint": "Pain"
-          },
-          {
-            "number": 2,
-            "answer": "ਸਰ",
-            "syllables": [
-              "ਸ",
-              "ਰ"
-            ],
-            "row": 2,
-            "col": 1,
-            "isHorizontal": true,
-            "hint": "Lake"
-          },
-          {
-            "number": 3,
-            "answer": "ਤਰ",
-            "syllables": [
-              "ਤ",
-              "ਰ"
-            ],
-            "row": 2,
-            "col": 5,
-            "isHorizontal": true,
-            "hint": "Swim"
-          },
-          {
-            "number": 3,
-            "answer": "ਤਕ",
-            "syllables": [
-              "ਤ",
-              "ਕ"
-            ],
-            "row": 2,
-            "col": 5,
-            "isHorizontal": false,
-            "hint": "Until"
-          },
-          {
-            "number": 4,
-            "answer": "ਦਸਤਕ",
-            "syllables": [
-              "ਦ",
-              "ਸ",
-              "ਤ",
-              "ਕ"
-            ],
-            "row": 3,
-            "col": 2,
-            "isHorizontal": true,
-            "hint": "Knock"
-          },
-          {
-            "number": 5,
-            "answer": "ਸਰਕਸ",
-            "syllables": [
-              "ਸ",
-              "ਰ",
-              "ਕ",
-              "ਸ"
-            ],
-            "row": 3,
-            "col": 3,
-            "isHorizontal": false,
-            "hint": "Circus"
-          },
-          {
-            "number": 6,
-            "answer": "ਕਦ",
-            "syllables": [
-              "ਕ",
-              "ਦ"
-            ],
-            "row": 3,
-            "col": 7,
-            "isHorizontal": true,
-            "hint": "When"
-          },
-          {
-            "number": 6,
-            "answer": "ਕਸ",
-            "syllables": [
-              "ਕ",
-              "ਸ"
-            ],
-            "row": 3,
-            "col": 7,
-            "isHorizontal": false,
-            "hint": "Tighten"
-          },
-          {
-            "number": 7,
-            "answer": "ਦਸ",
-            "syllables": [
-              "ਦ",
-              "ਸ"
-            ],
-            "row": 4,
-            "col": 6,
-            "isHorizontal": true,
-            "hint": "Ten"
-          },
-          {
-            "number": 7,
-            "answer": "ਦਰ",
-            "syllables": [
-              "ਦ",
-              "ਰ"
-            ],
-            "row": 4,
-            "col": 6,
-            "isHorizontal": false,
-            "hint": "Door"
-          },
-          {
-            "number": 8,
-            "answer": "ਕਰ",
-            "syllables": [
-              "ਕ",
-              "ਰ"
-            ],
-            "row": 5,
-            "col": 5,
-            "isHorizontal": true,
-            "hint": "Do"
           },
           {
             "number": 8,
@@ -1951,13 +1199,39 @@
               "ਦ",
               "ਰ"
             ],
-            "row": 5,
-            "col": 5,
+            "row": 4,
+            "col": 6,
             "isHorizontal": false,
             "hint": "Respect"
           },
           {
             "number": 9,
+            "answer": "ਬਸਰ",
+            "syllables": [
+              "ਬ",
+              "ਸ",
+              "ਰ"
+            ],
+            "row": 6,
+            "col": 3,
+            "isHorizontal": false,
+            "hint": "To pass (time)"
+          },
+          {
+            "number": 10,
+            "answer": "ਸਰਬ",
+            "syllables": [
+              "ਸ",
+              "ਰ",
+              "ਬ"
+            ],
+            "row": 6,
+            "col": 5,
+            "isHorizontal": true,
+            "hint": "All"
+          },
+          {
+            "number": 10,
             "answer": "ਸਰਦ",
             "syllables": [
               "ਸ",
@@ -1965,244 +1239,64 @@
               "ਦ"
             ],
             "row": 6,
-            "col": 3,
-            "isHorizontal": true,
+            "col": 5,
+            "isHorizontal": false,
             "hint": "Cold"
           },
           {
-            "number": 10,
-            "answer": "ਰਸ",
-            "syllables": [
-              "ਰ",
-              "ਸ"
-            ],
-            "row": 7,
-            "col": 5,
-            "isHorizontal": true,
-            "hint": "Juice"
-          },
-          {
             "number": 11,
-            "answer": "ਸਤ",
-            "syllables": [
-              "ਸ",
-              "ਤ"
-            ],
-            "row": 7,
-            "col": 6,
-            "isHorizontal": false,
-            "hint": "Truth"
-          }
-        ],
-        "dialLetters": [
-          "ਕ",
-          "ਤ",
-          "ਦ",
-          "ਰ",
-          "ਸ"
-        ],
-        "unusedCandidateWords": []
-      },
-      {
-        "levelNumber": 14,
-        "gridWidth": 9,
-        "gridHeight": 9,
-        "words": [
-          {
-            "number": 1,
-            "answer": "ਦਰ",
-            "syllables": [
-              "ਦ",
-              "ਰ"
-            ],
-            "row": 1,
-            "col": 8,
-            "isHorizontal": true,
-            "hint": "Door"
-          },
-          {
-            "number": 1,
-            "answer": "ਦਰਦ",
-            "syllables": [
-              "ਦ",
-              "ਰ",
-              "ਦ"
-            ],
-            "row": 1,
-            "col": 8,
-            "isHorizontal": false,
-            "hint": "Pain"
-          },
-          {
-            "number": 2,
-            "answer": "ਕਦ",
-            "syllables": [
-              "ਕ",
-              "ਦ"
-            ],
-            "row": 3,
-            "col": 7,
-            "isHorizontal": true,
-            "hint": "When"
-          },
-          {
-            "number": 2,
-            "answer": "ਕਲਮ",
-            "syllables": [
-              "ਕ",
-              "ਲ",
-              "ਮ"
-            ],
-            "row": 3,
-            "col": 7,
-            "isHorizontal": false,
-            "hint": "Pen"
-          },
-          {
-            "number": 3,
-            "answer": "ਕਮਲ",
-            "syllables": [
-              "ਕ",
-              "ਮ",
-              "ਲ"
-            ],
-            "row": 4,
-            "col": 5,
-            "isHorizontal": true,
-            "hint": "Lotus"
-          },
-          {
-            "number": 3,
-            "answer": "ਕਰਮ",
-            "syllables": [
-              "ਕ",
-              "ਰ",
-              "ਮ"
-            ],
-            "row": 4,
-            "col": 5,
-            "isHorizontal": false,
-            "hint": "Deed"
-          },
-          {
-            "number": 4,
-            "answer": "ਕਦਰ",
-            "syllables": [
-              "ਕ",
-              "ਦ",
-              "ਰ"
-            ],
-            "row": 5,
-            "col": 3,
-            "isHorizontal": true,
-            "hint": "Respect"
-          },
-          {
-            "number": 4,
-            "answer": "ਕਦਮ",
-            "syllables": [
-              "ਕ",
-              "ਦ",
-              "ਮ"
-            ],
-            "row": 5,
-            "col": 3,
-            "isHorizontal": false,
-            "hint": "Step"
-          },
-          {
-            "number": 5,
-            "answer": "ਮਲ",
-            "syllables": [
-              "ਮ",
-              "ਲ"
-            ],
-            "row": 5,
-            "col": 7,
-            "isHorizontal": true,
-            "hint": "Rub"
-          },
-          {
-            "number": 6,
-            "answer": "ਮਰ",
-            "syllables": [
-              "ਮ",
-              "ਰ"
-            ],
-            "row": 6,
-            "col": 5,
-            "isHorizontal": true,
-            "hint": "Die"
-          },
-          {
-            "number": 7,
-            "answer": "ਰਲ",
-            "syllables": [
-              "ਰ",
-              "ਲ"
-            ],
-            "row": 6,
-            "col": 6,
-            "isHorizontal": false,
-            "hint": "Mix"
-          },
-          {
-            "number": 8,
-            "answer": "ਦਮ",
-            "syllables": [
-              "ਦ",
-              "ਮ"
-            ],
-            "row": 7,
-            "col": 2,
-            "isHorizontal": true,
-            "hint": "Breath"
-          },
-          {
-            "number": 8,
-            "answer": "ਦਲ",
-            "syllables": [
-              "ਦ",
-              "ਲ"
-            ],
-            "row": 7,
-            "col": 2,
-            "isHorizontal": false,
-            "hint": "Group"
-          },
-          {
-            "number": 9,
-            "answer": "ਕਲ",
-            "syllables": [
-              "ਕ",
-              "ਲ"
-            ],
-            "row": 8,
-            "col": 1,
-            "isHorizontal": true,
-            "hint": "Tomorrow"
-          },
-          {
-            "number": 9,
             "answer": "ਕਰ",
             "syllables": [
               "ਕ",
               "ਰ"
             ],
-            "row": 8,
+            "row": 7,
             "col": 1,
             "isHorizontal": false,
             "hint": "Do"
+          },
+          {
+            "number": 12,
+            "answer": "ਸਬਰ",
+            "syllables": [
+              "ਸ",
+              "ਬ",
+              "ਰ"
+            ],
+            "row": 7,
+            "col": 3,
+            "isHorizontal": true,
+            "hint": "Patience"
+          },
+          {
+            "number": 13,
+            "answer": "ਰਬਰ",
+            "syllables": [
+              "ਰ",
+              "ਬ",
+              "ਰ"
+            ],
+            "row": 8,
+            "col": 1,
+            "isHorizontal": true,
+            "hint": "Rubber"
           }
         ],
         "dialLetters": [
           "ਕ",
           "ਦ",
-          "ਮ",
+          "ਬ",
           "ਰ",
-          "ਲ"
+          "ਸ"
         ],
-        "unusedCandidateWords": []
+        "unusedCandidateWords": [
+          "ਦਰ",
+          "ਬਸ",
+          "ਰਦ",
+          "ਸਰ",
+          "ਕਦ",
+          "ਕਸ"
+        ]
       }
     ],
     "itemPool": {
@@ -2585,6 +1679,86 @@
       "ਪਕ": {
         "audio": "audio/lessons/words/cook.mp3",
         "hint": "Cook"
+      },
+      "ਸਤਰ": {
+        "audio": "audio/lessons/words/line.mp3",
+        "hint": "Line"
+      },
+      "ਕਸਰ": {
+        "audio": "audio/lessons/words/shortfall.mp3",
+        "hint": "Shortfall"
+      },
+      "ਰਸਦ": {
+        "audio": "audio/lessons/words/supplies.mp3",
+        "hint": "Supplies"
+      },
+      "ਤਦ": {
+        "audio": "audio/lessons/words/then.mp3",
+        "hint": "Then"
+      },
+      "ਰਦ": {
+        "audio": "audio/lessons/words/reject.mp3",
+        "hint": "Reject"
+      },
+      "ਮਦਦ": {
+        "audio": "audio/lessons/words/help.mp3",
+        "hint": "Help"
+      },
+      "ਦਮਕ": {
+        "audio": "audio/lessons/words/glow.mp3",
+        "hint": "Glow"
+      },
+      "ਦਲਦਲ": {
+        "audio": "audio/lessons/words/swamp.mp3",
+        "hint": "Swamp"
+      },
+      "ਮਰਦ": {
+        "audio": "audio/lessons/words/man.mp3",
+        "hint": "Man"
+      },
+      "ਬਰਸ": {
+        "audio": "audio/lessons/words/year.mp3",
+        "hint": "Year (poetic)"
+      },
+      "ਸਰਬ": {
+        "audio": "audio/lessons/words/all.mp3",
+        "hint": "All"
+      },
+      "ਤਨਮਨ": {
+        "audio": "audio/lessons/words/body.mp3",
+        "hint": "Body and mind"
+      },
+      "ਮਰਗ": {
+        "audio": "audio/lessons/words/path.mp3",
+        "hint": "Path"
+      },
+      "ਮਗਨ": {
+        "audio": "audio/lessons/words/engrossed.mp3",
+        "hint": "Engrossed"
+      },
+      "ਰਬਰ": {
+        "audio": "audio/lessons/words/rubber.mp3",
+        "hint": "Rubber"
+      },
+      "ਬਸਰ": {
+        "audio": "audio/lessons/words/to.mp3",
+        "hint": "To pass (time)"
+      },
+      "ਚਮਨ": {
+        "audio": "audio/lessons/words/garden.mp3",
+        "hint": "Garden"
+      },
+      "ਦਮਨ": {
+        "audio": "audio/lessons/words/suppression.mp3",
+        "hint": "Suppression"
+      },
+      "ਚਰਮ": {
+        "audio": "audio/lessons/words/skin.mp3",
+        "hint": "Skin/leather"
+      },
+      "ਨਦਰ": {
+        "audio": "audio/lessons/words/grace.mp3",
+        "hint": "Grace/glance"
       }
     },
     "winBonusPoints": 20
