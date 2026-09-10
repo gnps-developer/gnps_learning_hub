@@ -39,9 +39,9 @@ workflows:
         script: |
           flutter test
 
-      - name: Generate Marketing Brochure
+      - name: Generate Premium Brochure
         script: |
-          dart tools/generate_brochure.dart
+          dart tools/brochure/generate_full_brochure.dart
 
       - name: Build Android App Bundle
         script: |
@@ -66,6 +66,7 @@ workflows:
       - build/app/outputs/**/mapping.txt
       - build/ios/ipa/*.ipa
       - exports/*.pdf
+      - exports/brochure/*.pdf
       - /tmp/xcodebuild_logs/*.log
       - flutter_drive.log
 
