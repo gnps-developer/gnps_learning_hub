@@ -319,3 +319,96 @@ img.emoji {
   margin-top: 30px;
 }
 .onepager-footer-row .qr-block { margin-top: 0; }
+
+/* ---------- Content Pages (Detailed Lists) ---------- */
+.content-page {
+  padding: 8px 50px;
+}
+.content-header {
+  margin-bottom: 5px;
+  border-bottom: 1px solid var(--color-accent);
+  padding-bottom: 3px;
+}
+.content-subtitle {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+.content-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+  padding: 5px 0;
+}
+.content-grid.sentences {
+  grid-template-columns: 1fr;
+}
+
+.content-tile {
+  background: white;
+  padding: 16px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  text-align: center;
+}
+.content-tile.sentence-tile {
+  flex-direction: row;
+  text-align: left;
+  gap: 20px;
+}
+.tile-emoji { font-size: 40px; }
+.tile-text { font-size: 18px; font-weight: 700; font-family: 'Noto Sans Gurmukhi', sans-serif; }
+.tile-sub { font-size: 13px; color: var(--color-text-muted); font-weight: 500; }
+
+/* Tracing Specific */
+.content-grid.tracing {
+  grid-template-columns: repeat(5, 110px);
+  grid-auto-rows: 125px;
+  gap: 10px;
+  padding: 0;
+  justify-content: center;
+  align-content: flex-start;
+}
+.tracing-tile {
+  background: white;
+  border-radius: 6px;
+  padding: 6px;
+  height: 100%; /* Respect grid row height */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px; /* Reduced gap to keep label inside */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.tracing-svg-container {
+  width: 100%;
+  aspect-ratio: 1.25; /* Shorter SVG to make room for label */
+  background: #F9F9F9;
+  border-radius: 4px;
+  position: relative;
+}
+.tracing-svg { width: 100%; height: 100%; }
+.tracing-guide-text {
+  font-size: 42px; /* Reduced font size for shorter container */
+  fill: #D0D0D0;
+  font-family: 'Noto Sans Gurmukhi', sans-serif;
+}
+.tracing-letter-label {
+  font-size: 12px; /* Reduced label size */
+  font-weight: 800;
+  color: var(--color-primary);
+  font-family: 'Noto Sans Gurmukhi', sans-serif;
+}

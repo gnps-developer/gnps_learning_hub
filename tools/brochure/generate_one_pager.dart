@@ -1,10 +1,9 @@
 // ignore_for_file: avoid_print
-import 'dart:io';
 import 'brochure_engine.dart';
 
 void main() async {
   print('🚀 Starting One-Pager Flyer Generator...');
-  final ctx = await BrochureEngine.loadContext();
+  final ctx = await BrochureEngine.loadContext(contentFile: 'brochure_one_pager.json');
   final op = ctx.sections['onePager'];
   final fn = ctx.sections['finalNotes'];
 

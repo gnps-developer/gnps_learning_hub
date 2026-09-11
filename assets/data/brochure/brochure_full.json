@@ -1,26 +1,4 @@
 {
-  "brand": {
-    "appName": "Gurmukhi Sikho",
-    "eyebrow": "Punjabi • For Kids",
-    "heroGurmukhiTagline": "ਸਿੱਖੋ, ਖੇਡੋ, ਵਧੋ",
-    "heroSubtitle": "Learn, Play, Grow — the Gurmukhi learning adventure for kids",
-    "gurmukhiTagline": "ਪੰਜਾਬੀ ਸਿੱਖੋ",
-    "developer": "GNPS",
-    "coverSubtitle": "Curriculum Guide",
-    "coverVersionLabel": "VERSION 2026",
-    "logoPath": "assets/logo/logo.jpg"
-  },
-  "colors": {
-    "primary": "#1B2A4A",
-    "primaryDark": "#12203A",
-    "accent": "#F2A93B",
-    "arcade": "#E23E82",
-    "shop": "#4C9A6B",
-    "achievements": "#7C5CFC",
-    "background": "#FBF7EF",
-    "textBody": "#4A4439",
-    "textMuted": "#A39A83"
-  },
   "sections": {
     "lessonModule": {
       "badgeLabel": "Lesson",
@@ -35,10 +13,12 @@
       "footerLabel": "THE JOURNEY",
       "pills": [
         "Tracing",
-        "Word-by-Word Building",
-        "Real Sentence Structure",
-        "From Words to Voice",
-        "Unlock Interactive Word Games"
+        "Letters",
+        "Spellings",
+        "Match Picture",
+        "Match Words",
+        "Sentences",
+        "Unlock Word Games"
       ]
     },
     "achievements": {
@@ -48,27 +28,10 @@
       "description": "Every stroke traced, every word spelled, every sentence built — it all adds up. We mark each milestone with a badge, turning quiet daily practice into visible, shareable pride for kids and parents alike.",
       "screenshot": "listing/google-play-store/phone/phone_achievements.png",
       "footerLabel": "ACHIEVEMENTS",
-      "pills": ["Milestone Badges", "Progress Tracking", "Shareable Wins"]
-    },
-    "finalNotes": {
-      "title": "Gurmukhi Sikho",
-      "subtitle": "Download Now",
-      "gurmukhiLabel": "ਹੁਣੇ ਡਾਊਨਲੋਡ ਕਰੋ",
-      "message": "Available on Google Play, with Apple App Store to follow shortly after. Sikho, khedo, vadho — learn, play, grow, wherever your family calls home.",
-      "footerLabel": "AVAILABILITY",
-      "googlePlayUrl": "https://play.google.com/store/apps/details?id=au.edu.nsw.gnps.learning.hub",
-      "qrCaption": "Scan to get it on Google Play",
-      "platforms": [
-        {
-          "name": "Google Play",
-          "status": "Live",
-          "icon": "android"
-        },
-        {
-          "name": "App Store",
-          "status": "Coming Later",
-          "icon": "ios"
-        }
+      "pills": [
+        "Milestone Badges",
+        "Progress Tracking",
+        "Shareable Wins"
       ]
     },
     "arcade": {
@@ -94,12 +57,6 @@
         "Dozens of Custom Items",
         "Gamified Streak System"
       ]
-    },
-    "onePager": {
-      "title": "Gurmukhi Sikho",
-      "gurmukhiLabel": "ਸਿੱਖੋ, ਖੇਡੋ, ਵਧੋ",
-      "shortDescription": "A joyful Gurmukhi learning adventure for kids — tracing, spelling, matching, and sentence-building games that turn Punjabi practice into play. Launching soon on Android, with iOS to follow.",
-      "footerLabel": "ONE-PAGE OVERVIEW"
     }
   },
   "lessons": {

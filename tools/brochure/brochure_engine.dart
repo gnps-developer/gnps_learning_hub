@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 import 'package:qr/qr.dart';
 
 class BrochureContext {
@@ -50,9 +51,11 @@ class BrochureEngine {
     }
   }
 
-  static Future<BrochureContext> loadContext() async {
+  static Future<BrochureContext> loadContext({String contentFile = 'brochure_full.json'}) async {
     final root = findProjectRoot();
-    final config = jsonDecode(File('$root/assets/data/brochure_content.json').readAsStringSync()) as Map<String, dynamic>;
+    final shared = jsonDecode(File('$root/assets/data/brochure/marketing_shared.json').readAsStringSync()) as Map<String, dynamic>;
+    final content = jsonDecode(File('$root/assets/data/brochure/$contentFile').readAsStringSync()) as Map<String, dynamic>;
+    
     final manifest = jsonDecode(File('$root/assets/data/journey_manifest.json').readAsStringSync()) as Map<String, dynamic>;
     
     final lessons = [
@@ -67,31 +70,40 @@ class BrochureEngine {
     Future<String?> loadImage(String? rel) => _loadAsDataUri(rel == null ? null : '$root/$rel');
 
     final lessonImages = <String, String>{};
-    for (final e in (config['lessons'] as Map).entries) {
-      final uri = await loadImage(e.value['screenshot']);
-      if (uri != null) lessonImages[e.key] = uri;
+    if (content.containsKey('lessons')) {
+      for (final e in (content['lessons'] as Map).entries) {
+        final uri = await loadImage(e.value['screenshot']);
+        if (uri != null) lessonImages[e.key] = uri;
+      }
     }
 
     final gameImages = <String, String>{};
-    for (final e in (config['games'] as Map).entries) {
-      final uri = await loadImage(e.value['screenshot']);
-      if (uri != null) gameImages[e.key] = uri;
+    if (content.containsKey('games')) {
+      for (final e in (content['games'] as Map).entries) {
+        final uri = await loadImage(e.value['screenshot']);
+        if (uri != null) gameImages[e.key] = uri;
+      }
     }
 
+    // Merge sections. Shared 'finalNotes' goes into 'sections'
+    final mergedSections = Map<String, dynamic>.from(content['sections'] ?? {});
+    mergedSections['finalNotes'] = shared['finalNotes'];
+    mergedSections['journey'] = mergedSections['journey'] ?? {}; // Fallback if missing
+
     return BrochureContext(
-      brand: config['brand'],
-      colors: config['colors'],
-      sections: config['sections'],
-      lessonContent: config['lessons'],
-      gameContent: config['games'],
+      brand: shared['brand'],
+      colors: shared['colors'],
+      sections: mergedSections,
+      lessonContent: content['lessons'] ?? {},
+      gameContent: content['games'] ?? {},
       css: File('$root/tools/style.css').readAsStringSync(),
       version: manifest['version'],
       lessons: lessons,
       games: games,
-      logoUri: await loadImage(config['brand']['logoPath']),
-      journeyUri: await loadImage(config['sections']['journey']['screenshot']),
-      shopUri: await loadImage(config['sections']['shop']['screenshot']),
-      achievementsUri: await loadImage(config['sections']['achievements']['screenshot']),
+      logoUri: await loadImage(shared['brand']['logoPath']),
+      journeyUri: await loadImage(mergedSections['journey']?['screenshot']),
+      shopUri: await loadImage(mergedSections['shop']?['screenshot']),
+      achievementsUri: await loadImage(mergedSections['achievements']?['screenshot']),
       lessonImages: lessonImages,
       gameImages: gameImages,
     );
@@ -150,6 +162,111 @@ class BrochureEngine {
       case 'ios': return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="2" width="12" height="20" rx="2.5"/><line x1="10" y1="19" x2="14" y2="19" stroke-linecap="round"/></svg>';
       default: return '';
     }
+  }
+
+  static String contentPage({
+    required String title,
+    required String subtitle,
+    required String bodyHtml,
+    required String footerLeft,
+    required int pageNum,
+    bool dark = false,
+  }) {
+    return '''
+<div class="page content-page ${dark ? 'dark-section' : ''}">
+  <div class="content-header">
+    <h2 style="font-size: 32px; margin: 0;">$title</h2>
+    <p class="content-subtitle">$subtitle</p>
+  </div>
+  <div class="content-body">
+    $bodyHtml
+  </div>
+  <div class="footer ${dark ? 'hero-footer' : ''}">
+    <span>$footerLeft</span>
+    <span>PAGE $pageNum</span>
+  </div>
+</div>''';
+  }
+
+  static String tracingLetterSvg(String letter, List<dynamic> strokes) {
+    final paths = <String>[];
+    int strokeNum = 1;
+    for (final stroke in strokes) {
+      final points = stroke as List<dynamic>;
+      if (points.isEmpty) continue;
+
+      final polyPoints = points
+          .map((p) =>
+              '${(p['x'] * 100).toStringAsFixed(1)},${(p['y'] * 100).toStringAsFixed(1)}')
+          .join(' ');
+
+      // The "Ghost" path of the letter (thick background)
+      paths.add(
+          '<polyline points="$polyPoints" fill="none" stroke="#BDBDBD" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />');
+
+      // Add directional arrows at EVERY checkpoint to show the flow clearly
+      for (int i = 0; i < points.length - 1; i++) {
+        final p1 = points[i];
+        final p2 = points[i + 1];
+        final x1 = p1['x'] * 100;
+        final y1 = p1['y'] * 100;
+        final x2 = p2['x'] * 100;
+        final y2 = p2['y'] * 100;
+        
+        final dx = x2 - x1;
+        final dy = y2 - y1;
+        final distance = sqrt(dx * dx + dy * dy);
+        
+        if (distance > 1.5) {
+          final angle = atan2(dy, dx);
+          
+          // Larger, clearer arrows
+          final hl = 6.0; // Increased head size
+          final al = min(10.0, distance * 0.8); // Increased body length
+          
+          final ex = x1 + cos(angle) * al;
+          final ey = y1 + sin(angle) * al;
+          
+          final h1x = ex - hl * cos(angle - pi / 6);
+          final h1y = ey - hl * sin(angle - pi / 6);
+          final h2x = ex - hl * cos(angle + pi / 6);
+          final h2y = ey - hl * sin(angle + pi / 6);
+          
+          // High-contrast Arrow Body
+          paths.add('<line x1="${x1.toStringAsFixed(1)}" y1="${y1.toStringAsFixed(1)}" x2="${ex.toStringAsFixed(1)}" y2="${ey.toStringAsFixed(1)}" stroke="var(--color-primary)" stroke-width="2.2" stroke-linecap="round" />');
+          // High-contrast Arrow Head
+          paths.add('<polyline points="${h1x.toStringAsFixed(1)},${h1y.toStringAsFixed(1)} ${ex.toStringAsFixed(1)},${ey.toStringAsFixed(1)} ${h2x.toStringAsFixed(1)},${h2y.toStringAsFixed(1)}" fill="none" stroke="var(--color-primary)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />');
+        }
+
+        // Checkpoint dot (subtle)
+        paths.add('<circle cx="${x1.toStringAsFixed(1)}" cy="${y1.toStringAsFixed(1)}" r="1" fill="var(--color-accent)" opacity="0.4" />');
+      }
+      
+      // Final checkpoint dot
+      final last = points.last;
+      paths.add('<circle cx="${(last['x'] * 100).toStringAsFixed(1)}" cy="${(last['y'] * 100).toStringAsFixed(1)}" r="1" fill="var(--color-accent)" opacity="0.4" />');
+
+      // Subtle Stroke Number Badge
+      final start = points.first;
+      final sx = start['x'] * 100;
+      final sy = start['y'] * 100;
+      paths.add('''
+        <circle cx="${sx.toStringAsFixed(1)}" cy="${sy.toStringAsFixed(1)}" r="5" fill="var(--color-accent)" opacity="0.3" />
+        <text x="${sx.toStringAsFixed(1)}" y="${(sy + 1.8).toStringAsFixed(1)}" text-anchor="middle" font-size="6" font-weight="600" fill="var(--color-primary)" opacity="0.6">$strokeNum</text>
+      ''');
+
+      strokeNum++;
+    }
+
+    return '''
+<div class="tracing-tile">
+  <div class="tracing-svg-container">
+    <svg viewBox="0 0 100 100" class="tracing-svg">
+      ${paths.join('\n')}
+    </svg>
+  </div>
+  <span class="tracing-letter-label">$letter</span>
+</div>''';
   }
 
   static String _rootColorOverride(Map<String, dynamic> colors) {
