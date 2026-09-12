@@ -41,19 +41,10 @@ class BrochureContext {
 }
 
 class BrochureEngine {
-  /// Root folder where brochure-only source JSON lives, relative to the
-  /// project root. Deliberately kept OUTSIDE assets/ (alongside tools/) so
-  /// this brochure-generation data is never bundled into the app.
   static const _dataRoot = 'tools/brochure/data';
-
-  /// Root folder where convention-based screenshots live, relative to the
-  /// project root. Deliberately kept OUTSIDE assets/ (alongside tools/) so
-  /// these brochure-only source images are never bundled into the app.
-  /// Drop images here named after their id (e.g.
-  /// `tools/brochure/screenshots/lessons/lesson_tracing.png`) and they'll
-  /// be picked up automatically with no JSON changes required.
   static const _screenshotsRoot = 'tools/brochure/screenshots';
   static const _screenshotExtensions = ['png', 'jpg', 'jpeg', 'webp'];
+  static const _lessonContentRoot = 'assets/data';
 
   static String findProjectRoot() {
     var dir = Directory.current;
@@ -81,19 +72,23 @@ class BrochureEngine {
     final manifest =
         jsonDecode(
               File(
-                '$root/assets/data/journey_manifest.json',
+                '$root/$_lessonContentRoot/journey_manifest.json',
               ).readAsStringSync(),
             )
             as Map<String, dynamic>;
 
     final lessons = [
       for (final f in (manifest['lessonFiles'] as List).cast<String>())
-        jsonDecode(File('$root/assets/data/lessons/$f').readAsStringSync())
+        jsonDecode(
+              File('$root/$_lessonContentRoot/lessons/$f').readAsStringSync(),
+            )
             as Map<String, dynamic>,
     ];
     final games = [
       for (final f in (manifest['gameFiles'] as List).cast<String>())
-        jsonDecode(File('$root/assets/data/games/$f').readAsStringSync())
+        jsonDecode(
+              File('$root/$_lessonContentRoot/games/$f').readAsStringSync(),
+            )
             as Map<String, dynamic>,
     ];
 

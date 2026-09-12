@@ -33,7 +33,7 @@ This document is automatically generated from the app's lesson data.
 
 ### 3. Spelling (146 tasks)
 - **Animals** (10 tasks)
-- **Everyday Objects & Household** (10 tasks)
+- **Everyday Objects** (10 tasks)
 - **Fruits** (10 tasks)
 - **Colors** (10 tasks)
 - **Travel & Transport** (10 tasks)
@@ -51,7 +51,7 @@ This document is automatically generated from the app's lesson data.
 
 ### 4. Match the Picture (139 tasks)
 - **Animals** (10 tasks)
-- **Everyday Objects & Household** (10 tasks)
+- **Everyday Objects** (10 tasks)
 - **Fruits** (10 tasks)
 - **Colors** (10 tasks)
 - **Travel & Transport** (10 tasks)
@@ -78,7 +78,7 @@ This document is automatically generated from the app's lesson data.
 
 ### 6. Fill in the Blanks (80 tasks)
 - **Animals** (5 tasks)
-- **Everyday Objects & Household** (5 tasks)
+- **Everyday Objects** (5 tasks)
 - **Fruits** (5 tasks)
 - **Colors** (5 tasks)
 - **Travel & Transport** (5 tasks)
@@ -96,7 +96,7 @@ This document is automatically generated from the app's lesson data.
 
 ### 7. Sentence Arrangement (80 tasks)
 - **Animals** (5 tasks)
-- **Everyday Objects & Household** (5 tasks)
+- **Everyday Objects** (5 tasks)
 - **Fruits** (5 tasks)
 - **Colors** (5 tasks)
 - **Travel & Transport** (5 tasks)
