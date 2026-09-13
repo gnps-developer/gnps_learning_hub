@@ -12,6 +12,7 @@ import 'package:gnps_learning_hub/models/journey.dart';
 import 'package:gnps_learning_hub/services/progress_service.dart';
 import 'package:gnps_learning_hub/repositories/progress_repository.dart';
 import 'package:gnps_learning_hub/services/audio_service.dart';
+import 'package:gnps_learning_hub/config/ui_strings.dart';
 
 class MockProgressRepository extends Mock implements ProgressRepository {}
 
@@ -56,7 +57,7 @@ void main() {
       ),
     );
 
-    expect(find.text('GNPS'), findsOneWidget);
+    expect(find.text(UIStrings.byGNPS), findsOneWidget);
 
     // Cleanup
     await tester.pumpWidget(Container());

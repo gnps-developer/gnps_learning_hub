@@ -136,21 +136,33 @@ void main(List<String> args) async {
 
 void _extractExplicitAudio(dynamic data, Map<String, String> queue) {
   if (data is Map) {
+    // 1. Match typical fields
+    if (data.containsKey('audioFile')) {
+      final path = data['audioFile'] as String;
+      final text = data['letter'] ?? data['targetWord'] ?? data['correctLetter'] ?? data['word'] ?? data['fullSentence'];
+      if (text is String) {
+        queue[path] = text;
+      }
+    }
+    
+    if (data.containsKey('audio') && data.containsKey('hint')) {
+      final path = data['audio'] as String;
+      // In crossword itemPool, the key of the map itself is the Punjabi word
+      // Let's look for a key matching when traversing parent entries, or just look up parents
+    }
+
     final content = data['content'];
     if (content is Map) {
-      if (content.containsKey('audioFile')) {
-        final path = content['audioFile'] as String;
-        final text = content['letter'] ?? content['targetWord'] ?? content['correctLetter'] ?? content['word'] ?? content['fullSentence'];
-        if (text is String) {
-          queue[path] = text;
-        }
-      }
-      
       if (content.containsKey('itemPool')) {
         final mapping = content['itemPool'] as Map;
         for (final entry in mapping.entries) {
           if (entry.key is String && entry.value is String) {
             queue[entry.value as String] = entry.key as String;
+          } else if (entry.key is String && entry.value is Map) {
+            final valMap = entry.value as Map;
+            if (valMap.containsKey('audio')) {
+              queue[valMap['audio'] as String] = entry.key as String;
+            }
           }
         }
       }

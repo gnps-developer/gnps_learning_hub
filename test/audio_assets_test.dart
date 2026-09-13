@@ -141,11 +141,15 @@ void _collectAudioPaths(dynamic data, Set<String> paths) {
   if (data is Map) {
     for (final key in data.keys) {
       final value = data[key];
-      if (key == 'audioFile' && value is String) {
+      if ((key == 'audioFile' || key == 'audio') && value is String) {
         paths.add(value);
       } else if (key == 'itemPool' && value is Map) {
         for (final val in value.values) {
-          if (val is String) paths.add(val);
+          if (val is String) {
+            paths.add(val);
+          } else if (val is Map && val['audio'] is String) {
+            paths.add(val['audio'] as String);
+          }
         }
       } else {
         _collectAudioPaths(value, paths);
