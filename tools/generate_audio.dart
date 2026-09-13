@@ -147,8 +147,6 @@ void _extractExplicitAudio(dynamic data, Map<String, String> queue) {
     
     // Crossword words are fully handled via the itemPool check below, 
     // so this single check is unnecessary.
-      // Let's look for a key matching when traversing parent entries, or just look up parents
-    }
 
     final content = data['content'];
     if (content is Map) {
