@@ -414,21 +414,33 @@ void _addSentencesPages(
       .toList();
   _paginate(
     tasks,
-    10,
+    14,
     getPageNum,
     addPage,
     (chunk) {
-      return chunk
-          .map(
-            (t) =>
-                '<div class="content-tile sentence-tile"><span class="tile-text">${t['content']['fullSentence']}</span></div>',
-          )
-          .join();
+      return chunk.map((t) {
+        final content = t['content'] as Map<String, dynamic>;
+        final words = (content['words'] as List).cast<String>();
+        final order = (content['correctOrder'] as List).cast<int>();
+        
+        // Reconstruct full correct sentence from indices
+        final orderedWords = order.map((idx) => words[idx]).toList();
+        final fullSentence = orderedWords.join(' ');
+
+        return '''
+        <div class="content-tile" style="align-items: flex-start; text-align: left; padding: 18px; width: 100%;">
+          <span class="tile-text" style="font-size: 21px; margin-bottom: 10px; width: 100%; line-height: 1.4;">$fullSentence</span>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            ${words.map((w) => '<span style="background: #F5F5F5; color: #4A4439; border: 1px solid #E0E0E0; padding: 4px 10px; border-radius: 8px; font-size: 13px;">$w</span>').join(' ')}
+          </div>
+        </div>
+        ''';
+      }).join();
     },
     'Sentence Construction',
     'Building complex thoughts from single words',
     'CONVERSATIONAL PUNJABI',
-    gridClass: 'sentences',
+    gridClass: 'two-columns',
   );
 }
 
