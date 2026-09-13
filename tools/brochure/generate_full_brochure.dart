@@ -152,7 +152,7 @@ void main() async {
   for (final g in ctx.games) {
     if (g['id'] == 'crossword_punjabi') {
       _addCrosswordPages(ctx, g, addPage, () => pageNum);
-    } else if (g['id'] == 'bubble_pop_words') {
+    } else if (g['id'] == 'bubble_pop_words' || g['id'] == 'bubble_pop_letters') {
       _addBubblePopWordsPages(ctx, g, addPage, () => pageNum);
     }
   }
@@ -450,31 +450,90 @@ void _addCrosswordPages(
   void Function(String) addPage,
   int Function() getPageNum,
 ) {
-  final allWords = <String, String>{};
-  for (final level in (game['content']['levels'] as List)) {
-    for (final w in (level['words'] as List)) {
-      allWords[w['answer']] = w['hint'] ?? '';
-    }
-  }
+  final levels = game['content']['levels'] as List;
 
-  _paginate(
-    allWords.entries.toList(),
-    24,
-    getPageNum,
-    addPage,
-    (chunk) {
-      return chunk
-          .map(
-            (e) =>
-                '<div class="content-tile"><span class="tile-text">${e.key}</span><span class="tile-sub">${e.value}</span></div>',
-          )
-          .join();
-    },
-    'Crossword Challenges',
-    'Reinforcing vocabulary through logic puzzles',
-    'GAME VOCABULARY',
-    dark: true,
-  );
+  // Show exactly 1 crossword puzzle per page
+  for (var i = 0; i < levels.length; i++) {
+    final lvl = levels[i];
+    
+    final w = lvl['gridWidth'] as int;
+    final h = lvl['gridHeight'] as int;
+    final levelWords = lvl['words'] as List;
+    
+    // Build a logical grid to render
+    final cellMap = <String, Map<String, dynamic>>{};
+    final acrossClues = <String>[];
+    final downClues = <String>[];
+
+    for (final wordObj in levelWords) {
+      final syllables = wordObj['syllables'] as List;
+      final startR = wordObj['row'] as int;
+      final startC = wordObj['col'] as int;
+      final isH = wordObj['isHorizontal'] as bool;
+      final num = wordObj['number'] as int;
+      final hint = wordObj['hint'] as String;
+
+      final clue = '<li class="clue-item"><span class="clue-number">$num.</span> $hint</li>';
+      if (isH) acrossClues.add(clue); else downClues.add(clue);
+
+      for (var sIdx = 0; sIdx < syllables.length; sIdx++) {
+        final r = isH ? startR : startR + sIdx;
+        final c = isH ? startC + sIdx : startC;
+        final key = '$r,$c';
+        
+        final existing = cellMap[key] ?? {};
+        existing['char'] = syllables[sIdx];
+        if (sIdx == 0) existing['num'] = num;
+        cellMap[key] = existing;
+      }
+    }
+
+    // Generate HTML Grid Table
+    final gridHtml = StringBuffer();
+    gridHtml.writeln('<div class="crossword-html-grid" style="grid-template-columns: repeat($w, 1fr); width: ${w * 72}px;">');
+    for (var r = 1; r <= h; r++) {
+      for (var c = 1; c <= w; c++) {
+        final cell = cellMap['$r,$c'];
+        if (cell != null) {
+          final numLabel = cell.containsKey('num') ? '<span class="crossword-cell-number">${cell['num']}</span>' : '';
+          gridHtml.writeln('<div class="crossword-cell filled">$numLabel<span class="crossword-cell-letter">${cell['char']}</span></div>');
+        } else {
+          gridHtml.writeln('<div class="crossword-cell empty"></div>');
+        }
+      }
+    }
+    gridHtml.writeln('</div>');
+
+    final html = '''
+    <div class="crossword-container" style="align-items: center;">
+      <h3 style="color: #F2A93B; margin: 0 0 24px 0; font-size: 32px; text-align: center; width: 100%;">Level ${lvl['levelNumber']} Puzzle</h3>
+      
+      <div class="crossword-grid-wrapper" style="margin-bottom: 40px;">$gridHtml</div>
+      
+      <div class="crossword-clues" style="display: flex; flex-direction: column; gap: 20px; width: 100%; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px;">
+        <div class="clues-column">
+          <h4 style="font-size: 18px; margin-bottom: 12px; color: #F2A93B;">Across</h4>
+          <ul class="clues-list" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;">${acrossClues.join()}</ul>
+        </div>
+        <div class="clues-column">
+          <h4 style="font-size: 18px; margin-bottom: 12px; color: #F2A93B;">Down</h4>
+          <ul class="clues-list" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;">${downClues.join()}</ul>
+        </div>
+      </div>
+    </div>
+    ''';
+
+    addPage(
+      BrochureEngine.contentPage(
+        title: 'Crossword Challenges',
+        subtitle: 'Vocabulary reinforcement through logic puzzles',
+        bodyHtml: html,
+        footerLeft: 'ARCADE MODULE',
+        pageNum: getPageNum(),
+        dark: true,
+      ),
+    );
+  }
 }
 
 void _addBubblePopWordsPages(
@@ -483,23 +542,31 @@ void _addBubblePopWordsPages(
   PageAdder addPage,
   int Function() getPageNum,
 ) {
-  final allWords = (game['content']['itemPool'] as Map).keys.toList();
+  final itemPool = game['content']['itemPool'] as Map;
+  final allItems = itemPool.keys.toList(); // Keep original ordering or standard sorting
+
+  final isLetters = game['id'] == 'bubble_pop_letters';
+
   _paginate(
-    allWords..sort(),
-    24,
+    allItems,
+    isLetters ? 40 : 28,
     getPageNum,
     addPage,
     (chunk) {
-      return chunk
-          .map(
-            (w) =>
-                '<div class="content-tile"><span class="tile-text">$w</span></div>',
-          )
-          .join();
+      return chunk.map((item) {
+        return '''
+        <div class="content-tile" style="background: transparent; box-shadow: none; padding: 4px;">
+          <div class="bubble-item">
+            <span class="bubble-text">$item</span>
+          </div>
+        </div>
+        ''';
+      }).join();
     },
-    'Arcade: Bubble Pop',
-    'Dynamic word identification under pressure',
+    isLetters ? 'Arcade: Letter Bubbles' : 'Arcade: Word Bubbles',
+    isLetters ? 'Pop alphabet bubble characters to verify letters' : 'Dynamic word identification inside active bubble flows',
     'GAME VOCABULARY',
+    gridClass: isLetters ? 'bubble-letters' : '',
     dark: true,
   );
 }
