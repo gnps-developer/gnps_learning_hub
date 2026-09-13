@@ -200,10 +200,25 @@ String _featurePage(
   final imgBlock = img == null
       ? ''
       : '<div class="image-side"><div class="phone-mockup $variant"><div class="phone-screen"><img src="$img" /></div></div></div>';
-  final pillsHtml = (pills as List)
-      .map((l) => '<div class="pill $variant">$l</div>')
-      .join();
-  return '<div class="$cls"><div class="text-side"><span class="badge $variant">$badge</span><h2 style="font-size: 38px; margin: 0;">$title</h2><p class="title-gurmukhi $variant">$gurmukhi</p><p class="description">$desc</p><div class="pill-container">$pillsHtml</div></div>$imgBlock<div class="${dark ? "footer hero-footer" : "footer"}"><span>$footer</span><span>PAGE $page</span></div></div>';
+      
+  String pillsHtml;
+  if (pills is Map<String, List<String>>) {
+    final sectionsHtml = <String>[];
+    pills.forEach((heading, list) {
+      final isGame = heading.toLowerCase().contains('game') || heading.toLowerCase().contains('arcade');
+      final pillClass = isGame ? 'arcade' : variant;
+      sectionsHtml.add(
+        '<div style="margin-top: 16px; width: 100%;"><h4 style="margin: 0 0 8px 0; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-muted);">$heading</h4><div class="pill-container">${list.map((l) => '<div class="pill $pillClass">$l</div>').join()}</div></div>'
+      );
+    });
+    pillsHtml = sectionsHtml.join();
+  } else {
+    pillsHtml = '<div class="pill-container">${(pills as List)
+        .map((l) => '<div class="pill $variant">$l</div>')
+        .join()}</div>';
+  }
+
+  return '<div class="$cls"><div class="text-side"><span class="badge $variant">$badge</span><h2 style="font-size: 38px; margin: 0;">$title</h2><p class="title-gurmukhi $variant">$gurmukhi</p><p class="description">$desc</p>$pillsHtml</div>$imgBlock<div class="${dark ? "footer hero-footer" : "footer"}"><span>$footer</span><span>PAGE $page</span></div></div>';
 }
 
 String _closingPage(BrochureContext ctx) {
@@ -222,10 +237,10 @@ String _closingPage(BrochureContext ctx) {
 // --------------------------------------------------------------------------
 
 String _appendixIntroPage(BrochureContext ctx, int page) {
-  final pills = [
-    ...ctx.lessons.map((l) => l['title'] as String),
-    ...ctx.games.map((g) => g['title'] as String),
-  ];
+  final groupedPills = {
+    'Lessons': ctx.lessons.map((l) => l['title'] as String).toList(),
+    'Arcade Games': ctx.games.map((g) => g['title'] as String).toList(),
+  };
 
   return _featurePage(
     ctx,
@@ -233,7 +248,7 @@ String _appendixIntroPage(BrochureContext ctx, int page) {
     'Curriculum Reference',
     ctx.brand['gurmukhiTagline'] ?? '',
     'The following pages contain the complete, detailed contents of every lesson and game in ${ctx.brand['appName']} — the full alphabet reference, vocabulary lists, matching pairs, sentences, and in-game word banks used throughout the learning journey.',
-    pills,
+    groupedPills,
     null,
     'CURRICULUM REFERENCE',
     page,

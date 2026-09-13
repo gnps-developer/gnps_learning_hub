@@ -145,9 +145,8 @@ void _extractExplicitAudio(dynamic data, Map<String, String> queue) {
       }
     }
     
-    if (data.containsKey('audio') && data.containsKey('hint')) {
-      final path = data['audio'] as String;
-      // In crossword itemPool, the key of the map itself is the Punjabi word
+    // Crossword words are fully handled via the itemPool check below, 
+    // so this single check is unnecessary.
       // Let's look for a key matching when traversing parent entries, or just look up parents
     }
 
