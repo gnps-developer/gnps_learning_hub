@@ -126,6 +126,9 @@ void main() async {
   // Appendix: Detailed Curriculum Content
   // --------------------------------------------------------------------------
 
+  print('📚 Appending detailed intro...');
+  addPage(_appendixIntroPage(ctx, pageNum));
+
   // Add a transition page or just start appending
   print('📚 Appending detailed curriculum pages...');
 
@@ -217,6 +220,25 @@ String _closingPage(BrochureContext ctx) {
 // --------------------------------------------------------------------------
 // Curriculum Detail Generators
 // --------------------------------------------------------------------------
+
+String _appendixIntroPage(BrochureContext ctx, int page) {
+  final pills = [
+    ...ctx.lessons.map((l) => l['title'] as String),
+    ...ctx.games.map((g) => g['title'] as String),
+  ];
+
+  return _featurePage(
+    ctx,
+    'Appendix',
+    'Curriculum Reference',
+    ctx.brand['gurmukhiTagline'] ?? '',
+    'The following pages contain the complete, detailed contents of every lesson and game in ${ctx.brand['appName']} — the full alphabet reference, vocabulary lists, matching pairs, sentences, and in-game word banks used throughout the learning journey.',
+    pills,
+    null,
+    'CURRICULUM REFERENCE',
+    page,
+  );
+}
 
 void _addTracingPages(
   BrochureContext ctx,
