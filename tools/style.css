@@ -349,8 +349,8 @@ img.emoji {
   gap: 12px;
   padding: 5px 0;
 }
-.content-grid.sentences {
-  grid-template-columns: 1fr;
+.content-grid.two-columns {
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .content-tile {

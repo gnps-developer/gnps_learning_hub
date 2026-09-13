@@ -367,30 +367,39 @@ void _addFillInBlankPages(
   final tasks = (lesson['sections'] as List)
       .expand((s) => s['tasks'] as List)
       .toList();
-  final uniqueWords = <String>{};
-  for (final t in tasks) {
-    final content = t['content'] as Map<String, dynamic>;
-    if (content.containsKey('correctWord')) {
-      uniqueWords.add(content['correctWord'] as String);
-    }
-  }
 
   _paginate(
-    uniqueWords.toList()..sort(),
-    24,
+    tasks,
+    16,
     getPageNum,
     addPage,
     (chunk) {
-      return chunk
-          .map(
-            (w) =>
-                '<div class="content-tile"><span class="tile-text">$w</span></div>',
-          )
-          .join();
+      return chunk.map((t) {
+        final content = t['content'] as Map<String, dynamic>;
+        final sentence = (content['sentenceParts'] as List).join(' ');
+        final correct = content['correctWord'] as String;
+        final options = (content['options'] as List).cast<String>();
+
+        final optionsHtml = options.map((opt) {
+          final isCorrect = opt == correct;
+          final style = isCorrect
+              ? 'background: #E8F5E9; color: #2E7D32; border: 1px solid #A5D6A7; font-weight: 700;'
+              : 'background: #F5F5F5; color: #616161; border: 1px solid #E0E0E0;';
+          return '<span style="padding: 5px 12px; border-radius: 8px; font-size: 15px; $style">$opt</span>';
+        }).join(' ');
+
+        return '''
+        <div class="content-tile" style="align-items: flex-start; text-align: left; padding: 18px; width: 100%;">
+          <span class="tile-text" style="font-size: 21px; margin-bottom: 10px; width: 100%; line-height: 1.4;">$sentence</span>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">$optionsHtml</div>
+        </div>
+        ''';
+      }).join();
     },
-    'Contextual Learning',
+    'Fill in the Blanks',
     'Completing words within real-world contexts',
     'FILL IN THE BLANKS',
+    gridClass: 'two-columns',
   );
 }
 
