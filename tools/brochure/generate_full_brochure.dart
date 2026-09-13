@@ -1,4 +1,6 @@
 // ignore_for_file: avoid_print
+import 'dart:convert';
+import 'dart:io';
 import 'brochure_engine.dart';
 
 typedef PageAdder = void Function(String html);
@@ -136,8 +138,6 @@ void main() async {
     final lesson = ctx.lessons[i];
     if (lesson['id'] == 'lesson_tracing') {
       _addTracingPages(ctx, lesson, addPage, () => pageNum);
-    } else if (lesson['id'] == 'lesson_spelling') {
-      _addSpellingPages(ctx, lesson, addPage, () => pageNum);
     } else if (lesson['id'] == 'lesson_matching_images') {
       _addMatchingImagesPages(ctx, lesson, addPage, () => pageNum);
     } else if (lesson['id'] == 'lesson_matching_words') {
@@ -284,55 +284,33 @@ void _addTracingPages(
   );
 }
 
-void _addSpellingPages(
-  BrochureContext ctx,
-  Map<String, dynamic> lesson,
-  void Function(String) addPage,
-  int Function() getPageNum,
-) {
-  final tasks = (lesson['sections'] as List)
-      .expand((s) => s['tasks'] as List)
-      .toList();
-  final uniqueItems = <String, String>{};
-  for (final t in tasks) {
-    final c = t['content'] as Map<String, dynamic>;
-    uniqueItems[c['targetWord']] = c['emoji'];
-  }
-
-  _paginate(
-    uniqueItems.entries.toList(),
-    20,
-    getPageNum,
-    addPage,
-    (chunk) {
-      return chunk.map((e) {
-        return '<div class="content-tile"><span class="tile-emoji">${e.value}</span><span class="tile-text">${e.key}</span></div>';
-      }).join();
-    },
-    'Word Building',
-    'Master spelling with essential Punjabi words',
-    'VOCABULARY LIST',
-  );
-}
-
 void _addMatchingImagesPages(
   BrochureContext ctx,
   Map<String, dynamic> lesson,
   void Function(String) addPage,
   int Function() getPageNum,
 ) {
+  final root = BrochureEngine.findProjectRoot();
+  final referenceFile = File('$root/assets/data/emoji_reference.json');
+  final Map<String, dynamic> emojiReference = jsonDecode(
+    referenceFile.readAsStringSync(),
+  );
+
   final tasks = (lesson['sections'] as List)
       .expand((s) => s['tasks'] as List)
       .toList();
+
   final uniqueItems = <String, String>{};
   for (final t in tasks) {
     final c = t['content'] as Map<String, dynamic>;
-    uniqueItems[c['word']] = c['correctEmoji'];
+    final word = c['word'] as String;
+    // Source emoji dynamically from master reference file, with fallback if missing
+    uniqueItems[word] = (emojiReference[word] ?? c['correctEmoji']) as String;
   }
 
   _paginate(
     uniqueItems.entries.toList(),
-    20,
+    32,
     getPageNum,
     addPage,
     (chunk) {
@@ -363,7 +341,7 @@ void _addMatchingWordsPages(
 
   _paginate(
     allPairs.entries.toList(),
-    24,
+    36,
     getPageNum,
     addPage,
     (chunk) {
