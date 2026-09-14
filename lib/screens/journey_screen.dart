@@ -130,6 +130,10 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
                   data: (catalog) => _JourneyContent(
                     journey: journey,
                     progress: progress,
+                    achievementCount: ref.read(progressServiceProvider).calculateAchievementCount(
+                      journey: journey,
+                      unlockedGameDifficulties: progress.unlockedGameDifficulties,
+                    ),
                     catalog: catalog,
                     onTapLesson: (lesson) => _openLesson(lesson, journey),
                     onTapGame: (game) => _openGame(game, journey),
@@ -175,6 +179,7 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
 class _JourneyContent extends ConsumerWidget {
   final Journey journey;
   final LocalProgress progress;
+  final int achievementCount;
   final List<ShopItem> catalog;
   final void Function(Lesson lesson) onTapLesson;
   final void Function(GameConfig game) onTapGame;
@@ -182,6 +187,7 @@ class _JourneyContent extends ConsumerWidget {
   const _JourneyContent({
     required this.journey,
     required this.progress,
+    required this.achievementCount,
     required this.catalog,
     required this.onTapLesson,
     required this.onTapGame,
@@ -194,6 +200,7 @@ class _JourneyContent extends ConsumerWidget {
         JourneyBanner(
           progress: progress,
           catalog: catalog,
+          achievementCount: achievementCount,
           onTapGems: () =>
               ref.read(mainNavigationProvider.notifier).state = 1,
           onTapAchievements: () => Navigator.of(context).push(

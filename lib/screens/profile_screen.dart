@@ -107,8 +107,10 @@ class ProfileScreen extends ConsumerWidget {
               ),
               journeyAsync.maybeWhen(
                 data: (journey) {
-                  final totalTrophies = progress.unlockedGameDifficulties.values
-                      .fold<int>(0, (sum, val) => sum + val);
+                  final achievementCount = ref.read(progressServiceProvider).calculateAchievementCount(
+                    journey: journey,
+                    unlockedGameDifficulties: progress.unlockedGameDifficulties,
+                  );
 
                   return Padding(
                     padding: const EdgeInsets.only(top: AppSpacing.lg),
@@ -125,7 +127,7 @@ class ProfileScreen extends ConsumerWidget {
                               icon: Icons.emoji_events,
                               color: AppColors.gold,
                               label: UIStrings.achievementsTitle,
-                              value: '$totalTrophies',
+                              value: '$achievementCount',
                             ),
                           ),
                         ),

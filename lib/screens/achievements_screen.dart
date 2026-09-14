@@ -58,9 +58,20 @@ class AchievementsScreen extends ConsumerWidget {
               );
             }
 
+            final achievementCount = ref.read(progressServiceProvider).calculateAchievementCount(
+                  journey: journey,
+                  unlockedGameDifficulties: progress.unlockedGameDifficulties,
+                );
+
             return ListView(
               padding: const EdgeInsets.all(AppSpacing.lg),
-              children: unlockedGameCards,
+              children: [
+                _AchievementSummaryHeader(
+                  count: achievementCount,
+                ),
+                const SizedBox(height: AppSpacing.lg),
+                ...unlockedGameCards,
+              ],
             );
           },
           loading: () => const Center(child: CircularProgressIndicator()),
@@ -68,6 +79,63 @@ class AchievementsScreen extends ConsumerWidget {
         ),
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, _) => Center(child: Text('Error loading profile: $e')),
+      ),
+    );
+  }
+}
+
+class _AchievementSummaryHeader extends StatelessWidget {
+  final int count;
+
+  const _AchievementSummaryHeader({required this.count});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Theme.of(context).colorScheme.primary,
+            Theme.of(context).colorScheme.primary.withValues(alpha: 0.8),
+          ],
+        ),
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
+            blurRadius: 12,
+            offset: const Offset(0, 6),
+          )
+        ],
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.stars, color: Colors.white, size: 48),
+          const SizedBox(width: 20),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'TOTAL ACHIEVEMENTS',
+                style: TextStyle(
+                  color: Colors.white70,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: 1.2,
+                ),
+              ),
+              Text(
+                '$count Earned',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

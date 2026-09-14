@@ -309,6 +309,28 @@ class ProgressService {
     return updated;
   }
 
+  /// Calculates the total number of earned trophies (Bubble games)
+  /// and master medals (Crossword).
+  int calculateAchievementCount({
+    required Journey journey,
+    required Map<String, int> unlockedGameDifficulties,
+  }) {
+    int count = 0;
+    for (final game in journey.games) {
+      final progress = unlockedGameDifficulties[game.id] ?? 0;
+      if (game.type == 'crossword') {
+        final totalLevels = (game.content['levels'] as List?)?.length ?? 0;
+        if (progress >= totalLevels && totalLevels > 0) {
+          count += 1; // 1 Master Medal
+        }
+      } else {
+        // Standard difficulty games (Bubble Pop)
+        count += progress; // 1 to 3 trophies
+      }
+    }
+    return count;
+  }
+
   /// Records the score for a game and unlocks the next difficulty if won.
   /// Returns the newly unlocked difficulty index if a new achievement was earned, otherwise null.
   Future<(LocalProgress, int?)> recordGameScore({

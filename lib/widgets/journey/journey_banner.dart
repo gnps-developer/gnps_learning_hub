@@ -13,6 +13,7 @@ import '../../widgets/avatar/avatar_preview.dart';
 class JourneyBanner extends StatelessWidget {
   final LocalProgress progress;
   final List<ShopItem> catalog;
+  final int achievementCount;
   final VoidCallback? onTapGems;
   final VoidCallback? onTapAchievements;
   final VoidCallback? onTapProfile;
@@ -21,6 +22,7 @@ class JourneyBanner extends StatelessWidget {
     super.key,
     required this.progress,
     required this.catalog,
+    required this.achievementCount,
     this.onTapGems,
     this.onTapAchievements,
     this.onTapProfile,
@@ -102,8 +104,7 @@ class JourneyBanner extends StatelessWidget {
                 child: _StatPill(
                   icon: Icons.emoji_events,
                   color: AppColors.gold,
-                  value:
-                      '${progress.unlockedGameDifficulties.values.fold<int>(0, (sum, val) => sum + val)}',
+                  value: '$achievementCount',
                 ),
               ),
               const SizedBox(width: AppSpacing.xs),
