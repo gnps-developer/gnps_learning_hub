@@ -455,15 +455,23 @@ void _addCrosswordPages(
   // Show exactly 1 crossword puzzle per page
   for (var i = 0; i < levels.length; i++) {
     final lvl = levels[i];
-    
+    final levelNum = lvl['levelNumber'] as int;
     final w = lvl['gridWidth'] as int;
     final h = lvl['gridHeight'] as int;
     final levelWords = lvl['words'] as List;
     
-    // Build a logical grid to render
+    // 1. Build a logical grid to render
     final cellMap = <String, Map<String, dynamic>>{};
     final acrossClues = <String>[];
     final downClues = <String>[];
+
+    // 2. Dynamic style configuration
+    final isCompact = levelNum >= 5;
+    final cellSize = isCompact ? 62 : 70;
+    final letterSize = isCompact ? 28 : 32;
+    final numSize = isCompact ? 14 : 16;
+    final clueFontSize = isCompact ? 18 : 20;
+    final gridGap = 2;
 
     for (final wordObj in levelWords) {
       final syllables = wordObj['syllables'] as List;
@@ -473,7 +481,7 @@ void _addCrosswordPages(
       final num = wordObj['number'] as int;
       final hint = wordObj['hint'] as String;
 
-      final clue = '<li class="clue-item"><span class="clue-number">$num.</span> $hint</li>';
+      final clue = '<li class="clue-item" style="font-size: ${clueFontSize}px;"><span class="clue-number" style="font-size: ${clueFontSize}px;">$num.</span> $hint</li>';
       if (isH) acrossClues.add(clue); else downClues.add(clue);
 
       for (var sIdx = 0; sIdx < syllables.length; sIdx++) {
@@ -481,24 +489,24 @@ void _addCrosswordPages(
         final c = isH ? startC + sIdx : startC;
         final key = '$r,$c';
         
-        final existing = cellMap[key] ?? {};
-        existing['char'] = syllables[sIdx];
-        if (sIdx == 0) existing['num'] = num;
-        cellMap[key] = existing;
+        final cell = cellMap[key] ?? {};
+        cell['char'] = syllables[sIdx];
+        if (sIdx == 0) cell['num'] = num;
+        cellMap[key] = cell;
       }
     }
 
-    // Generate HTML Grid Table
+    // 3. Generate HTML Grid Table
     final gridHtml = StringBuffer();
-    gridHtml.writeln('<div class="crossword-html-grid" style="grid-template-columns: repeat($w, 1fr); width: ${w * 72}px;">');
+    gridHtml.writeln('<div class="crossword-html-grid" style="grid-template-columns: repeat($w, 1fr); width: ${w * (cellSize + gridGap)}px; gap: ${gridGap}px;">');
     for (var r = 1; r <= h; r++) {
       for (var c = 1; c <= w; c++) {
         final cell = cellMap['$r,$c'];
         if (cell != null) {
-          final numLabel = cell.containsKey('num') ? '<span class="crossword-cell-number">${cell['num']}</span>' : '';
-          gridHtml.writeln('<div class="crossword-cell filled">$numLabel<span class="crossword-cell-letter">${cell['char']}</span></div>');
+          final numLabel = cell.containsKey('num') ? '<span class="crossword-cell-number" style="font-size: ${numSize}px; top: ${isCompact ? 3 : 5}px; left: ${isCompact ? 5 : 8}px;">${cell['num']}</span>' : '';
+          gridHtml.writeln('<div class="crossword-cell filled" style="width: ${cellSize}px; height: ${cellSize}px; border-radius: ${isCompact ? 5 : 8}px;">$numLabel<span class="crossword-cell-letter" style="font-size: ${letterSize}px;">${cell['char']}</span></div>');
         } else {
-          gridHtml.writeln('<div class="crossword-cell empty"></div>');
+          gridHtml.writeln('<div class="crossword-cell empty" style="width: ${cellSize}px; height: ${cellSize}px;"></div>');
         }
       }
     }
@@ -506,18 +514,18 @@ void _addCrosswordPages(
 
     final html = '''
     <div class="crossword-container" style="align-items: center;">
-      <h3 style="color: #F2A93B; margin: 0 0 24px 0; font-size: 32px; text-align: center; width: 100%;">Level ${lvl['levelNumber']} Puzzle</h3>
+      <h3 style="color: #F2A93B; margin: 0 0 ${isCompact ? 12 : 24}px 0; font-size: ${isCompact ? 26 : 32}px; text-align: center; width: 100%;">Level $levelNum Puzzle</h3>
       
-      <div class="crossword-grid-wrapper" style="margin-bottom: 40px;">$gridHtml</div>
+      <div class="crossword-grid-wrapper" style="margin-bottom: ${isCompact ? 24 : 40}px; padding: ${isCompact ? 14 : 20}px;">$gridHtml</div>
       
-      <div class="crossword-clues" style="display: flex; flex-direction: column; gap: 20px; width: 100%; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px;">
+      <div class="crossword-clues" style="display: flex; flex-direction: column; gap: ${isCompact ? 14 : 20}px; width: 100%; border-top: 1px solid rgba(255,255,255,0.1); padding-top: ${isCompact ? 16 : 24}px;">
         <div class="clues-column">
-          <h4 style="font-size: 18px; margin-bottom: 12px; color: #F2A93B;">Across</h4>
-          <ul class="clues-list" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;">${acrossClues.join()}</ul>
+          <h4 style="font-size: ${isCompact ? 15 : 18}px; margin-bottom: ${isCompact ? 6 : 12}px; color: #F2A93B;">Across</h4>
+          <ul class="clues-list" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: ${isCompact ? 4 : 8}px;">${acrossClues.join()}</ul>
         </div>
         <div class="clues-column">
-          <h4 style="font-size: 18px; margin-bottom: 12px; color: #F2A93B;">Down</h4>
-          <ul class="clues-list" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;">${downClues.join()}</ul>
+          <h4 style="font-size: ${isCompact ? 15 : 18}px; margin-bottom: ${isCompact ? 6 : 12}px; color: #F2A93B;">Down</h4>
+          <ul class="clues-list" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: ${isCompact ? 4 : 8}px;">${downClues.join()}</ul>
         </div>
       </div>
     </div>
