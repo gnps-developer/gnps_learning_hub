@@ -461,6 +461,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       pageBuilder: (context, _, _) => AchievementCelebrationOverlay(
         gameTitle: 'Test Game',
         difficultyIndex: index,
+        isMaster: false,
         onDismiss: () => Navigator.of(context).pop(),
       ),
     );

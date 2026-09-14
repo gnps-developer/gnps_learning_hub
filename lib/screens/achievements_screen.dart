@@ -29,12 +29,17 @@ class AchievementsScreen extends ConsumerWidget {
                   final trophies =
                       progress.unlockedGameDifficulties[game.id] ?? 0;
                   final scores = progress.gameHighScores[game.id] ?? {};
+                  final totalLevels = game.type == 'crossword' 
+                      ? (game.content['levels'] as List?)?.length ?? 0
+                      : 0;
 
                   return _GameAchievementCard(
                     title: game.title,
                     trophies: trophies,
                     scores: scores,
                     icon: game.icon ?? Icons.videogame_asset,
+                    isCrossword: game.type == 'crossword',
+                    totalLevels: totalLevels,
                   );
                 })
                 .where((w) => w is! SizedBox)
@@ -73,12 +78,16 @@ class _GameAchievementCard extends StatelessWidget {
   final int trophies;
   final Map<String, int> scores;
   final IconData icon;
+  final bool isCrossword;
+  final int totalLevels;
 
   const _GameAchievementCard({
     required this.title,
     required this.trophies,
     required this.scores,
     required this.icon,
+    this.isCrossword = false,
+    this.totalLevels = 0,
   });
 
   @override
@@ -106,42 +115,110 @@ class _GameAchievementCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: AppSpacing.md),
-                Text(
-                  title,
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
                       ),
+                      if (isCrossword)
+                        Text(
+                          'Progress: ${trophies.clamp(0, totalLevels)} / $totalLevels Levels',
+                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                color: Colors.grey,
+                              ),
+                        ),
+                    ],
+                  ),
                 ),
               ],
             ),
             const SizedBox(height: AppSpacing.lg),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _TrophyItem(
-                  level: GameDifficulty.easy,
-                  isEarned: trophies >= 1,
-                  score: scores[GameDifficulty.easy.name] ?? 0,
-                  color: AppColors.bronze,
+            if (isCrossword)
+              Center(
+                child: _MasterBadgeItem(
+                  isEarned: trophies >= totalLevels && totalLevels > 0,
+                  label: UIStrings.trophyMaster,
+                  color: AppColors.master,
                 ),
-                _TrophyItem(
-                  level: GameDifficulty.medium,
-                  isEarned: trophies >= 2,
-                  score: scores[GameDifficulty.medium.name] ?? 0,
-                  color: AppColors.silver,
-                ),
-                _TrophyItem(
-                  level: GameDifficulty.hard,
-                  isEarned: trophies >= 3,
-                  score: scores[GameDifficulty.hard.name] ?? 0,
-                  color: AppColors.gold,
-                ),
-              ],
-            ),
+              )
+            else
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _TrophyItem(
+                    level: GameDifficulty.easy,
+                    isEarned: trophies >= 1,
+                    score: scores[GameDifficulty.easy.name] ?? 0,
+                    color: AppColors.bronze,
+                  ),
+                  _TrophyItem(
+                    level: GameDifficulty.medium,
+                    isEarned: trophies >= 2,
+                    score: scores[GameDifficulty.medium.name] ?? 0,
+                    color: AppColors.silver,
+                  ),
+                  _TrophyItem(
+                    level: GameDifficulty.hard,
+                    isEarned: trophies >= 3,
+                    score: scores[GameDifficulty.hard.name] ?? 0,
+                    color: AppColors.gold,
+                  ),
+                ],
+              ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class _MasterBadgeItem extends StatelessWidget {
+  final bool isEarned;
+  final String label;
+  final Color color;
+
+  const _MasterBadgeItem({
+    required this.isEarned,
+    required this.label,
+    required this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            Icon(
+              Icons.workspace_premium,
+              color: isEarned ? color : Colors.grey.shade300,
+              size: 64,
+            ),
+            if (!isEarned)
+              const Icon(
+                Icons.lock,
+                size: 20,
+                color: Colors.grey,
+              ),
+          ],
+        ),
+        const SizedBox(height: AppSpacing.sm),
+        Text(
+          label,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+            color: isEarned ? color : Colors.grey,
+          ),
+        ),
+      ],
     );
   }
 }

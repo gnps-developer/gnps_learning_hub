@@ -15,6 +15,7 @@ class AppColors {
   static const bronze = Color(0xFFCD7F32);
   static const silver = Color(0xFFC0C0C0);
   static const gold = Color(0xFFFFD700);
+  static const master = Color(0xFFA020F0); // Deep Purple for Master achievement
 
   // Backgrounds & Overlays
   static final overlayDark = Colors.black.withValues(alpha: 0.85);

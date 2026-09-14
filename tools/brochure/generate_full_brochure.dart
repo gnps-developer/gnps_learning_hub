@@ -482,7 +482,11 @@ void _addCrosswordPages(
       final hint = wordObj['hint'] as String;
 
       final clue = '<li class="clue-item" style="font-size: ${clueFontSize}px;"><span class="clue-number" style="font-size: ${clueFontSize}px;">$num.</span> $hint</li>';
-      if (isH) acrossClues.add(clue); else downClues.add(clue);
+      if (isH) {
+        acrossClues.add(clue);
+      } else {
+        downClues.add(clue);
+      }
 
       for (var sIdx = 0; sIdx < syllables.length; sIdx++) {
         final r = isH ? startR : startR + sIdx;

@@ -115,11 +115,14 @@ class ProgressNotifier extends StateNotifier<AsyncValue<LocalProgress>> {
   }
 
   /// DEBUG ONLY. Unlocks all game achievements.
-  Future<void> debugCompleteAllAchievements() async {
+  Future<void> debugCompleteAllAchievements(Journey journey) async {
     await _initialLoad;
     final current = state.value;
     if (current == null) return;
-    final updated = await _service.debugCompleteAllAchievements(current);
+    final updated = await _service.debugCompleteAllAchievements(
+      progress: current,
+      journey: journey,
+    );
     state = AsyncValue.data(updated);
   }
 

@@ -44,8 +44,10 @@ class UIStrings {
   static const trophyBronze = 'Bronze';
   static const trophySilver = 'Silver';
   static const trophyGold = 'Gold';
+  static const trophyMaster = 'Crossword Master';
   static const gameHighScores = 'Game High Scores';
   static String trophyUnlocked(String tier) => '$tier Trophy Unlocked!';
+  static String masterEarned(String name) => '$name Unlocked!';
   static String forGame(String title) => 'for $title';
   static String bestAttempt(int score) => 'Best: $score ⭐';
   static const noTrophiesMessage =

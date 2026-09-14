@@ -80,13 +80,18 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
 
     if (result != null && mounted) {
       _showAchievementCelebration(
-        result['gameTitle'] as String,
-        result['difficultyIndex'] as int,
+        title: result['gameTitle'] as String,
+        index: result['difficultyIndex'] as int?,
+        isMaster: result['isMaster'] as bool? ?? false,
       );
     }
   }
 
-  void _showAchievementCelebration(String title, int index) {
+  void _showAchievementCelebration({
+    required String title,
+    int? index,
+    bool isMaster = false,
+  }) {
     showGeneralDialog(
       context: context,
       barrierDismissible: false,
@@ -96,6 +101,7 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
       pageBuilder: (context, _, _) => AchievementCelebrationOverlay(
         gameTitle: title,
         difficultyIndex: index,
+        isMaster: isMaster,
         onDismiss: () => Navigator.of(context).pop(),
       ),
     );

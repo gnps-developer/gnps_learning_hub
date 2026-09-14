@@ -55,7 +55,7 @@ class ContentDebugScreen extends ConsumerWidget {
                     icon: Icons.emoji_events,
                     color: Colors.orange.shade800,
                     onPressed: () async {
-                      await ref.read(progressProvider.notifier).debugCompleteAllAchievements();
+                      await ref.read(progressProvider.notifier).debugCompleteAllAchievements(journey);
                       if (context.mounted) _showSnack(context, 'All game trophies unlocked!');
                     },
                   ),

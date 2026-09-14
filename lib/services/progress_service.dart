@@ -210,15 +210,21 @@ class ProgressService {
   }
 
   /// DEBUG ONLY. Unlocks all game achievements (Gold status) for the bubble games.
-  Future<LocalProgress> debugCompleteAllAchievements(
-    LocalProgress progress,
-  ) async {
+  Future<LocalProgress> debugCompleteAllAchievements({
+    required LocalProgress progress,
+    required Journey journey,
+  }) async {
     if (!kDebugMode && !progress.isDeveloperModeEnabled) return progress;
 
     final updated = progress.clone();
     final allUnlockedValue = TaskConfig.maxGameDifficultyIndex + 1;
     updated.unlockedGameDifficulties[ContentIds.bubblePopLetters] = allUnlockedValue;
     updated.unlockedGameDifficulties[ContentIds.bubblePopWords] = allUnlockedValue;
+    
+    // Also complete crossword based on actual levels
+    final crossword = journey.games.firstWhere((g) => g.id == ContentIds.crosswordPunjabi);
+    final levelsCount = (crossword.content['levels'] as List?)?.length ?? 6;
+    updated.unlockedGameDifficulties[ContentIds.crosswordPunjabi] = levelsCount; 
 
     await _repository.save(updated);
     return updated;

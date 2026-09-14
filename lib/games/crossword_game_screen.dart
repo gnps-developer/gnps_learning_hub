@@ -28,6 +28,7 @@ class _CrosswordGameScreenState extends ConsumerState<CrosswordGameScreen> {
   int _wordsFoundInLevel = 0;
   bool _isTransitioning = false;
   bool _gameFinished = false;
+  Map<String, dynamic>? _newAchievement;
 
   @override
   void initState() {
@@ -87,12 +88,24 @@ class _CrosswordGameScreenState extends ConsumerState<CrosswordGameScreen> {
     ref.read(progressProvider.notifier).addPoints(winBonus);
 
     // Save level progress
+    final nextLevelNum = _currentLevelIndex + 1;
+    final progress = ref.read(progressProvider).value;
+    final previousSavedLevel = progress?.unlockedGameDifficulties[widget.game.id] ?? 0;
+
     await ref
         .read(progressProvider.notifier)
         .saveGameLevel(
       gameId: widget.game.id,
-      levelIndex: _currentLevelIndex + 1,
+      levelIndex: nextLevelNum,
     );
+
+    // If we just finished the last level AND it's the first time finishing it
+    if (nextLevelNum == _crosswordData.levels.length && previousSavedLevel < nextLevelNum) {
+      _newAchievement = {
+        'gameTitle': widget.game.title,
+        'isMaster': true,
+      };
+    }
 
     // Short delay to allow the last word revelation to be seen
     await Future.delayed(const Duration(milliseconds: 1000));
@@ -268,7 +281,7 @@ class _CrosswordGameScreenState extends ConsumerState<CrosswordGameScreen> {
                       ),
                       const SizedBox(height: AppSpacing.xl),
                       ElevatedButton(
-                        onPressed: () => Navigator.of(context).pop(),
+                        onPressed: () => Navigator.of(context).pop(_newAchievement),
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
                             horizontal: AppSpacing.xxl,

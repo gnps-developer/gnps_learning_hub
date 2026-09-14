@@ -9,13 +9,15 @@ import '../avatar/avatar_preview.dart';
 
 class AchievementCelebrationOverlay extends ConsumerStatefulWidget {
   final String gameTitle;
-  final int difficultyIndex; // 1=Bronze, 2=Silver, 3=Gold
+  final int? difficultyIndex; // 1=Bronze, 2=Silver, 3=Gold (for difficulty games)
+  final bool isMaster; // For level-completion games like Crossword
   final VoidCallback onDismiss;
 
   const AchievementCelebrationOverlay({
     super.key,
     required this.gameTitle,
-    required this.difficultyIndex,
+    this.difficultyIndex,
+    this.isMaster = false,
     required this.onDismiss,
   });
 
@@ -78,6 +80,8 @@ class _AchievementCelebrationOverlayState
   }
 
   Color _getTrophyColor() {
+    if (widget.isMaster) return AppColors.master;
+
     switch (widget.difficultyIndex) {
       case 1:
         return AppColors.bronze;
@@ -91,6 +95,8 @@ class _AchievementCelebrationOverlayState
   }
 
   String _getTrophyName() {
+    if (widget.isMaster) return UIStrings.trophyMaster;
+
     switch (widget.difficultyIndex) {
       case 1:
         return UIStrings.trophyBronze;
@@ -180,7 +186,7 @@ class _AchievementCelebrationOverlayState
                         ),
                       ),
 
-                      // Trophy (In front of avatar, beneath face)
+                      // Trophy/Badge (In front of avatar, beneath face)
                       AnimatedBuilder(
                         animation: _trophyScale,
                         builder: (context, child) {
@@ -189,7 +195,7 @@ class _AchievementCelebrationOverlayState
                             child: Transform.scale(
                               scale: _trophyScale.value,
                               child: Icon(
-                                Icons.emoji_events,
+                                widget.isMaster ? Icons.workspace_premium : Icons.emoji_events,
                                 color: _getTrophyColor(),
                                 size: 110,
                                 shadows: [
@@ -213,7 +219,9 @@ class _AchievementCelebrationOverlayState
                     child: Column(
                       children: [
                         Text(
-                          UIStrings.trophyUnlocked(_getTrophyName()),
+                          widget.isMaster 
+                            ? UIStrings.masterEarned(_getTrophyName())
+                            : UIStrings.trophyUnlocked(_getTrophyName()),
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 28,
