@@ -21,14 +21,14 @@ class AchievementsScreen extends ConsumerWidget {
           data: (journey) {
             final unlockedGameCards = journey.games
                 .map((game) {
-                  // Only show achievements for games that are unlocked (completed anchor lesson)
-                  final isUnlocked = progress.completedLessonIds
-                      .contains(game.unlockAfterLessonId);
-                  if (!isUnlocked) return const SizedBox.shrink();
-
                   final trophies =
                       progress.unlockedGameDifficulties[game.id] ?? 0;
                   final scores = progress.gameHighScores[game.id] ?? {};
+
+                  // Show if unlocked via lesson OR if some trophies were already earned (e.g. debug/saved)
+                  final isUnlocked = progress.completedLessonIds.contains(game.unlockAfterLessonId);
+                  if (!isUnlocked && trophies == 0 && scores.isEmpty) return const SizedBox.shrink();
+
                   final totalLevels = game.type == 'crossword' 
                       ? (game.content['levels'] as List?)?.length ?? 0
                       : 0;
@@ -197,7 +197,7 @@ class _MasterBadgeItem extends StatelessWidget {
           alignment: Alignment.center,
           children: [
             Icon(
-              Icons.workspace_premium,
+              Icons.military_tech,
               color: isEarned ? color : Colors.grey.shade300,
               size: 64,
             ),

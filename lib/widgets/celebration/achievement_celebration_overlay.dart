@@ -9,15 +9,17 @@ import '../avatar/avatar_preview.dart';
 
 class AchievementCelebrationOverlay extends ConsumerStatefulWidget {
   final String gameTitle;
-  final int? difficultyIndex; // 1=Bronze, 2=Silver, 3=Gold (for difficulty games)
-  final bool isMaster; // For level-completion games like Crossword
+  final String achievementLabel; // e.g. "Gold Trophy Unlocked!"
+  final Widget rewardWidget; // The Animated icon or badge
+  final Color celebrationColor; // The primary color for halo/rays/button
   final VoidCallback onDismiss;
 
   const AchievementCelebrationOverlay({
     super.key,
     required this.gameTitle,
-    this.difficultyIndex,
-    this.isMaster = false,
+    required this.achievementLabel,
+    required this.rewardWidget,
+    required this.celebrationColor,
     required this.onDismiss,
   });
 
@@ -79,36 +81,6 @@ class _AchievementCelebrationOverlayState
     super.dispose();
   }
 
-  Color _getTrophyColor() {
-    if (widget.isMaster) return AppColors.master;
-
-    switch (widget.difficultyIndex) {
-      case 1:
-        return AppColors.bronze;
-      case 2:
-        return AppColors.silver;
-      case 3:
-        return AppColors.gold;
-      default:
-        return AppColors.gold;
-    }
-  }
-
-  String _getTrophyName() {
-    if (widget.isMaster) return UIStrings.trophyMaster;
-
-    switch (widget.difficultyIndex) {
-      case 1:
-        return UIStrings.trophyBronze;
-      case 2:
-        return UIStrings.trophySilver;
-      case 3:
-        return UIStrings.trophyGold;
-      default:
-        return '';
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final progressAsync = ref.watch(progressProvider);
@@ -131,7 +103,7 @@ class _AchievementCelebrationOverlayState
                       angle: _rotationController.value * 2 * pi,
                       child: CustomPaint(
                         painter: _LightRaysPainter(
-                          color: _getTrophyColor().withValues(alpha: 0.15),
+                          color: widget.celebrationColor.withValues(alpha: 0.15),
                           rayCount: 16,
                         ),
                         size: const Size(600, 600),
@@ -161,9 +133,9 @@ class _AchievementCelebrationOverlayState
                                 shape: BoxShape.circle,
                                 gradient: RadialGradient(
                                   colors: [
-                                    _getTrophyColor().withValues(alpha: 0.7),
-                                    _getTrophyColor().withValues(alpha: 0.2),
-                                    _getTrophyColor().withValues(alpha: 0.0),
+                                    widget.celebrationColor.withValues(alpha: 0.7),
+                                    widget.celebrationColor.withValues(alpha: 0.2),
+                                    widget.celebrationColor.withValues(alpha: 0.0),
                                   ],
                                   stops: const [0.0, 0.5, 1.0],
                                 ),
@@ -186,7 +158,7 @@ class _AchievementCelebrationOverlayState
                         ),
                       ),
 
-                      // Trophy/Badge (In front of avatar, beneath face)
+                      // Reward Widget (In front of avatar, beneath face)
                       AnimatedBuilder(
                         animation: _trophyScale,
                         builder: (context, child) {
@@ -194,18 +166,7 @@ class _AchievementCelebrationOverlayState
                             bottom: 20, // Positioned near the bottom of the avatar container
                             child: Transform.scale(
                               scale: _trophyScale.value,
-                              child: Icon(
-                                widget.isMaster ? Icons.workspace_premium : Icons.emoji_events,
-                                color: _getTrophyColor(),
-                                size: 110,
-                                shadows: [
-                                  Shadow(
-                                    color: Colors.black.withValues(alpha: 0.5),
-                                    blurRadius: 15,
-                                    offset: const Offset(0, 4),
-                                  )
-                                ],
-                              ),
+                              child: widget.rewardWidget,
                             ),
                           );
                         },
@@ -219,9 +180,7 @@ class _AchievementCelebrationOverlayState
                     child: Column(
                       children: [
                         Text(
-                          widget.isMaster 
-                            ? UIStrings.masterEarned(_getTrophyName())
-                            : UIStrings.trophyUnlocked(_getTrophyName()),
+                          widget.achievementLabel,
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 28,
@@ -241,7 +200,7 @@ class _AchievementCelebrationOverlayState
                               horizontal: 56,
                               vertical: 18,
                             ),
-                            backgroundColor: _getTrophyColor(),
+                            backgroundColor: widget.celebrationColor,
                             foregroundColor: Colors.black,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(AppSpacing.md),

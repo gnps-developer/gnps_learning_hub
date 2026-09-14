@@ -18,6 +18,7 @@ import 'shop_screen.dart';
 import 'achievements_screen.dart';
 
 import '../models/game_config.dart';
+import '../models/achievements/achievement_reward.dart';
 import '../models/shop/default_item_ids.dart';
 import '../providers/navigation_providers.dart';
 import '../games/bubble_game_screen.dart';
@@ -70,7 +71,7 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
       return;
     }
 
-    final result = await Navigator.of(context).push<Map<String, dynamic>>(
+    final result = await Navigator.of(context).push<AchievementReward>(
       MaterialPageRoute(
         builder: (_) => game.type == 'crossword'
             ? CrosswordGameScreen(game: game)
@@ -79,19 +80,11 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
     );
 
     if (result != null && mounted) {
-      _showAchievementCelebration(
-        title: result['gameTitle'] as String,
-        index: result['difficultyIndex'] as int?,
-        isMaster: result['isMaster'] as bool? ?? false,
-      );
+      _showAchievementCelebration(result);
     }
   }
 
-  void _showAchievementCelebration({
-    required String title,
-    int? index,
-    bool isMaster = false,
-  }) {
+  void _showAchievementCelebration(AchievementReward reward) {
     showGeneralDialog(
       context: context,
       barrierDismissible: false,
@@ -99,9 +92,21 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
       barrierColor: AppColors.overlayDark,
       transitionDuration: AppDurations.medium,
       pageBuilder: (context, _, _) => AchievementCelebrationOverlay(
-        gameTitle: title,
-        difficultyIndex: index,
-        isMaster: isMaster,
+        gameTitle: reward.gameTitle,
+        achievementLabel: reward.label,
+        celebrationColor: reward.color,
+        rewardWidget: Icon(
+          reward.icon,
+          color: reward.color,
+          size: 110,
+          shadows: [
+            Shadow(
+              color: Colors.black.withValues(alpha: 0.5),
+              blurRadius: 15,
+              offset: const Offset(0, 4),
+            )
+          ],
+        ),
         onDismiss: () => Navigator.of(context).pop(),
       ),
     );

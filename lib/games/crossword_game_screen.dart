@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/game_config.dart';
 import '../models/games/crossword_data.dart';
+import '../models/achievements/achievement_reward.dart';
 import '../config/ui_config.dart';
 import '../config/ui_strings.dart';
 import '../providers/progress_providers.dart';
@@ -28,7 +29,7 @@ class _CrosswordGameScreenState extends ConsumerState<CrosswordGameScreen> {
   int _wordsFoundInLevel = 0;
   bool _isTransitioning = false;
   bool _gameFinished = false;
-  Map<String, dynamic>? _newAchievement;
+  AchievementReward? _newAchievement;
 
   @override
   void initState() {
@@ -101,10 +102,7 @@ class _CrosswordGameScreenState extends ConsumerState<CrosswordGameScreen> {
 
     // If we just finished the last level AND it's the first time finishing it
     if (nextLevelNum == _crosswordData.levels.length && previousSavedLevel < nextLevelNum) {
-      _newAchievement = {
-        'gameTitle': widget.game.title,
-        'isMaster': true,
-      };
+      _newAchievement = CrosswordMasterMedal(widget.game.title);
     }
 
     // Short delay to allow the last word revelation to be seen

@@ -11,6 +11,8 @@ import 'package:url_launcher/url_launcher.dart';
 import '../config/debug_config.dart';
 import '../config/ui_config.dart';
 import '../config/ui_strings.dart';
+import '../models/achievements/achievement_reward.dart';
+import '../models/games/game_difficulty.dart';
 import '../providers/content_providers.dart';
 import '../providers/progress_providers.dart';
 import '../tools/content_debug_screen.dart';
@@ -446,24 +448,55 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             },
             child: const Text('Gold (Hard)'),
           ),
+          const Divider(),
+          SimpleDialogOption(
+            onPressed: () {
+              Navigator.pop(context);
+              _showMasterCelebration();
+            },
+            child: const Text('Crossword Master'),
+          ),
         ],
       ),
     );
   }
 
+  void _showMasterCelebration() {
+    _displayCelebration(const CrosswordMasterMedal('Crossword'));
+  }
+
   void _showCelebration(int index) {
+    final difficulty = GameDifficulty.values[index - 1];
+    _displayCelebration(BubbleGameTrophy('Bubble Pop', difficulty));
+  }
+
+  void _displayCelebration(AchievementReward reward) {
     showGeneralDialog(
       context: context,
       barrierDismissible: false,
       barrierLabel: 'Test Celebration',
       barrierColor: Colors.black.withValues(alpha: 0.85),
       transitionDuration: const Duration(milliseconds: 400),
-      pageBuilder: (context, _, _) => AchievementCelebrationOverlay(
-        gameTitle: 'Test Game',
-        difficultyIndex: index,
-        isMaster: false,
-        onDismiss: () => Navigator.of(context).pop(),
-      ),
+      pageBuilder: (context, _, _) {
+        return AchievementCelebrationOverlay(
+          gameTitle: reward.gameTitle,
+          achievementLabel: reward.label,
+          celebrationColor: reward.color,
+          rewardWidget: Icon(
+            reward.icon,
+            color: reward.color,
+            size: 110,
+            shadows: [
+              Shadow(
+                color: Colors.black.withValues(alpha: 0.5),
+                blurRadius: 15,
+                offset: const Offset(0, 4),
+              )
+            ],
+          ),
+          onDismiss: () => Navigator.of(context).pop(),
+        );
+      },
     );
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/game_config.dart';
+import '../models/achievements/achievement_reward.dart';
 import '../models/games/game_difficulty.dart';
 import '../models/shop/default_item_ids.dart';
 import '../config/ui_config.dart';
@@ -40,7 +41,7 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
   bool _isConsumingHeart = false;
   int _pendingLosses = 0;
   GameDifficulty? _selectedDifficulty;
-  Map<String, dynamic>? _newAchievement;
+  AchievementReward? _newAchievement;
 
   // Configurable parameters from game.content
   late int _spawnRateMs;
@@ -301,10 +302,8 @@ class _BubbleGameScreenState extends ConsumerState<BubbleGameScreen>
 
     if (newIndex != null && mounted) {
       setState(() {
-        _newAchievement = {
-          'gameTitle': widget.game.title,
-          'difficultyIndex': newIndex,
-        };
+        final difficulty = GameDifficulty.values[newIndex - 1];
+        _newAchievement = BubbleGameTrophy(widget.game.title, difficulty);
       });
     }
   }
