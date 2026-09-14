@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # Release Preparation Script
-# Usage: ./tools/prepare_release.sh <version_tag>
+# Usage: ./tools/release/prepare_release.sh <version_tag>
 
 VERSION=$1
 
 if [ -z "$VERSION" ]; then
-    echo "Usage: ./tools/prepare_release.sh <vX.Y.Z>"
+    echo "Usage: ./tools/release/prepare_release.sh <vX.Y.Z>"
     exit 1
 fi
 
@@ -49,4 +49,4 @@ echo "🚀 Tag $VERSION pushed!"
 echo "📄 Draft release notes saved to: exports/release_notes_draft.txt"
 echo ""
 echo "Next Steps:"
-echo "1. Once published, run: ./tools/finish_release.sh"
+echo "1. Once published, run: ./tools/release/finish_release.sh"

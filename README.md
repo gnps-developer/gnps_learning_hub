@@ -60,17 +60,17 @@ This repository includes a suite of command-line tools to maintain the curriculu
 ### 📊 Curriculum Overview
 The `guides/CURRICULUM.md` file tracks all lessons and tasks. To refresh it based on the current JSON content:
 ```bash
-dart tools/generate_curriculum.dart
+dart tools/appcontent/generate_curriculum.dart
 ```
 
 ### 🔊 Content Audio Generation
 To ensure 100% reliability across all devices, the app can use pre-recorded audio snippets instead of relying on the system TTS engine. To generate audio for all current lessons:
 ```bash
-dart tools/generate_audio.dart
+dart tools/appaudio/generate_audio.dart
 ```
 To generate audio for specific lessons only, provide the lesson IDs as arguments:
 ```bash
-dart tools/generate_audio.dart lesson_tracing lesson_spelling
+dart tools/appaudio/generate_audio.dart lesson_tracing lesson_spelling
 ```
 This script will scan your JSON content and download missing `.mp3` files to `assets/audio/lessons/`, organized by lesson and shared common folders for efficient reuse.
 
@@ -124,7 +124,7 @@ The generated PDFs will be located in the `exports/` directory.
 4. **Prepare Curriculum Data**:
    Ensure the curriculum manifest and documentation are up-to-date with the latest content:
    ```bash
-   dart tools/generate_curriculum.dart
+   dart tools/appcontent/generate_curriculum.dart
    ```
 
 ### Running the App

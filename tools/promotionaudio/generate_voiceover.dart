@@ -4,11 +4,12 @@ import 'dart:io';
 
 /// A tool to generate Punjabi voiceover audio files using Google Translate TTS.
 /// 
-/// Usage: dart tools/generate_voiceover.dart [output_directory]
+/// Usage: dart tools/promotionaudio/generate_voiceover.dart [output_directory]
 void main(List<String> args) async {
-  final scriptFile = File('tools/voiceover_script.json');
+  // Look for the script file in the same directory as the tool
+  final scriptFile = File('tools/promotionaudio/voiceover_script.json');
   if (!scriptFile.existsSync()) {
-    print('Error: tools/voiceover_script.json not found.');
+    print('Error: tools/promotionaudio/voiceover_script.json not found.');
     exit(1);
   }
 

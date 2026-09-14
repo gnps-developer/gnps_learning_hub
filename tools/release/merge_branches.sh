@@ -7,8 +7,8 @@ SOURCE_BRANCH=$1
 TARGET_BRANCH=$2
 
 if [ -z "$SOURCE_BRANCH" ] || [ -z "$TARGET_BRANCH" ]; then
-    echo "Usage: ./tools/merge_branches.sh <source_branch> <target_branch>"
-    echo "Example: ./tools/merge_branches.sh develop main"
+    echo "Usage: ./tools/release/merge_branches.sh <source_branch> <target_branch>"
+    echo "Example: ./tools/release/merge_branches.sh develop main"
     exit 1
 fi
 

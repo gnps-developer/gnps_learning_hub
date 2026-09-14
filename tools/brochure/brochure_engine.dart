@@ -169,7 +169,7 @@ class BrochureEngine {
       sections: mergedSections,
       lessonContent: lessonContent.cast<String, dynamic>(),
       gameContent: gameContent.cast<String, dynamic>(),
-      css: File('$root/tools/style.css').readAsStringSync(),
+      css: File('$root/tools/brochure/style.css').readAsStringSync(),
       version: manifest['version'],
       lessons: lessons,
       games: games,

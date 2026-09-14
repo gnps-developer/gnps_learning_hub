@@ -1,11 +1,11 @@
-# Curriculum Overview
+# Gurmukhi Sikho - Curriculum Overview
 
 This document is automatically generated from the app's lesson data.
 
 ### 📊 App Statistics
 - **Total Lessons**: 7
 - **Total Interactive Tasks**: 532
-- **Total Games**: 2
+- **Total Games**: 3
 
 ---
 
@@ -118,6 +118,7 @@ This document is automatically generated from the app's lesson data.
 
 - **Letter Bubbles**: bubble pop game unlocked after `lesson_tracing`.
 - **Word Bubbles**: bubble pop game unlocked after `lesson_matching_words`.
+- **Punjabi Crossword**: crossword game unlocked after `lesson_arrange_sentence`.
 
 ---
-*Last Updated: 2026-08-30*
+*Last Updated: 2026-09-14*

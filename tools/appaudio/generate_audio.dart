@@ -8,13 +8,13 @@ import 'dart:io';
 /// Usage:
 /// ```bash
 /// # Generate for all JSON files
-/// dart tools/generate_audio.dart
+/// dart tools/appaudio/generate_audio.dart
 ///
 /// # Generate for specific lesson ID
-/// dart tools/generate_audio.dart lesson_spelling
+/// dart tools/appaudio/generate_audio.dart lesson_spelling
 ///
 /// # Generate a specific word manually
-/// dart tools/generate_audio.dart --word "ਸਤਿਨਾਮ" --path "audio/lessons/words/satnam.mp3"
+/// dart tools/appaudio/generate_audio.dart --word "ਸਤਿਨਾਮ" --path "audio/lessons/words/satnam.mp3"
 /// ```
 void main(List<String> args) async {
   final projectRoot = _findProjectRoot();
