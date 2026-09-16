@@ -66,6 +66,19 @@ void main() {
           final itemPool = content['itemPool'] as Map;
           expect(itemPool.isNotEmpty, isTrue,
               reason: 'Game $gameId itemPool cannot be empty');
+
+          // Specific check for Crossword integrity
+          if (type == 'crossword') {
+            final levels = content['levels'] as List;
+            for (final level in levels) {
+              final words = level['words'] as List;
+              for (final wordObj in words) {
+                final answer = wordObj['answer'] as String;
+                expect(itemPool.containsKey(answer), isTrue,
+                    reason: 'Game $gameId: Word "$answer" used in Level ${level['levelNumber']} is missing from the itemPool.');
+              }
+            }
+          }
         });
       }
     }
