@@ -11,6 +11,8 @@ workflows:
     instance_type: mac_mini_m2
 
     environment:
+      groups:
+        - ios_credentials # Placeholder for iOS certificates and profiles
       android_signing:
         - GNPS Upload
       flutter: stable
@@ -55,16 +57,24 @@ workflows:
             --build-name=1.0.$PROJECT_BUILD_NUMBER \
             --build-number=$PROJECT_BUILD_NUMBER
 
-      # Only works if iOS code signing has been configured
-      # - name: Build iOS IPA
-      #   script: |
-      #     flutter build ipa --release
+      - name: Build iOS IPA
+        script: |
+          flutter build ipa --release --no-codesign \
+            --build-name=1.0.$PROJECT_BUILD_NUMBER \
+            --build-number=$PROJECT_BUILD_NUMBER
+
+      - name: Build Web
+        script: |
+          flutter build web --release \
+            --base-href / \
+            --pwa-strategy offline-first
 
     artifacts:
       - build/app/outputs/**/*.apk
       - build/app/outputs/**/*.aab
       - build/app/outputs/**/mapping.txt
       - build/ios/ipa/*.ipa
+      - build/web/**
       - exports/*.pdf
       - exports/brochure/*.pdf
       - /tmp/xcodebuild_logs/*.log
