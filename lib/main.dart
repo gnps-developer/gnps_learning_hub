@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -41,6 +42,48 @@ class LearningHubApp extends ConsumerWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: seedColor),
         useMaterial3: true,
       ),
+      builder: (context, child) {
+        if (!kIsWeb) return child!;
+        
+        final theme = Theme.of(context);
+        final isDark = theme.brightness == Brightness.dark;
+        
+        // Use a background color derived from the theme
+        final outerBackground = isDark 
+            ? theme.colorScheme.surfaceContainerLow
+            : theme.colorScheme.primaryContainer.withValues(alpha: 0.3);
+
+        return Container(
+          color: outerBackground,
+          child: Center(
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                // Responsive width: 95% on small screens, max 800px on larger screens
+                final width = constraints.maxWidth < 800 
+                    ? constraints.maxWidth * 0.95 
+                    : 800.0;
+
+                return Container(
+                  width: width,
+                  height: double.infinity,
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.15),
+                        blurRadius: 20,
+                        offset: const Offset(0, 5),
+                      ),
+                    ],
+                  ),
+                  child: ClipRect(
+                    child: child!,
+                  ),
+                );
+              },
+            ),
+          ),
+        );
+      },
       home: const SplashScreen(),
     );
   }
