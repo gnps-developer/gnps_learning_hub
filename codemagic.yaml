@@ -12,7 +12,8 @@ workflows:
 
     environment:
       groups:
-        - ios_credentials # Placeholder for iOS certificates and profiles
+        - ios_credentials
+        - web_deploy # Contains your GITHUB_TOKEN
       android_signing:
         - GNPS Upload
       flutter: stable
@@ -63,12 +64,28 @@ workflows:
             --build-name=1.0.$PROJECT_BUILD_NUMBER \
             --build-number=$PROJECT_BUILD_NUMBER
 
-      - name: Build Web
+      - name: Build and Deploy Web
         script: |
+          # 1. Build the release version with the correct base-href
           flutter build web --release \
-            --base-href / \
+            --base-href /gurmukhi-sikho-webapp/ \
             --pwa-strategy offline-first
+          
+          # 2. Archive for Codemagic download
           cd build/web && zip -r ../../web_build.zip .
+          
+          # 3. Deploy to the separate live repository
+          # Setup git identity
+          git config --global user.email "developer@gnps.nsw.edu.au"
+          git config --global user.name "Codemagic CI"
+          
+          # Push to the live repo using the token
+          git init
+          git remote add origin https://$GITHUB_TOKEN@github.com/gnps-developer/gurmukhi-sikho-webapp.git
+          git checkout -b main
+          git add .
+          git commit -m "Automated deploy from Codemagic build $PROJECT_BUILD_NUMBER"
+          git push origin main --force
 
     artifacts:
       - build/app/outputs/**/*.apk
