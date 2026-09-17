@@ -12,8 +12,7 @@ workflows:
 
     environment:
       groups:
-        - ios_credentials
-        - web_deploy # Contains your GITHUB_TOKEN
+        - web_deploy # reference to GITHUB_TOKEN
       android_signing:
         - GNPS Upload
       flutter: stable
