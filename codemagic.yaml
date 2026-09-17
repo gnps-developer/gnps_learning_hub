@@ -68,13 +68,14 @@ workflows:
           flutter build web --release \
             --base-href / \
             --pwa-strategy offline-first
+          cd build/web && zip -r ../../web_build.zip .
 
     artifacts:
       - build/app/outputs/**/*.apk
       - build/app/outputs/**/*.aab
       - build/app/outputs/**/mapping.txt
       - build/ios/ipa/*.ipa
-      - build/web/**
+      - web_build.zip
       - exports/*.pdf
       - exports/brochure/*.pdf
       - /tmp/xcodebuild_logs/*.log
