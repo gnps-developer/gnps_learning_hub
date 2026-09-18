@@ -58,16 +58,20 @@ class LearningHubApp extends ConsumerWidget {
           child: Center(
             child: LayoutBuilder(
               builder: (context, constraints) {
-                // Responsive width: 95% on small screens, max 800px on larger screens
-                final width = constraints.maxWidth < 800 
-                    ? constraints.maxWidth * 0.95 
-                    : 800.0;
+                final isMobileWidth = constraints.maxWidth < 600;
+                
+                // 100% width on mobile, 95% on tablets, max 800px on desktop
+                final width = isMobileWidth 
+                    ? constraints.maxWidth 
+                    : (constraints.maxWidth < 840 
+                        ? constraints.maxWidth * 0.95 
+                        : 800.0);
 
                 return Container(
                   width: width,
                   height: double.infinity,
                   decoration: BoxDecoration(
-                    boxShadow: [
+                    boxShadow: isMobileWidth ? null : [
                       BoxShadow(
                         color: Colors.black.withValues(alpha: 0.15),
                         blurRadius: 20,
