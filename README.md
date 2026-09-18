@@ -82,16 +82,36 @@ Generate professional, multi-page brochures and one-pagers that highlight the ap
 - **Data Dependencies**: Ensure `assets/data/brochure_content.json` and the stylesheet `tools/style.css` are present.
 
 #### Usage
-- **Generate Full Brochure & Flyer**:
+- **Generate Full Brochure**:
   ```bash
-  dart tools/generate_brochure.dart
+  dart tools/brochure/generate_full_brochure.dart
   ```
-- **Generate Specific Items**:
+- **Generate One-Pager Flyer**:
   ```bash
-  dart tools/generate_brochure.dart --full   # Just the premium brochure
-  dart tools/generate_brochure.dart --flyer  # Just the one-page flyer
+  dart tools/brochure/generate_one_pager.dart
   ```
-The generated PDFs will be located in the `exports/` directory.
+The generated PDFs will be located in the `exports/brochure/` directory.
+
+---
+
+## 🚀 Release Process
+
+The project uses a structured branching model and automated scripts to manage releases.
+
+### 1. Prepare Release
+When the `develop` branch is stable, run the preparation script to audit data and tag the version:
+```bash
+./tools/release/prepare_release.sh v1.0.X
+```
+
+### 2. Build & Verify
+Codemagic will automatically trigger a build for the new tag. Download the artifacts (AAB/IPA) and verify them.
+
+### 3. Finalize Release
+Once the release is live in the stores, merge the changes into `main` and return to `develop`:
+```bash
+./tools/release/finish_release.sh
+```
 
 ---
 
