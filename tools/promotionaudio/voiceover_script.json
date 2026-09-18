@@ -2,29 +2,69 @@
   "language": "pa",
   "segments": [
     {
-      "id": "01_welcome",
-      "text": "ਜੀ ਐਨ ਪੀ ਐਸ ਲਰਨਿੰਗ ਹੱਬ ਵਿੱਚ ਤੁਹਾਡਾ ਸੁਆਗਤ ਹੈ!",
-      "description": "Welcome message"
+      "id": "01_intro",
+      "text": "ਗੁਰਮੁਖੀ ਸਿੱਖੋ, ਖੇਡੋ ਤੇ ਵਧੋ।",
+      "description": "App Tagline Intro"
     },
     {
-      "id": "02_tracing_id",
-      "text": "ਅੱਖਰ ਲਿਖਣਾ ਸਿੱਖੋ ਅਤੇ ਪਛਾਣ ਕਰੋ।",
-      "description": "Tracing and identification"
+      "id": "02_journey",
+      "text": "ਇੱਕ ਦਿਲਚਸਪ ਸਫ਼ਰ ਸ਼ੁਰੂ ਕਰੋ ਜਿੱਥੇ ਤੁਸੀਂ ਪੰਜਾਬੀ ਅੱਖਰਾਂ ਤੋਂ ਲੈ ਕੇ ਪੂਰੇ ਵਾਕਾਂ ਤੱਕ ਸਭ ਕੁਝ ਸਿੱਖੋਗੇ।",
+      "description": "Interactive Map Journey"
     },
     {
-      "id": "03_bubble_game",
-      "text": "ਬੁਲਬੁਲੇ ਵਾਲੀ ਖੇਡ ਦਾ ਅਨੰਦ ਲਓ।",
-      "description": "Bubble game"
+      "id": "03_tracing",
+      "text": "ਅੱਖਰਾਂ ਨੂੰ ਸਹੀ ਤਰੀਕੇ ਨਾਲ ਲਿਖਣਾ ਸਿੱਖਣ ਲਈ ਸਾਡੇ ਟ੍ਰੇਸਿੰਗ ਟੂਲ ਦੀ ਵਰਤੋਂ ਕਰੋ।",
+      "description": "Letter Tracing"
     },
     {
-      "id": "04_activities",
-      "text": "ਤਸਵੀਰਾਂ ਤੇ ਸ਼ਬਦ ਮਿਲਾਓ, ਦੁਕਾਨ ਤੋਂ ਚੀਜ਼ਾਂ ਖਰੀਦੋ ਅਤੇ ਆਪਣਾ ਅਵਤਾਰ ਸਜਾਓ।",
-      "description": "Matching, shop, and avatar"
+      "id": "04_recognition",
+      "text": "ਮਜ਼ੇਦਾਰ ਚੁਣੌਤੀਆਂ ਰਾਹੀਂ ਅੱਖਰਾਂ ਦੀ ਪਛਾਣ ਕਰੋ ਅਤੇ ਪੰਜਾਬੀ ਪੜ੍ਹਨ ਦੇ ਹੁਨਰ ਨੂੰ ਨਿਖਾਰੋ।",
+      "description": "Letter Selection"
     },
     {
-      "id": "05_tagline",
-      "text": "ਆਓ, ਮਿਲ ਕੇ ਪੰਜਾਬੀ ਸਿੱਖੋ, ਖੇਡੋ, ਵਧੋ!",
-      "description": "App tagline"
+      "id": "05_visual_vocab",
+      "text": "ਰੰਗੀਨ ਤਸਵੀਰਾਂ ਨੂੰ ਸ਼ਬਦਾਂ ਨਾਲ ਮਿਲਾ ਕੇ ਆਪਣੀ ਪੰਜਾਬੀ ਸ਼ਬਦਾਵਲੀ ਵਧਾਓ।",
+      "description": "Picture-Word Matching"
+    },
+    {
+      "id": "06_spelling",
+      "text": "ਅੱਖਰਾਂ ਨੂੰ ਸਹੀ ਤਰਤੀਬ ਵਿੱਚ ਜੋੜ ਕੇ ਨਵੇਂ ਸ਼ਬਦ ਬਣਾਉਣ ਦੀ ਕਲਾ ਸਿੱਖੋ।",
+      "description": "Spelling/Word Building"
+    },
+    {
+      "id": "07_sentences",
+      "text": "ਛੋਟੇ ਸ਼ਬਦਾਂ ਤੋਂ ਪੂਰੇ ਵਾਕ ਬਣਾਉਣ ਦੇ ਮਾਹਿਰ ਬਣੋ ਅਤੇ ਭਰੋਸੇ ਨਾਲ ਪੰਜਾਬੀ ਬੋਲੋ।",
+      "description": "Sentence Building"
+    },
+    {
+      "id": "08_crossword",
+      "text": "ਮਨੋਰੰਜਕ ਪਹੇਲੀਆਂ ਰਾਹੀਂ ਨਵੇਂ ਸ਼ਬਦ ਸਿੱਖੋ ਅਤੇ ਆਪਣੇ ਦਿਮਾਗ ਨੂੰ ਤੇਜ਼ ਬਣਾਓ।",
+      "description": "Crossword Module"
+    },
+    {
+      "id": "09_arcade",
+      "text": "ਬੁਲਬੁਲੇ ਵਾਲੀਆਂ ਖੇਡਾਂ ਨਾਲ ਮਨੋਰੰਜਨ ਦੇ ਨਾਲ-ਨਾਲ ਪੜ੍ਹਾਈ ਦਾ ਅਨੰਦ ਲਓ।",
+      "description": "Arcade Games"
+    },
+    {
+      "id": "10_avatar",
+      "text": "ਆਪਣਾ ਮਨਪਸੰਦ ਅਵਤਾਰ ਬਣਾਓ, ਖੂਬਸੂਰਤ ਦਸਤਾਰਾਂ ਅਤੇ ਕੱਪੜੇ ਚੁਣੋ।",
+      "description": "Avatar Customizer"
+    },
+    {
+      "id": "11_shop",
+      "text": "ਪੜ੍ਹਾਈ ਦੌਰਾਨ ਜਿੱਤੇ ਗਏ ਰਤਨਾਂ ਨਾਲ ਦੁਕਾਨ ਤੋਂ ਨਵੀਆਂ ਚੀਜ਼ਾਂ ਖਰੀਦੋ।",
+      "description": "In-app Shop & Gems"
+    },
+    {
+      "id": "12_motivation",
+      "text": "ਹਰ ਰੋਜ਼ ਪੜ੍ਹੋ, ਆਪਣੀ ਲੜੀ ਬਣਾਏ ਰੱਖੋ ਅਤੇ ਟਰਾਫੀਆਂ ਜਿੱਤੋ।",
+      "description": "Daily Streaks & Trophies"
+    },
+    {
+      "id": "13_closing",
+      "text": "ਗੁਰਮੁਖੀ ਸਿੱਖੋ - ਆਓ ਮਿਲ ਕੇ ਆਪਣੀ ਵਿਰਾਸਤ ਨਾਲ ਜੁੜੀਏ।",
+      "description": "Call to Action"
     }
   ]
 }
