@@ -3,6 +3,7 @@
   "title": "Punjabi Crossword",
   "unlockAfterLessonId": "lesson_arrange_sentence",
   "type": "crossword",
+  "requiresHearts": false,
   "content": {
     "levels": [
       {

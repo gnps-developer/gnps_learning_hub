@@ -45,7 +45,7 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
     final progress = ref.read(progressProvider).value;
     final hearts = progress?.ownedItemQuantities[DefaultItemIds.extraLife] ?? 0;
 
-    if (hearts <= 0) {
+    if (game.requiresHearts && hearts <= 0) {
       showDialog(
         context: context,
         builder:

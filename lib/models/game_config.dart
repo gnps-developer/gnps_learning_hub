@@ -6,6 +6,7 @@ class GameConfig {
   final String unlockAfterLessonId;
   final String type; // e.g., 'bubble_pop'
   final Map<String, dynamic> content;
+  final bool requiresHearts;
   final double? mapXOffset; // Horizontal offset from the anchor lesson
   final double? mapYOffset; // Vertical offset from the anchor lesson
   final IconData? icon;
@@ -17,6 +18,7 @@ class GameConfig {
     required this.unlockAfterLessonId,
     required this.type,
     this.content = const {},
+    this.requiresHearts = true,
     this.mapXOffset,
     this.mapYOffset,
     this.icon,
@@ -30,6 +32,7 @@ class GameConfig {
       unlockAfterLessonId: json['unlockAfterLessonId'] as String,
       type: json['type'] as String,
       content: Map<String, dynamic>.from(json['content'] as Map? ?? {}),
+      requiresHearts: json['requiresHearts'] as bool? ?? true,
       mapXOffset: (json['mapXOffset'] as num?)?.toDouble(),
       mapYOffset: (json['mapYOffset'] as num?)?.toDouble(),
       icon: json['icon'] is String
@@ -47,6 +50,7 @@ class GameConfig {
     'unlockAfterLessonId': unlockAfterLessonId,
     'type': type,
     'content': content,
+    'requiresHearts': requiresHearts,
     'mapXOffset': mapXOffset,
     'mapYOffset': mapYOffset,
     'icon': _reverseIconMapping[icon],
