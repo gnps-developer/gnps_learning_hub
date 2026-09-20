@@ -13,6 +13,7 @@ workflows:
     environment:
       groups:
         - web_deploy # reference to GITHUB_TOKEN
+        - apple_appstore_upload # Apple IPA upload credentials
       android_signing:
         - GNPS Upload
       ios_signing:
@@ -70,6 +71,14 @@ workflows:
             --build-name=1.0.$PROJECT_BUILD_NUMBER \
             --build-number=$PROJECT_BUILD_NUMBER \
             --export-options-plist=/Users/builder/export_options.plist
+
+      - name: Upload IPA to App Store Connect
+        script: |
+          xcrun altool --upload-app \
+            --type ios \
+            --file "$(find build/ios/ipa -name '*.ipa')" \
+            --username "developer@gnps.nsw.edu.au" \
+            --password "APPLE_APPSTORE_UPLOAD"
 
       - name: Build and Deploy Web
         script: |
