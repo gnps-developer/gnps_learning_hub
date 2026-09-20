@@ -15,6 +15,9 @@ workflows:
         - web_deploy # reference to GITHUB_TOKEN
       android_signing:
         - GNPS Upload
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: au.edu.nsw.gnps.learning.hub
       flutter: stable
       xcode: latest
 
@@ -57,11 +60,16 @@ workflows:
             --build-name=1.0.$PROJECT_BUILD_NUMBER \
             --build-number=$PROJECT_BUILD_NUMBER
 
+      - name: Set up code signing settings on Xcode project
+        script: |
+          xcode-project use-profiles
+
       - name: Build iOS IPA
         script: |
-          flutter build ipa --release --no-codesign \
+          flutter build ipa --release \
             --build-name=1.0.$PROJECT_BUILD_NUMBER \
-            --build-number=$PROJECT_BUILD_NUMBER
+            --build-number=$PROJECT_BUILD_NUMBER \
+            --export-options-plist=/Users/builder/export_options.plist
 
       - name: Build and Deploy Web
         script: |
@@ -69,15 +77,15 @@ workflows:
           flutter build web --release \
             --base-href /gurmukhi-sikho-webapp/ \
             --pwa-strategy offline-first
-          
+
           # 2. Archive for Codemagic download
           cd build/web && zip -r ../../web_build.zip .
-          
+
           # 3. Deploy to the separate live repository
           # Setup git identity
           git config --global user.email "developer@gnps.nsw.edu.au"
           git config --global user.name "Codemagic CI"
-          
+
           # Push to the live repo using the token
           git init
           git remote add origin https://$GITHUB_TOKEN@github.com/gnps-developer/gurmukhi-sikho-webapp.git
