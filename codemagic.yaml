@@ -78,7 +78,7 @@ workflows:
             --type ios \
             --file "$(find build/ios/ipa -name '*.ipa')" \
             --username "developer@gnps.nsw.edu.au" \
-            --password "APPLE_APPSTORE_UPLOAD"
+            --password "$APPLE_APPSTORE_UPLOAD"
 
       - name: Build and Deploy Web
         script: |
