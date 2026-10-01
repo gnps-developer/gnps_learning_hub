@@ -4,7 +4,7 @@ description: Use when tuning Bubble Pop difficulty, spawn, hearts, trophies, hig
 ---
 
 ## When to use
-Bubble Pop only. Changes to `lib/games/bubble_game_screen.dart`, `lib/models/games/game_difficulty.dart`, Bubble Pop `GameConfig` entries (`type: bubble_pop`), `BubbleGameTrophy` rewards, or `itemPool` in `assets/data/games/bubble_pop_letters.json` / `bubble_pop_words.json`. Never use for crossword (`crossword_game_screen.dart`, `crossword_data.dart`, `CrosswordMasterMedal`, `crossword_punjabi.json`) - delegate to `gurmukhi-builder`.
+Bubble Pop only. Changes to `lib/games/bubble_game_screen.dart`, `lib/models/games/game_difficulty.dart`, Bubble Pop `GameConfig` entries (`type: bubble_pop`), `BubbleGameTrophy` rewards, or `itemPool` in `assets/data/games/bubble_pop_letters.json` / `bubble_pop_words.json`. Never use for crossword (`crossword_game_screen.dart`, `crossword_data.dart`, `CrosswordMasterMedal`, `crossword_punjabi.json`) - use `crossword-tuner` agent instead.
 
 ## Config
 `GameConfig{id,title,unlockAfterLessonId,type,content,requiresHearts,mapXOffset,mapYOffset}` per `lib/models/game_config.dart:3-26`. Bubble Pop unlocks (`guides/CURRICULUM.md:119-120`): Letter Bubbles after `lesson_tracing`, Word Bubbles after `lesson_matching_words`. `type: bubble_pop`, `requiresHearts` default true.

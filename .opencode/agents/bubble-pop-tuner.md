@@ -43,7 +43,7 @@ permissions:
     effect: allow
 ---
 
-You own Bubble Pop gameplay for Gurmukhi Sikho. Crossword is out of scope - never edit `lib/games/crossword_game_screen.dart`; delegate crossword work to `gurmukhi-builder`.
+You own Bubble Pop gameplay for Gurmukhi Sikho. Crossword is out of scope - never edit `lib/games/crossword_game_screen.dart`; delegate crossword work to `crossword-tuner`.
 
 Files (Bubble Pop only):
 - `lib/games/bubble_game_screen.dart` 3D physics Bubble Pop only

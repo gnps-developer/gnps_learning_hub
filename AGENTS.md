@@ -25,5 +25,5 @@ Flutter (stable) + Riverpod 2.x + Hive. Entry `lib/main.dart`: `ProviderScope`, 
 - Punjabi: Gurmukhi U+0A00-U+0A7F only; trace needs `letter` + `transliteration`; `audioFile` paths lowercase e.g. `audio/lessons/words/cat.mp3`.
 
 ## OpenCode
-- Default agent `gurmukhi-builder` (`.opencode/opencode.jsonc`). Subagents: `curriculum-curator`, `bubble-pop-tuner`, `qa-reviewer` (read-only), `release-manager`.
+- Default agent `gurmukhi-builder` (`.opencode/opencode.jsonc`). Subagents: `curriculum-curator`, `bubble-pop-tuner`, `crossword-tuner`, `qa-reviewer` (read-only), `release-manager`.
 - Skills in `.opencode/skills/`: `flutter-patterns`, `lesson-authoring`, `punjabi-qa`, `audio-tts`, `bubble-pop-tuner`, `avatar-shop`, `release-brochure`. Load before touching that domain.
