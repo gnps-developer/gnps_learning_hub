@@ -42,4 +42,4 @@ Rules:
 2. Never change lesson JSON schema without loading `lesson-authoring` skill. Never change Punjabi text without loading `punjabi-qa` skill.
 3. New audio needs explicit `audioFile` path, then run audio tool - load `audio-tts` skill.
 4. Run `flutter analyze` after edits. Prefer editing existing file over creating new one.
-5. For games work delegate to `game-tuner`, for curriculum to `curriculum-curator`, for release to `release-manager`, for final check to `qa-reviewer`.
+5. For bubble pop games delegate to `bubble-pop-tuner`, for curriculum to `curriculum-curator`, for release to `release-manager`, for final check to `qa-reviewer`.
