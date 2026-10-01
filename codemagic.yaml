@@ -116,6 +116,7 @@ workflows:
       - build/app/outputs/**/*.aab
       - build/app/outputs/**/mapping.txt
       - build/ios/ipa/*.ipa
+      - ios_simulator_bundle.zip
       - web_build.zip
       - exports/*.pdf
       - exports/brochure/*.pdf
