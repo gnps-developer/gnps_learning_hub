@@ -61,6 +61,14 @@ workflows:
             --build-name=1.0.$PROJECT_BUILD_NUMBER \
             --build-number=$PROJECT_BUILD_NUMBER
 
+      - name: Build iOS Simulator bundle
+        script: |
+          flutter build ios --simulator --no-codesign \
+            --build-name=1.0.$PROJECT_BUILD_NUMBER \
+            --build-number=$PROJECT_BUILD_NUMBER
+          cd build/ios/iphonesimulator
+          zip -r ../../../ios_simulator_bundle.zip Runner.app            
+
       - name: Set up code signing settings on Xcode project
         script: |
           xcode-project use-profiles
