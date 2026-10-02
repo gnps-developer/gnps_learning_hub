@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../config/ui_strings.dart';
 import 'goal_setup_screen.dart';
 
 class IntroScreen extends StatelessWidget {
@@ -14,7 +15,7 @@ class IntroScreen extends StatelessWidget {
             children: [
               const Spacer(),
               Text(
-                'ਪੰਜਾਬੀ ਸਿੱਖੋ',
+                UIStrings.appNameGurmukhi,
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
               const SizedBox(height: 12),
