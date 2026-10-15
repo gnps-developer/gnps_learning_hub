@@ -227,10 +227,10 @@ String _closingPage(BrochureContext ctx) {
   final badges = (fn['platforms'] as List)
       .map(
         (p) =>
-            '<div class="store-badge ${p['status'].toString().toLowerCase().contains('available') ? 'available' : 'soon'}"><div class="store-badge-icon">${BrochureEngine.storeBadgeIcon(p['icon'])}</div><div class="store-badge-text"><span class="store-badge-status">${p['status']}</span><span class="store-badge-name">${p['name']}</span></div></div>',
+            '<div class="store-badge available"><div class="store-badge-icon">${BrochureEngine.storeBadgeIcon(p['icon'])}</div><div class="store-badge-text"><span class="store-badge-status">${p['status']}</span><span class="store-badge-name">${p['name']}</span></div></div>',
       )
       .join();
-  return '<div class="page closing-page"><h1 style="font-size: 52px; margin: 0;">${fn['title']}</h1><p class="closing-subtitle">${fn['subtitle'] ?? ""}</p><p class="gurmukhi-tag" style="margin: 16px 0 20px 0;">${fn['gurmukhiLabel']}</p><p style="font-size: 19px; line-height: 1.6; max-width: 640px; color: rgba(251, 247, 239, 0.8);">${fn['message']}</p><div class="store-badges">$badges</div>${BrochureEngine.qrBlock(fn['googlePlayUrl'], fn['qrCaption'])}<div class="footer hero-footer"><span>${fn['footerLabel']}</span><span>${ctx.brand['appName']}</span></div></div>';
+  return '<div class="page closing-page"><h1 style="font-size: 52px; margin: 0;">${fn['title']}</h1><p class="closing-subtitle">${fn['subtitle'] ?? ""}</p><p class="gurmukhi-tag" style="margin: 16px 0 20px 0;">${fn['gurmukhiLabel']}</p><p style="font-size: 19px; line-height: 1.6; max-width: 640px; color: rgba(251, 247, 239, 0.8);">${fn['message']}</p><div class="store-badges">$badges</div>${BrochureEngine.qrContainer(fn)}<div class="footer hero-footer"><span>${fn['footerLabel']}</span><span>${ctx.brand['appName']}</span></div></div>';
 }
 
 // --------------------------------------------------------------------------

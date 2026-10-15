@@ -25,10 +25,12 @@
     "title": "Gurmukhi Sikho",
     "subtitle": "Download Now",
     "gurmukhiLabel": "ਹੁਣੇ ਡਾਊਨਲੋਡ ਕਰੋ",
-    "message": "Available on Google Play, with Apple App Store to follow shortly after. Sikho, khedo, vadho — learn, play, grow, wherever your family calls home.",
+    "message": "Available on Google Play and Apple App Store. Sikho, khedo, vadho — learn, play, grow, wherever your family calls home.",
     "footerLabel": "AVAILABILITY",
     "googlePlayUrl": "https://play.google.com/store/apps/details?id=au.edu.nsw.gnps.learning.hub",
-    "qrCaption": "Scan to get it on Google Play",
+    "googlePlayQrCaption": "Google Play",
+    "appleAppStoreUrl": "https://apps.apple.com/us/app/gurmukhi-sikho-learn-punjabi/id6814097405",
+    "appleAppStoreQrCaption": "App Store",
     "platforms": [
       {
         "name": "Google Play",
@@ -37,7 +39,7 @@
       },
       {
         "name": "App Store",
-        "status": "Coming Later",
+        "status": "Live",
         "icon": "ios"
       }
     ]

@@ -239,6 +239,25 @@ class BrochureEngine {
     return '<div class="qr-block"><div class="qr-code">${_qrCodeSvg(url)}</div><span class="qr-caption">${caption ?? 'Scan to download'}</span></div>';
   }
 
+  static String qrContainer(Map<String, dynamic> finalNotes) {
+    final blocks = <String>[];
+
+    final googlePlayUrl = finalNotes['googlePlayUrl'] as String?;
+    final googlePlayCaption = (finalNotes['googlePlayQrCaption'] ?? finalNotes['qrCaption'] ?? 'Google Play') as String?;
+    if (googlePlayUrl != null && googlePlayUrl.isNotEmpty) {
+      blocks.add(qrBlock(googlePlayUrl, googlePlayCaption));
+    }
+
+    final appleUrl = (finalNotes['appleAppStoreUrl'] ?? finalNotes['appStoreUrl'] ?? finalNotes['appleUrl']) as String?;
+    final appleCaption = (finalNotes['appleAppStoreQrCaption'] ?? finalNotes['appleQrCaption'] ?? finalNotes['appStoreQrCaption'] ?? 'App Store') as String?;
+    if (appleUrl != null && appleUrl.isNotEmpty) {
+      blocks.add(qrBlock(appleUrl, appleCaption));
+    }
+
+    if (blocks.isEmpty) return '';
+    return '<div class="qr-container">${blocks.join()}</div>';
+  }
+
   static String storeBadgeIcon(String icon) {
     switch (icon) {
       case 'android':
